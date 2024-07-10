@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 16px;
+    box-shadow: 0px 4px 4px 0px #0000001A;
+}
+
+.headline-main-part {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headline-main-part h1 {
+    margin: 0;
+    font-size: 47px;
+    font-weight: 700;
+}
+
+.arrow-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+}

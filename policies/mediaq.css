@@ -1,0 +1,13 @@
+@media (max-width: 428px) {
+    .headline-main-part h1 {
+        position: absolute;
+        top: 128px;
+        left: 16px;
+    }
+
+    .arrow-img {
+        position: absolute;
+        top: 128px;
+        left: 380px;
+    }
+}
