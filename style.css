@@ -10,15 +10,16 @@ header {
     box-shadow: 0px 4px 4px 0px #0000001A;
 }
 
-.headline-main-part {
+.legal-notice-head {
     display: flex;
     justify-content: space-between;
+    margin-top: 48px;
+    padding: 0 16px;
 }
 
-.headline-main-part h1 {
+.legal-notice-head h1 {
     margin: 0;
     font-size: 47px;
-    font-weight: 700;
 }
 
 .arrow-img {
@@ -27,4 +28,39 @@ header {
     align-items: center;
     height: 32px;
     width: 32px;
+}
+
+.legal-notice-content {
+    padding: 0 16.5px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.legal-notice-content a {
+    color: #29ABE2;
+    text-decoration: none;
+}
+
+.legal-notice-content a:hover {
+    text-decoration: underline;
+}
+
+.legal-notice-content h2 {
+    font-size: 27px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+.legal-notice-content h3 {
+    margin: 0;
+}
+
+.legal-notice-content ul {
+    padding-inline-start: 24px;
+    margin: 0;
+}
+
+.legal-notice-content p {
+    margin: 0;
 }
