@@ -1,11 +1,13 @@
 body {
     margin: 0;
     font-family: "Inter", sans-serif;
+    background-color: #F6F7F8;
 }
 
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px 16px;
     box-shadow: 0px 4px 4px 0px #0000001A;
     background-color: white;
@@ -13,14 +15,47 @@ header {
     top: 0;
 }
 
-.legal-notice-head {
+.haeder-left img {
+    height: 39.02px;
+    width: 32px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-help-icon {
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-user-icon {
+    height: 56px;
+    width: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #2A3647;
+    border-radius: 559px;
+}
+
+.header-user-icon img {
+    width: 27.94px;
+    height: 14.24px;
+}
+
+.hpl-head {
     display: flex;
     justify-content: space-between;
-    background-color: #F6F7F8;
     padding: 48px 16px 0 16px;
 }
 
-.legal-notice-head h1 {
+.hpl-head h1 {
     margin: 0;
     font-size: 47px;
 }
@@ -33,44 +68,43 @@ header {
     width: 32px;
 }
 
-.legal-notice-content {
+.hpl-content {
     padding: 0 16.5px 24px 16.5px;
     display: flex;
     flex-direction: column;
     gap: 24px;
-    background-color: #F6F7F8;
 }
 
-.legal-notice-content a {
+.hpl-content a {
     color: #29ABE2;
     text-decoration: none;
 }
 
-.legal-notice-content a:hover {
+.hpl-content a:hover {
     text-decoration: underline;
 }
 
-.legal-notice-content h2 {
+.hpl-content h2 {
     font-size: 27px;
     margin-top: 24px;
     margin-bottom: 16px;
 }
 
-.legal-notice-content h3 {
+.hpl-content h3 {
     margin: 0;
 }
 
-.legal-notice-content ul {
+.hpl-content ul {
     padding-inline-start: 24px;
     margin: 0;
 }
 
-.legal-notice-content p {
+.hpl-content p {
     margin: 0;
 }
 
 .mobile-nav {
-    display: flex;
+    display: none;
     justify-content: space-between;
     background-color: #2A3647;
     color: #CDCDCD;

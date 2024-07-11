@@ -1,3 +1,35 @@
-@media (max-width: 428px) {
-    
+@media (max-width: 600px) {
+    header {
+        padding: 20px 16px;
+    }
+
+    .header-help-icon {
+        display: none;
+    }
+
+    .header-user-icon {
+        height: 40px;
+        width: 40px;
+    }
+
+    .header-user-icon img {
+        width: 20.68px;
+        height: 10.54px;
+    }
+
+    .hpl-head {
+        padding: 48px 16px 0 16px;
+    }
+
+    .hpl-head h1 {
+        font-size: 47px;
+    }
+
+    .hpl-content {
+        padding: 0 16.5px 24px 16.5px;
+    }
+
+    .mobile-nav {
+        display: flex;
+    }
 }
