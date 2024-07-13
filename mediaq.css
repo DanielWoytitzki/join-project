@@ -1,6 +1,18 @@
-@media (max-width: 600px) {
+@media (max-width: 800px) {
+    body {
+        display: block;
+    }
+    
     header {
         padding: 20px 16px;
+    }
+
+    .header-left img {
+        display: block;
+    }
+
+    .header-left p {
+        display: none;
     }
 
     .header-help-icon {
@@ -31,5 +43,9 @@
 
     .mobile-nav {
         display: flex;
+    }
+
+    .desktop-nav {
+        display: none;
     }
 }
