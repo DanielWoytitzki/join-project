@@ -182,3 +182,27 @@ header {
     gap: 4px;
     height: 317px;
 }
+
+.contact-section {
+    display: flex;
+    width: calc(100vw - 232px);
+}
+
+.contact-big {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.contact-big h1 {
+    font-size: 61px;
+}
+
+.contact-big hr {
+    height: 59px;
+    border: 1px solid #29ABE2
+}
+
+.contact-big p {
+    font-size: 27px;
+}
