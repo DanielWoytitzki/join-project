@@ -67,6 +67,11 @@ header {
     font-size: 61px;
 }
 
+.hpl-head a {
+    color: #29ABE2;
+    text-decoration: none;
+}
+
 .arrow-img {
     display: flex;
     justify-content: center;
@@ -99,6 +104,7 @@ header {
 
 .hpl-content h3 {
     margin: 0;
+    font-size: 20px;
 }
 
 .hpl-content ul {
