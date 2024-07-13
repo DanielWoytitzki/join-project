@@ -184,7 +184,6 @@ header {
 }
 
 .contact-section {
-    display: flex;
     width: calc(100vw - 232px);
 }
 
@@ -205,4 +204,40 @@ header {
 
 .contact-big p {
     font-size: 27px;
+}
+
+.board-section {
+    width: calc(100vw - 232px);
+}
+
+.board-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 64px;
+}
+
+.board-head h1 {
+    font-size: 61px;
+}
+
+.board-head input {
+    height: 48px;
+    width: 312px;
+    border: 1px solid #A8A8A8;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #D1D1D1;
+    padding: 8px 16px;
+}
+
+.board-head button {
+    background-color: #2A3647;
+    color: white;
+    height: 48px;
+    width: 160px;
+    padding: 8px 16px;
+    font-size: 21px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
 }
