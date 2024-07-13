@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./mediaq.css">
+    <title>Add Task</title>
+</head>
+
+<body>
+
+    <nav class="desktop-nav">
+        <div>
+            <img src="./img/logo-big-desktop.svg" alt="">
+        </div>
+
+        <div class="desktop-nav-icon-box">
+            <div class="desktop-nav-icon">
+                <img src="./img/nav-icon-summary.svg" alt="">
+                <span>Summary</span>
+            </div>
+            <div class="desktop-nav-icon">
+                <img src="./img/nav-icon-task.svg" alt="">
+                <span>Add Task</span>
+            </div>
+            <div class="desktop-nav-icon">
+                <img src="./img/nav-icon-board.svg" alt="">
+                <span>Board</span>
+            </div>
+            <div class="desktop-nav-icon">
+                <img src="./img/nav-icon-contact.svg" alt="">
+                <span>Contacts</span>
+            </div>
+        </div>
+
+        <div class="extra-links-desktop-nav">
+            <span style="padding: 8px;">Privacy Policy</span>
+            <span style="padding: 8px;">Legal notice</span>
+        </div>
+    </nav>
+
+    <div>
+        <header>
+            <div class="header-left">
+                <p>
+                    Kanban Project Management Tool
+                </p>
+                <img src="./img/join-logo.svg" alt="Join-Logo">
+            </div>
+            <div class="header-right">
+                <div class="header-help-icon">
+                    <img src="./img/help-icon.svg" alt="">
+                </div>
+                <div class="header-user-icon">
+                    <img src="./img/current-user.svg" alt="">
+                </div>
+            </div>
+        </header>
+
+        <section class="task-section">
+
+            <div>
+                <h1>Add Task</h1>
+            </div>
+
+            <div class="task-section-content">
+
+                <div class="task-section-content-left">
+                    <div class="task-section-content-box">
+                        <span>Title</span>
+                        <input type="text" name="" id="" placeholder="Enter a Title">
+                    </div>
+                    <div class="task-section-content-box">
+                        <span>Description</span>
+                        <textarea name="" id="" placeholder="Enter a Description"></textarea>
+                    </div>
+                    <div class="task-section-content-box">
+                        <span>Assigned to</span>
+                        <select name="" id="">
+                            <option value="">Select contacts to assign</option>
+                            <option value="">Beispiel</option>
+                            <option value="">Beispiel</option>
+                            <option value="">Beispiel</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <hr>
+                </div>
+
+                <div class="task-section-content-right">
+                    <div class="task-section-content-box">
+                        <span>Due date</span>
+                        <input type="date" name="" id="">
+                    </div>
+                    <div class="task-section-content-box">
+                        <span>Prio</span>
+                        <div>
+                            <button>Urgent</button>
+                            <button>Medium</button>
+                            <button>Low</button>
+                        </div>
+                    </div>
+                    <div class="task-section-content-box">
+                        <span>Category</span>
+                        <select name="" id="">
+                            <option value="">Select task category</option>
+                            <option value="">Beispiel</option>
+                            <option value="">Beispiel</option>
+                            <option value="">Beispiel</option>
+                        </select>
+                    </div>
+                    <div class="task-section-content-box">
+                        <span>Subtasks</span>
+                        <input type="text" name="" id="" placeholder="Add new subtask">
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-section-bottom">
+                <p>
+                    This field is required
+                </p>
+
+                <div>
+                    <button>Clear</button>
+                    <button>Create Task</button>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-icon">
+            <img src="./img/nav-icon-summary.svg" alt="">
+            <span>Summary</span>
+        </div>
+        <div class="mobile-nav-icon">
+            <img src="./img/nav-icon-board.svg" alt="">
+            <span>Board</span>
+        </div>
+        <div class="mobile-nav-icon">
+            <img src="./img/nav-icon-task.svg" alt="">
+            <span>Add Task</span>
+        </div>
+        <div class="mobile-nav-icon">
+            <img src="./img/nav-icon-contact.svg" alt="">
+            <span>Contacts</span>
+        </div>
+    </nav>
+
+</body>
+
+</html>
