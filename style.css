@@ -122,8 +122,9 @@ header {
     background-color: #2A3647;
     color: #CDCDCD;
     padding: 2px 16px;
-    position: sticky;
+    position: fixed;
     bottom: 0;
+    width: calc(100vw - 32px);
 }
 
 .mobile-nav-icon {
