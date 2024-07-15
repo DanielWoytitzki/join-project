@@ -80,7 +80,10 @@
               />
             </div>
             <div class="board-column-body">
-              <div class="board-column-body-task"></div>
+              <div class="board-column-body-no-task">
+                <span>No tasks To do</span>
+              </div>
+              <div class="board-column-body-task d-none"></div>
             </div>
           </div>
           <div class="board-column">
@@ -93,7 +96,36 @@
               />
             </div>
             <div class="board-column-body">
-              <div class="board-column-body-task"></div>
+              <div class="board-column-body-no-task">
+                <span>No tasks in progress</span>
+              </div>
+              <div class="board-column-body-task">
+                <div>
+                  <span class="board-column-body-task-label">User Story</span>
+                </div>
+                <div class="board-column-body-task-text">
+                  <h3>Kochwelt Page & Recipe Recomender</h3>
+                  <span>Build start page with recipe recommendation...</span>
+                </div>
+                <div class="board-column-body-task-progress">
+                  <div class="board-column-body-task-progress-bar">
+                    <div
+                      class="board-column-body-task-progress-bar-progress"
+                    ></div>
+                  </div>
+                  <span>1/2</span>
+                  <span>Subtasks</span>
+                </div>
+                <div class="board-column-body-task-bottom">
+                  <div>
+                    <span>AM</span>
+                    <span>EM</span>
+                  </div>
+                  <div class="board-column-body-task-bottom-icon">
+                    <img src="./img/prio-urgent.svg" alt="" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="board-column">
@@ -106,7 +138,10 @@
               />
             </div>
             <div class="board-column-body">
-              <div class="board-column-body-task"></div>
+              <div class="board-column-body-no-task">
+                <span>No tasks await feedback</span>
+              </div>
+              <div class="board-column-body-task d-none"></div>
             </div>
           </div>
           <div class="board-column">
@@ -114,7 +149,10 @@
               <h2>Done</h2>
             </div>
             <div class="board-column-body">
-              <div class="board-column-body-task"></div>
+              <div class="board-column-body-no-task">
+                <span>No tasks done</span>
+              </div>
+              <div class="board-column-body-task d-none"></div>
             </div>
           </div>
         </div>

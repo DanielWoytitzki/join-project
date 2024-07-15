@@ -254,6 +254,7 @@ header {
   display: flex;
   flex-direction: column;
   flex: 1 1 0px;
+  gap: 24px;
 }
 
 .board-column-header {
@@ -262,9 +263,11 @@ header {
   align-items: center;
 }
 
-.board-column-header {
+.board-column-header h2 {
   font-size: 20px;
   line-height: 24px;
+  margin: 0;
+  color: #2a3647;
 }
 
 .board-column-header-icon {
@@ -274,7 +277,104 @@ header {
 
 .board-column-header-icon:hover {
   cursor: pointer;
-  /* fill: #29abe2; */
+  filter: brightness(0) saturate(100%) invert(65%) sepia(16%) saturate(6653%)
+    hue-rotate(165deg) brightness(94%) contrast(87%);
+}
+
+.board-column-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.board-column-body-no-task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px dashed #a8a8a8;
+  background-color: #e7e7e7;
+  color: #a8a8a8;
+  box-shadow: 0px 0px 4px 0px #00000029;
+}
+
+.board-column-body-task {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 24px;
+  gap: 24px;
+  box-shadow: 0px 0px 10px 3px #00000014;
+}
+
+.board-column-body-task-label {
+  background-color: #0038ff;
+  border-radius: 8px;
+  padding: 4px 16px;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.board-column-body-task-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 19.2px;
+}
+
+.board-column-body-task-text h3 {
+  margin: 0;
+  color: #2a3647;
+}
+
+.board-column-body-task-text span {
+  color: #a8a8a8;
+}
+
+.board-column-body-task-progress {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+
+.board-column-body-task-progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 8px;
+}
+
+.board-column-body-task-progress-bar-progress {
+  width: 50%;
+  height: 100%;
+  background-color: #4589ff;
+  border-radius: 8px 0 0 8px;
+}
+
+.board-column-body-task-progress span {
+  font-size: 12px;
+  line-height: 14.4px;
+  color: #000000;
+}
+
+.board-column-body-task-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-column-body-task-bottom-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .task-section {
@@ -348,4 +448,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.d-none {
+  display: none;
 }
