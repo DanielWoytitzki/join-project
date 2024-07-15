@@ -117,9 +117,13 @@
                   <span>Subtasks</span>
                 </div>
                 <div class="board-column-body-task-bottom">
-                  <div>
-                    <span>AM</span>
-                    <span>EM</span>
+                  <div class="board-column-body-task-bottom-contactlist">
+                    <div class="board-column-body-task-bottom-contact">
+                      <span>AM</span>
+                    </div>
+                    <div class="board-column-body-task-bottom-contact left">
+                      <span>EM</span>
+                    </div>
                   </div>
                   <div class="board-column-body-task-bottom-icon">
                     <img src="./img/prio-urgent.svg" alt="" />
@@ -177,6 +181,79 @@
         <span>Contacts</span>
       </div>
     </nav>
+
+    <div class="board-overlay-task-background">
+      <div class="board-overlay-task" onclick="event.stopPropagation()">
+        <div class="board-overlay-task-header">
+          <span>User Story</span>
+          <img src="./img/close.svg" alt="" />
+        </div>
+        <h1 class="board-overlay-task-title">
+          Kochwelt Page & Recipe Recommender
+        </h1>
+        <span class="board-overlay-task-description">
+          Build start page with recipe recommendation.
+        </span>
+        <div class="board-overlay-task-date">
+          <span style="color: #2a3647">Due date:</span>
+          <span>10/05/2023</span>
+        </div>
+        <div class="board-overlay-task-priority">
+          <span style="color: #2a3647">Priority:</span>
+          <div class="board-overlay-task-priority-inner">
+            <span>Medium</span>
+            <img src="./img/prio-medium.svg" alt="" />
+          </div>
+        </div>
+        <div class="board-overlay-task-contacts">
+          <span class="board-overlay-task-contacts-span">Assigned To:</span>
+          <ul class="board-overlay-task-contactlist">
+            <li class="board-overlay-task-contactlist-contact">
+              <div
+                class="board-overlay-task-contactlist-contact-icon"
+                style="background: #1fd7c1"
+              >
+                <span>EM</span>
+              </div>
+              <span>Emmanuel Mauer</span>
+            </li>
+            <li class="board-overlay-task-contactlist-contact">
+              <div
+                class="board-overlay-task-contactlist-contact-icon"
+                style="background: #462f8a"
+              >
+                <span>MB</span>
+              </div>
+              <span>Marcel Bauer</span>
+            </li>
+          </ul>
+        </div>
+        <div class="board-overlay-task-subtasks">
+          <span class="board-overlay-task-subtasks-span">Subtasks</span>
+          <ul class="board-overlay-task-subtasklist">
+            <li class="board-overlay-task-subtasklist-subtask">
+              <input type="checkbox" />
+              <span>Implement Recipe Recommendation</span>
+            </li>
+            <li class="board-overlay-task-subtasklist-subtask">
+              <input type="checkbox" />
+              <span>Start Page Layout</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div>
+            <img src="" alt="" />
+            <span></span>
+          </div>
+          <hr />
+          <div>
+            <img src="" alt="" />
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="script.js"></script>
   <script src="./javascript/board.js"></script>
