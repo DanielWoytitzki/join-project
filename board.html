@@ -14,7 +14,7 @@
     <title>Board</title>
   </head>
 
-  <body>
+  <body onload="initBoard()">
     <nav class="desktop-nav">
       <div>
         <img src="./img/logo-big-desktop.svg" alt="" />
@@ -79,7 +79,7 @@
                 alt=""
               />
             </div>
-            <div class="board-column-body">
+            <div class="board-column-body" id="taskFieldToDo">
               <div class="board-column-body-no-task">
                 <span>No tasks To do</span>
               </div>
@@ -95,11 +95,11 @@
                 alt=""
               />
             </div>
-            <div class="board-column-body">
+            <div class="board-column-body" id="taskFieldInProgress">
               <div class="board-column-body-no-task">
                 <span>No tasks in progress</span>
               </div>
-              <div class="board-column-body-task">
+              <!-- <div class="board-column-body-task">
                 <div>
                   <span class="board-column-body-task-label">User Story</span>
                 </div>
@@ -129,7 +129,7 @@
                     <img src="./img/prio-urgent.svg" alt="" />
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="board-column">
@@ -141,7 +141,7 @@
                 alt=""
               />
             </div>
-            <div class="board-column-body">
+            <div class="board-column-body" id="taskFieldAwaitFeedback">
               <div class="board-column-body-no-task">
                 <span>No tasks await feedback</span>
               </div>
@@ -152,7 +152,7 @@
             <div class="board-column-header">
               <h2>Done</h2>
             </div>
-            <div class="board-column-body">
+            <div class="board-column-body" id="taskFieldDone">
               <div class="board-column-body-no-task">
                 <span>No tasks done</span>
               </div>
@@ -182,8 +182,12 @@
       </div>
     </nav>
 
-    <div class="board-overlay-task-background">
-      <div class="board-overlay-task" onclick="event.stopPropagation()">
+    <div
+      class="board-overlay-task-background d-none"
+      id="taskOverlay"
+      onclick="disableOverlayTask()"
+    >
+      <!-- <div class="board-overlay-task" onclick="event.stopPropagation()">
         <div class="board-overlay-task-header">
           <span>User Story</span>
           <img src="./img/close.svg" alt="" />
@@ -254,9 +258,10 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </body>
   <script src="script.js"></script>
   <script src="./javascript/board.js"></script>
+  <script src="./javascript/boardHTML.js"></script>
 </html>

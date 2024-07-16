@@ -309,6 +309,10 @@ header {
   box-shadow: 0px 0px 10px 3px #00000014;
 }
 
+.board-column-body-task:hover {
+  cursor: pointer;
+}
+
 .board-column-body-task-label {
   background-color: #0038ff;
   border-radius: 8px;
@@ -426,7 +430,7 @@ header {
   flex-direction: column;
   gap: 24px;
   border-radius: 30px;
-  width: 525px;
+  width: 445px;
   cursor: default;
 }
 
@@ -448,6 +452,12 @@ header {
 .board-overlay-task-header img {
   width: 32px;
   height: 32px;
+}
+
+.board-overlay-task-header img:hover {
+  cursor: pointer;
+  background-color: #f4f4f4;
+  border-radius: 50%;
 }
 
 .board-overlay-task-title {
@@ -553,7 +563,7 @@ header {
 }
 
 .board-overlay-task-subtasklist-subtask:hover {
-  background-color: #f5f5f5;
+  background-color: #f4f4f4;
   border-radius: 8px;
 }
 
