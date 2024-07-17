@@ -285,6 +285,7 @@ header {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1 1 auto;
 }
 
 .board-column-body-no-task {

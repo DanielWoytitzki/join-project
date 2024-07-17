@@ -79,12 +79,12 @@
                 alt=""
               />
             </div>
-            <div class="board-column-body" id="taskFieldToDo">
-              <div class="board-column-body-no-task">
-                <span>No tasks To do</span>
-              </div>
-              <div class="board-column-body-task d-none"></div>
-            </div>
+            <div
+              class="board-column-body"
+              id="taskFieldToDo"
+              ondrop="moveTo('ToDo')"
+              ondragover="allowDrop(event)"
+            ></div>
           </div>
           <div class="board-column">
             <div class="board-column-header">
@@ -95,42 +95,12 @@
                 alt=""
               />
             </div>
-            <div class="board-column-body" id="taskFieldInProgress">
-              <div class="board-column-body-no-task">
-                <span>No tasks in progress</span>
-              </div>
-              <!-- <div class="board-column-body-task">
-                <div>
-                  <span class="board-column-body-task-label">User Story</span>
-                </div>
-                <div class="board-column-body-task-text">
-                  <h3>Kochwelt Page & Recipe Recomender</h3>
-                  <span>Build start page with recipe recommendation...</span>
-                </div>
-                <div class="board-column-body-task-progress">
-                  <div class="board-column-body-task-progress-bar">
-                    <div
-                      class="board-column-body-task-progress-bar-progress"
-                    ></div>
-                  </div>
-                  <span>1/2</span>
-                  <span>Subtasks</span>
-                </div>
-                <div class="board-column-body-task-bottom">
-                  <div class="board-column-body-task-bottom-contactlist">
-                    <div class="board-column-body-task-bottom-contact">
-                      <span>AM</span>
-                    </div>
-                    <div class="board-column-body-task-bottom-contact left">
-                      <span>EM</span>
-                    </div>
-                  </div>
-                  <div class="board-column-body-task-bottom-icon">
-                    <img src="./img/prio-urgent.svg" alt="" />
-                  </div>
-                </div>
-              </div> -->
-            </div>
+            <div
+              class="board-column-body"
+              id="taskFieldInProgress"
+              ondrop="moveTo('InProgress')"
+              ondragover="allowDrop(event)"
+            ></div>
           </div>
           <div class="board-column">
             <div class="board-column-header">
@@ -141,23 +111,23 @@
                 alt=""
               />
             </div>
-            <div class="board-column-body" id="taskFieldAwaitFeedback">
-              <div class="board-column-body-no-task">
-                <span>No tasks await feedback</span>
-              </div>
-              <div class="board-column-body-task d-none"></div>
-            </div>
+            <div
+              class="board-column-body"
+              id="taskFieldAwaitFeedback"
+              ondrop="moveTo('AwaitFeedback')"
+              ondragover="allowDrop(event)"
+            ></div>
           </div>
           <div class="board-column">
             <div class="board-column-header">
               <h2>Done</h2>
             </div>
-            <div class="board-column-body" id="taskFieldDone">
-              <div class="board-column-body-no-task">
-                <span>No tasks done</span>
-              </div>
-              <div class="board-column-body-task d-none"></div>
-            </div>
+            <div
+              class="board-column-body"
+              id="taskFieldDone"
+              ondrop="moveTo('Done')"
+              ondragover="allowDrop(event)"
+            ></div>
           </div>
         </div>
       </section>
@@ -186,80 +156,7 @@
       class="board-overlay-task-background d-none"
       id="taskOverlay"
       onclick="disableOverlayTask()"
-    >
-      <!-- <div class="board-overlay-task" onclick="event.stopPropagation()">
-        <div class="board-overlay-task-header">
-          <span>User Story</span>
-          <img src="./img/close.svg" alt="" />
-        </div>
-        <h1 class="board-overlay-task-title">
-          Kochwelt Page & Recipe Recommender
-        </h1>
-        <span class="board-overlay-task-description">
-          Build start page with recipe recommendation.
-        </span>
-        <div class="board-overlay-task-date">
-          <span style="color: #2a3647">Due date:</span>
-          <span>10/05/2023</span>
-        </div>
-        <div class="board-overlay-task-priority">
-          <span style="color: #2a3647">Priority:</span>
-          <div class="board-overlay-task-priority-inner">
-            <span>Medium</span>
-            <img src="./img/prio-medium.svg" alt="" />
-          </div>
-        </div>
-        <div class="board-overlay-task-contacts">
-          <span class="board-overlay-task-contacts-span">Assigned To:</span>
-          <ul class="board-overlay-task-contactlist">
-            <li class="board-overlay-task-contactlist-contact">
-              <div
-                class="board-overlay-task-contactlist-contact-icon"
-                style="background: #1fd7c1"
-              >
-                <span>EM</span>
-              </div>
-              <span>Emmanuel Mauer</span>
-            </li>
-            <li class="board-overlay-task-contactlist-contact">
-              <div
-                class="board-overlay-task-contactlist-contact-icon"
-                style="background: #462f8a"
-              >
-                <span>MB</span>
-              </div>
-              <span>Marcel Bauer</span>
-            </li>
-          </ul>
-        </div>
-        <div class="board-overlay-task-subtasks">
-          <span class="board-overlay-task-subtasks-span">Subtasks</span>
-          <ul class="board-overlay-task-subtasklist">
-            <li class="board-overlay-task-subtasklist-subtask">
-              <input type="checkbox" />
-              <span>Implement Recipe Recommendation</span>
-            </li>
-            <li class="board-overlay-task-subtasklist-subtask">
-              <input type="checkbox" />
-              <span>Start Page Layout</span>
-            </li>
-          </ul>
-        </div>
-        <div class="board-overlay-task-footer">
-          <div class="board-overlay-task-footer-inner">
-            <div class="board-overlay-task-footer-inner-inner">
-              <img src="./img/delete.svg" alt="" />
-              <span>Delete</span>
-            </div>
-            <hr class="board-overlay-task-footer-devider" />
-            <div class="board-overlay-task-footer-inner-inner">
-              <img src="./img/edit.svg" alt="" />
-              <span>Edit</span>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    </div>
+    ></div>
   </body>
   <script src="script.js"></script>
   <script src="./javascript/board.js"></script>

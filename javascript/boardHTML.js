@@ -1,5 +1,5 @@
 function generateTaskHTML(taskId, task) {
-  return `<div class="board-column-body-task" id="task${taskId}" onclick="openTaskDetails('${taskId}')">
+  return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-column-body-task" id="task${taskId}" onclick="openTaskDetails('${taskId}')">
             <div>
                 <span class="board-column-body-task-label">${task["category"]}</span>
             </div>
@@ -30,7 +30,7 @@ function generateTaskHTML(taskId, task) {
         </div>`;
 }
 
-function generateTaskOverlayHTML(taskId, task) {
+function generateTaskOverlayHTML(taskId, task, priority) {
   return `<div class="board-overlay-task" onclick="event.stopPropagation()" id="taskOverlay${taskId}">
             <div class="board-overlay-task-header">
                 <span>${task["category"]}</span>
@@ -49,7 +49,7 @@ function generateTaskOverlayHTML(taskId, task) {
             <div class="board-overlay-task-priority">
                 <span style="color: #2a3647">Priority:</span>
                 <div class="board-overlay-task-priority-inner">
-                    <span>Medium</span>
+                    <span>${priority}</span>
                     <img src="./img/prio-${task["priority"]}.svg" alt="" />
                 </div>
             </div>
@@ -97,4 +97,28 @@ function generateTaskOverlayHTML(taskId, task) {
                 </div>
             </div>
         </div>`;
+}
+
+function generateNoTaskToDo() {
+  return `<div class="board-column-body-no-task">
+            <span>No tasks To do</span>
+          </div>`;
+}
+
+function generateNoTaskInProgress() {
+  return `<div class="board-column-body-no-task">
+            <span>No tasks in progress</span>
+          </div>`;
+}
+
+function generateNoTaskAwaitFeedback() {
+  return `<div class="board-column-body-no-task">
+            <span>No tasks await feedback</span>
+          </div>`;
+}
+
+function generateNoTaskDone() {
+  return `<div class="board-column-body-no-task">
+            <span>No tasks done</span>
+          </div>`;
 }

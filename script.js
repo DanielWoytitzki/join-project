@@ -46,3 +46,8 @@ async function putData(path = "", data = {}) {
     console.error("Error rendering tasks:", error);
   }
 }
+
+function nameWithUpperCase(name) {
+  let nameUpperCase = name.charAt(0).toUpperCase() + name.slice(1);
+  return nameUpperCase;
+}
