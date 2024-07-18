@@ -152,11 +152,131 @@
       </div>
     </nav>
 
-    <div
+    <section
       class="board-overlay-task-background d-none"
       id="taskOverlay"
       onclick="disableOverlayTask()"
-    ></div>
+    ></section>
+
+    <section class="board-add-task-background" id="addTaskOverlay">
+      <div class="board-add-task">
+        <div class="board-add-task-header">
+          <h1>Add Task</h1>
+          <img
+            class="closeIcon"
+            src="./img/close.svg"
+            alt=""
+            onclick="disableOverlayAddTask()"
+          />
+        </div>
+        <div class="add-task-body">
+          <div class="add-task-body-column">
+            <div class="add-task-content-box">
+              <label for="addTaskTitle">Title</label>
+              <div class="add-task-required-input">
+                <input
+                  type="text"
+                  name="addTaskTitle"
+                  id="addTaskTitle"
+                  placeholder="Enter a Title"
+                />
+                <div class="add-task-small-required d-none">
+                  This field is required
+                </div>
+              </div>
+            </div>
+            <div class="add-task-content-box">
+              <label for="addTaskDescription">Description</label>
+              <textarea
+                name="addTaskDescription"
+                id="addTaskDescription"
+                placeholder="Enter a Description"
+              ></textarea>
+            </div>
+            <div class="add-task-content-box">
+              <label for="addTaskAssignedTo">Assigned to</label>
+              <select
+                class="add-task-dropdown"
+                name="addTaskAssignedTo"
+                id="addTaskAssignedTo"
+              >
+                <option value="">Select contacts to assign</option>
+                <option value="">Beispiel</option>
+                <option value="">Beispiel</option>
+                <option value="">Beispiel</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <hr class="add-task-devider" />
+          </div>
+
+          <div class="add-task-body-column">
+            <div class="add-task-content-box">
+              <label for="addTaskDueDate">Due date</label>
+              <div class="add-task-required-input">
+                <input type="date" name="addTaskDueDate" id="addTaskDueDate" />
+                <div class="add-task-small-required d-none">
+                  This field is required
+                </div>
+              </div>
+            </div>
+            <div class="add-task-content-box">
+              <label>Prio</label>
+              <div class="add-task-priority-content-box">
+                <div
+                  class="add-task-priority white"
+                  onclick="addTaskPrioritySelect('Urgent')"
+                  id="addtaskPriorityUrgent"
+                >
+                  <span>Urgent</span>
+                  <img src="./img/prio-urgent.svg" alt="" />
+                </div>
+                <div
+                  class="add-task-priority orange"
+                  onclick="addTaskPrioritySelect('Medium')"
+                  id="addtaskPriorityMedium"
+                >
+                  <span>Medium</span>
+                  <img src="./img/prio-medium.svg" alt="" />
+                </div>
+                <div
+                  class="add-task-priority white"
+                  onclick="addTaskPrioritySelect('Low')"
+                  id="addtaskPriorityLow"
+                >
+                  <span>Low</span>
+                  <img src="./img/prio-low.svg" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="add-task-content-box">
+              <label>Category</label>
+              <select class="add-task-dropdown" name="" id="">
+                <option value="">Select task category</option>
+                <option value="">Beispiel</option>
+                <option value="">Beispiel</option>
+                <option value="">Beispiel</option>
+              </select>
+            </div>
+            <div class="add-task-content-box">
+              <label>Subtasks</label>
+              <input type="text" name="" id="" placeholder="Add new subtask" />
+            </div>
+          </div>
+        </div>
+
+        <div class="add-task-bottom">
+          <p>This field is required</p>
+
+          <div>
+            <button>Clear</button>
+            <button>Create Task</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
   <script src="script.js"></script>
   <script src="./javascript/board.js"></script>

@@ -4,6 +4,7 @@ let taskFieldInProgress = document.getElementById("taskFieldInProgress");
 let taskFieldAwaitFeedback = document.getElementById("taskFieldAwaitFeedback");
 let taskFieldDone = document.getElementById("taskFieldDone");
 let taskOverlay = document.getElementById("taskOverlay");
+let addTaskOverlay = document.getElementById("addTaskOverlay");
 let currentDraggedElement;
 
 function initBoard() {
@@ -73,8 +74,16 @@ function showOverlayTask() {
   taskOverlay.classList.remove("d-none");
 }
 
+function showOverlayAddTask() {
+  addTaskOverlay.classList.remove("d-none");
+}
+
 function disableOverlayTask() {
   taskOverlay.classList.add("d-none");
+}
+
+function disableOverlayAddTask() {
+  addTaskOverlay.classList.add("d-none");
 }
 
 function startDragging(id) {
@@ -91,4 +100,31 @@ function moveTo(position) {
   let data = position;
   putData(path, data);
   setTimeout(renderTasks, 100);
+}
+
+function addTaskPrioritySelect(priority) {
+  let urgent = document.getElementById("addtaskPriorityUrgent");
+  let medium = document.getElementById("addtaskPriorityMedium");
+  let low = document.getElementById("addtaskPriorityLow");
+  if (priority == "Urgent") {
+    urgent.classList.add("red");
+    urgent.classList.remove("white");
+    medium.classList.remove("orange");
+    medium.classList.add("white");
+    low.classList.remove("green");
+  } else if (priority == "Medium") {
+    medium.classList.add("orange");
+    medium.classList.remove("white");
+    urgent.classList.remove("red");
+    urgent.classList.add("white");
+    low.classList.remove("green");
+    low.classList.add("white");
+  } else if (priority == "Low") {
+    low.classList.add("green");
+    low.classList.remove("white");
+    medium.classList.remove("orange");
+    medium.classList.add("white");
+    urgent.classList.remove("red");
+    urgent.classList.add("white");
+  }
 }

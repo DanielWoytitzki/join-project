@@ -34,7 +34,7 @@ function generateTaskOverlayHTML(taskId, task, priority) {
   return `<div class="board-overlay-task" onclick="event.stopPropagation()" id="taskOverlay${taskId}">
             <div class="board-overlay-task-header">
                 <span>${task["category"]}</span>
-                <img src="./img/close.svg" alt="" onclick="disableOverlayTask()" />
+                <img class="closeIcon" src="./img/close.svg" alt="" onclick="disableOverlayTask()" />
             </div>
             <h1 class="board-overlay-task-title">
                 ${task["title"]}
