@@ -1,5 +1,8 @@
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 
+/**
+ * This function adds a new user to the database
+ */
 async function addUserToDatabase() {
     let userName = document.getElementById('name').value;
     let userEmail = document.getElementById('email').value;
@@ -11,49 +14,74 @@ async function addUserToDatabase() {
         password: userPassword,
     };
 
-    let response = await fetch(BASE_URL + "/users.json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user)
-    });
-    let responseAsJson = await response.json();
-    console.log(responseAsJson);
+    try {
+        let response = await fetch(BASE_URL + "/users.json", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user)
+        });
 
-    checkConfirmedPassword(userPassword);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        let responseAsJson = await response.json();
+        console.log(responseAsJson);
+    } catch (error) {
+        console.error('Error adding user to database:', error);
+    }
 }
 
-function checkConfirmedPassword(userPassword) {
+/**
+ * This function checks the entered password with the confirmed password
+ * 
+ * @returns "true" or "false"
+ */
+function checkConfirmedPassword() {
+    let userPassword = document.getElementById('password').value;
     let confirmedPassword = document.getElementById('confirmedPassword').value;
 
     if (userPassword == confirmedPassword) {
-        console.log('Passwort stimmt überein');
+        return true;
     } else {
-        console.log('Bitte überprüfe Sie Ihre Eingabe.');
+        return false;
     }
 }
 
+/**
+ * This function checks if the checkbox of "I accept the Privacy policy" is checked or not
+ * 
+ * @returns "true" or "false" 
+ */
 function checkCheckbox() {
-    let checkbox = document.getElementById('checkbox');
-    
+    let checkbox = document.getElementById('checkbox-privacy-policy').checked;
+
     if (checkbox == true) {
-        console.log('Privacy policy wurde akzeptiert');
-        document.getElementById('signup-button').disabled = true;
-    } else {
-        console.log('Bitte Privacy policy akzeptieren');
         document.getElementById('signup-button').disabled = false;
+        return true;
+    } else {
+        document.getElementById('signup-button').disabled = true;
+        return false;
     }
 }
 
+/**
+ * This function signs one up as an user
+ */
 function signUp() {
-    checkConfirmedPassword();
-    checkCheckbox();
-    addUserToDatabase();
-    
-    document.getElementById('name').value = '';
-    userEmail = document.getElementById('email').value = '';
-    userPassword = document.getElementById('password').value = '';
-    
-    window.location.href = 'login.html?msg=You Signed Up successfully'
+    if (checkConfirmedPassword() == false) {
+        document.getElementById('confirmedPassword').style = "border-color: red;";
+        document.getElementById('wrongConfirmedPasswordMSG').style.removeProperty("display");
+        console.log('Das Passwort stimmt nicht überein. Bitte überprüfen Sie Ihre Eingabe');
+    } else if (checkCheckbox() == false) {
+        console.log('Bitte akzeptieren Sie unsere Privacy policy.');
+    } else {
+        addUserToDatabase();
+        document.getElementById('name').value = '';
+        userEmail = document.getElementById('email').value = '';
+        userPassword = document.getElementById('password').value = '';
+        window.location.href = 'login.html?msg=You Signed Up successfully';
+    }
 }

@@ -29,15 +29,16 @@
                 <input id="email" type="email" placeholder="Email" required>
                 <input id="password" type="password" placeholder="Password" required>
                 <input id="confirmedPassword" type="password" placeholder="Confirm Password" required>
+                <p id="wrongConfirmedPasswordMSG" style="display: none;">Ups! your password don't match</p>
             </div>
 
             <div class="style_login_d-flex-row">
-                <input id="checkbox-privacy-policy" type="checkbox"><p>I accept the <a href="">Privacy policy</a></p>
+                <input id="checkbox-privacy-policy" type="checkbox" onclick="checkCheckbox()"><p>I accept the <a href="">Privacy policy</a></p>
             </div>
         </form>
 
         <div class="style_login_d-flex-column">
-            <button onclick="signUp(); return false">Sign up</button>
+            <button id="signup-button" onclick="signUp(); return false" disabled>Sign up</button>
         </div>
     </main>
 
