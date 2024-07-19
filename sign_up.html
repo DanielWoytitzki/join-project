@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in</title>
+    <title>Sign up</title>
 
-    <link rel="stylesheet" href="./style_login.css">
     <link rel="stylesheet" href="./style.css">
-    <script src="./javascript/login.js"></script>
+    <script src="./javascript/sign_up.js"></script>
 </head>
 <body>
     <div>
@@ -16,31 +15,31 @@
 
     <main>
         <div>
-            <h2>Log in</h2>
+            <div>
+                <img src="./img/arrow-left-blue.svg" alt="">
+                <h2>Sign up</h2>
+            </div>
+            
             <hr>
         </div>
 
         <form>
             <div class="style_login_d-flex-column">
+                <input id="name" type="text" placeholder="Name" required>
                 <input id="email" type="email" placeholder="Email" required>
                 <input id="password" type="password" placeholder="Password" required>
+                <input id="confirmedPassword" type="password" placeholder="Confirm Password" required>
             </div>
 
             <div class="style_login_d-flex-row">
-                <input id="checkbox-remember-me" type="checkbox"><p>Remember me</p>
+                <input id="checkbox-privacy-policy" type="checkbox"><p>I accept the <a href="">Privacy policy</a></p>
             </div>
         </form>
 
         <div class="style_login_d-flex-column">
-            <button onclick="logInAsUser(); return false">Log in</button>
-            <button>Guest Log in</button>
+            <button onclick="signUp(); return false">Sign up</button>
         </div>
     </main>
-
-    <div>
-        <p>Not a Join user?</p>
-        <button>Sign up</button>
-    </div>
 
     <div>
         <a href="">Privacy Policy</a>

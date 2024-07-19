@@ -25,9 +25,9 @@ async function addUserToDatabase() {
 }
 
 function checkConfirmedPassword(userPassword) {
-    let confirmedPassword = document.getElementById('confirmedPassword');
+    let confirmedPassword = document.getElementById('confirmedPassword').value;
 
-    if (userPassword.value == confirmedPassword.value) {
+    if (userPassword == confirmedPassword) {
         console.log('Passwort stimmt überein');
     } else {
         console.log('Bitte überprüfe Sie Ihre Eingabe.');
@@ -37,7 +37,7 @@ function checkConfirmedPassword(userPassword) {
 function checkCheckbox() {
     let checkbox = document.getElementById('checkbox');
     
-    if (checkbox == checked) {
+    if (checkbox == true) {
         console.log('Privacy policy wurde akzeptiert');
         document.getElementById('signup-button').disabled = true;
     } else {
