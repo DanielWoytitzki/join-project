@@ -9,10 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./mediaq.css">
+
+    <link rel="stylesheet" href="./style_contacts.css">
+    <script src="./javascript/contacts.js"></script>
+    
     <title>Contacts</title>
 </head>
 
-<body>
+<body onload="loadContactsFromDatabase()">
 
     <nav class="desktop-nav">
         <div>
@@ -20,27 +24,27 @@
         </div>
 
         <div class="desktop-nav-icon-box">
-            <a href="./summary.html"><div class="desktop-nav-icon">
+            <div class="desktop-nav-icon">
                 <img src="./img/nav-icon-summary.svg" alt="">
                 <span>Summary</span>
-            </div></a>
-            <a href="./add-task.html"><div class="desktop-nav-icon">
+            </div>
+            <div class="desktop-nav-icon">
                 <img src="./img/nav-icon-task.svg" alt="">
                 <span>Add Task</span>
-            </div></a>
-            <a href="./board.html"><div class="desktop-nav-icon">
+            </div>
+            <div class="desktop-nav-icon">
                 <img src="./img/nav-icon-board.svg" alt="">
                 <span>Board</span>
-            </div></a>
-            <a href="./contacts.html"><div class="desktop-nav-icon">
+            </div>
+            <div class="desktop-nav-icon">
                 <img src="./img/nav-icon-contact.svg" alt="">
                 <span>Contacts</span>
-            </div></a>
+            </div>
         </div>
 
         <div class="extra-links-desktop-nav">
-            <a href="./privacy-policy.html">Privacy Policy</a>
-            <a href="./legal-notice.html">Legal notice</a>
+            <span style="padding: 8px;">Privacy Policy</span>
+            <span style="padding: 8px;">Legal notice</span>
         </div>
     </nav>
 
@@ -62,34 +66,46 @@
             </div>
         </header>
 
-        <section class="contact-section">
+        <section class="contact-section" class="style_contacts_d-flex">
 
-            <div class="contact-section-head">
+            <div>
+                <div>
+                    <button onclick="addNewContact()">Add new contact</button>
+                </div>
+
+                <div id="contact-list"></div>
+            </div>
+
+            <div class="contact-big">
                 <h1>Contacts</h1>
                 <hr>
                 <p>Better with a team</p>
+            </div>
+
+            <div id="contact-detailed">
+
             </div>
 
         </section>
     </div>
 
     <nav class="mobile-nav">
-        <a href="./summary.html"><div class="mobile-nav-icon">
+        <div class="mobile-nav-icon">
             <img src="./img/nav-icon-summary.svg" alt="">
             <span>Summary</span>
-        </div></a>
-        <a href="./board.html"><div class="mobile-nav-icon">
+        </div>
+        <div class="mobile-nav-icon">
             <img src="./img/nav-icon-board.svg" alt="">
             <span>Board</span>
-        </div></a>
-        <a href="./add-task.html"><div class="mobile-nav-icon">
+        </div>
+        <div class="mobile-nav-icon">
             <img src="./img/nav-icon-task.svg" alt="">
             <span>Add Task</span>
-        </div></a>
-        <a href="./contacts.html"><div class="mobile-nav-icon">
+        </div>
+        <div class="mobile-nav-icon">
             <img src="./img/nav-icon-contact.svg" alt="">
             <span>Contacts</span>
-        </div></a>
+        </div>
     </nav>
 
 </body>

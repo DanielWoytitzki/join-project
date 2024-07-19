@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+
+    <link rel="stylesheet" href="./style_login.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./javascript/login.js"></script>
+</head>
+<body>
+    <div>
+        <img src="./img/join-logo.svg" alt="join-logo">
+    </div>
+
+    <main>
+        <div>
+            <h2>Log in</h2>
+            <hr>
+        </div>
+
+        <form onsubmit="login(); return false">
+            <div class="style_login_d-flex-column">
+                <input id="email" type="email" placeholder="Email" required>
+                <input id="password" type="password" placeholder="Password" required>
+            </div>
+
+            <div class="style_login_d-flex-row">
+                <input id="checkbox-remember-me" type="checkbox"><p>Remember me</p>
+            </div>
+        </form>
+
+        <div class="style_login_d-flex-column">
+            <button>Log in</button>
+            <button>Guest Log in</button>
+        </div>
+    </main>
+
+    <div>
+        <p>Not a Join user?</p>
+        <button>Sign up</button>
+    </div>
+</body>
+</html>
