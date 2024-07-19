@@ -127,6 +127,15 @@ header {
   width: calc(100vw - 32px);
 }
 
+.mobile-nav a {
+    color: #cdcdcd;
+    text-decoration: none;
+}
+
+.mobile-nav a:hover {
+    background-color: #091931;
+}
+
 .mobile-nav-icon {
   display: flex;
   flex-direction: column;
@@ -164,6 +173,15 @@ header {
   gap: 15px;
 }
 
+.desktop-nav-icon-box a {
+    color: #cdcdcd;
+    text-decoration: none;
+}
+
+.desktop-nav-icon-box a:hover {
+    background-color: #091931;
+}
+
 .desktop-nav-icon {
   display: flex;
   align-items: center;
@@ -182,6 +200,18 @@ header {
   justify-content: flex-end;
   gap: 4px;
   height: 317px;
+  width: 100%;
+  text-align: center;
+}
+
+.extra-links-desktop-nav a {
+    color: #cdcdcd;
+    text-decoration: none;
+    padding: 8px;
+}
+
+.extra-links-desktop-nav a:hover {
+    background-color: #091931;
 }
 
 .contact-section {
