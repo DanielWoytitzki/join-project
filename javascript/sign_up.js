@@ -85,3 +85,7 @@ function signUp() {
         window.location.href = 'login.html?msg=You Signed Up successfully';
     }
 }
+
+function forwardToLogIn() {
+    window.location.href = 'login.html';
+}

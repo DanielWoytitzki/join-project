@@ -55,3 +55,7 @@ function loadLogInFromLocalStorage() {
 function logInAsGuest() {
 
 }
+
+function forwardToSignUp() {
+    window.location.href = 'sign_up.html';
+}
