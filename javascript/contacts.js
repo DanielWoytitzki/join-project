@@ -1,4 +1,4 @@
-const BASE_URL = "https://join-275-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * This function is for loading your contacts from the database
