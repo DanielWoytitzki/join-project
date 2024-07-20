@@ -1,50 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
 
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style_signup.css">
     <script src="./javascript/sign_up.js"></script>
 </head>
-<body>
+
+<body class="sign-up-dflex-column">
     <div>
-        <img src="./img/join-logo.svg" alt="join-logo">
+        <img src="./img/join-logo.svg" alt="join-logo" class="sign-up-logo">
     </div>
 
-    <main>
-        <div>
-            <div>
-                <img src="./img/arrow-left-blue.svg" alt="" onclick="forwardToLogIn()">
-                <h2>Sign up</h2>
-            </div>
-            
+    <main class="sign-up-dflex-column sign-up-frame153">
+        <div class="sign-up-arrow-left">
+            <img src="./img/arrow-left-blue.svg" alt="" onclick="forwardToLogIn()">
+        </div>
+        
+        <div class="sign-up-frame159">
+            <p>Sign up</p>
             <hr>
         </div>
 
-        <form>
-            <div class="style_login_d-flex-column">
-                <input id="name" type="text" placeholder="Name" required>
-                <input id="email" type="email" placeholder="Email" required>
-                <input id="password" type="password" placeholder="Password" required>
-                <input id="confirmedPassword" type="password" placeholder="Confirm Password" required>
-                <p id="wrongConfirmedPasswordMSG" style="display: none;">Ups! your password don't match</p>
+        <form onsubmit="signUp(); return false" class="sign-up-frame212">
+            <div class="sign-up-frame160">
+                <div class="sign-up-frame155">
+                    <div class="sign-up-frame14">
+                        <input id="name" type="text" placeholder="Name" required>
+                    </div>
+                    
+                </div>
+                
+                <div class="sign-up-frame157">
+                    <input id="email" type="email" placeholder="Email" required>
+                </div>
+                
+                <div class="sign-up-frame158">
+                    <input id="password" type="password" placeholder="Password" required>
+                </div>
+                
+                <div class="sign-up-frame156">
+                    <input id="confirmedPassword" type="password" placeholder="Confirm Password" required>
+                    <p id="wrongConfirmedPasswordMSG" style="display: none;">Ups! your password don't match</p>
+                </div>
             </div>
 
-            <div class="style_login_d-flex-row">
-                <input id="checkbox-privacy-policy" type="checkbox" onclick="checkCheckbox()"><p>I accept the <a href="">Privacy policy</a></p>
+            <div class="sign-up-privacy-policy-check-mark">
+                <div class="sign-up-privacy-policy-check-mark-check-button">
+                    <input id="checkbox-privacy-policy" type="checkbox" onclick="checkCheckbox()">
+                    <span class="sign-up-privacy-policy-check-mark-check-button-checkmark"></span>
+                </div>
+                
+                <p>I accept the <a href="./privacy-policy.html">Privacy policy</a></p>
             </div>
+
+            <button id="signup-button" class="sign-up-button-signup" disabled >Sign up</button>
         </form>
-
-        <div class="style_login_d-flex-column">
-            <button id="signup-button" onclick="signUp(); return false" disabled>Sign up</button>
-        </div>
     </main>
 
-    <div>
-        <a href="">Privacy Policy</a>
-        <a href="">Legal notice</a>
+    <div class="sign-up-frame213">
+        <a href="./privacy-policy.html">Privacy Policy</a>
+        <a href="./legal-notice.html">Legal notice</a>
+    </div>
+
+    <div id="msg-box" style="display: none;">
+        You Signed Up successfully
     </div>
 </body>
+
 </html>

@@ -79,11 +79,11 @@ function signUp() {
         console.log('Bitte akzeptieren Sie unsere Privacy policy.');
     } else {
         addUserToDatabase();
-        document.getElementById('name').value = '';
-        userEmail = document.getElementById('email').value = '';
-        userPassword = document.getElementById('password').value = '';
-        window.location.href = 'login.html?msg=You Signed Up successfully';
     }
+    document.getElementById('name').value = '';
+    userEmail = document.getElementById('email').value = '';
+    userPassword = document.getElementById('password').value = '';
+    window.location.href = 'login.html?msg=You Signed Up successfully';
 }
 
 function forwardToLogIn() {
