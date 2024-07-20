@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,25 +10,60 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./javascript/login.js"></script>
 </head>
-<body>
+
+<body class="log-in-dflex-column">
     <div>
-        <img src="./img/join-logo.svg" alt="join-logo">
+        <img src="./img/join-logo.svg" alt="join-logo" class="log-in-logo">
     </div>
 
-    <main>
-        <div>
-            <h2>Log in</h2>
+    <div class="log-in-frame156">
+        <p>Not a Join user?</p>
+        <button class="log-in-button-signup" onclick="forwardToSignUp()">Sign up</button>
+    </div>
+
+
+    <main class="log-in-dflex-column log-in-frame153">
+        <div class="log-in-frame159">
+            <p>Log in</p>
             <hr>
         </div>
 
+        <form onsubmit="logInAsUser(); return false" class="log-in-frame250">
+            <div class="log-in-container">
+                <div class="log-in-frame155">
+                    <div class="log-in-frame14">
+                        <div class="log-in-frame157">
+                            <input id="email" type="email" placeholder="Email" required>
+                            <img src="./img/mail.svg" alt="icon-email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log-in-frame156-2">
+                    <div class="log-in-frame14">
+                        <div class="log-in-frame158">
+                            <input id="password" type="password" placeholder="Password" required>
+                            <img src="./img/lock.svg" alt="icon-lock">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </main>
+
+
+    <main>
         <form>
             <div class="style_login_d-flex-column">
-                <input id="email" type="email" placeholder="Email" required>
-                <input id="password" type="password" placeholder="Password" required>
+                
+                
             </div>
 
             <div class="style_login_d-flex-row">
-                <input id="checkbox-remember-me" type="checkbox"><p>Remember me</p>
+                <input id="checkbox-remember-me" type="checkbox">
+                <p>Remember me</p>
             </div>
         </form>
 
@@ -37,14 +73,12 @@
         </div>
     </main>
 
-    <div>
-        <p>Not a Join user?</p>
-        <button onclick="forwardToSignUp()">Sign up</button>
-    </div>
 
-    <div>
-        <a href="">Privacy Policy</a>
-        <a href="">Legal notice</a>
+
+    <div class="log-in-frame213">
+        <a href="./privacy-policy.html">Privacy Policy</a>
+        <a href="./legal-notice.html">Legal notice</a>
     </div>
 </body>
+
 </html>
