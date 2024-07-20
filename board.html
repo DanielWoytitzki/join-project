@@ -17,33 +17,41 @@
   <body onload="initBoard()">
     <nav class="desktop-nav">
       <div>
-          <img src="./img/logo-big-desktop.svg" alt="">
+        <img src="./img/logo-big-desktop.svg" alt="" />
       </div>
 
       <div class="desktop-nav-icon-box">
-          <a href="./summary.html"><div class="desktop-nav-icon">
-              <img src="./img/nav-icon-summary.svg" alt="">
-              <span>Summary</span>
-          </div></a>
-          <a href="./add-task.html"><div class="desktop-nav-icon">
-              <img src="./img/nav-icon-task.svg" alt="">
-              <span>Add Task</span>
-          </div></a>
-          <a href="./board.html"><div class="desktop-nav-icon">
-              <img src="./img/nav-icon-board.svg" alt="">
-              <span>Board</span>
-          </div></a>
-          <a href="./contacts.html"><div class="desktop-nav-icon">
-              <img src="./img/nav-icon-contact.svg" alt="">
-              <span>Contacts</span>
-          </div></a>
+        <a href="./summary.html"
+          ><div class="desktop-nav-icon">
+            <img src="./img/nav-icon-summary.svg" alt="" />
+            <span>Summary</span>
+          </div></a
+        >
+        <a href="./add-task.html"
+          ><div class="desktop-nav-icon">
+            <img src="./img/nav-icon-task.svg" alt="" />
+            <span>Add Task</span>
+          </div></a
+        >
+        <a href="./board.html"
+          ><div class="desktop-nav-icon">
+            <img src="./img/nav-icon-board.svg" alt="" />
+            <span>Board</span>
+          </div></a
+        >
+        <a href="./contacts.html"
+          ><div class="desktop-nav-icon">
+            <img src="./img/nav-icon-contact.svg" alt="" />
+            <span>Contacts</span>
+          </div></a
+        >
       </div>
 
       <div class="extra-links-desktop-nav">
-          <a href="./privacy-policy.html">Privacy Policy</a>
-          <a href="./legal-notice.html">Legal notice</a>
+        <a href="./privacy-policy.html">Privacy Policy</a>
+        <a href="./legal-notice.html">Legal notice</a>
       </div>
-  </nav>
+    </nav>
 
     <div>
       <header>
@@ -66,7 +74,7 @@
           <h1>Board</h1>
           <div style="display: flex; gap: 32px; align-items: center">
             <input type="text" placeholder="Find Task" />
-            <button>Add Task</button>
+            <button onclick="addTask()">Add Task</button>
           </div>
         </div>
         <div class="board-body">
@@ -134,23 +142,31 @@
     </div>
 
     <nav class="mobile-nav">
-      <a href="./summary.html"><div class="mobile-nav-icon">
-          <img src="./img/nav-icon-summary.svg" alt="">
+      <a href="./summary.html"
+        ><div class="mobile-nav-icon">
+          <img src="./img/nav-icon-summary.svg" alt="" />
           <span>Summary</span>
-      </div></a>
-      <a href="./board.html"><div class="mobile-nav-icon">
-          <img src="./img/nav-icon-board.svg" alt="">
+        </div></a
+      >
+      <a href="./board.html"
+        ><div class="mobile-nav-icon">
+          <img src="./img/nav-icon-board.svg" alt="" />
           <span>Board</span>
-      </div></a>
-      <a href="./add-task.html"><div class="mobile-nav-icon">
-          <img src="./img/nav-icon-task.svg" alt="">
+        </div></a
+      >
+      <a href="./add-task.html"
+        ><div class="mobile-nav-icon">
+          <img src="./img/nav-icon-task.svg" alt="" />
           <span>Add Task</span>
-      </div></a>
-      <a href="./contacts.html"><div class="mobile-nav-icon">
-          <img src="./img/nav-icon-contact.svg" alt="">
+        </div></a
+      >
+      <a href="./contacts.html"
+        ><div class="mobile-nav-icon">
+          <img src="./img/nav-icon-contact.svg" alt="" />
           <span>Contacts</span>
-      </div></a>
-  </nav>
+        </div></a
+      >
+    </nav>
 
     <section
       class="board-overlay-task-background d-none"
@@ -158,7 +174,7 @@
       onclick="disableOverlayTask()"
     ></section>
 
-    <section class="board-add-task-background" id="addTaskOverlay">
+    <section class="board-add-task-background d-none" id="addTaskOverlay">
       <div class="board-add-task">
         <div class="board-add-task-header">
           <h1>Add Task</h1>
@@ -188,6 +204,7 @@
             <div class="add-task-content-box">
               <label for="addTaskDescription">Description</label>
               <textarea
+                class="add-task-textarea"
                 name="addTaskDescription"
                 id="addTaskDescription"
                 placeholder="Enter a Description"
@@ -195,16 +212,41 @@
             </div>
             <div class="add-task-content-box">
               <label for="addTaskAssignedTo">Assigned to</label>
-              <select
-                class="add-task-dropdown"
-                name="addTaskAssignedTo"
-                id="addTaskAssignedTo"
+              <div
+                class="add-task-dropdown add-task-dropdown-shadow"
+                onclick="toggleContacts()"
               >
-                <option value="">Select contacts to assign</option>
-                <option value="">Beispiel</option>
-                <option value="">Beispiel</option>
-                <option value="">Beispiel</option>
-              </select>
+                <div class="add-task-dropdown-select">
+                  <span id="addTaskAssignedTo">Select contacts to assign</span>
+                  <img
+                    src="./img/arrow-drop-down.svg"
+                    alt=""
+                    id="addTaskAssignedToArrow"
+                  />
+                </div>
+                <div class="d-none" id="addTaskAssignedToDropdownOptions">
+                  <!-- <div
+                    class="add-task-dropdown-option add-task-contact-box"
+                    onclick="event.stopPropagation()"
+                  >
+                    <div class="add-task-contact-content">
+                      <div
+                        class="add-task-contact-icon"
+                        style="background: #462f8a"
+                      >
+                        <span>MB</span>
+                      </div>
+                      <span>Sofia Müller (you)</span>
+                    </div>
+                    <img
+                      src="./img/check-button-unchecked.svg"
+                      alt=""
+                      onclick="contactSelect()"
+                      id="contact"
+                    />
+                  </div> -->
+                </div>
+              </div>
             </div>
           </div>
 
@@ -253,12 +295,33 @@
             </div>
             <div class="add-task-content-box">
               <label>Category</label>
-              <select class="add-task-dropdown" name="" id="">
-                <option value="">Select task category</option>
-                <option value="">Beispiel</option>
-                <option value="">Beispiel</option>
-                <option value="">Beispiel</option>
-              </select>
+              <div
+                class="add-task-dropdown add-task-dropdown-shadow"
+                onclick="toggleCategory()"
+              >
+                <div class="add-task-dropdown-select">
+                  <span id="addTaskCategory">Select task category</span>
+                  <img
+                    src="./img/arrow-drop-down.svg"
+                    alt=""
+                    id="addTaskCategoryArrow"
+                  />
+                </div>
+                <div class="d-none" id="addTaskCategoryDropdownOptions">
+                  <div
+                    class="add-task-dropdown-option"
+                    onclick="setCategory('Technical Task')"
+                  >
+                    <span>Technical Task</span>
+                  </div>
+                  <div
+                    class="add-task-dropdown-option"
+                    onclick="setCategory('User Story')"
+                  >
+                    <span>User Story</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="add-task-content-box">
               <label>Subtasks</label>
@@ -268,11 +331,16 @@
         </div>
 
         <div class="add-task-bottom">
-          <p>This field is required</p>
-
-          <div>
-            <button>Clear</button>
-            <button>Create Task</button>
+          <span><strong class="red-star">*</strong>This field is required</span>
+          <div class="add-task-bottom-button-section">
+            <div class="add-task-bottom-button btn-cancel">
+              <span class="">Cancel</span>
+              <img class="icon-cancel" src="./img/cancel.svg" alt="" />
+            </div>
+            <div class="add-task-bottom-button btn-check">
+              <span>Create Task</span>
+              <img src="./img/check.svg" alt="" />
+            </div>
           </div>
         </div>
       </div>
@@ -281,4 +349,5 @@
   <script src="script.js"></script>
   <script src="./javascript/board.js"></script>
   <script src="./javascript/boardHTML.js"></script>
+  <script src="./javascript/addTask.js"></script>
 </html>

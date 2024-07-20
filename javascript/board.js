@@ -1,4 +1,3 @@
-const TASKS_URL = "tasks";
 let taskFieldToDo = document.getElementById("taskFieldToDo");
 let taskFieldInProgress = document.getElementById("taskFieldInProgress");
 let taskFieldAwaitFeedback = document.getElementById("taskFieldAwaitFeedback");
@@ -99,32 +98,10 @@ function moveTo(position) {
   let path = TASKS_URL + "/" + currentDraggedElement + "/position";
   let data = position;
   putData(path, data);
-  setTimeout(renderTasks, 100);
+  setTimeout(renderTasks, 200);
 }
 
-function addTaskPrioritySelect(priority) {
-  let urgent = document.getElementById("addtaskPriorityUrgent");
-  let medium = document.getElementById("addtaskPriorityMedium");
-  let low = document.getElementById("addtaskPriorityLow");
-  if (priority == "Urgent") {
-    urgent.classList.add("red");
-    urgent.classList.remove("white");
-    medium.classList.remove("orange");
-    medium.classList.add("white");
-    low.classList.remove("green");
-  } else if (priority == "Medium") {
-    medium.classList.add("orange");
-    medium.classList.remove("white");
-    urgent.classList.remove("red");
-    urgent.classList.add("white");
-    low.classList.remove("green");
-    low.classList.add("white");
-  } else if (priority == "Low") {
-    low.classList.add("green");
-    low.classList.remove("white");
-    medium.classList.remove("orange");
-    medium.classList.add("white");
-    urgent.classList.remove("red");
-    urgent.classList.add("white");
-  }
+async function addTask() {
+  await loadContactList();
+  addTaskOverlay.classList.remove("d-none");
 }
