@@ -83,9 +83,26 @@ function signUp() {
     document.getElementById('name').value = '';
     userEmail = document.getElementById('email').value = '';
     userPassword = document.getElementById('password').value = '';
-    window.location.href = 'login.html?msg=You Signed Up successfully';
+    successfullSignUp();
+    /* setTimeout(window.location.href = 'login.html', 800); */
 }
 
 function forwardToLogIn() {
     window.location.href = 'login.html';
+}
+
+function successfullSignUp() {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.innerHTML = HTMLForSuccessfullSignUp();
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+}
+
+function HTMLForSuccessfullSignUp() {
+    return `
+        <div class="sign-up-frame73">
+            You Signed Up successfully
+        </div>
+    `
 }
