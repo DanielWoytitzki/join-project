@@ -136,3 +136,14 @@ function generateContactList(contactId, initials, name, contactState) {
                  onclick="contactSelect('${contactId}')"/>
           </div>`;
 }
+
+function generateSubtaskList(subtaskId, subtaskTitle) {
+  return `<div id="subtask'${subtaskId}'" class="add-task-subtask-task">
+            <li>${subtaskTitle}</li>
+            <div class="add-task-subtask-add-icon-section">
+                <img id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
+                <hr class="add-task-subtask-devider" />
+                <img id="addTaskSubtaskDelete" src="./img/delete.svg" alt="" />
+            </div>
+          </div>`;
+}

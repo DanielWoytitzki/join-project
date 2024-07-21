@@ -224,28 +224,7 @@
                     id="addTaskAssignedToArrow"
                   />
                 </div>
-                <div class="d-none" id="addTaskAssignedToDropdownOptions">
-                  <!-- <div
-                    class="add-task-dropdown-option add-task-contact-box"
-                    onclick="event.stopPropagation()"
-                  >
-                    <div class="add-task-contact-content">
-                      <div
-                        class="add-task-contact-icon"
-                        style="background: #462f8a"
-                      >
-                        <span>MB</span>
-                      </div>
-                      <span>Sofia Müller (you)</span>
-                    </div>
-                    <img
-                      src="./img/check-button-unchecked.svg"
-                      alt=""
-                      onclick="contactSelect()"
-                      id="contact"
-                    />
-                  </div> -->
-                </div>
+                <div class="d-none" id="addTaskAssignedToDropdownOptions"></div>
               </div>
             </div>
           </div>
@@ -323,9 +302,72 @@
                 </div>
               </div>
             </div>
-            <div class="add-task-content-box">
+            <div class="add-task-content-box pointer">
               <label>Subtasks</label>
-              <input type="text" name="" id="" placeholder="Add new subtask" />
+              <!-- <div id="addTaskSubtask" class="add-task-subtask" onclick="showSubtaskInput()">
+                <span>Add new subtask</span>
+                <div class="add-task-subtask-icon">
+                  <img class="filter" src="./img/add-plus.svg" alt="" />
+                </div>
+              </div> -->
+              <div class="add-task-subtask-add" id="addTaskSubtaskContainer">
+                <input
+                  id="addTaskSubtaskInput"
+                  type="text"
+                  placeholder="Add new subtask"
+                />
+                <div
+                  id="addTaskSubtaskPlusIcon"
+                  class="add-task-subtask-icon"
+                  onclick="subtaskFocusInput()"
+                >
+                  <img class="filter" src="./img/add-plus.svg" alt="" />
+                </div>
+                <div
+                  id="addTaskSubtasIconSection"
+                  class="add-task-subtask-add-icon-section-input d-none"
+                >
+                  <div
+                    class="add-task-subtask-icon"
+                    onclick="subtaskClearInput()"
+                  >
+                    <img src="./img/close.svg" alt="" class="filter" />
+                  </div>
+                  <hr class="add-task-subtask-devider" />
+                  <div
+                    class="add-task-subtask-icon"
+                    onclick="subtaskSubmitInput()"
+                  >
+                    <img src="./img/check.svg" alt="" class="filter" />
+                  </div>
+                </div>
+              </div>
+              <div id="addTaskSubtaskList" class="add-task-subtask-list">
+                <!-- <div class="add-task-subtask-task">
+                  <li>Contact Form</li>
+                  <div class="add-task-subtask-add-icon-section">
+                    <img id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
+                    <hr class="add-task-subtask-devider" />
+                    <img
+                      id="addTaskSubtaskDelete"
+                      src="./img/delete.svg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="add-task-subtask-task">
+                  <li><span>Write Legal Imprint</span></li>
+                  <div class="add-task-subtask-add-icon-section">
+                    <img id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
+                    <hr class="add-task-subtask-devider" />
+                    <img
+                      id="addTaskSubtaskDelete"
+                      src="./img/delete.svg"
+                      alt=""
+                    />
+                  </div>
+                </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -334,7 +376,7 @@
           <span><strong class="red-star">*</strong>This field is required</span>
           <div class="add-task-bottom-button-section">
             <div class="add-task-bottom-button btn-cancel">
-              <span class="">Cancel</span>
+              <span onclick="disableOverlayAddTask()">Cancel</span>
               <img class="icon-cancel" src="./img/cancel.svg" alt="" />
             </div>
             <div class="add-task-bottom-button btn-check">

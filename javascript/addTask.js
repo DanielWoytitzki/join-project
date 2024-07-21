@@ -4,6 +4,12 @@ let contacts = [];
 let contactDropdown = document.getElementById(
   "addTaskAssignedToDropdownOptions"
 );
+let subtasks = [];
+let addTaskSubtaskList = document.getElementById("addTaskSubtaskList");
+let addTaskSubtaskInput = document.getElementById("addTaskSubtaskInput");
+let addTaskSubtaskContainer = document.getElementById(
+  "addTaskSubtaskContainer"
+);
 
 function addTaskPrioritySelect(priority) {
   let urgent = document.getElementById("addtaskPriorityUrgent");
@@ -125,4 +131,48 @@ function getInitials(name) {
   let initials = nameParts.map((part) => part[0]).join("");
   initials.toUpperCase();
   return initials;
+}
+
+function subtaskFocusInput() {
+  addTaskSubtaskInput.focus();
+}
+
+function subtaskClearInput() {
+  addTaskSubtaskInput.value = "";
+}
+
+addTaskSubtaskInput.addEventListener("focus", () => {
+  addTaskSubtaskContainer.classList.add("focused");
+  document.getElementById("addTaskSubtaskPlusIcon").classList.add("d-none");
+  document
+    .getElementById("addTaskSubtasIconSection")
+    .classList.remove("d-none");
+});
+
+addTaskSubtaskInput.addEventListener("blur", () => {
+  setTimeout(removeFocus, 100);
+});
+
+function removeFocus() {
+  addTaskSubtaskContainer.classList.remove("focused");
+  document.getElementById("addTaskSubtaskPlusIcon").classList.remove("d-none");
+  document.getElementById("addTaskSubtasIconSection").classList.add("d-none");
+}
+
+function subtaskSubmitInput() {
+  let subtask = addTaskSubtaskInput.value;
+  subtasks.push({
+    subtaskTitle: subtask,
+    subtaskState: "unchecked",
+  });
+  showAddTaskSubtasks();
+  subtaskClearInput();
+}
+
+function showAddTaskSubtasks() {
+  addTaskSubtaskList.innerHTML = "";
+  for (let i = 0; i < subtasks.length; i++) {
+    let subtaskTitle = subtasks[i]["subtaskTitle"];
+    addTaskSubtaskList.innerHTML += generateSubtaskList(i, subtaskTitle);
+  }
 }
