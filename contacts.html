@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="./style_contacts.css">
     <script src="./javascript/contacts.js"></script>
-    
+
     <title>Contacts</title>
 </head>
 
@@ -68,13 +68,24 @@
 
         <section class="contact-section" class="style_contacts_d-flex">
 
-            <div>
-                <div>
-                    <button onclick="addNewContact()">Add new contact</button>
+            <div class="contacts-frame97">
+                <div class="contacts-frame97-bar">
+                    <img src="./img/Vector 12.svg" alt="vector-up" class="contacts-frame97-bar-vector12">
+                    <img src="./img/Vector 11.svg" alt="vector-bar" class="contacts-frame97-bar-vector11">
+                    <img src="./img/Vector 13.svg" alt="vector-down" class="contacts-frame97-bar-vector13">
                 </div>
 
-                <div id="contact-list"></div>
+                <div class="contact-button">
+                    <button onclick="addNewContact()" class="contact-button-primary-contact">
+                        <p>Add new contact</p>
+                        <img src="./img/person_add.svg" alt="add_person">
+                    </button>
+                </div>
+
+                <div id="contact-list" class="contact-contactlist">
+                </div>
             </div>
+         
 
             <div class="contact-big">
                 <h1>Contacts</h1>

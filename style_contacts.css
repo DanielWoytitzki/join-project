@@ -69,3 +69,100 @@
     margin: 10px 0;
     padding: 10px;
 }
+
+
+/* DROP SHADOW */
+.contacts-frame97 {
+    position: fixed;
+    width: 456px;
+    height: 928px;
+    top: 96px;
+    left: 232px;
+    background-color: #FFFFFF;
+}
+
+.contacts-frame97-bar {
+    width: 24px;
+    height: 928px;
+    position: absolute;
+    left: 432px;
+}
+
+.contacts-frame97-bar-vector12 {
+    width: 10px;
+    height: 4px;
+    position: absolute;
+    top: 20px;
+    left: 8px;
+    background-color: #A8A8A8;
+}
+
+.contacts-frame97-bar-vector11 {
+    height: 53px;
+    position: absolute;
+    top: 77px;
+    left: 13px;
+    border: 8px solid #A8A8A8;
+}
+
+.contacts-frame97-bar-vector13 {
+    width: 10px;
+    height: 4px;
+    position: absolute;
+    top: 908px;
+    left: 17px;
+    background-color: #A8A8A8;
+    transform: rotate(180deg);
+}
+
+.contact-button {
+    width: 456px;
+    height: 101px;
+    background-color: #FFFFFF;
+}
+
+.contact-button-primary-contact {
+    width: 352px;
+    height: 56px;
+    position: absolute;
+    top: 22.5px;
+    left: 52px;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    background-color: #2A3647;
+    padding: 12px 0px 12px 0px;
+    gap: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-button-primary-contact p {
+    width: 175px;
+    height: 25px;
+    font-size: 21px;
+    font-weight: 700px;
+    color: #FFFFFF;
+}
+
+.contact-button-primary-contact img {
+    width: 32px;
+    height: 32px;
+    align-self: center;
+}
+
+/* ADD DROPSHADOW */
+.contact-button-primary-contact:hover {
+    cursor: pointer;
+    background-color: #29ABE2;
+    border: #29ABE2;
+}
+
+.contact-contactlist {
+    width: 400px;
+    height: 1188px;
+    position: absolute;
+    left: 28px;
+    padding: 32px 24px 32px 24px;
+    background-color: #FFFFFF;
+}
