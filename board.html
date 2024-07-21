@@ -195,6 +195,7 @@
                   name="addTaskTitle"
                   id="addTaskTitle"
                   placeholder="Enter a Title"
+                  class="add-task-content-box-input"
                 />
                 <div class="add-task-small-required d-none">
                   This field is required
@@ -237,7 +238,12 @@
             <div class="add-task-content-box">
               <label for="addTaskDueDate">Due date</label>
               <div class="add-task-required-input">
-                <input type="date" name="addTaskDueDate" id="addTaskDueDate" />
+                <input
+                  class="add-task-content-box-input"
+                  type="date"
+                  name="addTaskDueDate"
+                  id="addTaskDueDate"
+                />
                 <div class="add-task-small-required d-none">
                   This field is required
                 </div>
@@ -304,17 +310,12 @@
             </div>
             <div class="add-task-content-box pointer">
               <label>Subtasks</label>
-              <!-- <div id="addTaskSubtask" class="add-task-subtask" onclick="showSubtaskInput()">
-                <span>Add new subtask</span>
-                <div class="add-task-subtask-icon">
-                  <img class="filter" src="./img/add-plus.svg" alt="" />
-                </div>
-              </div> -->
               <div class="add-task-subtask-add" id="addTaskSubtaskContainer">
                 <input
                   id="addTaskSubtaskInput"
                   type="text"
                   placeholder="Add new subtask"
+                  class="add-task-content-box-input"
                 />
                 <div
                   id="addTaskSubtaskPlusIcon"
@@ -342,44 +343,24 @@
                   </div>
                 </div>
               </div>
-              <div id="addTaskSubtaskList" class="add-task-subtask-list">
-                <!-- <div class="add-task-subtask-task">
-                  <li>Contact Form</li>
-                  <div class="add-task-subtask-add-icon-section">
-                    <img id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
-                    <hr class="add-task-subtask-devider" />
-                    <img
-                      id="addTaskSubtaskDelete"
-                      src="./img/delete.svg"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div class="add-task-subtask-task">
-                  <li><span>Write Legal Imprint</span></li>
-                  <div class="add-task-subtask-add-icon-section">
-                    <img id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
-                    <hr class="add-task-subtask-devider" />
-                    <img
-                      id="addTaskSubtaskDelete"
-                      src="./img/delete.svg"
-                      alt=""
-                    />
-                  </div>
-                </div> -->
-              </div>
+              <div id="addTaskSubtaskList" class="add-task-subtask-list"></div>
             </div>
           </div>
         </div>
-
         <div class="add-task-bottom">
           <span><strong class="red-star">*</strong>This field is required</span>
           <div class="add-task-bottom-button-section">
-            <div class="add-task-bottom-button btn-cancel">
-              <span onclick="disableOverlayAddTask()">Cancel</span>
+            <div
+              class="add-task-bottom-button btn-cancel"
+              onclick="disableOverlayAddTask()"
+            >
+              <span>Cancel</span>
               <img class="icon-cancel" src="./img/cancel.svg" alt="" />
             </div>
-            <div class="add-task-bottom-button btn-check">
+            <div
+              class="add-task-bottom-button btn-check"
+              onclick="addTaskSubmit()"
+            >
               <span>Create Task</span>
               <img src="./img/check.svg" alt="" />
             </div>

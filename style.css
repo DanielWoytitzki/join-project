@@ -780,7 +780,7 @@ header {
     hue-rotate(176deg) brightness(114%) contrast(101%);
 }
 
-.add-task-content-box input {
+.add-task-content-box-input {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 12px 21px;
@@ -789,11 +789,11 @@ header {
   line-height: 24px;
 }
 
-.add-task-content-box input::placeholder {
+.add-task-content-box-input::placeholder {
   color: #d1d1d1;
 }
 
-.add-task-content-box input:focus {
+.add-task-content-box-input:focus {
   outline-color: #29abe2;
 }
 
@@ -1044,6 +1044,41 @@ header {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.add-task-subtask-edit {
+  display: flex;
+  align-items: center;
+  padding: 2px 16px;
+  border-bottom: 1px solid #29abe2;
+}
+
+.add-task-subtask-edit hr {
+  margin: 0;
+  height: 20px;
+}
+
+.add-task-subtask-edit-input {
+  padding: 0;
+  border: none;
+  flex-grow: 1;
+  color: #000000;
+  font-size: 16px;
+}
+
+.add-task-subtask-edit-input:focus {
+  outline: none;
+}
+
+.add-task-subtask-edit-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.add-task-subtask-edit-icons img {
+  width: 20px;
+  height: 20px;
 }
 
 /* ==================================== */

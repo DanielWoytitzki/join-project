@@ -141,9 +141,24 @@ function generateSubtaskList(subtaskId, subtaskTitle) {
   return `<div id="subtask'${subtaskId}'" class="add-task-subtask-task">
             <li>${subtaskTitle}</li>
             <div class="add-task-subtask-add-icon-section">
-                <img id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
+                <img onclick="subtaskEditTask(${subtaskId})" id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
                 <hr class="add-task-subtask-devider" />
-                <img id="addTaskSubtaskDelete" src="./img/delete.svg" alt="" />
+                <img onclick="subtaskDeleteTask(${subtaskId})" id="addTaskSubtaskDelete" src="./img/delete.svg" alt="" />
+            </div>
+          </div>`;
+}
+
+function generateSubtaskEdit(subtaskId) {
+  return `<div class="add-task-subtask-edit">
+            <input id="subtaskInputEditValue" class="add-task-subtask-edit-input" type="text" />
+            <div class="add-task-subtask-edit-icons">
+                <div class="add-task-subtask-icon">
+                    <img onclick="subtaskDeleteTask(${subtaskId})" src="./img/delete.svg" alt="" class="filter" />
+                </div>
+                <hr />
+                <div class="add-task-subtask-icon">
+                    <img onclick="subtaskSubmitEditTask(${subtaskId})" src="./img/check.svg" alt="" class="filter" />
+                </div>
             </div>
           </div>`;
 }

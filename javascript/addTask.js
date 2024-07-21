@@ -1,3 +1,5 @@
+let taskPriority = "Medium";
+let taskCategory;
 let categoryState = false;
 let contactsState = false;
 let contacts = [];
@@ -21,6 +23,7 @@ function addTaskPrioritySelect(priority) {
     medium.classList.remove("orange");
     medium.classList.add("white");
     low.classList.remove("green");
+    taskPriority = "Urgent";
   } else if (priority == "Medium") {
     medium.classList.add("orange");
     medium.classList.remove("white");
@@ -28,6 +31,7 @@ function addTaskPrioritySelect(priority) {
     urgent.classList.add("white");
     low.classList.remove("green");
     low.classList.add("white");
+    taskPriority = "Medium";
   } else if (priority == "Low") {
     low.classList.add("green");
     low.classList.remove("white");
@@ -35,6 +39,7 @@ function addTaskPrioritySelect(priority) {
     medium.classList.add("white");
     urgent.classList.remove("red");
     urgent.classList.add("white");
+    taskPriority = "Low";
   }
 }
 
@@ -56,6 +61,7 @@ function toggleCategory() {
 
 function setCategory(category) {
   document.getElementById("addTaskCategory").innerHTML = `${category}`;
+  taskCategory = category;
 }
 
 function toggleContacts() {
@@ -175,4 +181,33 @@ function showAddTaskSubtasks() {
     let subtaskTitle = subtasks[i]["subtaskTitle"];
     addTaskSubtaskList.innerHTML += generateSubtaskList(i, subtaskTitle);
   }
+}
+
+function subtaskDeleteTask(id) {
+  subtasks.splice(id, 1);
+  showAddTaskSubtasks();
+}
+
+function subtaskEditTask(id) {
+  addTaskSubtaskList.innerHTML = "";
+  addTaskSubtaskList.innerHTML += generateSubtaskEdit(id);
+  console.log(subtasks[id]["subtaskTitle"]);
+  document.getElementById("subtaskInputEditValue").value =
+    subtasks[id]["subtaskTitle"];
+}
+
+function subtaskSubmitEditTask(id) {
+  let subtask = document.getElementById("subtaskInputEditValue").value;
+  subtasks[id]["subtaskTitle"] = subtask;
+  showAddTaskSubtasks();
+}
+
+function addTaskSubmit() {
+  let title = document.getElementById("addTaskTitle").value;
+  let description = document.getElementById("addTaskDescription").value;
+  let dueDate = document.getElementById("addTaskDueDate").value;
+  taskPriority;
+  taskCategory;
+  //object Contacts
+  //object subtasks
 }
