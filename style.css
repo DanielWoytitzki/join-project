@@ -216,16 +216,20 @@ header {
 
 .contact-section {
   width: calc(100vw - 232px);
+  display: flex;
+  align-items: flex-start;
 }
 
 .contact-section-head {
   width: 569px;
   display: flex;
   align-items: center;
+  padding: 88px 40px;
 }
 
 .contact-section-head h1 {
   font-size: 61px;
+  margin: 0;
 }
 
 .contact-section-head hr {
@@ -235,6 +239,89 @@ header {
 
 .contact-section-head p {
   font-size: 27px;
+}
+
+.all-contacts-box {
+    width: 456px;
+    height: calc(100vh - 102px);
+    background-color: white;
+    box-shadow: 4px 0px 6px 0px #00000014;
+    /* z-index: 1; its like that in figma but look better without */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+}
+
+.all-contacts-box button {
+    width: 352px;
+    padding: 12px 0;
+    background: #2A3647;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    margin-top: 22.5px;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.all-contacts-box button img {
+    height: 32px;
+    width: 32px;
+}
+
+.contact-list {
+    width: 352px;
+}
+
+.contact-list hr {
+    margin: 0;
+    border: 1px solid #D1D1D1;
+}
+
+.alphabetical-numbering {
+    padding: 17px 36px;
+    font-size: 20px;
+}
+
+.single-contact-box {
+    padding: 15px 24px;
+    display: flex;
+    gap: 35px;
+}
+
+.single-contact-box-profile-img {
+    height: 42px;
+    width: 42px;
+    background: #9327FF;
+    color: #ffffff;
+    border: 2px solid #FFFFFF;
+    border-radius: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.single-contact-box-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.single-contact-box-content span {
+    font-size: 20px;
+}
+
+.single-contact-box-content a {
+    font-size: 16px;
+    color: #007CEE;
+    text-decoration: none;
 }
 
 .board-section {
