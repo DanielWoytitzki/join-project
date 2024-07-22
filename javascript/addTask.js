@@ -203,7 +203,7 @@ function subtaskSubmitEditTask(id) {
   showAddTaskSubtasks();
 }
 
-async function addTaskSubmit() {
+async function addTaskSubmit(state) {
   addTaskAssignedContactList();
   let title = document.getElementById("addTaskTitle").value;
   let description = document.getElementById("addTaskDescription").value;
@@ -218,7 +218,7 @@ async function addTaskSubmit() {
     category: taskCategory,
     assignedContacts: assignedContactsObject,
     subtasks: subtasksObject,
-    position: "ToDo",
+    position: state,
   };
 
   await postData(TASKS_URL, task);
