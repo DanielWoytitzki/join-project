@@ -12,6 +12,7 @@ let addTaskSubtaskInput = document.getElementById("addTaskSubtaskInput");
 let addTaskSubtaskContainer = document.getElementById(
   "addTaskSubtaskContainer"
 );
+let addTaskAssignedContacts = [];
 
 function addTaskPrioritySelect(priority) {
   let urgent = document.getElementById("addtaskPriorityUrgent");
@@ -202,12 +203,39 @@ function subtaskSubmitEditTask(id) {
   showAddTaskSubtasks();
 }
 
-function addTaskSubmit() {
+async function addTaskSubmit() {
+  addTaskAssignedContactList();
   let title = document.getElementById("addTaskTitle").value;
   let description = document.getElementById("addTaskDescription").value;
   let dueDate = document.getElementById("addTaskDueDate").value;
-  taskPriority;
-  taskCategory;
-  //object Contacts
-  //object subtasks
+  let assignedContactsObject = convertArrayToObject(addTaskAssignedContacts);
+  let subtasksObject = convertArrayToObject(subtasks);
+  let task = {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: taskPriority,
+    category: taskCategory,
+    assignedContacts: assignedContactsObject,
+    subtasks: subtasksObject,
+    position: "ToDo",
+  };
+
+  await postData(TASKS_URL, task);
+}
+
+function convertArrayToObject(array) {
+  let obj = {};
+  array.forEach((value, index) => {
+    obj[index] = value;
+  });
+  return obj;
+}
+
+function addTaskAssignedContactList() {
+  for (let i = 0; i < contacts.length; i++) {
+    if (contacts[i]["state"] == "checked") {
+      addTaskAssignedContacts.push(contacts[i]["id"]);
+    }
+  }
 }
