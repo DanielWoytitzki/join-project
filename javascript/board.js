@@ -9,9 +9,9 @@ let contactsOverlay = [];
 let boardContacts;
 let boardTasks;
 
-function initBoard() {
-  pullContacts();
-  renderTasks();
+async function initBoard() {
+  await pullContacts();
+  await renderTasks();
 }
 
 async function pullContacts() {
@@ -68,11 +68,10 @@ function displayTaskSubtasks(item, id) {
   if (item.hasOwnProperty("subtasks")) {
     let taskId = document.getElementById(`taskSubtasks${id}`);
     let subtasks = item["subtasks"];
-    console.log(subtasks);
     let subtaskDone = 0;
     let subtaskTotal = 0;
     for (const key in subtasks) {
-      if (subtasks["subtaskState"] == "checked") {
+      if (subtasks[key]["subtaskState"] == "checked") {
         subtaskDone++;
       }
       subtaskTotal++;
@@ -86,7 +85,6 @@ function displayTaskSubtasks(item, id) {
       );
     }
   }
-  // taskId.innerHTML += generateTaskSubtasks(progress, subtaskDone, subtaskTotal);
 }
 
 function clearTaskBoard() {
@@ -123,26 +121,79 @@ function noTasks() {
 
 async function renderOverlayTasks(id) {
   try {
-    let data = await readData(TASKS_URL + `/${id}`);
-    // loadContactsOverlayTask(data);
-    console.log(contactsOverlay);
+    let item = await readData(TASKS_URL + `/${id}`);
     taskOverlay.innerHTML = "";
-    let priority = nameWithUpperCase(data["priority"]);
-    taskOverlay.innerHTML += generateTaskOverlayHTML(id, data, priority);
+    let priority = nameWithUpperCase(item["priority"]);
+    taskOverlay.innerHTML += generateTaskOverlayHTML(id, item, priority);
+    displayTaskOverlayAssignedContacts(item, id);
+    displayTaskOverlaySubtasks(item, id);
   } catch (error) {
     console.error("Error rendering tasks:", error);
   }
 }
 
-// async function loadContactsOverlayTask(data) {
-//   boardContacts;
-//   for (let i = 0; i < data["assignedContacts"].length; i++) {
-//     if(boardContacts == data["assignedContacts"][i]) {
+function displayTaskOverlayAssignedContacts(item, id) {
+  if (item.hasOwnProperty("assignedContacts")) {
+    let assignedContacts = item["assignedContacts"];
+    let taskId = document.getElementById(`taskOverlayContacts${id}`);
+    for (let i = 0; i < assignedContacts.length; i++) {
+      let contact = assignedContacts[i];
+      for (let key in boardContacts) {
+        if (key == contact) {
+          let contactName = boardContacts[key]["name"];
+          let initials = getInitials(contactName);
+          taskId.innerHTML += generateTaskOverlayContacts(
+            initials,
+            contactName
+          );
+        }
+      }
+    }
+  }
+}
 
-//     }
-//     contactsOverlay.push(data["assignedContacts"][i]);
-//   }
-// }
+function displayTaskOverlaySubtasks(item, id) {
+  if (item.hasOwnProperty("subtasks")) {
+    let taskId = document.getElementById(`taskOverlaySubtasks${id}`);
+    let subtasks = item["subtasks"];
+    let state;
+    for (const key in subtasks) {
+      if (subtasks[key]["subtaskState"] == "checked") {
+        state = "checked";
+        subtaskTitle = subtasks[key]["subtaskTitle"];
+        taskId.innerHTML += generateTaskOverlaySubtasks(
+          subtaskTitle,
+          state,
+          id,
+          key
+        );
+      } else {
+        state = "unchecked";
+        subtaskTitle = subtasks[key]["subtaskTitle"];
+        taskId.innerHTML += generateTaskOverlaySubtasks(
+          subtaskTitle,
+          state,
+          id,
+          key
+        );
+      }
+    }
+  }
+}
+
+async function toggleTaskOverlaySubtask(state, id, key) {
+  if (state == "checked") {
+    let path = TASKS_URL + "/" + id + "/subtasks/" + key + "/subtaskState";
+    let data = "unchecked";
+    await putData(path, data);
+    openTaskDetails(id);
+  } else if (state == "unchecked") {
+    let path = TASKS_URL + "/" + id + "/subtasks/" + key + "/subtaskState";
+    let data = "checked";
+    await putData(path, data);
+    openTaskDetails(id);
+  }
+}
 
 function showOverlayTask() {
   taskOverlay.classList.remove("d-none");
@@ -154,6 +205,7 @@ function showOverlayAddTask() {
 
 function disableOverlayTask() {
   taskOverlay.classList.add("d-none");
+  renderTasks();
 }
 
 function disableOverlayAddTask() {

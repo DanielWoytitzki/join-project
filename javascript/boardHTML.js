@@ -64,32 +64,12 @@ function generateTaskOverlayHTML(taskId, task, priority) {
             </div>
             <div class="board-overlay-task-contacts">
                 <span class="board-overlay-task-contacts-span">Assigned To:</span>
-                <ul class="board-overlay-task-contactlist">
-                    <li class="board-overlay-task-contactlist-contact">
-                        <div class="board-overlay-task-contactlist-contact-icon" style="background: #1fd7c1">
-                            <span>EM</span>
-                        </div>
-                        <span>Emmanuel Mauer</span>
-                    </li>
-                    <li class="board-overlay-task-contactlist-contact">
-                        <div class="board-overlay-task-contactlist-contact-icon" style="background: #462f8a">
-                            <span>MB</span>
-                        </div>
-                        <span>Marcel Bauer</span>
-                    </li>
+                <ul class="board-overlay-task-contactlist" id="taskOverlayContacts${taskId}">
                 </ul>
             </div>
             <div class="board-overlay-task-subtasks">
                 <span class="board-overlay-task-subtasks-span">Subtasks</span>
-                <ul class="board-overlay-task-subtasklist">
-                    <li class="board-overlay-task-subtasklist-subtask">
-                        <input type="checkbox" />
-                        <span>Implement Recipe Recommendation</span>
-                    </li>
-                    <li class="board-overlay-task-subtasklist-subtask">
-                        <input type="checkbox" />
-                        <span>Start Page Layout</span>
-                    </li>
+                <ul class="board-overlay-task-subtasklist" id="taskOverlaySubtasks${taskId}">
                 </ul>
             </div>
             <div class="board-overlay-task-footer">
@@ -106,6 +86,22 @@ function generateTaskOverlayHTML(taskId, task, priority) {
                 </div>
             </div>
         </div>`;
+}
+
+function generateTaskOverlayContacts(initials, name) {
+  return `<li class="board-overlay-task-contactlist-contact">
+            <div class="board-overlay-task-contactlist-contact-icon" style="background: #1fd7c1">
+                <span>${initials}</span>
+            </div>
+            <span>${name}</span>
+          </li>`;
+}
+
+function generateTaskOverlaySubtasks(subtaskTitle, state, id, key) {
+  return `<li class="board-overlay-task-subtasklist-subtask">
+            <img src="./img/check-button-${state}.svg" class="check-hover" onclick="toggleTaskOverlaySubtask('${state}', '${id}', '${key}')" alt=""/>
+            <span>${subtaskTitle}</span>
+          </li>`;
 }
 
 function generateNoTaskToDo() {

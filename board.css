@@ -426,3 +426,9 @@
   line-height: 73.2px;
   margin: 0;
 }
+
+.check-hover:hover {
+  cursor: pointer;
+  background-color: #d1d1d1;
+  border-radius: 50%;
+}
