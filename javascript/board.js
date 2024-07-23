@@ -31,7 +31,7 @@ async function renderTasks() {
       let column = item["position"];
       displayTasks(column, key, item);
       displayTaskAssignedContacts(item, key);
-      displayTaskSubtasks();
+      displayTaskSubtasks(item, key);
     }
     noTasks();
   } catch (error) {
@@ -40,30 +40,54 @@ async function renderTasks() {
 }
 
 function displayTaskAssignedContacts(item, id) {
-  let assignedContacts = item["assignedContacts"];
-  let taskId = document.getElementById(`taskContacts${id}`);
-  console.log(`taskContacts${id}`);
-  let counter = 0;
-  for (let i = 0; i < assignedContacts.length; i++) {
-    let contact = assignedContacts[i];
-    for (let key in boardContacts) {
-      if (key == contact && counter == 0) {
-        let contactName = boardContacts[key]["name"];
-        let initials = getInitials(contactName);
-        taskId.innerHTML += generateTaskContacts(initials);
-        counter++;
-      } else if (key == contact && counter > 0) {
-        let contactName = boardContacts[key]["name"];
-        let initials = getInitials(contactName);
-        let left = counter * 8;
-        taskId.innerHTML += generateTaskContactsTwo(initials, left);
-        counter++;
+  if (item.hasOwnProperty("assignedContacts")) {
+    let assignedContacts = item["assignedContacts"];
+    let taskId = document.getElementById(`taskContacts${id}`);
+    let counter = 0;
+    for (let i = 0; i < assignedContacts.length; i++) {
+      let contact = assignedContacts[i];
+      for (let key in boardContacts) {
+        if (key == contact && counter == 0) {
+          let contactName = boardContacts[key]["name"];
+          let initials = getInitials(contactName);
+          taskId.innerHTML += generateTaskContacts(initials);
+          counter++;
+        } else if (key == contact && counter > 0) {
+          let contactName = boardContacts[key]["name"];
+          let initials = getInitials(contactName);
+          let left = counter * 8;
+          taskId.innerHTML += generateTaskContactsTwo(initials, left);
+          counter++;
+        }
       }
     }
   }
 }
 
-function displayTaskSubtasks() {}
+function displayTaskSubtasks(item, id) {
+  if (item.hasOwnProperty("subtasks")) {
+    let taskId = document.getElementById(`taskSubtasks${id}`);
+    let subtasks = item["subtasks"];
+    console.log(subtasks);
+    let subtaskDone = 0;
+    let subtaskTotal = 0;
+    for (const key in subtasks) {
+      if (subtasks["subtaskState"] == "checked") {
+        subtaskDone++;
+      }
+      subtaskTotal++;
+    }
+    if (!subtaskTotal == 0) {
+      let progress = (subtaskDone / subtaskTotal) * 100;
+      taskId.innerHTML += generateTaskSubtasks(
+        progress,
+        subtaskDone,
+        subtaskTotal
+      );
+    }
+  }
+  // taskId.innerHTML += generateTaskSubtasks(progress, subtaskDone, subtaskTotal);
+}
 
 function clearTaskBoard() {
   taskFieldToDo.innerHTML = "";
