@@ -85,6 +85,7 @@ async function editContactFromDatabase(contactId, updatedData) {
 function renderContacts(contacts) {
     let contactList = document.getElementById('contact-list');
     contactList.innerHTML = '';
+    document.getElementById('contact-detailed').innerHTML = '';
 
     if (contacts) {
         // Convert contacts object to an array and sort it alphabetically by name
@@ -106,7 +107,9 @@ function renderContacts(contacts) {
         // Render each group
         for (let letter in groupedContacts) {
             contactList.innerHTML += `
-                <h2>${letter}</h2>
+                <div class="alphabetical-numbering">
+                    <span>${letter}</span>
+                </div>
                 <hr>
                 `;
             groupedContacts[letter].forEach(contact => {
@@ -128,18 +131,14 @@ function HTMLForContactCard(contact) {
     const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
 
     return `
-        <div class="contact-card" onclick="showDetailedContact('${contact.id}')">
-            <div class="contact-initials">
-                <div class="initials-circle">
-                    ${firstLetter}${secondLetter}
-                </div>
+        <div onclick="showDetailedContact('${contact.id}')" class="single-contact-box">
+            <div class="single-contact-box-profile-img">
+                <span>${firstLetter}${secondLetter}</span>
             </div>
-            
-            <div>
-                <p>${contact.name}</p>
-                <p>${contact.email}</p>
+            <div class="single-contact-box-content">
+                <span>${contact.name}</span>
+                <a href="mailto:philipb@beispiel.com">${contact.email}</a>
             </div>
-            
         </div>
     `
 }
@@ -167,26 +166,33 @@ function HTMLForDetailedContact(detailedContact) {
     const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
 
     return `
-        <div class="detailed-contact">
-            <div class="detailed-contact-header">
-                <div class="initials-circle">
-                    ${firstLetter}${secondLetter}
-                </div>
-                <div class="detailed-contact-info">
-                    <h2>${detailedContact.name}</h2>
-                    <p>${detailedContact.email}</p>
-                </div>
-            </div>
-            <div class="detailed-contact-body">
-                <h3>Contact Information</h3>
-                <p><strong>Email:</strong> ${detailedContact.email}</p>
-                <p><strong>Phone:</strong> ${detailedContact.phone}</p>
-            </div>
-            <div class="detailed-contact-actions">
-                <button type="button" onclick="editContactFromDatabasePrompt('${detailedContact.id}', '${detailedContact.name}', '${detailedContact.email}', '${detailedContact.phone}')">Edit</button>
-                <button type="button" onclick="deleteContactFromDatabase('${detailedContact.id}')">Delete</button>
-            </div>
-        </div>
+        <div style="display: flex; align-items: center; gap: 54px;">
+                        <div class="contact-big-profile-img">
+                            <span>${firstLetter}${secondLetter}</span>
+                        </div>
+                        <div>
+                            <h2>${detailedContact.name}</h2>
+                            <div style="display: flex; justify-content: space-between; width: 159px;">
+                                <div onclick="editContactFromDatabasePrompt('${detailedContact.id}', '${detailedContact.name}', '${detailedContact.email}', '${detailedContact.phone}')" class="contact-big-icon">
+                                    <img src="./img/edit-icon-contact.svg" alt="">
+                                    <span>Edit</span>
+                                </div>
+                                <div onclick="deleteContactFromDatabase('${detailedContact.id}')" class="contact-big-icon">
+                                    <img src="./img/delete-icon-contact.svg" alt="">
+                                    <span>Delete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 74px; display: flex; align-items: center; font-size: 20px;">
+                        <span>Contact Information</span>
+                    </div>
+                    <div class="contact-big-info">
+                        <span>Email</span>
+                        <a href="mailto:philipb@beispiel.com">${detailedContact.email}</a>
+                        <span>Phone</span>
+                        <a style="color: black;" href="tel:+491111111111">${detailedContact.phone}</a>
+                    </div>
     `;
 }
 

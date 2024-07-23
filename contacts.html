@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./contacts.css">
     <link rel="stylesheet" href="./mediaq.css">
+    <script src="./javascript/contacts.js"></script>
     <title>Contacts</title>
 </head>
 
-<body>
+<body onload="loadContactsFromDatabase()">
 
     <nav class="desktop-nav">
         <div>
@@ -74,143 +75,8 @@
         <section class="contact-section">
 
             <div class="all-contacts-box">
-                <button>Add new contact<img src="./img/person_add-icon.svg"></button>
-                <div class="contact-list">
-                    <div class="alphabetical-numbering">
-                        <span>C</span>
-                    </div>
-                    <hr>
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>CK</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Christian K.</span>
-                            <a href="mailto:christiank@beispiel.com">christiank@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="alphabetical-numbering">
-                        <span>D</span>
-                    </div>
-                    <hr>
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>DW</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Daniel W.</span>
-                            <a href="mailto:danielw@beispiel.com">danielw@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="alphabetical-numbering">
-                        <span>P</span>
-                    </div>
-                    <hr>
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>PB</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Philip B.</span>
-                            <a href="mailto:philipb@beispiel.com">philipb@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="alphabetical-numbering">
-                        <span>T</span>
-                    </div>
-                    <hr>
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
-
-                    <div class="single-contact-box">
-                        <div class="single-contact-box-profile-img">
-                            <span>TT</span>
-                        </div>
-                        <div class="single-contact-box-content">
-                            <span>Test Test</span>
-                            <a href="mailto:testtest@beispiel.com">testtest@beispiel.com</a>
-                        </div>
-                    </div>
+                <button onclick="addNewContact()">Add new contact<img src="./img/person_add-icon.svg"></button>
+                <div id="contact-list" class="contact-list">
                 </div>
             </div>
 
@@ -220,34 +86,8 @@
                     <hr>
                     <p>Better with a team</p>
                 </div>
-                <div class="contact-big-onclick">
-                    <div style="display: flex; align-items: center; gap: 54px;">
-                        <div class="contact-big-profile-img">
-                            <span>PB</span>
-                        </div>
-                        <div>
-                            <h2>Philip B.</h2>
-                            <div style="display: flex; justify-content: space-between; width: 159px;">
-                                <div class="contact-big-icon">
-                                    <img src="./img/edit-icon-contact.svg" alt="">
-                                    <span>Edit</span>
-                                </div>
-                                <div class="contact-big-icon">
-                                    <img src="./img/delete-icon-contact.svg" alt="">
-                                    <span>Delete</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="height: 74px; display: flex; align-items: center; font-size: 20px;">
-                        <span>Contact Information</span>
-                    </div>
-                    <div class="contact-big-info">
-                        <span>Email</span>
-                        <a href="mailto:philipb@beispiel.com">philipb@beispiel.com</a>
-                        <span>Phone</span>
-                        <a style="color: black;" href="tel:+491111111111">+49 1111 111 11 1</a>
-                    </div>
+                <div id="contact-detailed" class="contact-big-onclick">
+                    
                 </div>
             </div>
 
