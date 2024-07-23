@@ -7,12 +7,7 @@ function generateTaskHTML(taskId, task) {
                 <h3>${task["title"]}</h3>
                 <span>${task["description"]}</span>
             </div>
-            <div class="board-body-body-task-progress">
-                <div class="board-body-body-task-progress-bar">
-                    <div class="board-body-body-task-progress-bar-progress"></div>
-                </div>
-                <span>1/2</span>
-                <span>Subtasks</span>
+            <div class="board-body-body-task-progress" id="taskSubtasks${taskId}">
             </div>
             <div class="board-body-body-task-bottom">
                 <div class="board-body-body-task-bottom-contactlist" id="taskContacts${taskId}">
@@ -36,7 +31,13 @@ function generateTaskContactsTwo(initials, left) {
             </div>`;
 }
 
-function generateTaskSubtasks() {}
+function generateTaskSubtasks(progress, subtaskDone, subtaskTotal) {
+  return `<div class="board-body-body-task-progress-bar">
+                <div class="board-body-body-task-progress-bar-progress" style="width: ${progress}%;"></div>
+            </div>
+            <span>${subtaskDone}/${subtaskTotal}</span>
+            <span>Subtasks</span>`;
+}
 
 function generateTaskOverlayHTML(taskId, task, priority) {
   return `<div class="board-overlay-task" onclick="event.stopPropagation()" id="taskOverlay${taskId}">
