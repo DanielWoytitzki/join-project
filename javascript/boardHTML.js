@@ -15,13 +15,7 @@ function generateTaskHTML(taskId, task) {
                 <span>Subtasks</span>
             </div>
             <div class="board-body-body-task-bottom">
-                <div class="board-body-body-task-bottom-contactlist">
-                    <div class="board-body-body-task-bottom-contact">
-                        <span>AM</span>
-                    </div>
-                    <div class="board-body-body-task-bottom-contact left">
-                        <span>EM</span>
-                    </div>
+                <div class="board-body-body-task-bottom-contactlist" id="taskContacts${taskId}">
                 </div>
                 <div class="board-body-body-task-bottom-icon">
                     <img src="./img/prio-${task["priority"]}.svg" alt="" />
@@ -29,6 +23,20 @@ function generateTaskHTML(taskId, task) {
             </div>
         </div>`;
 }
+
+function generateTaskContacts(initials) {
+  return `<div class="board-body-body-task-bottom-contact">
+            <span>${initials}</span>
+          </div>`;
+}
+
+function generateTaskContactsTwo(initials, left) {
+  return `<div class="board-body-body-task-bottom-contact" style="left: -${left}px;">
+              <span>${initials}</span>
+            </div>`;
+}
+
+function generateTaskSubtasks() {}
 
 function generateTaskOverlayHTML(taskId, task, priority) {
   return `<div class="board-overlay-task" onclick="event.stopPropagation()" id="taskOverlay${taskId}">

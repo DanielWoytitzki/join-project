@@ -53,3 +53,11 @@ function nameWithUpperCase(name) {
   let nameUpperCase = name.charAt(0).toUpperCase() + name.slice(1);
   return nameUpperCase;
 }
+
+function getInitials(name) {
+  let fullName = name;
+  let nameParts = fullName.split(" ");
+  let initials = nameParts.map((part) => part[0]).join("");
+  initials.toUpperCase();
+  return initials;
+}

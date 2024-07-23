@@ -6,27 +6,64 @@ let taskOverlay = document.getElementById("taskOverlay");
 let addTaskOverlay = document.getElementById("addTaskOverlay");
 let currentDraggedElement;
 let contactsOverlay = [];
-let contactsForOverlay;
+let boardContacts;
+let boardTasks;
 
 function initBoard() {
+  pullContacts();
   renderTasks();
+}
+
+async function pullContacts() {
+  try {
+    boardContacts = await readData(CONTACTS_URL);
+  } catch (error) {
+    console.error("Error rendering tasks:", error);
+  }
 }
 
 async function renderTasks() {
   clearTaskBoard();
   try {
-    let data = await readData(TASKS_URL);
-    contactsForOverlay = await readData(CONTACTS_URL);
-    for (let key in data) {
-      let item = data[key];
+    boardTasks = await readData(TASKS_URL);
+    for (let key in boardTasks) {
+      let item = boardTasks[key];
       let column = item["position"];
       displayTasks(column, key, item);
+      displayTaskAssignedContacts(item, key);
+      displayTaskSubtasks();
     }
     noTasks();
   } catch (error) {
     console.error("Error rendering tasks:", error);
   }
 }
+
+function displayTaskAssignedContacts(item, id) {
+  let assignedContacts = item["assignedContacts"];
+  let taskId = document.getElementById(`taskContacts${id}`);
+  console.log(`taskContacts${id}`);
+  let counter = 0;
+  for (let i = 0; i < assignedContacts.length; i++) {
+    let contact = assignedContacts[i];
+    for (let key in boardContacts) {
+      if (key == contact && counter == 0) {
+        let contactName = boardContacts[key]["name"];
+        let initials = getInitials(contactName);
+        taskId.innerHTML += generateTaskContacts(initials);
+        counter++;
+      } else if (key == contact && counter > 0) {
+        let contactName = boardContacts[key]["name"];
+        let initials = getInitials(contactName);
+        let left = counter * 8;
+        taskId.innerHTML += generateTaskContactsTwo(initials, left);
+        counter++;
+      }
+    }
+  }
+}
+
+function displayTaskSubtasks() {}
 
 function clearTaskBoard() {
   taskFieldToDo.innerHTML = "";
@@ -63,7 +100,7 @@ function noTasks() {
 async function renderOverlayTasks(id) {
   try {
     let data = await readData(TASKS_URL + `/${id}`);
-    loadContactsOverlayTask(data);
+    // loadContactsOverlayTask(data);
     console.log(contactsOverlay);
     taskOverlay.innerHTML = "";
     let priority = nameWithUpperCase(data["priority"]);
@@ -74,9 +111,9 @@ async function renderOverlayTasks(id) {
 }
 
 // async function loadContactsOverlayTask(data) {
-//   contactsForOverlay;
+//   boardContacts;
 //   for (let i = 0; i < data["assignedContacts"].length; i++) {
-//     if(contactsForOverlay == data["assignedContacts"][i]) {
+//     if(boardContacts == data["assignedContacts"][i]) {
 
 //     }
 //     contactsOverlay.push(data["assignedContacts"][i]);
