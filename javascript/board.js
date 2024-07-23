@@ -73,12 +73,15 @@ async function renderOverlayTasks(id) {
   }
 }
 
-async function loadContactsOverlayTask(data) {
-  contactsForOverlay;
-  for (let i = 0; i < data["assignedContacts"].length; i++) {
-    contactsOverlayTemp.push(data["assignedContacts"][i]);
-  }
-}
+// async function loadContactsOverlayTask(data) {
+//   contactsForOverlay;
+//   for (let i = 0; i < data["assignedContacts"].length; i++) {
+//     if(contactsForOverlay == data["assignedContacts"][i]) {
+
+//     }
+//     contactsOverlay.push(data["assignedContacts"][i]);
+//   }
+// }
 
 function showOverlayTask() {
   taskOverlay.classList.remove("d-none");

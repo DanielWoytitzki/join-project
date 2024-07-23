@@ -1,29 +1,29 @@
 function generateTaskHTML(taskId, task) {
-  return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-column-body-task" id="task${taskId}" onclick="openTaskDetails('${taskId}')">
+  return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="openTaskDetails('${taskId}')">
             <div>
-                <span class="board-column-body-task-label">${task["category"]}</span>
+                <span class="board-body-body-task-label">${task["category"]}</span>
             </div>
-            <div class="board-column-body-task-text">
+            <div class="board-body-body-task-text">
                 <h3>${task["title"]}</h3>
                 <span>${task["description"]}</span>
             </div>
-            <div class="board-column-body-task-progress">
-                <div class="board-column-body-task-progress-bar">
-                    <div class="board-column-body-task-progress-bar-progress"></div>
+            <div class="board-body-body-task-progress">
+                <div class="board-body-body-task-progress-bar">
+                    <div class="board-body-body-task-progress-bar-progress"></div>
                 </div>
                 <span>1/2</span>
                 <span>Subtasks</span>
             </div>
-            <div class="board-column-body-task-bottom">
-                <div class="board-column-body-task-bottom-contactlist">
-                    <div class="board-column-body-task-bottom-contact">
+            <div class="board-body-body-task-bottom">
+                <div class="board-body-body-task-bottom-contactlist">
+                    <div class="board-body-body-task-bottom-contact">
                         <span>AM</span>
                     </div>
-                    <div class="board-column-body-task-bottom-contact left">
+                    <div class="board-body-body-task-bottom-contact left">
                         <span>EM</span>
                     </div>
                 </div>
-                <div class="board-column-body-task-bottom-icon">
+                <div class="board-body-body-task-bottom-icon">
                     <img src="./img/prio-${task["priority"]}.svg" alt="" />
                 </div>
             </div>
@@ -100,25 +100,25 @@ function generateTaskOverlayHTML(taskId, task, priority) {
 }
 
 function generateNoTaskToDo() {
-  return `<div class="board-column-body-no-task">
+  return `<div class="board-body-body-no-task">
             <span>No tasks To do</span>
           </div>`;
 }
 
 function generateNoTaskInProgress() {
-  return `<div class="board-column-body-no-task">
+  return `<div class="board-body-body-no-task">
             <span>No tasks in progress</span>
           </div>`;
 }
 
 function generateNoTaskAwaitFeedback() {
-  return `<div class="board-column-body-no-task">
+  return `<div class="board-body-body-no-task">
             <span>No tasks await feedback</span>
           </div>`;
 }
 
 function generateNoTaskDone() {
-  return `<div class="board-column-body-no-task">
+  return `<div class="board-body-body-no-task">
             <span>No tasks done</span>
           </div>`;
 }

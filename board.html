@@ -9,10 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./board.css">
-    <link rel="stylesheet" href="./add-task.css">
+    <link rel="stylesheet" href="./board.css" />
+    <link rel="stylesheet" href="./add-task.css" />
     <link rel="stylesheet" href="./mediaq.css" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Board</title>
   </head>
 
@@ -80,65 +80,60 @@
           </div>
         </div>
         <div class="board-body">
-          <div class="board-column">
-            <div class="board-column-header">
-              <h2>To do</h2>
-              <img
-                class="board-column-header-icon"
-                src="./img/plus-button.svg"
-                alt=""
-              />
-            </div>
-            <div
-              class="board-column-body"
-              id="taskFieldToDo"
-              ondrop="moveTo('ToDo')"
-              ondragover="allowDrop(event)"
-            ></div>
+          <div class="board-body-header">
+            <h2>To do</h2>
+            <img
+              class="board-body-header-icon"
+              src="./img/plus-button.svg"
+              alt=""
+            />
           </div>
-          <div class="board-column">
-            <div class="board-column-header">
-              <h2>In progress</h2>
-              <img
-                class="board-column-header-icon"
-                src="./img/plus-button.svg"
-                alt=""
-              />
-            </div>
-            <div
-              class="board-column-body"
-              id="taskFieldInProgress"
-              ondrop="moveTo('InProgress')"
-              ondragover="allowDrop(event)"
-            ></div>
+          <div
+            class="board-body-body"
+            id="taskFieldToDo"
+            ondrop="moveTo('ToDo')"
+            ondragover="allowDrop(event)"
+          ></div>
+
+          <div class="board-body-header">
+            <h2>In progress</h2>
+            <img
+              class="board-body-header-icon"
+              src="./img/plus-button.svg"
+              alt=""
+            />
           </div>
-          <div class="board-column">
-            <div class="board-column-header">
-              <h2>Await feedback</h2>
-              <img
-                class="board-column-header-icon"
-                src="./img/plus-button.svg"
-                alt=""
-              />
-            </div>
-            <div
-              class="board-column-body"
-              id="taskFieldAwaitFeedback"
-              ondrop="moveTo('AwaitFeedback')"
-              ondragover="allowDrop(event)"
-            ></div>
+          <div
+            class="board-body-body"
+            id="taskFieldInProgress"
+            ondrop="moveTo('InProgress')"
+            ondragover="allowDrop(event)"
+          ></div>
+
+          <div class="board-body-header">
+            <h2>Await feedback</h2>
+            <img
+              class="board-body-header-icon"
+              src="./img/plus-button.svg"
+              alt=""
+            />
           </div>
-          <div class="board-column">
-            <div class="board-column-header">
-              <h2>Done</h2>
-            </div>
-            <div
-              class="board-column-body"
-              id="taskFieldDone"
-              ondrop="moveTo('Done')"
-              ondragover="allowDrop(event)"
-            ></div>
+          <div
+            class="board-body-body"
+            id="taskFieldAwaitFeedback"
+            ondrop="moveTo('AwaitFeedback')"
+            ondragover="allowDrop(event)"
+          ></div>
+
+          <div class="board-body-header">
+            <h2>Done</h2>
           </div>
+          <div
+            class="board-body-body"
+            id="taskFieldDone"
+            ondrop="moveTo('Done')"
+            ondragover="allowDrop(event)"
+          ></div>
         </div>
       </section>
     </div>
