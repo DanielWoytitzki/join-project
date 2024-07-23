@@ -171,6 +171,7 @@ header {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 
 .desktop-nav-icon-box a {
