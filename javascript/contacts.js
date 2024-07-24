@@ -147,29 +147,28 @@ function addNewContact() {
  */
 function HTMLForAddNewContact() {
     return `
-        <div class="overlay-content">
-            <img src="./img/join-logo.svg"></img>
-            <h3>Add contact</h3>
-            <p>Tasks are better with a team!</p>
-            <hr>
-            <div>
+        <div class="overlay-add-contact">
+            <div class="overlay-add-contact-left">
+                <img src="./img/logo-big-desktop.svg">
+                <h1>Add contact</h1>
+                <p>Tasks are better with a team!</p>
+                <hr>
+            </div>
+            <div class="overlay-add-contact-right">
                 <div>
-                    <img src="./img/close.svg" onclick="closeOverlay()"></img>
+                    <img class="profile-icon-img" src="./img/profile-pic-blank.svg" alt="Profile Picture Placeholder">
                 </div>
                 <div>
                     <div>
-                        <img src="path/to/profile-pic-placeholder" alt="Profile Picture Placeholder">
-                    </div>
-                    <div>
-                        <form>
+                        <form class="input-fields-add-contact">
                             <input required type="text" placeholder="Name" id="name">
                             <input required type="email" placeholder="E-Mail" id="email">
                             <input required type="number" placeholder="Phone" id="phone">
                         </form>
-                        <div>
-                            <button type="button" onclick="closeOverlay()">Cancel <img src="./img/close.svg"></img></button>
-                            <button type="button" onclick="addContactToDatabase()">Create contact <img src="./img"></img></button>
-                        </div>
+                    </div>
+                    <div>
+                        <button type="button" onclick="closeOverlay()">Cancel <img src="./img/close.svg"></button>
+                        <button type="button" onclick="addContactToDatabase()">Create contact <img src="./img/check.svg"></button>
                     </div>
                 </div>
             </div>
