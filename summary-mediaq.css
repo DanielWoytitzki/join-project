@@ -1,0 +1,150 @@
+@media (max-width: 1436px) {
+    .summary-content {
+        flex-direction: column;
+        gap: 48px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .summary-section-head {
+        width: 480px;
+        padding: 64px 64px 56px 64px;
+    }
+
+    .summary-section-head h1 {
+        font-size: 47px;
+    }
+
+    .summary-section-head span {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 850px) {
+    .summary-section {
+        width: 100%;
+    }
+
+    .summary-greeting {
+        display: none;
+    }
+
+    .summary-section-head {
+        display: none;
+    }
+
+    .summary-section-head-mobile {
+        display: flex;
+    }
+
+    .summary-content {
+        padding: 0;
+    }
+
+    .summary-container {
+        width: 396px;
+        height: 384px;
+    }
+
+    .summary-medium-box {
+        width: 186px;
+        height: 110px;
+    }
+
+    .summary-medium-box span {
+        font-size: 47px;
+    }
+
+    .summary-medium-box p {
+        font-size: 14px;
+    }
+
+    .summary-icon-background {
+        height: 40px;
+        width: 40px;
+    }
+
+    .todo-icon-summary {
+        height: 19.62px;
+    }
+
+    .done-icon-summary {
+        height: 12.83px;
+    }
+
+    .summary-large-box {
+        height: 110px;
+        gap: 20px;
+    }
+
+    .summary-large-box-left img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .summary-large-box-left span {
+        font-size: 47px;
+    }
+
+    .summary-large-box-left p {
+        font-size: 14px;
+    }
+
+    .summary-large-box hr {
+        height: 68px;
+    }
+
+    .summary-large-box-right {
+        gap: 8px;
+    }
+
+    .summary-large-box-right span {
+        font-size: 16px;
+    }
+
+    .summary-large-box-right p {
+        font-size: 14px;
+    }
+
+    .summary-small-box {
+        width: 116px;
+        height: 116px;
+    }
+
+    .summary-small-box span {
+        font-size: 47px;
+    }
+
+    .summary-small-box p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 410px) {
+    .summary-section {
+        width: 100%;
+    }
+
+    .summary-container {
+        width: 314px;
+        height: 384px;
+    }
+
+    .summary-medium-box {
+        width: 150px;
+        height: 110px;
+    }
+
+    .summary-small-box {
+        width: 96px;
+        height: 116px;
+    }
+
+    .summary-small-box span {
+        font-size: 47px;
+    }
+
+    .summary-small-box p {
+        font-size: 14px;
+    }
+}

@@ -1,10 +1,17 @@
-@media (max-width: 800px) {
+@media (max-width: 1050px) {
+    header {
+        padding: 20px 40px 20px 80px;
+    }
+}
+
+@media (max-width: 850px) {
     body {
         display: block;
     }
     
     header {
         padding: 20px 16px;
+        width: calc(100vw - 32px);
     }
 
     .header-left img {
