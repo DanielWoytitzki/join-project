@@ -26,17 +26,21 @@ async function renderTasks() {
   clearTaskBoard();
   try {
     boardTasks = await readData(TASKS_URL);
-    for (let key in boardTasks) {
-      let item = boardTasks[key];
-      let column = item["position"];
-      displayTasks(column, key, item);
-      displayTaskAssignedContacts(item, key);
-      displayTaskSubtasks(item, key);
-    }
-    noTasks();
+    displayBoard();
   } catch (error) {
     console.error("Error rendering tasks:", error);
   }
+}
+
+function displayBoard() {
+  for (let key in boardTasks) {
+    let item = boardTasks[key];
+    let column = item["position"];
+    displayTasks(column, key, item);
+    displayTaskAssignedContacts(item, key);
+    displayTaskSubtasks(item, key);
+  }
+  noTasks();
 }
 
 function displayTaskAssignedContacts(item, id) {
@@ -121,7 +125,7 @@ function noTasks() {
 
 async function renderOverlayTasks(id) {
   try {
-    let item = await readData(TASKS_URL + `/${id}`);
+    let item = boardTasks[id];
     taskOverlay.innerHTML = "";
     let priority = nameWithUpperCase(item["priority"]);
     taskOverlay.innerHTML += generateTaskOverlayHTML(id, item, priority);
@@ -214,7 +218,6 @@ function disableOverlayAddTask() {
 
 function startDragging(id) {
   currentDraggedElement = id;
-  console.log(currentDraggedElement);
 }
 
 function allowDrop(ev) {
@@ -226,9 +229,4 @@ function moveTo(position) {
   let data = position;
   putData(path, data);
   setTimeout(renderTasks, 200);
-}
-
-async function addTask() {
-  await loadContactList();
-  addTaskOverlay.classList.remove("d-none");
 }

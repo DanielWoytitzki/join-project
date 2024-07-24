@@ -44,6 +44,11 @@ function addTaskPrioritySelect(priority) {
   }
 }
 
+async function addTask() {
+  await loadContactList();
+  addTaskOverlay.classList.remove("d-none");
+}
+
 function toggleCategory() {
   if (categoryState == false) {
     document
@@ -195,7 +200,7 @@ function subtaskSubmitEditTask(id) {
   showAddTaskSubtasks();
 }
 
-async function addTaskSubmit(state) {
+function addTaskSubmit(state) {
   addTaskAssignedContactList();
   let title = document.getElementById("addTaskTitle").value;
   let description = document.getElementById("addTaskDescription").value;
@@ -213,7 +218,9 @@ async function addTaskSubmit(state) {
     position: state,
   };
 
-  await postData(TASKS_URL, task);
+  postData(TASKS_URL, task);
+
+  renderTasks();
 }
 
 function convertArrayToObject(array) {
