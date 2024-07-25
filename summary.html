@@ -90,7 +90,7 @@
             <div class="summary-content">
                 <div class="summary-container">
                     <div style="display: flex; justify-content: space-between;">
-                        <div class="summary-medium-box">
+                        <div onclick="forwardToBoard()" class="summary-medium-box">
                             <div class="summary-icon-background">
                                 <img class="todo-icon-summary" src="./img/to-do-summary-icon.svg" alt="">
                             </div>
@@ -99,7 +99,7 @@
                                 <p>To-do</p>
                             </div>
                         </div>
-                        <div class="summary-medium-box">
+                        <div onclick="forwardToBoard()" class="summary-medium-box">
                             <div class="summary-icon-background">
                                 <img class="done-icon-summary" src="./img/done-summary-icon.svg" alt="">
                             </div>
@@ -111,7 +111,7 @@
                     </div>
 
 
-                    <div class="summary-large-box">
+                    <div onclick="forwardToBoard()" class="summary-large-box">
                         <div class="summary-large-box-left">
                             <img src="./img/urgent-summary-icon.svg" alt="">
                             <div>
@@ -128,15 +128,15 @@
 
 
                     <div style="display: flex; justify-content: space-between;">
-                        <div class="summary-small-box">
+                        <div onclick="forwardToBoard()" class="summary-small-box">
                             <span id="tasksInBoard"></span>
                             <p>Tasks in<br>Board</p>
                         </div>
-                        <div class="summary-small-box">
+                        <div onclick="forwardToBoard()" class="summary-small-box">
                             <span id="tasksInProgress"></span>
                             <p>Tasks in<br>Progress</p>
                         </div>
-                        <div class="summary-small-box">
+                        <div onclick="forwardToBoard()" class="summary-small-box">
                             <span id="tasksAwaitingFeedback"></span>
                             <p>Awaiting<br>Feedback</p>
                         </div>

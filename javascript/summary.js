@@ -123,3 +123,10 @@ async function init() {
         console.log(numberOfTasksToDo, numberOfTasksDone, numberOfUrgentTasks, dateOfUpcomingDeadline, numberOfTasksInBoard, numberOfTasksInProgress, numberOfTasksAwaitingFeedback);
     }
 }
+
+/**
+ * This function forwards one to the board page
+ */
+function forwardToBoard() {
+    window.location.href = 'board.html';
+}
