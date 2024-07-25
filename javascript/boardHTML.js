@@ -74,7 +74,7 @@ function generateTaskOverlayHTML(taskId, task, priority) {
             </div>
             <div class="board-overlay-task-footer">
                 <div class="board-overlay-task-footer-inner">
-                    <div class="board-overlay-task-footer-inner-inner">
+                    <div class="board-overlay-task-footer-inner-inner" onclick="taskOverlayDeleteTask('${taskId}')">
                         <img src="./img/delete.svg" alt="" />
                         <span>Delete</span>
                     </div>

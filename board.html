@@ -82,7 +82,7 @@
                 <img src="./img/search.svg" alt="" />
               </div>
             </div>
-            <button class="board-head-right-add" onclick="addTask()">
+            <button class="board-head-right-add" onclick="addTask('ToDo')">
               <span>Add task</span>
               <img src="./img/add-plus.svg" alt="" />
             </button>
@@ -95,6 +95,7 @@
               class="board-body-header-icon"
               src="./img/plus-button.svg"
               alt=""
+              onclick="addTask('ToDo')"
             />
           </div>
           <div
@@ -110,6 +111,7 @@
               class="board-body-header-icon"
               src="./img/plus-button.svg"
               alt=""
+              onclick="addTask('InProgress')"
             />
           </div>
           <div
@@ -125,6 +127,7 @@
               class="board-body-header-icon"
               src="./img/plus-button.svg"
               alt=""
+              onclick="addTask('AwaitFeedback')"
             />
           </div>
           <div
@@ -191,14 +194,13 @@
             onclick="disableOverlayAddTask()"
           />
         </div>
-        <form
-          class="add-task-body"
-          id="addTaskForm"
-          onsubmit="addTaskSubmit('ToDo')"
-        >
+        <div class="add-task-body" id="addTaskForm">
+          <!-- onsubmit="addTaskSubmit()" -->
           <div class="add-task-body-column">
             <div class="add-task-content-box">
-              <label for="addTaskTitle">Title</label>
+              <label for="addTaskTitle"
+                >Title<span class="red-star">*</span></label
+              >
               <div class="add-task-required-input">
                 <input
                   type="text"
@@ -206,8 +208,12 @@
                   id="addTaskTitle"
                   placeholder="Enter a Title"
                   class="add-task-content-box-input"
+                  required
                 />
-                <div class="add-task-small-required d-none">
+                <div
+                  id="addTaskTitleRequired"
+                  class="add-task-small-required d-none"
+                >
                   This field is required
                 </div>
               </div>
@@ -246,7 +252,9 @@
 
           <div class="add-task-body-column">
             <div class="add-task-content-box">
-              <label for="addTaskDueDate">Due date</label>
+              <label for="addTaskDueDate"
+                >Due date<span class="red-star">*</span></label
+              >
               <div class="add-task-required-input">
                 <input
                   class="add-task-content-box-input"
@@ -254,7 +262,10 @@
                   name="addTaskDueDate"
                   id="addTaskDueDate"
                 />
-                <div class="add-task-small-required d-none">
+                <div
+                  id="addTaskDueDateRequired"
+                  class="add-task-small-required d-none"
+                >
                   This field is required
                 </div>
               </div>
@@ -289,12 +300,15 @@
               </div>
             </div>
             <div class="add-task-content-box">
-              <label>Category</label>
+              <label>Category<span class="red-star">*</span></label>
               <div
                 class="add-task-dropdown add-task-dropdown-shadow"
                 onclick="toggleCategory()"
               >
-                <div class="add-task-dropdown-select">
+                <div
+                  class="add-task-dropdown-select"
+                  id="addTaskCategoryContainer"
+                >
                   <span id="addTaskCategory">Select task category</span>
                   <img
                     src="./img/arrow-drop-down.svg"
@@ -316,6 +330,12 @@
                     <span>User Story</span>
                   </div>
                 </div>
+              </div>
+              <div
+                id="addTaskCategoryRequired"
+                class="add-task-small-required d-none"
+              >
+                This field is required
               </div>
             </div>
             <div class="add-task-content-box pointer">
@@ -356,7 +376,7 @@
               <div id="addTaskSubtaskList" class="add-task-subtask-list"></div>
             </div>
           </div>
-        </form>
+        </div>
         <div class="add-task-bottom">
           <span><strong class="red-star">*</strong>This field is required</span>
           <div class="add-task-bottom-button-section">
@@ -369,9 +389,10 @@
             </div>
             <button
               class="add-task-bottom-button btn-check"
-              type="submit"
-              form="addTaskForm"
+              onclick="addTaskSubmit()"
             >
+              <!-- type="submit"
+            form="addTaskForm" -->
               <span>Create Task</span>
               <img src="./img/check.svg" alt="" />
             </button>

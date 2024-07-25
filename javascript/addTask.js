@@ -13,6 +13,7 @@ let addTaskSubtaskContainer = document.getElementById(
   "addTaskSubtaskContainer"
 );
 let addTaskAssignedContacts = [];
+let taskState = "ToDo";
 
 function addTaskPrioritySelect(priority) {
   let urgent = document.getElementById("addtaskPriorityUrgent");
@@ -44,7 +45,8 @@ function addTaskPrioritySelect(priority) {
   }
 }
 
-async function addTask() {
+async function addTask(state) {
+  taskState = state;
   await loadContactList();
   addTaskOverlay.classList.remove("d-none");
 }
@@ -200,27 +202,80 @@ function subtaskSubmitEditTask(id) {
   showAddTaskSubtasks();
 }
 
-function addTaskSubmit(state) {
-  addTaskAssignedContactList();
-  let title = document.getElementById("addTaskTitle").value;
-  let description = document.getElementById("addTaskDescription").value;
-  let dueDate = document.getElementById("addTaskDueDate").value;
-  let assignedContactsObject = convertArrayToObject(addTaskAssignedContacts);
-  let subtasksObject = convertArrayToObject(subtasks);
-  let task = {
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    priority: taskPriority,
-    category: taskCategory,
-    assignedContacts: assignedContactsObject,
-    subtasks: subtasksObject,
-    position: state,
-  };
+function addTaskSubmit() {
+  let required = checkRequired();
+  console.log(required);
+  if (required) {
+    addTaskAssignedContactList();
+    let title = document.getElementById("addTaskTitle").value;
+    let description = document.getElementById("addTaskDescription").value;
+    let dueDate = document.getElementById("addTaskDueDate").value;
+    let assignedContactsObject = convertArrayToObject(addTaskAssignedContacts);
+    let subtasksObject = convertArrayToObject(subtasks);
+    let task = {
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      priority: taskPriority,
+      category: taskCategory,
+      assignedContacts: assignedContactsObject,
+      subtasks: subtasksObject,
+      position: taskState,
+    };
+    postData(TASKS_URL, task);
+    renderTasks();
+    taskState = "ToDo";
+    disableOverlayAddTask();
+  }
+}
 
-  postData(TASKS_URL, task);
-
-  renderTasks();
+function checkRequired() {
+  let title = false,
+    dueDate = false,
+    category = false;
+  if (document.getElementById("addTaskTitle").value == "") {
+    document.getElementById("addTaskTitleRequired").classList.remove("d-none");
+    document.getElementById("addTaskTitle").classList.add("red-border");
+  } else if (!document.getElementById("addTaskTitle").value == "") {
+    document.getElementById("addTaskTitleRequired").classList.add("d-none");
+    document.getElementById("addTaskTitle").classList.remove("red-border");
+    title = true;
+  }
+  if (document.getElementById("addTaskDueDate").value == "") {
+    document
+      .getElementById("addTaskDueDateRequired")
+      .classList.remove("d-none");
+    document.getElementById("addTaskDueDate").classList.add("red-border");
+  } else if (!document.getElementById("addTaskDueDate").value == "") {
+    document.getElementById("addTaskDueDateRequired").classList.add("d-none");
+    document.getElementById("addTaskDueDate").classList.remove("red-border");
+    dueDate = true;
+  }
+  if (
+    document.getElementById("addTaskCategory").innerHTML ==
+    "Select task category"
+  ) {
+    document
+      .getElementById("addTaskCategoryRequired")
+      .classList.remove("d-none");
+    document
+      .getElementById("addTaskCategoryContainer")
+      .classList.add("red-border");
+  } else if (
+    document.getElementById("addTaskCategory").innerHTML == "Technical Task" ||
+    document.getElementById("addTaskCategory").innerHTML == "User Story"
+  ) {
+    document.getElementById("addTaskCategoryRequired").classList.add("d-none");
+    document
+      .getElementById("addTaskCategoryContainer")
+      .classList.remove("red-border");
+    category = true;
+  }
+  let required;
+  if (title && dueDate && category) {
+    required = true;
+  }
+  return required;
 }
 
 function convertArrayToObject(array) {
@@ -237,4 +292,11 @@ function addTaskAssignedContactList() {
       addTaskAssignedContacts.push(contacts[i]["id"]);
     }
   }
+}
+
+async function taskOverlayDeleteTask(id) {
+  let path = TASKS_URL + "/" + id;
+  await deleteData(path);
+  await renderTasks();
+  disableOverlayTask();
 }

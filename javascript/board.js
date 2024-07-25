@@ -190,11 +190,13 @@ async function toggleTaskOverlaySubtask(state, id, key) {
     let path = TASKS_URL + "/" + id + "/subtasks/" + key + "/subtaskState";
     let data = "unchecked";
     await putData(path, data);
+    await renderTasks();
     openTaskDetails(id);
   } else if (state == "unchecked") {
     let path = TASKS_URL + "/" + id + "/subtasks/" + key + "/subtaskState";
     let data = "checked";
     await putData(path, data);
+    await renderTasks();
     openTaskDetails(id);
   }
 }
