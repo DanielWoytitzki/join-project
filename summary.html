@@ -15,7 +15,7 @@
     <title>Summary</title>
 </head>
 
-<body onload="fetchTasksFromDatabase()">
+<body onload="init()">
 
     <nav class="desktop-nav">
         <div>
@@ -95,7 +95,7 @@
                                 <img class="todo-icon-summary" src="./img/to-do-summary-icon.svg" alt="">
                             </div>
                             <div>
-                                <span>1</span>
+                                <span id="tasksToDo"></span>
                                 <p>To-do</p>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                 <img class="done-icon-summary" src="./img/done-summary-icon.svg" alt="">
                             </div>
                             <div>
-                                <span>1</span>
+                                <span id="tasksDone"></span>
                                 <p>Done</p>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                         <div class="summary-large-box-left">
                             <img src="./img/urgent-summary-icon.svg" alt="">
                             <div>
-                                <span>1</span>
+                                <span id="tasksUrgent"></span>
                                 <p>Urgent</p>
                             </div>
                         </div>
@@ -129,15 +129,15 @@
 
                     <div style="display: flex; justify-content: space-between;">
                         <div class="summary-small-box">
-                            <span>5</span>
+                            <span id="tasksInBoard"></span>
                             <p>Tasks in<br>Board</p>
                         </div>
                         <div class="summary-small-box">
-                            <span>2</span>
+                            <span id="tasksInProgress"></span>
                             <p>Tasks in<br>Progress</p>
                         </div>
                         <div class="summary-small-box">
-                            <span>2</span>
+                            <span id="tasksAwaitingFeedback"></span>
                             <p>Awaiting<br>Feedback</p>
                         </div>
                     </div>
