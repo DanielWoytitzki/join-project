@@ -8,6 +8,7 @@ let currentDraggedElement;
 let contactsOverlay = [];
 let boardContacts;
 let boardTasks;
+let boardSearchInput = document.getElementById("boardSearchInput");
 
 async function initBoard() {
   await pullContacts();
@@ -39,8 +40,17 @@ function displayBoard() {
     displayTasks(column, key, item);
     displayTaskAssignedContacts(item, key);
     displayTaskSubtasks(item, key);
+    categoryBackgroundColor(item, key);
   }
   noTasks();
+}
+
+function categoryBackgroundColor(item, key) {
+  if (item["category"] == "User Story") {
+    document.getElementById(`category${key}`).style.background = "#0038FF";
+  } else if (item["category"] == "Technical Task") {
+    document.getElementById(`category${key}`).style.background = "#20D7C1";
+  }
 }
 
 function displayTaskAssignedContacts(item, id) {
@@ -131,8 +141,19 @@ async function renderOverlayTasks(id) {
     taskOverlay.innerHTML += generateTaskOverlayHTML(id, item, priority);
     displayTaskOverlayAssignedContacts(item, id);
     displayTaskOverlaySubtasks(item, id);
+    categoryBackgroundColorOverlay(item, id);
   } catch (error) {
     console.error("Error rendering tasks:", error);
+  }
+}
+
+function categoryBackgroundColorOverlay(item, key) {
+  if (item["category"] == "User Story") {
+    document.getElementById(`categoryOverlay${key}`).style.background =
+      "#0038FF";
+  } else if (item["category"] == "Technical Task") {
+    document.getElementById(`categoryOverlay${key}`).style.background =
+      "#20D7C1";
   }
 }
 
@@ -212,6 +233,7 @@ function showOverlayAddTask() {
 function disableOverlayTask() {
   taskOverlay.classList.add("d-none");
   renderTasks();
+  boardSearchInput.value = "";
 }
 
 function disableOverlayAddTask() {
@@ -231,4 +253,31 @@ function moveTo(position) {
   let data = position;
   putData(path, data);
   setTimeout(renderTasks, 200);
+}
+
+function displaySearchBoard(key) {
+  let item = boardTasks[key];
+  let column = item["position"];
+  displayTasks(column, key, item);
+  displayTaskAssignedContacts(item, key);
+  displayTaskSubtasks(item, key);
+  categoryBackgroundColor(item, key);
+}
+
+boardSearchInput.addEventListener("input", searchBoard);
+
+function searchBoard() {
+  clearTaskBoard();
+  let filterWord = boardSearchInput.value.toLowerCase();
+  for (let key in boardTasks) {
+    let title = boardTasks[key]["title"];
+    let description = boardTasks[key]["description"];
+    if (
+      title.toLowerCase().includes(filterWord) ||
+      description.toLowerCase().includes(filterWord)
+    ) {
+      displaySearchBoard(key);
+    }
+  }
+  noTasks();
 }

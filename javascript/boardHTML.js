@@ -1,7 +1,7 @@
 function generateTaskHTML(taskId, task) {
   return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="openTaskDetails('${taskId}')">
             <div>
-                <span class="board-body-body-task-label">${task["category"]}</span>
+                <span class="board-body-body-task-label" id="category${taskId}">${task["category"]}</span>
             </div>
             <div class="board-body-body-task-text">
                 <h3>${task["title"]}</h3>
@@ -42,7 +42,7 @@ function generateTaskSubtasks(progress, subtaskDone, subtaskTotal) {
 function generateTaskOverlayHTML(taskId, task, priority) {
   return `<div class="board-overlay-task" onclick="event.stopPropagation()" id="taskOverlay${taskId}">
             <div class="board-overlay-task-header">
-                <span>${task["category"]}</span>
+                <span id="categoryOverlay${taskId}">${task["category"]}</span>
                 <img class="closeIcon" src="./img/close.svg" alt="" onclick="disableOverlayTask()" />
             </div>
             <h1 class="board-overlay-task-title">
