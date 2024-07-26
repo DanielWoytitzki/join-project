@@ -6,21 +6,13 @@ let taskOverlay = document.getElementById("taskOverlay");
 let addTaskOverlay = document.getElementById("addTaskOverlay");
 let currentDraggedElement;
 let contactsOverlay = [];
-let boardContacts;
 let boardTasks;
 let boardSearchInput = document.getElementById("boardSearchInput");
+let boardContacts;
 
 async function initBoard() {
   await pullContacts();
   await renderTasks();
-}
-
-async function pullContacts() {
-  try {
-    boardContacts = await readData(CONTACTS_URL);
-  } catch (error) {
-    console.error("Error rendering tasks:", error);
-  }
 }
 
 async function renderTasks() {

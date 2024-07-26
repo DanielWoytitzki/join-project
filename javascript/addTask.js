@@ -15,6 +15,12 @@ let addTaskSubtaskContainer = document.getElementById(
 let addTaskAssignedContacts = [];
 let taskState = "ToDo";
 
+async function initAddTask() {
+  await pullContacts();
+  await loadContactList();
+  taskState = "ToDo";
+}
+
 function addTaskPrioritySelect(priority) {
   let urgent = document.getElementById("addtaskPriorityUrgent");
   let medium = document.getElementById("addtaskPriorityMedium");
@@ -223,10 +229,16 @@ function addTaskSubmit() {
       position: taskState,
     };
     postData(TASKS_URL, task);
-    renderTasks();
-    taskState = "ToDo";
-    disableOverlayAddTask();
+    document.getElementById("taskAddedSlide").classList.remove("d-none");
+    setTimeout(hideOverlay, 1000);
   }
+}
+
+function hideOverlay() {
+  taskState = "ToDo";
+  renderTasks();
+  document.getElementById("taskAddedSlide").classList.add("d-none");
+  disableOverlayAddTask();
 }
 
 function checkRequired() {
@@ -299,4 +311,34 @@ async function taskOverlayDeleteTask(id) {
   await deleteData(path);
   await renderTasks();
   disableOverlayTask();
+}
+
+function addTaskSubmitSite() {
+  let required = checkRequired();
+  console.log(required);
+  if (required) {
+    addTaskAssignedContactList();
+    let title = document.getElementById("addTaskTitle").value;
+    let description = document.getElementById("addTaskDescription").value;
+    let dueDate = document.getElementById("addTaskDueDate").value;
+    let assignedContactsObject = convertArrayToObject(addTaskAssignedContacts);
+    let subtasksObject = convertArrayToObject(subtasks);
+    let task = {
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      priority: taskPriority,
+      category: taskCategory,
+      assignedContacts: assignedContactsObject,
+      subtasks: subtasksObject,
+      position: taskState,
+    };
+    postData(TASKS_URL, task);
+
+    setTimeout(redirectBoard, 2000);
+  }
+}
+
+function redirectBoard() {
+  window.location.href = "board.html";
 }

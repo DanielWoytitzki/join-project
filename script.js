@@ -61,3 +61,11 @@ function getInitials(name) {
   initials.toUpperCase();
   return initials;
 }
+
+async function pullContacts() {
+  try {
+    boardContacts = await readData(CONTACTS_URL);
+  } catch (error) {
+    console.error("Error rendering tasks:", error);
+  }
+}
