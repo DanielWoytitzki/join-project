@@ -334,7 +334,8 @@ function addTaskSubmitSite() {
       position: taskState,
     };
     postData(TASKS_URL, task);
-
+    document.getElementById("taskAddedSlide").classList.remove("d-none");
+    document.getElementById("taskAddedSlide").classList.add("transition-up");
     setTimeout(redirectBoard, 2000);
   }
 }
