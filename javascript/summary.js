@@ -56,10 +56,32 @@ function getNumberOfUrgentTasks(tasks) {
  */
 function getDateOfUpcomingDeadline(tasks) {
     let tasksArray = Object.values(tasks);
-    return tasksArray.filter(task => task.priority === 'Urgent').length;
+
+    for (let i = 0; i < tasksArray.length; i++) {
+        var datesOfTasks = tasksArray[i].dueDate;
+        checkDatesOfTasksWithToday(datesOfTasks);
+    }
 }
 
+/*
+// TEST
+function getDatesOfTasks(tasksArray) {
+    for (let i = 0; i < tasksArray.length; i++) {
+        var datesOfTasks = tasksArray[i].dueDate;
+        checkDatesOfTasksWithToday(datesOfTasks);
+    }
+}
+*/
 
+function checkDatesOfTasksWithToday(datesOfTasks) {
+    const currentDate = new Date();
+    let today = currentDate.toDateString();
+
+
+
+
+    console.log(datesOfTasks, today );
+}
 
 
 
@@ -101,22 +123,22 @@ async function init() {
     if (tasks) {
         let numberOfTasksToDo = getNumberOfTasksToDo(tasks);
         document.getElementById('tasksToDo').innerHTML = numberOfTasksToDo;
-        
+
         let numberOfTasksDone = getNumberOfTasksDone(tasks);
         document.getElementById('tasksDone').innerHTML = numberOfTasksDone;
-        
+
         let numberOfUrgentTasks = getNumberOfUrgentTasks(tasks);
         document.getElementById('tasksUrgent').innerHTML = numberOfUrgentTasks;
-        
+
         let dateOfUpcomingDeadline = getDateOfUpcomingDeadline(tasks);
 
-        
+
         let numberOfTasksInBoard = getNumberOfTasksInBoard(tasks);
         document.getElementById('tasksInBoard').innerHTML = numberOfTasksInBoard;
-        
+
         let numberOfTasksInProgress = getNumberOfTasksInProgress(tasks);
         document.getElementById('tasksInProgress').innerHTML = numberOfTasksInProgress;
-        
+
         let numberOfTasksAwaitingFeedback = getNumberOfTasksAwaitingFeedback(tasks);
         document.getElementById('tasksAwaitingFeedback').innerHTML = numberOfTasksAwaitingFeedback;
 
