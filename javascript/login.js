@@ -29,6 +29,9 @@ async function logInAsUser() {
 
     if (userFound) {
         console.log('User gefunden');
+        jQuery(window).load(function () {
+            sessionStorage.setItem('status', 'loggedIn')
+        });
     } else {
         console.log('User wurde nicht gefunden. Bitte registrieren Sie sich oder melden sich als Gast an');
     }
@@ -72,7 +75,7 @@ function saveLogInToLocalStorage(email, password) {
  * @param {string} email - Email of the current user
  * @param {string} password - Password of the current user
  */
-function loadLogInFromLocalStorage(email, password) {   
+function loadLogInFromLocalStorage(email, password) {
     let emailAsText = localStorage.getItem('email');
     let passwordAsText = localStorage.getItem('password');
     if (emailAsText && passwordAsText) {
