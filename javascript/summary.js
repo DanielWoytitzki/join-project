@@ -1,6 +1,41 @@
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
+ * This function checks the current local time
+ */
+function checkLocalTime() {
+    var localDate = new Date();
+    var currentLocalTime = localDate.getHours();
+
+    generateGreeting(currentLocalTime);
+}
+
+/**
+ * This function generates the greeting depending on the current local time
+ * @param {number} currentLocalTime 
+ */
+function generateGreeting(currentLocalTime) {
+    if (currentLocalTime > 5 && currentLocalTime < 12) {
+        document.getElementById("greeting").innerHTML = 'Good morning,';
+    }
+    if (currentLocalTime >= 12 && currentLocalTime < 18) {
+        document.getElementById("greeting").innerHTML = 'Good afternoon,';
+    }
+    if (currentLocalTime >18 && currentLocalTime < 5) {
+        document.getElementById("greeting").innerHTML = 'Good evening,';
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/**
  * This function fetches the tasks from the database
  * @returns An object, empty or filled with all tasks
  */
@@ -125,6 +160,7 @@ async function init() {
 
         console.log(numberOfTasksToDo, numberOfTasksDone, numberOfUrgentTasks, dateOfUpcomingDeadline, numberOfTasksInBoard, numberOfTasksInProgress, numberOfTasksAwaitingFeedback);
     }
+    checkLocalTime();
 }
 
 /**
