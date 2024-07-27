@@ -44,46 +44,27 @@ function getNumberOfUrgentTasks(tasks) {
     return tasksArray.filter(task => task.priority === 'Urgent').length;
 }
 
-
-
-
-
-// AUSSTEHEND
 /**
  * This function gets the date of the upcoming deadline
- * @param {object} tasks -  All tasks within the database
- * @returns 
+ * @param {object} tasks - All tasks within the database 
+ * @returns The date of the upcoming deadline (e. g. "Month Day, Year")
  */
 function getDateOfUpcomingDeadline(tasks) {
     let tasksArray = Object.values(tasks);
+    let datesOfTasksArray = [];
 
     for (let i = 0; i < tasksArray.length; i++) {
-        var datesOfTasks = tasksArray[i].dueDate;
-        checkDatesOfTasksWithToday(datesOfTasks);
+        var datesOfTasks = new Date(tasksArray[i].dueDate);
+        datesOfTasksArray.push(datesOfTasks);
     }
+
+    let sortedDatesOfTasksArray = datesOfTasksArray.sort((a, b) => a - b);
+
+    var upcomingDate = sortedDatesOfTasksArray[0];
+
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return upcomingDate.toLocaleDateString('en-US', options);
 }
-
-/*
-// TEST
-function getDatesOfTasks(tasksArray) {
-    for (let i = 0; i < tasksArray.length; i++) {
-        var datesOfTasks = tasksArray[i].dueDate;
-        checkDatesOfTasksWithToday(datesOfTasks);
-    }
-}
-*/
-
-function checkDatesOfTasksWithToday(datesOfTasks) {
-    const currentDate = new Date();
-    let today = currentDate.toDateString();
-
-
-
-
-    console.log(datesOfTasks, today );
-}
-
-
 
 /**
  * This function gets the number of "tasks in board"
@@ -131,7 +112,7 @@ async function init() {
         document.getElementById('tasksUrgent').innerHTML = numberOfUrgentTasks;
 
         let dateOfUpcomingDeadline = getDateOfUpcomingDeadline(tasks);
-
+        document.getElementById('upcomingDeadline').innerHTML = dateOfUpcomingDeadline;
 
         let numberOfTasksInBoard = getNumberOfTasksInBoard(tasks);
         document.getElementById('tasksInBoard').innerHTML = numberOfTasksInBoard;
