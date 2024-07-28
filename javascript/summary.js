@@ -1,4 +1,8 @@
+/*
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
+*/
+
+init();
 
 /**
  * This function checks the current local time

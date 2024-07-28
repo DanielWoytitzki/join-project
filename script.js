@@ -1,12 +1,19 @@
 // ONLOAD funktioniert anscheinend nur mit einer Funktion => PRÜFEN !!!
 // Einbindung "script.js" nicht vergessen => nur eine Script-Datei möglich?! => ebenfalls PRÜFEN !!!
-/*
+
+/**
+ * This function renders all templates (e. g. header, navigation bar on desktop/mobile)
+ */
 function renderTemplates() {
   document.getElementById('header').innerHTML = generateHTMLForHeader();
   document.getElementById('desktopNav').innerHTML = generateHTMLForDesktopNav();
   document.getElementById('mobileNav').innerHTML = generateHTMLForMobileNav();
 }
 
+/**
+ * This function generates the template for the header
+ * @returns HTML-Code
+ */
 function generateHTMLForHeader() {
   return `
     <div class="header-left">
@@ -26,6 +33,10 @@ function generateHTMLForHeader() {
   `
 }
 
+/**
+ * This function generates the template for the navigation bar on desktop
+ * @returns HTML-Code
+ */
 function generateHTMLForDesktopNav() {
   return `
     <div>
@@ -66,6 +77,10 @@ function generateHTMLForDesktopNav() {
   `
 }
 
+/**
+ * This function generates the template for the navigation bar on mobile
+ * @returns HTML-Code
+ */
 function generateHTMLForMobileNav() {
   return `
     <a href="./summary.html">
@@ -94,7 +109,7 @@ function generateHTMLForMobileNav() {
     </a>
   `
 }
-*/
+
 
 
 

@@ -11,67 +11,17 @@
     <link rel="stylesheet" href="./summary.css">
     <link rel="stylesheet" href="./summary-mediaq.css">
     <link rel="stylesheet" href="./mediaq.css">
+    <script src="./script.js"></script>
     <script src="./javascript/summary.js"></script>
     <title>Summary</title>
 </head>
 
-<body onload="init()">
+<body onload="renderTemplates()">
 
-    <nav id="desktopNav" class="desktop-nav">
-        <div>
-            <img src="./img/logo-big-desktop.svg" alt="">
-        </div>
-
-        <div class="desktop-nav-icon-box">
-            <a href="./summary.html">
-                <div class="desktop-nav-icon">
-                    <img src="./img/nav-icon-summary.svg" alt="">
-                    <span>Summary</span>
-                </div>
-            </a>
-            <a href="./add-task.html">
-                <div class="desktop-nav-icon">
-                    <img src="./img/nav-icon-task.svg" alt="">
-                    <span>Add Task</span>
-                </div>
-            </a>
-            <a href="./board.html">
-                <div class="desktop-nav-icon">
-                    <img src="./img/nav-icon-board.svg" alt="">
-                    <span>Board</span>
-                </div>
-            </a>
-            <a href="./contacts.html">
-                <div class="desktop-nav-icon">
-                    <img src="./img/nav-icon-contact.svg" alt="">
-                    <span>Contacts</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="extra-links-desktop-nav">
-            <a href="./privacy-policy.html">Privacy Policy</a>
-            <a href="./legal-notice.html">Legal notice</a>
-        </div>
-    </nav>
+    <nav id="desktopNav" class="desktop-nav"></nav>
 
     <div>
-        <header id="header">
-            <div class="header-left">
-                <p>
-                    Kanban Project Management Tool
-                </p>
-                <img src="./img/join-logo.svg" alt="Join-Logo">
-            </div>
-            <div class="header-right">
-                <div class="header-help-icon">
-                    <img src="./img/help-icon.svg" alt="">
-                </div>
-                <div class="header-user-icon">
-                    <img src="./img/current-user.svg" alt="">
-                </div>
-            </div>
-        </header>
+        <header id="header"></header>
 
         <section class="summary-section">
 
@@ -153,30 +103,7 @@
     </div>
 
     <nav id="mobileNav" class="mobile-nav">
-        <a href="./summary.html">
-            <div class="mobile-nav-icon">
-                <img src="./img/nav-icon-summary.svg" alt="">
-                <span>Summary</span>
-            </div>
-        </a>
-        <a href="./board.html">
-            <div class="mobile-nav-icon">
-                <img src="./img/nav-icon-board.svg" alt="">
-                <span>Board</span>
-            </div>
-        </a>
-        <a href="./add-task.html">
-            <div class="mobile-nav-icon">
-                <img src="./img/nav-icon-task.svg" alt="">
-                <span>Add Task</span>
-            </div>
-        </a>
-        <a href="./contacts.html">
-            <div class="mobile-nav-icon">
-                <img src="./img/nav-icon-contact.svg" alt="">
-                <span>Contacts</span>
-            </div>
-        </a>
+        
     </nav>
 
 </body>
