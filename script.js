@@ -114,8 +114,27 @@ function forwardToHelp() {
   window.location.href = 'help.html'
 }
 
+/**
+ * This function fetchs ones user details (status (e. g. "logged in"), name and email) from the session storage
+ */
+function fetchUserDetailsFromSessionStorage() {
+  let userDetailsString = sessionStorage.getItem('userDetails');
+  if (userDetailsString) {
+    let userDetails = JSON.parse(userDetailsString);
+    console.log(userDetails.status);
+    console.log(userDetails.name);
+    console.log(userDetails.email);
+  }
+}
 
-
+/**
+ * This function deletes ones user details (status (e. g. "logged in"), name and email) from the session storage
+ * = log out
+ */
+function deleteUserDetailsFromSessionStorage() {
+  sessionStorage.clear();
+  window.location.href = './index.html'
+}
 
 
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
