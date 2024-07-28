@@ -275,6 +275,7 @@
   border-radius: 30px;
   width: 445px;
   cursor: default;
+  margin: 48px 0;
 }
 
 .board-overlay-task-header {
@@ -492,4 +493,52 @@
   cursor: pointer;
   background-color: #d1d1d1;
   border-radius: 50%;
+}
+
+.board-overlay-task-edit {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 4px 0px #00000029;
+  padding: 48px 20px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 30px;
+  width: 465px;
+  cursor: default;
+  max-height: calc(100vh - 196px);
+}
+
+.board-overlay-task-edit-right {
+  align-self: flex-end;
+  padding-right: 20px;
+}
+
+.board-overlay-task-edit-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: scroll;
+  gap: 24px;
+  width: calc(525px - 40px - 40px);
+  padding-right: 20px;
+}
+
+.board-overlay-task-edit-content-box {
+  width: 435px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.board-overlay-task-edit-content-box label {
+  font-size: 20px;
+  line-height: 24px;
+  color: #2a3647;
+}
+
+.board-overlay-task-edit-content-box-input {
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 12px 21px;
+  font-size: 20px;
+  line-height: 24px;
 }
