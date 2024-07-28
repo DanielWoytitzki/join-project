@@ -1,5 +1,105 @@
-const BASE_URL =
-  "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
+// ONLOAD funktioniert anscheinend nur mit einer Funktion => PRÜFEN !!!
+// Einbindung "script.js" nicht vergessen => nur eine Script-Datei möglich?! => ebenfalls PRÜFEN !!!
+/*
+function renderTemplates() {
+  document.getElementById('header').innerHTML = generateHTMLForHeader();
+  document.getElementById('desktopNav').innerHTML = generateHTMLForDesktopNav();
+  document.getElementById('mobileNav').innerHTML = generateHTMLForMobileNav();
+}
+
+function generateHTMLForHeader() {
+  return `
+    <div class="header-left">
+      <p>
+        Kanban Project Management Tool
+      </p>
+      <img src="./img/join-logo.svg" alt="Join-Logo">
+    </div>
+    <div class="header-right">
+      <div class="header-help-icon">
+        <img src="./img/help-icon.svg" alt="">
+      </div>
+      <div class="header-user-icon">
+        <img src="./img/current-user.svg" alt="">
+      </div>
+  </div>
+  `
+}
+
+function generateHTMLForDesktopNav() {
+  return `
+    <div>
+      <img src="./img/logo-big-desktop.svg" alt="">
+    </div>
+
+    <div class="desktop-nav-icon-box">
+      <a href="./summary.html">
+        <div class="desktop-nav-icon">
+          <img src="./img/nav-icon-summary.svg" alt="">
+          <span>Summary</span>
+        </div>
+      </a>
+      <a href="./add-task.html">
+        <div class="desktop-nav-icon">
+          <img src="./img/nav-icon-task.svg" alt="">
+          <span>Add Task</span>
+        </div>
+      </a>
+      <a href="./board.html">
+        <div class="desktop-nav-icon">
+          <img src="./img/nav-icon-board.svg" alt="">
+          <span>Board</span>
+        </div>
+      </a>
+      <a href="./contacts.html">
+        <div class="desktop-nav-icon">
+          <img src="./img/nav-icon-contact.svg" alt="">
+          <span>Contacts</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="extra-links-desktop-nav">
+      <a href="./privacy-policy.html">Privacy Policy</a>
+      <a href="./legal-notice.html">Legal notice</a>
+    </div>
+  `
+}
+
+function generateHTMLForMobileNav() {
+  return `
+    <a href="./summary.html">
+      <div class="mobile-nav-icon">
+        <img src="./img/nav-icon-summary.svg" alt="">
+        <span>Summary</span>
+      </div>
+    </a>
+    <a href="./board.html">
+      <div class="mobile-nav-icon">
+        <img src="./img/nav-icon-board.svg" alt="">
+        <span>Board</span>
+      </div>
+    </a>
+    <a href="./add-task.html">
+      <div class="mobile-nav-icon">
+        <img src="./img/nav-icon-task.svg" alt="">
+        <span>Add Task</span>
+      </div>
+    </a>
+    <a href="./contacts.html">
+      <div class="mobile-nav-icon">
+        <img src="./img/nav-icon-contact.svg" alt="">
+        <span>Contacts</span>
+      </div>
+    </a>
+  `
+}
+*/
+
+
+
+
+const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 const TASKS_URL = "tasks";
 const CONTACTS_URL = "contacts";
 
