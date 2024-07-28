@@ -52,8 +52,8 @@ function addTaskPrioritySelect(priority) {
 }
 
 async function addTask(state) {
-  taskState = state;
   await loadContactList();
+  taskState = state;
   addTaskOverlay.classList.remove("d-none");
 }
 
@@ -98,7 +98,6 @@ function toggleContacts() {
 }
 
 function contactSelect(key) {
-  console.log(key);
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i].id == key && contacts[i].state == "unchecked") {
       contacts[i].state = "checked";
@@ -136,7 +135,7 @@ function showContacts() {
     let name = contacts[i]["contact"];
     let contactState = contacts[i]["state"];
     let initials = getInitials(name);
-    contactDropdown.innerHTML += generateContactList(
+    contactDropdown.innerHTML += generateAddTaskContactList(
       contactId,
       initials,
       name,
@@ -185,7 +184,7 @@ function showAddTaskSubtasks() {
   addTaskSubtaskList.innerHTML = "";
   for (let i = 0; i < subtasks.length; i++) {
     let subtaskTitle = subtasks[i]["subtaskTitle"];
-    addTaskSubtaskList.innerHTML += generateSubtaskList(i, subtaskTitle);
+    addTaskSubtaskList.innerHTML += generateAddTaskSubtaskList(i, subtaskTitle);
   }
 }
 
@@ -196,7 +195,7 @@ function subtaskDeleteTask(id) {
 
 function subtaskEditTask(id) {
   addTaskSubtaskList.innerHTML = "";
-  addTaskSubtaskList.innerHTML += generateSubtaskEdit(id);
+  addTaskSubtaskList.innerHTML += generateAddTaskSubtaskEdit(id);
   console.log(subtasks[id]["subtaskTitle"]);
   document.getElementById("subtaskInputEditValue").value =
     subtasks[id]["subtaskTitle"];

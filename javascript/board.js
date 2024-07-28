@@ -10,10 +10,12 @@ let contactsOverlay = [];
 let boardTasks;
 let boardSearchInput = document.getElementById("boardSearchInput");
 let boardContacts;
+let contactsOverlayEdit = [];
 
 async function initBoard() {
   await pullContacts();
   await renderTasks();
+  await loadContactListBoardEdit();
 }
 
 async function renderTasks() {
@@ -304,5 +306,77 @@ async function renderOverlayTasksEdit(id) {
     //submit
   } catch (error) {
     console.error("Error rendering tasks:", error);
+  }
+}
+
+function toggleContactsEdit() {
+  if (contactsState == false) {
+    document
+      .getElementById("addTaskAssignedToDropdownOptionsEdit")
+      .classList.remove("d-none");
+    contactsState = true;
+    document
+      .getElementById("addTaskAssignedToArrowEdit")
+      .classList.add("turn180");
+    showContactsEdit();
+  } else if (contactsState == true) {
+    document
+      .getElementById("addTaskAssignedToDropdownOptionsEdit")
+      .classList.add("d-none");
+    contactsState = false;
+    document
+      .getElementById("addTaskAssignedToArrowEdit")
+      .classList.remove("turn180");
+  }
+}
+
+function showContactsEdit() {
+  document.getElementById("addTaskAssignedToDropdownOptionsEdit").innerHTML =
+    "";
+  console.log(contactsOverlayEdit);
+  for (let i = 0; i < contactsOverlayEdit.length; i++) {
+    let contactId = contactsOverlayEdit[i]["id"];
+    let name = contactsOverlayEdit[i]["contact"];
+    let contactState = contactsOverlayEdit[i]["state"];
+    let initials = getInitials(name);
+    document.getElementById("addTaskAssignedToDropdownOptionsEdit").innerHTML +=
+      generateContactListEdit(contactId, initials, name, contactState);
+  }
+}
+
+function contactSelectEdit(key) {
+  for (let i = 0; i < contactsOverlayEdit.length; i++) {
+    if (
+      contactsOverlayEdit[i].id == key &&
+      contactsOverlayEdit[i].state == "unchecked"
+    ) {
+      contactsOverlayEdit[i].state = "checked";
+    } else if (
+      contactsOverlayEdit[i].id == key &&
+      contactsOverlayEdit[i].state == "checked"
+    ) {
+      contactsOverlayEdit[i].state = "unchecked";
+    }
+  }
+  showContactsEdit();
+}
+
+async function loadContactListBoardEdit() {
+  try {
+    await pullContactListBoardEdit();
+  } catch (error) {
+    console.error("Error rendering tasks:", error);
+  }
+}
+
+async function pullContactListBoardEdit() {
+  let data = await readData(CONTACTS_URL);
+
+  for (let key in data) {
+    contactsOverlayEdit.push({
+      id: key,
+      contact: data[key]["name"],
+      state: "unchecked",
+    });
   }
 }

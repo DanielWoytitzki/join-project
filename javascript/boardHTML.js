@@ -128,46 +128,6 @@ function generateNoTaskDone() {
           </div>`;
 }
 
-function generateContactList(contactId, initials, name, contactState) {
-  return `<div id="contact'${contactId}'" class="add-task-dropdown-option add-task-contact-box" onclick="event.stopPropagation()">
-            <div class="add-task-contact-content">
-                <div class="add-task-contact-icon" style="background: #462f8a">
-                    <span>${initials}</span>
-                </div>
-                <span>${name}</span>
-            </div>
-            <img src="./img/check-button-${contactState}.svg"
-                 alt=""
-                 onclick="contactSelect('${contactId}')"/>
-          </div>`;
-}
-
-function generateSubtaskList(subtaskId, subtaskTitle) {
-  return `<div id="subtask'${subtaskId}'" class="add-task-subtask-task">
-            <li>${subtaskTitle}</li>
-            <div class="add-task-subtask-add-icon-section">
-                <img onclick="subtaskEditTask(${subtaskId})" id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
-                <hr class="add-task-subtask-devider" />
-                <img onclick="subtaskDeleteTask(${subtaskId})" id="addTaskSubtaskDelete" src="./img/delete.svg" alt="" />
-            </div>
-          </div>`;
-}
-
-function generateSubtaskEdit(subtaskId) {
-  return `<div class="add-task-subtask-edit">
-            <input id="subtaskInputEditValue" class="add-task-subtask-edit-input" type="text" />
-            <div class="add-task-subtask-edit-icons">
-                <div class="add-task-subtask-icon">
-                    <img onclick="subtaskDeleteTask(${subtaskId})" src="./img/delete.svg" alt="" class="filter" />
-                </div>
-                <hr />
-                <div class="add-task-subtask-icon">
-                    <img onclick="subtaskSubmitEditTask(${subtaskId})" src="./img/check.svg" alt="" class="filter" />
-                </div>
-            </div>
-          </div>`;
-}
-
 function generateTaskOverlayEditHTML(taskId) {
   return `<div class="board-overlay-task-edit" onclick="event.stopPropagation()" id="taskOverlayEdit${taskId}">
             <div class="board-overlay-task-edit-right">
@@ -245,17 +205,17 @@ function generateTaskOverlayEditHTML(taskId) {
                     <label for="addTaskAssignedTo">Assigned to</label>
                     <div
                         class="add-task-dropdown add-task-dropdown-shadow"
-                        onclick="toggleContacts()"
+                        onclick="toggleContactsEdit()"
                     >
                         <div class="add-task-dropdown-select">
                             <span id="addTaskAssignedTo">Select contacts to assign</span>
                             <img
                                 src="./img/arrow-drop-down.svg"
                                 alt=""
-                                id="addTaskAssignedToArrow"
+                                id="addTaskAssignedToArrowEdit"
                             />
                         </div>
-                        <div class="d-none" id="addTaskAssignedToDropdownOptions"></div>
+                        <div class="d-none" id="addTaskAssignedToDropdownOptionsEdit"></div>
                     </div>
                 </div>
                 <div class="board-overlay-task-edit-content-box pointer">
@@ -303,4 +263,18 @@ function generateTaskOverlayEditHTML(taskId) {
                 </button>
             </div>
         </div>`;
+}
+
+function generateContactListEdit(contactId, initials, name, contactState) {
+  return `<div id="contact'${contactId}'" class="add-task-dropdown-option add-task-contact-box" onclick="event.stopPropagation()">
+              <div class="add-task-contact-content">
+                  <div class="add-task-contact-icon" style="background: #462f8a">
+                      <span>${initials}</span>
+                  </div>
+                  <span>${name}</span>
+              </div>
+              <img src="./img/check-button-${contactState}.svg"
+                   alt=""
+                   onclick="contactSelectEdit('${contactId}')"/>
+            </div>`;
 }
