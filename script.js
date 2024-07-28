@@ -1,6 +1,3 @@
-// ONLOAD funktioniert anscheinend nur mit einer Funktion => PRÜFEN !!!
-// Einbindung "script.js" nicht vergessen => nur eine Script-Datei möglich?! => ebenfalls PRÜFEN !!!
-
 /**
  * This function renders all templates (e. g. header, navigation bar on desktop/mobile)
  */
@@ -23,7 +20,7 @@ function generateHTMLForHeader() {
       <img src="./img/join-logo.svg" alt="Join-Logo">
     </div>
     <div class="header-right">
-      <div class="header-help-icon">
+      <div onclick="forwardToHelp()" class="header-help-icon">
         <img src="./img/help-icon.svg" alt="">
       </div>
       <div class="header-user-icon">
@@ -110,7 +107,9 @@ function generateHTMLForMobileNav() {
   `
 }
 
-
+function forwardToHelp() {
+  window.location.href = 'help.html'
+}
 
 
 
