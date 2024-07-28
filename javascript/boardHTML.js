@@ -53,7 +53,7 @@ function generateTaskOverlayHTML(taskId, task, priority) {
             </span>
             <div class="board-overlay-task-date">
                 <span style="color: #2a3647">Due date:</span>
-                <span>${task["due-date"]}</span>
+                <span>${task["dueDate"]}</span>
             </div>
             <div class="board-overlay-task-priority">
                 <span style="color: #2a3647">Priority:</span>
@@ -79,7 +79,7 @@ function generateTaskOverlayHTML(taskId, task, priority) {
                         <span>Delete</span>
                     </div>
                     <hr class="board-overlay-task-footer-devider" />
-                    <div class="board-overlay-task-footer-inner-inner">
+                    <div class="board-overlay-task-footer-inner-inner" onclick="openTaskDetailsEdit('${taskId}')">
                         <img src="./img/edit.svg" alt="" />
                         <span>Edit</span>
                     </div>
@@ -166,4 +166,141 @@ function generateSubtaskEdit(subtaskId) {
                 </div>
             </div>
           </div>`;
+}
+
+function generateTaskOverlayEditHTML(taskId) {
+  return `<div class="board-overlay-task-edit" onclick="event.stopPropagation()" id="taskOverlayEdit${taskId}">
+            <div class="board-overlay-task-edit-right">
+                <img class="closeIcon" src="./img/close.svg" alt="" onclick="disableOverlayTaskEdit()" />
+            </div>
+            <div class="board-overlay-task-edit-container">
+                <div class="board-overlay-task-edit-content-box">
+                    <label for="editTaskTitle">Title<span class="red-star">*</span></label>
+                    <div class="add-task-required-input">
+                        <input
+                            type="text"
+                            name="editTaskTitle"
+                            id="editTaskTitle"
+                            placeholder="Enter a Title"
+                            class="board-overlay-task-edit-content-box-input"
+                        />
+                        <div id="addTaskTitleRequired" class="add-task-small-required d-none">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="board-overlay-task-edit-content-box">
+                    <label for="editTaskDescription">Description</label>
+                    <textarea
+                        class="add-task-textarea"
+                        name="editTaskDescription"
+                        id="editTaskDescription"
+                        placeholder="Enter a Description"
+                    ></textarea>
+                </div>
+                <div class="board-overlay-task-edit-content-box">
+                    <label for="editTaskDueDate">Due date<span class="red-star">*</span></label>
+                    <div class="add-task-required-input">
+                        <input
+                            class="board-overlay-task-edit-content-box-input"
+                            type="date"
+                            name="editTaskDueDate"
+                            id="editTaskDueDate"
+                        />
+                        <div id="addTaskDueDateRequired" class="add-task-small-required d-none">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="board-overlay-task-edit-content-box">
+                    <label>Prio</label>
+                    <div class="add-task-priority-content-box">
+                        <div
+                            class="add-task-priority white"
+                            onclick="addTaskPrioritySelect('Urgent')"
+                            id="addtaskPriorityUrgent"
+                        >
+                            <span>Urgent</span>
+                            <img src="./img/prio-urgent.svg" alt="" />
+                        </div>
+                        <div
+                            class="add-task-priority orange"
+                            onclick="addTaskPrioritySelect('Medium')"
+                            id="addtaskPriorityMedium"
+                        >
+                            <span>Medium</span>
+                            <img src="./img/prio-medium.svg" alt="" />
+                        </div>
+                        <div
+                            class="add-task-priority white"
+                            onclick="addTaskPrioritySelect('Low')"
+                            id="addtaskPriorityLow"
+                        >
+                            <span>Low</span>
+                            <img src="./img/prio-low.svg" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="board-overlay-task-edit-content-box">
+                    <label for="addTaskAssignedTo">Assigned to</label>
+                    <div
+                        class="add-task-dropdown add-task-dropdown-shadow"
+                        onclick="toggleContacts()"
+                    >
+                        <div class="add-task-dropdown-select">
+                            <span id="addTaskAssignedTo">Select contacts to assign</span>
+                            <img
+                                src="./img/arrow-drop-down.svg"
+                                alt=""
+                                id="addTaskAssignedToArrow"
+                            />
+                        </div>
+                        <div class="d-none" id="addTaskAssignedToDropdownOptions"></div>
+                    </div>
+                </div>
+                <div class="board-overlay-task-edit-content-box pointer">
+                    <label>Subtasks</label>
+                    <div class="add-task-subtask-add" id="addTaskSubtaskContainer">
+                        <input
+                            id="addTaskSubtaskInput"
+                            type="text"
+                            placeholder="Add new subtask"
+                            class="board-overlay-task-edit-content-box-input"
+                        />
+                        <div
+                            id="addTaskSubtaskPlusIcon"
+                            class="add-task-subtask-icon"
+                            onclick="subtaskFocusInput()"
+                        >
+                            <img class="filter" src="./img/add-plus.svg" alt="" />
+                        </div>
+                        <div
+                            id="addTaskSubtasIconSection"
+                            class="add-task-subtask-add-icon-section-input d-none"
+                        >
+                            <div
+                                class="add-task-subtask-icon"
+                                onclick="subtaskClearInput()"
+                            >
+                                <img src="./img/close.svg" alt="" class="filter" />
+                            </div>
+                            <hr class="add-task-subtask-devider" />
+                            <div
+                                class="add-task-subtask-icon"
+                                onclick="subtaskSubmitInput()"
+                            >
+                                <img src="./img/check.svg" alt="" class="filter" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="addTaskSubtaskList" class="add-task-subtask-list"></div>
+                </div>
+            </div>
+            <div class="board-overlay-task-edit-right">
+                <button class="add-task-bottom-button btn-check">
+                    <span>Ok</span>
+                    <img src="./img/check.svg" alt="" />
+                </button>
+            </div>
+        </div>`;
 }

@@ -4,6 +4,7 @@ let taskFieldAwaitFeedback = document.getElementById("taskFieldAwaitFeedback");
 let taskFieldDone = document.getElementById("taskFieldDone");
 let taskOverlay = document.getElementById("taskOverlay");
 let addTaskOverlay = document.getElementById("addTaskOverlay");
+let taskOverlayEdit = document.getElementById("taskOverlayEdit");
 let currentDraggedElement;
 let contactsOverlay = [];
 let boardTasks;
@@ -222,6 +223,10 @@ function showOverlayAddTask() {
   addTaskOverlay.classList.remove("d-none");
 }
 
+function showOverlayTaskEdit() {
+  taskOverlayEdit.classList.remove("d-none");
+}
+
 function disableOverlayTask() {
   taskOverlay.classList.add("d-none");
   renderTasks();
@@ -230,6 +235,12 @@ function disableOverlayTask() {
 
 function disableOverlayAddTask() {
   addTaskOverlay.classList.add("d-none");
+}
+
+function disableOverlayTaskEdit() {
+  taskOverlayEdit.classList.add("d-none");
+  renderTasks();
+  boardSearchInput.value = "";
 }
 
 function startDragging(id) {
@@ -272,4 +283,26 @@ function searchBoard() {
     }
   }
   noTasks();
+}
+
+function openTaskDetailsEdit(id) {
+  showOverlayTaskEdit();
+  renderOverlayTasksEdit(id);
+}
+
+async function renderOverlayTasksEdit(id) {
+  try {
+    let item = boardTasks[id];
+    taskOverlayEdit.innerHTML = "";
+    taskOverlayEdit.innerHTML += generateTaskOverlayEditHTML(id);
+    document.getElementById("editTaskTitle").value = item["title"];
+    document.getElementById("editTaskDescription").value = item["description"];
+    document.getElementById("editTaskDueDate").value = item["dueDate"];
+    addTaskPrioritySelect(item["priority"]);
+    //contacts
+    //subtasks
+    //submit
+  } catch (error) {
+    console.error("Error rendering tasks:", error);
+  }
 }
