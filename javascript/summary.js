@@ -19,13 +19,11 @@ function checkLocalTime() {
  * @param {number} currentLocalTime 
  */
 function generateGreeting(currentLocalTime) {
-    if (currentLocalTime > 5 && currentLocalTime < 12) {
+    if (currentLocalTime >= 5 && currentLocalTime < 12) {
         document.getElementById("greeting").innerHTML = 'Good morning,';
-    }
-    if (currentLocalTime >= 12 && currentLocalTime < 18) {
+    } else if (currentLocalTime >= 12 && currentLocalTime < 18) {
         document.getElementById("greeting").innerHTML = 'Good afternoon,';
-    }
-    if (currentLocalTime >18 && currentLocalTime < 5) {
+    } else {
         document.getElementById("greeting").innerHTML = 'Good evening,';
     }
 }

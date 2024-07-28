@@ -114,6 +114,10 @@ function forwardToHelp() {
   window.location.href = 'help.html'
 }
 
+
+
+
+
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 const TASKS_URL = "tasks";
 const CONTACTS_URL = "contacts";
