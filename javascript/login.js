@@ -19,9 +19,12 @@ async function logInAsUser() {
     console.log(users);
 
     let userFound = false;
+    let userName = '';
+
     for (let userId in users) {
         if (users[userId].email === email && users[userId].password === password) {
             userFound = true;
+            userName = users[userId].name;
             console.log('User gefunden:', users[userId]);
             break;
         }
@@ -29,14 +32,27 @@ async function logInAsUser() {
 
     if (userFound) {
         console.log('User gefunden');
-        jQuery(window).load(function () {
-            sessionStorage.setItem('status', 'loggedIn')
-        });
+        saveLogInToSessionStorage(userName, email);
     } else {
         console.log('User wurde nicht gefunden. Bitte registrieren Sie sich oder melden sich als Gast an');
     }
     checkRememberMe(email, password);
     window.location.href = 'summary.html';
+}
+
+/**
+ * This function saves the login process to the session storage
+ * @param {string} name - Name of the logged in user
+ * @param {string} email - Email of the logged in user
+ */
+function saveLogInToSessionStorage(name, email) {
+    let userDetails = {
+        status: 'logged in',
+        name: name,
+        email: email
+    };
+    
+    sessionStorage.setItem('userDetails', JSON.stringify(userDetails));
 }
 
 /**
