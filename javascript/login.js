@@ -29,20 +29,20 @@ function signUpHTML() {
             </div>
         </div>
         <div style="gap: 24px"; class="login-box-input-fields">
-            <input style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name">
-            <input style="background-image: url('./img/mail-icon.svg');" type="text" placeholder="Email">
-            <input style="background-image: url('./img/lock-icon.svg');" type="text" placeholder="Password">
+            <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name">
+            <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email">
+            <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password">
             <div>
-                <input style="background-image: url('./img/lock-icon.svg');" type="text" placeholder="Confirm Password">
+                <input id="confirmedPassword" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Confirm Password">
                 <p>Your passwords don't match. Please try again.</p>
                 <div class="checkbox-acceptpl">
-                    <input type="checkbox">
+                    <input id="checkbox-privacy-policy" type="checkbox">
                     <span>I accept the <a href="./privacy-policy.html">Privacy policy</a></span>
                 </div>
             </div>
         </div>
         <div class="login-box-buttons">
-            <button class="button-login">Sign up</button>
+            <button onclick="signUp()" id="signup-button" class="button-login">Sign up</button>
         </div>
     </div>
     `;

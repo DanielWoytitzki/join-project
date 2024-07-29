@@ -5,6 +5,7 @@ function renderTemplates() {
   document.getElementById('header').innerHTML = generateHTMLForHeader();
   document.getElementById('desktopNav').innerHTML = generateHTMLForDesktopNav();
   document.getElementById('mobileNav').innerHTML = generateHTMLForMobileNav();
+  insertUserInitials();
 }
 
 /**
@@ -24,7 +25,7 @@ function generateHTMLForHeader() {
         <img src="./img/help-icon.svg" alt="">
       </div>
       <div class="header-user-icon">
-        <img src="./img/current-user.svg" alt="">
+        <span id="userInitials"></span
       </div>
   </div>
   `
@@ -134,6 +135,18 @@ function fetchUserDetailsFromSessionStorage() {
 function deleteUserDetailsFromSessionStorage() {
   sessionStorage.clear();
   window.location.href = './index.html'
+}
+
+/**
+ * This function inserts the user's initials into the header
+ */
+function insertUserInitials() {
+  let userDetailsString = sessionStorage.getItem('userDetails');
+  if (userDetailsString) {
+    let userDetails = JSON.parse(userDetailsString);
+    let initials = userDetails.name.split(' ').map(namePart => namePart.charAt(0)).join('');
+    document.getElementById('userInitials').innerHTML = initials;
+  }
 }
 
 

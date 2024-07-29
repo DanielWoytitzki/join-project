@@ -29,19 +29,19 @@
                 <hr>
             </div>
             <div class="login-box-input-fields">
-                <input style="background-image: url('./img/mail-icon.svg');" type="text" placeholder="Email">
+                <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email">
                 <div>
-                    <input style="background-image: url('./img/lock-icon.svg');" type="text" placeholder="Password">
+                    <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password">
                     <p>Check your email and password. Please try again.</p>
                     <div class="checkbox-remember">
-                        <input type="checkbox">
+                        <input id="checkbox-remember-me" type="checkbox">
                         <span>Remember me</span>
                     </div>
                 </div>
             </div>
             <div class="login-box-buttons">
-                <button class="button-login">Log in</button>
-                <button class="button-guest-login">Guest Log in</button>
+                <button onclick="logInAsUser()" class="button-login">Log in</button>
+                <button onclick="logInAsGuest()" class="button-guest-login">Guest Log in</button>
             </div>
         </div>
     </section>
@@ -57,6 +57,7 @@
     </div>
 
     <script src="./javascript/login.js"></script>
+    <script src="./javascript/signup.js"></script>
 </body>
 
 </html>
