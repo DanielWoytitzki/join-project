@@ -146,6 +146,8 @@ function insertUserInitials() {
     let userDetails = JSON.parse(userDetailsString);
     let initials = userDetails.name.split(' ').map(namePart => namePart.charAt(0)).join('');
     document.getElementById('userInitials').innerHTML = initials;
+  } else {
+    document.getElementById('userInitials').innerHTML = 'G';
   }
 }
 
