@@ -1,6 +1,4 @@
-/*
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
-*/
 
 /**
  * This function adds a new user to the database
