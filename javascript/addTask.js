@@ -14,11 +14,14 @@ let addTaskSubtaskContainer = document.getElementById(
 );
 let addTaskAssignedContacts = [];
 let taskState = "ToDo";
+let addTaskOverlay = document.getElementById("addTaskOverlay");
+let contactsOverlay = [];
 
 async function initAddTask() {
   await pullContacts();
   await loadContactList();
   taskState = "ToDo";
+  renderTemplates();
 }
 
 function addTaskPrioritySelect(priority) {
@@ -305,13 +308,6 @@ function addTaskAssignedContactList() {
   }
 }
 
-async function taskOverlayDeleteTask(id) {
-  let path = TASKS_URL + "/" + id;
-  await deleteData(path);
-  await renderTasks();
-  disableOverlayTask();
-}
-
 function addTaskSubmitSite() {
   let required = checkRequired();
   console.log(required);
@@ -341,4 +337,12 @@ function addTaskSubmitSite() {
 
 function redirectBoard() {
   window.location.href = "board.html";
+}
+
+function showOverlayAddTask() {
+  addTaskOverlay.classList.remove("d-none");
+}
+
+function disableOverlayAddTask() {
+  addTaskOverlay.classList.add("d-none");
 }

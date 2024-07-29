@@ -2,9 +2,9 @@
  * This function renders all templates (e. g. header, navigation bar on desktop/mobile)
  */
 function renderTemplates() {
-  document.getElementById('header').innerHTML = generateHTMLForHeader();
-  document.getElementById('desktopNav').innerHTML = generateHTMLForDesktopNav();
-  document.getElementById('mobileNav').innerHTML = generateHTMLForMobileNav();
+  document.getElementById("header").innerHTML = generateHTMLForHeader();
+  document.getElementById("desktopNav").innerHTML = generateHTMLForDesktopNav();
+  document.getElementById("mobileNav").innerHTML = generateHTMLForMobileNav();
 }
 
 /**
@@ -27,7 +27,7 @@ function generateHTMLForHeader() {
         <img src="./img/current-user.svg" alt="">
       </div>
   </div>
-  `
+  `;
 }
 
 /**
@@ -71,7 +71,7 @@ function generateHTMLForDesktopNav() {
       <a href="./privacy-policy.html">Privacy Policy</a>
       <a href="./legal-notice.html">Legal notice</a>
     </div>
-  `
+  `;
 }
 
 /**
@@ -104,21 +104,21 @@ function generateHTMLForMobileNav() {
         <span>Contacts</span>
       </div>
     </a>
-  `
+  `;
 }
 
 /**
  * This function forwards one to the help page
  */
 function forwardToHelp() {
-  window.location.href = 'help.html'
+  window.location.href = "help.html";
 }
 
 /**
  * This function fetchs ones user details (status (e. g. "logged in"), name and email) from the session storage
  */
 function fetchUserDetailsFromSessionStorage() {
-  let userDetailsString = sessionStorage.getItem('userDetails');
+  let userDetailsString = sessionStorage.getItem("userDetails");
   if (userDetailsString) {
     let userDetails = JSON.parse(userDetailsString);
     console.log(userDetails.status);
@@ -133,11 +133,11 @@ function fetchUserDetailsFromSessionStorage() {
  */
 function deleteUserDetailsFromSessionStorage() {
   sessionStorage.clear();
-  window.location.href = './index.html'
+  window.location.href = "./index.html";
 }
 
-
-const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL =
+  "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 const TASKS_URL = "tasks";
 const CONTACTS_URL = "contacts";
 
@@ -198,12 +198,4 @@ function getInitials(name) {
   let initials = nameParts.map((part) => part[0]).join("");
   initials.toUpperCase();
   return initials;
-}
-
-async function pullContacts() {
-  try {
-    boardContacts = await readData(CONTACTS_URL);
-  } catch (error) {
-    console.error("Error rendering tasks:", error);
-  }
 }

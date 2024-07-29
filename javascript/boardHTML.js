@@ -1,16 +1,16 @@
 function generateTaskHTML(taskId, task) {
-  return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="openTaskDetails('${taskId}')">
+  return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="boardOverlayRender('${taskId}')">
             <div>
-                <span class="board-body-body-task-label" id="category${taskId}">${task["category"]}</span>
+                <span class="board-body-body-task-label" id="boardTasksCategory${taskId}">${task["category"]}</span>
             </div>
             <div class="board-body-body-task-text">
                 <h3>${task["title"]}</h3>
                 <span>${task["description"]}</span>
             </div>
-            <div class="board-body-body-task-progress" id="taskSubtasks${taskId}">
+            <div class="board-body-body-task-progress" id="boardTasksSubtasks${taskId}">
             </div>
             <div class="board-body-body-task-bottom">
-                <div class="board-body-body-task-bottom-contactlist" id="taskContacts${taskId}">
+                <div class="board-body-body-task-bottom-contactlist" id="boardTasksContacts${taskId}">
                 </div>
                 <div class="board-body-body-task-bottom-icon">
                     <img src="./img/prio-${task["priority"]}.svg" alt="" />
@@ -43,7 +43,7 @@ function generateTaskOverlayHTML(taskId, task, priority) {
   return `<div class="board-overlay-task" onclick="event.stopPropagation()" id="taskOverlay${taskId}">
             <div class="board-overlay-task-header">
                 <span id="categoryOverlay${taskId}">${task["category"]}</span>
-                <img class="closeIcon" src="./img/close.svg" alt="" onclick="disableOverlayTask()" />
+                <img class="closeIcon" src="./img/close.svg" alt="" onclick="boardOverlayTaskHide()" />
             </div>
             <h1 class="board-overlay-task-title">
                 ${task["title"]}
@@ -64,12 +64,12 @@ function generateTaskOverlayHTML(taskId, task, priority) {
             </div>
             <div class="board-overlay-task-contacts">
                 <span class="board-overlay-task-contacts-span">Assigned To:</span>
-                <ul class="board-overlay-task-contactlist" id="taskOverlayContacts${taskId}">
+                <ul class="board-overlay-task-contactlist" id="boardOverlayTaskContacts${taskId}">
                 </ul>
             </div>
             <div class="board-overlay-task-subtasks">
                 <span class="board-overlay-task-subtasks-span">Subtasks</span>
-                <ul class="board-overlay-task-subtasklist" id="taskOverlaySubtasks${taskId}">
+                <ul class="board-overlay-task-subtasklist" id="boardOverlayTaskSubtasks${taskId}">
                 </ul>
             </div>
             <div class="board-overlay-task-footer">
@@ -79,7 +79,7 @@ function generateTaskOverlayHTML(taskId, task, priority) {
                         <span>Delete</span>
                     </div>
                     <hr class="board-overlay-task-footer-devider" />
-                    <div class="board-overlay-task-footer-inner-inner" onclick="openTaskDetailsEdit('${taskId}')">
+                    <div class="board-overlay-task-footer-inner-inner" onclick="boardOverlayEditRender('${taskId}')">
                         <img src="./img/edit.svg" alt="" />
                         <span>Edit</span>
                     </div>
@@ -99,7 +99,7 @@ function generateTaskOverlayContacts(initials, name) {
 
 function generateTaskOverlaySubtasks(subtaskTitle, state, id, key) {
   return `<li class="board-overlay-task-subtasklist-subtask">
-            <img src="./img/check-button-${state}.svg" class="check-hover" onclick="toggleTaskOverlaySubtask('${state}', '${id}', '${key}')" alt=""/>
+            <img src="./img/check-button-${state}.svg" class="check-hover" onclick="boardOverlayTaskSubtaskToggle('${state}', '${id}', '${key}')" alt=""/>
             <span>${subtaskTitle}</span>
           </li>`;
 }
@@ -205,17 +205,17 @@ function generateTaskOverlayEditHTML(taskId) {
                     <label for="addTaskAssignedTo">Assigned to</label>
                     <div
                         class="add-task-dropdown add-task-dropdown-shadow"
-                        onclick="toggleContactsEdit()"
+                        onclick="boardOverlayEditToggleContacts()"
                     >
                         <div class="add-task-dropdown-select">
                             <span id="addTaskAssignedTo">Select contacts to assign</span>
                             <img
                                 src="./img/arrow-drop-down.svg"
                                 alt=""
-                                id="addTaskAssignedToArrowEdit"
+                                id="boardOverlayEditContactsDropdownArrow"
                             />
                         </div>
-                        <div class="d-none" id="addTaskAssignedToDropdownOptionsEdit"></div>
+                        <div class="d-none" id="boardOverlayEditContactsDropdownOptions"></div>
                     </div>
                 </div>
                 <div class="board-overlay-task-edit-content-box pointer">

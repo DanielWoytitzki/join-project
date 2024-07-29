@@ -1,57 +1,70 @@
-let taskFieldToDo = document.getElementById("taskFieldToDo");
-let taskFieldInProgress = document.getElementById("taskFieldInProgress");
-let taskFieldAwaitFeedback = document.getElementById("taskFieldAwaitFeedback");
-let taskFieldDone = document.getElementById("taskFieldDone");
-let taskOverlay = document.getElementById("taskOverlay");
-let addTaskOverlay = document.getElementById("addTaskOverlay");
-let taskOverlayEdit = document.getElementById("taskOverlayEdit");
-let currentDraggedElement;
-let contactsOverlay = [];
-let boardTasks;
-let boardSearchInput = document.getElementById("boardSearchInput");
 let boardContacts;
-let contactsOverlayEdit = [];
+let boardTasks;
+let boardPositionToDo = document.getElementById("taskFieldToDo");
+let boardPositionInProgress = document.getElementById("taskFieldInProgress");
+let boardPositionAwaitFeedback = document.getElementById(
+  "taskFieldAwaitFeedback"
+);
+let boardPositionDone = document.getElementById("taskFieldDone");
+let boardSearchInput = document.getElementById("boardSearchInput");
+let boardOverlayTask = document.getElementById("taskOverlay");
+let boardOverlayEditTask = document.getElementById("taskOverlayEdit");
+let currentDraggedElement;
+let boardOverlayEditContactsState = false;
+let boardOverlayEditContacts = [];
 
-async function initBoard() {
-  await pullContacts();
-  await renderTasks();
-  await loadContactListBoardEdit();
+async function boardInit() {
+  await boardPullContacts();
+  await boardRenderTasks();
+  renderTemplates();
 }
 
-async function renderTasks() {
-  clearTaskBoard();
+async function boardPullContacts() {
   try {
-    boardTasks = await readData(TASKS_URL);
-    displayBoard();
+    boardContacts = await readData(CONTACTS_URL);
   } catch (error) {
     console.error("Error rendering tasks:", error);
   }
 }
 
-function displayBoard() {
+async function boardRenderTasks() {
+  boardClearTasks();
+  try {
+    boardTasks = await readData(TASKS_URL);
+    boardDisplay();
+  } catch (error) {
+    console.error("Error rendering tasks:", error);
+  }
+}
+
+function boardClearTasks() {
+  boardPositionToDo.innerHTML = "";
+  boardPositionInProgress.innerHTML = "";
+  boardPositionAwaitFeedback.innerHTML = "";
+  boardPositionDone.innerHTML = "";
+}
+
+function boardDisplay() {
   for (let key in boardTasks) {
-    let item = boardTasks[key];
-    let column = item["position"];
-    displayTasks(column, key, item);
-    displayTaskAssignedContacts(item, key);
-    displayTaskSubtasks(item, key);
-    categoryBackgroundColor(item, key);
+    let task = boardTasks[key];
+    let position = task["position"];
+    boardDisplayTasks(position, key, task);
+    boardDisplayTasksAssignedContacts(task, key);
+    boardDisplayTasksSubtasks(task, key);
+    boardDisplayCategoryBackground(task, key);
   }
-  noTasks();
+  boardDisplayNoTasks();
 }
 
-function categoryBackgroundColor(item, key) {
-  if (item["category"] == "User Story") {
-    document.getElementById(`category${key}`).style.background = "#0038FF";
-  } else if (item["category"] == "Technical Task") {
-    document.getElementById(`category${key}`).style.background = "#20D7C1";
-  }
+function boardDisplayTasks(position, key, item) {
+  let column = "taskField" + position;
+  document.getElementById(column).innerHTML += generateTaskHTML(key, item);
 }
 
-function displayTaskAssignedContacts(item, id) {
-  if (item.hasOwnProperty("assignedContacts")) {
-    let assignedContacts = item["assignedContacts"];
-    let taskId = document.getElementById(`taskContacts${id}`);
+function boardDisplayTasksAssignedContacts(task, id) {
+  if (task.hasOwnProperty("assignedContacts")) {
+    let assignedContacts = task["assignedContacts"];
+    let taskId = document.getElementById(`boardTasksContacts${id}`);
     let counter = 0;
     for (let i = 0; i < assignedContacts.length; i++) {
       let contact = assignedContacts[i];
@@ -73,10 +86,10 @@ function displayTaskAssignedContacts(item, id) {
   }
 }
 
-function displayTaskSubtasks(item, id) {
-  if (item.hasOwnProperty("subtasks")) {
-    let taskId = document.getElementById(`taskSubtasks${id}`);
-    let subtasks = item["subtasks"];
+function boardDisplayTasksSubtasks(task, id) {
+  if (task.hasOwnProperty("subtasks")) {
+    let taskId = document.getElementById(`boardTasksSubtasks${id}`);
+    let subtasks = task["subtasks"];
     let subtaskDone = 0;
     let subtaskTotal = 0;
     for (const key in subtasks) {
@@ -96,66 +109,102 @@ function displayTaskSubtasks(item, id) {
   }
 }
 
-function clearTaskBoard() {
-  taskFieldToDo.innerHTML = "";
-  taskFieldInProgress.innerHTML = "";
-  taskFieldAwaitFeedback.innerHTML = "";
-  taskFieldDone.innerHTML = "";
-}
-
-function displayTasks(column, key, item) {
-  let position = "taskField" + column;
-  document.getElementById(position).innerHTML += generateTaskHTML(key, item);
-}
-
-function openTaskDetails(id) {
-  showOverlayTask();
-  renderOverlayTasks(id);
-}
-
-function noTasks() {
-  if (!taskFieldToDo.hasChildNodes()) {
-    taskFieldToDo.innerHTML += generateNoTaskAwaitFeedback();
-  }
-  if (!taskFieldInProgress.hasChildNodes()) {
-    taskFieldInProgress.innerHTML += generateNoTaskDone();
-  }
-  if (!taskFieldAwaitFeedback.hasChildNodes()) {
-    taskFieldAwaitFeedback.innerHTML += generateNoTaskAwaitFeedback();
-  }
-  if (!taskFieldDone.hasChildNodes()) {
-    taskFieldDone.innerHTML += generateNoTaskDone();
-  }
-}
-
-async function renderOverlayTasks(id) {
-  try {
-    let item = boardTasks[id];
-    taskOverlay.innerHTML = "";
-    let priority = nameWithUpperCase(item["priority"]);
-    taskOverlay.innerHTML += generateTaskOverlayHTML(id, item, priority);
-    displayTaskOverlayAssignedContacts(item, id);
-    displayTaskOverlaySubtasks(item, id);
-    categoryBackgroundColorOverlay(item, id);
-  } catch (error) {
-    console.error("Error rendering tasks:", error);
-  }
-}
-
-function categoryBackgroundColorOverlay(item, key) {
-  if (item["category"] == "User Story") {
-    document.getElementById(`categoryOverlay${key}`).style.background =
+function boardDisplayCategoryBackground(task, key) {
+  if (task["category"] == "User Story") {
+    document.getElementById(`boardTasksCategory${key}`).style.background =
       "#0038FF";
-  } else if (item["category"] == "Technical Task") {
-    document.getElementById(`categoryOverlay${key}`).style.background =
+  } else if (task["category"] == "Technical Task") {
+    document.getElementById(`boardTasksCategory${key}`).style.background =
       "#20D7C1";
   }
 }
 
-function displayTaskOverlayAssignedContacts(item, id) {
-  if (item.hasOwnProperty("assignedContacts")) {
-    let assignedContacts = item["assignedContacts"];
-    let taskId = document.getElementById(`taskOverlayContacts${id}`);
+function boardDisplayNoTasks() {
+  if (!boardPositionToDo.hasChildNodes()) {
+    boardPositionToDo.innerHTML += generateNoTaskAwaitFeedback();
+  }
+  if (!boardPositionInProgress.hasChildNodes()) {
+    boardPositionInProgress.innerHTML += generateNoTaskDone();
+  }
+  if (!boardPositionAwaitFeedback.hasChildNodes()) {
+    boardPositionAwaitFeedback.innerHTML += generateNoTaskAwaitFeedback();
+  }
+  if (!boardPositionDone.hasChildNodes()) {
+    boardPositionDone.innerHTML += generateNoTaskDone();
+  }
+}
+
+/* ======== Drag & Drop ====== */
+
+function startDragging(id) {
+  currentDraggedElement = id;
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function moveTo(position) {
+  let path = TASKS_URL + "/" + currentDraggedElement + "/position";
+  let data = position;
+  putData(path, data);
+  setTimeout(boardRenderTasks, 200);
+}
+
+/* ======== Search ====== */
+
+boardSearchInput.addEventListener("input", boardSearch);
+
+function boardSearch() {
+  boardClearTasks();
+  let filterWord = boardSearchInput.value.toLowerCase();
+  for (let key in boardTasks) {
+    let title = boardTasks[key]["title"];
+    let description = boardTasks[key]["description"];
+    if (
+      title.toLowerCase().includes(filterWord) ||
+      description.toLowerCase().includes(filterWord)
+    ) {
+      boardDisplaySearch(key);
+    }
+  }
+  boardDisplayNoTasks();
+}
+
+function boardDisplaySearch(key) {
+  let task = boardTasks[key];
+  let position = task["position"];
+  boardDisplayTasks(position, key, task);
+  boardDisplayTasksAssignedContacts(task, key);
+  boardDisplayTasksSubtasks(task, key);
+  boardDisplayCategoryBackground(task, key);
+}
+
+/* ======== Overlay ====== */
+
+function boardOverlayRender(id) {
+  boardOverlayDisplay();
+  boardOverlayDisplayTask(id);
+}
+
+function boardOverlayDisplay() {
+  boardOverlayTask.classList.remove("d-none");
+}
+
+function boardOverlayDisplayTask(id) {
+  boardOverlayTask.innerHTML = "";
+  let task = boardTasks[id];
+  let priority = nameWithUpperCase(task["priority"]);
+  boardOverlayTask.innerHTML += generateTaskOverlayHTML(id, task, priority);
+  boardOverlayDisplayTaskAssignedContacts(task, id);
+  boardOverlayDisplayTaskSubtasks(task, id);
+  boardOverlayDisplayTaskCategoryBackgroundColor(task, id);
+}
+
+function boardOverlayDisplayTaskAssignedContacts(task, id) {
+  if (task.hasOwnProperty("assignedContacts")) {
+    let assignedContacts = task["assignedContacts"];
+    let taskId = document.getElementById(`boardOverlayTaskContacts${id}`);
     for (let i = 0; i < assignedContacts.length; i++) {
       let contact = assignedContacts[i];
       for (let key in boardContacts) {
@@ -172,10 +221,10 @@ function displayTaskOverlayAssignedContacts(item, id) {
   }
 }
 
-function displayTaskOverlaySubtasks(item, id) {
-  if (item.hasOwnProperty("subtasks")) {
-    let taskId = document.getElementById(`taskOverlaySubtasks${id}`);
-    let subtasks = item["subtasks"];
+function boardOverlayDisplayTaskSubtasks(task, id) {
+  if (task.hasOwnProperty("subtasks")) {
+    let taskId = document.getElementById(`boardOverlayTaskSubtasks${id}`);
+    let subtasks = task["subtasks"];
     let state;
     for (const key in subtasks) {
       if (subtasks[key]["subtaskState"] == "checked") {
@@ -201,182 +250,171 @@ function displayTaskOverlaySubtasks(item, id) {
   }
 }
 
-async function toggleTaskOverlaySubtask(state, id, key) {
+function boardOverlayDisplayTaskCategoryBackgroundColor(task, key) {
+  if (task["category"] == "User Story") {
+    document.getElementById(`categoryOverlay${key}`).style.background =
+      "#0038FF";
+  } else if (task["category"] == "Technical Task") {
+    document.getElementById(`categoryOverlay${key}`).style.background =
+      "#20D7C1";
+  }
+}
+
+async function boardOverlayTaskSubtaskToggle(state, id, key) {
   if (state == "checked") {
     let path = TASKS_URL + "/" + id + "/subtasks/" + key + "/subtaskState";
     let data = "unchecked";
     await putData(path, data);
-    await renderTasks();
-    openTaskDetails(id);
+    await boardRenderTasks();
+    boardOverlayRender(id);
   } else if (state == "unchecked") {
     let path = TASKS_URL + "/" + id + "/subtasks/" + key + "/subtaskState";
     let data = "checked";
     await putData(path, data);
-    await renderTasks();
-    openTaskDetails(id);
+    await boardRenderTasks();
+    boardOverlayRender(id);
   }
 }
 
-function showOverlayTask() {
-  taskOverlay.classList.remove("d-none");
-}
-
-function showOverlayAddTask() {
-  addTaskOverlay.classList.remove("d-none");
-}
-
-function showOverlayTaskEdit() {
-  taskOverlayEdit.classList.remove("d-none");
-}
-
-function disableOverlayTask() {
-  taskOverlay.classList.add("d-none");
-  renderTasks();
+function boardOverlayTaskHide() {
+  boardOverlayTask.classList.add("d-none");
+  boardRenderTasks();
   boardSearchInput.value = "";
 }
 
-function disableOverlayAddTask() {
-  addTaskOverlay.classList.add("d-none");
+async function taskOverlayDeleteTask(id) {
+  let path = TASKS_URL + "/" + id;
+  await deleteData(path);
+  await boardRenderTasks();
+  boardOverlayTaskHide();
 }
 
-function disableOverlayTaskEdit() {
-  taskOverlayEdit.classList.add("d-none");
-  renderTasks();
-  boardSearchInput.value = "";
+/* ======== Overlay Edit ====== */
+
+function boardOverlayEditRender(id) {
+  boardOverlayEditDisplay();
+  boardOverlayEditDisplayTask(id);
 }
 
-function startDragging(id) {
-  currentDraggedElement = id;
+function boardOverlayEditDisplay() {
+  boardOverlayEditTask.classList.remove("d-none");
 }
 
-function allowDrop(ev) {
-  ev.preventDefault();
+function boardOverlayEditDisplayTask(id) {
+  let task = boardTasks[id];
+  boardOverlayEditTask.innerHTML = "";
+  boardOverlayEditTask.innerHTML += generateTaskOverlayEditHTML(id);
+  document.getElementById("editTaskTitle").value = task["title"];
+  document.getElementById("editTaskDescription").value = task["description"];
+  document.getElementById("editTaskDueDate").value = task["dueDate"];
+  addTaskPrioritySelect(task["priority"]);
+  boardOverlayEditContacts = [];
+  boardOverlayEditPullContacts(task, id);
+  // boardOverlayEditPushCheckedContacts(task["assignedContacts"], id);
+  //contacts
+  //subtasks
+  //submit
 }
 
-function moveTo(position) {
-  let path = TASKS_URL + "/" + currentDraggedElement + "/position";
-  let data = position;
-  putData(path, data);
-  setTimeout(renderTasks, 200);
-}
+function boardOverlayEditPullContacts(task) {
+  let assignedContacts = task["assignedContacts"];
 
-function displaySearchBoard(key) {
-  let item = boardTasks[key];
-  let column = item["position"];
-  displayTasks(column, key, item);
-  displayTaskAssignedContacts(item, key);
-  displayTaskSubtasks(item, key);
-  categoryBackgroundColor(item, key);
-}
+  for (let key in boardContacts) {
+    for (let i = 0; i < assignedContacts.length; i++) {
+      console.log(assignedContacts[i]);
+      if (key == assignedContacts[i]) {
+        boardOverlayEditContacts.push({
+          id: key,
+          contact: boardContacts[key]["name"],
+          state: "checked",
+        });
+      }
+    }
 
-boardSearchInput.addEventListener("input", searchBoard);
-
-function searchBoard() {
-  clearTaskBoard();
-  let filterWord = boardSearchInput.value.toLowerCase();
-  for (let key in boardTasks) {
-    let title = boardTasks[key]["title"];
-    let description = boardTasks[key]["description"];
     if (
-      title.toLowerCase().includes(filterWord) ||
-      description.toLowerCase().includes(filterWord)
+      !boardOverlayEditContacts.hasOwnProperty({
+        id: key,
+      })
     ) {
-      displaySearchBoard(key);
+      console.log("hello");
     }
   }
-  noTasks();
+  console.log(boardOverlayEditContacts);
 }
 
-function openTaskDetailsEdit(id) {
-  showOverlayTaskEdit();
-  renderOverlayTasksEdit(id);
-}
+// function boardOverlayEditPushCheckedContacts(assignedContacts, id) {
+//   // let taskId = document.getElementById(`boardOverlayTaskContacts${id}`);
+//   for (let i = 0; i < assignedContacts.length; i++) {
+//     let contact = assignedContacts[i];
+//     for (let key in boardContacts) {
+//       if (key == contact) {
+//         let contactName = boardContacts[key]["name"];
+//         let initials = getInitials(contactName);
+//         taskId.innerHTML += generateTaskOverlayContacts(initials, contactName);
+//       }
+//     }
+//   }
 
-async function renderOverlayTasksEdit(id) {
-  try {
-    let item = boardTasks[id];
-    taskOverlayEdit.innerHTML = "";
-    taskOverlayEdit.innerHTML += generateTaskOverlayEditHTML(id);
-    document.getElementById("editTaskTitle").value = item["title"];
-    document.getElementById("editTaskDescription").value = item["description"];
-    document.getElementById("editTaskDueDate").value = item["dueDate"];
-    addTaskPrioritySelect(item["priority"]);
-    //contacts
-    //subtasks
-    //submit
-  } catch (error) {
-    console.error("Error rendering tasks:", error);
-  }
-}
-
-function toggleContactsEdit() {
-  if (contactsState == false) {
+function boardOverlayEditToggleContacts() {
+  if (boardOverlayEditContactsState == false) {
     document
-      .getElementById("addTaskAssignedToDropdownOptionsEdit")
+      .getElementById("boardOverlayEditContactsDropdownOptions")
       .classList.remove("d-none");
-    contactsState = true;
+    boardOverlayEditContactsState = true;
     document
-      .getElementById("addTaskAssignedToArrowEdit")
+      .getElementById("boardOverlayEditContactsDropdownArrow")
       .classList.add("turn180");
-    showContactsEdit();
-  } else if (contactsState == true) {
+    boardOverlayEditDisplayContacts();
+  } else if (boardOverlayEditContactsState == true) {
     document
-      .getElementById("addTaskAssignedToDropdownOptionsEdit")
+      .getElementById("boardOverlayEditContactsDropdownOptions")
       .classList.add("d-none");
-    contactsState = false;
+    boardOverlayEditContactsState = false;
     document
-      .getElementById("addTaskAssignedToArrowEdit")
+      .getElementById("boardOverlayEditContactsDropdownArrow")
       .classList.remove("turn180");
   }
 }
 
-function showContactsEdit() {
-  document.getElementById("addTaskAssignedToDropdownOptionsEdit").innerHTML =
+function boardOverlayEditDisplayContacts() {
+  document.getElementById("boardOverlayEditContactsDropdownOptions").innerHTML =
     "";
-  console.log(contactsOverlayEdit);
-  for (let i = 0; i < contactsOverlayEdit.length; i++) {
-    let contactId = contactsOverlayEdit[i]["id"];
-    let name = contactsOverlayEdit[i]["contact"];
-    let contactState = contactsOverlayEdit[i]["state"];
+  console.log(boardOverlayEditContacts);
+  for (let i = 0; i < boardOverlayEditContacts.length; i++) {
+    let contactId = boardOverlayEditContacts[i]["id"];
+    let name = boardOverlayEditContacts[i]["contact"];
+    let contactState = boardOverlayEditContacts[i]["state"];
     let initials = getInitials(name);
-    document.getElementById("addTaskAssignedToDropdownOptionsEdit").innerHTML +=
-      generateContactListEdit(contactId, initials, name, contactState);
+    document.getElementById(
+      "boardOverlayEditContactsDropdownOptions"
+    ).innerHTML += generateContactListEdit(
+      contactId,
+      initials,
+      name,
+      contactState
+    );
   }
 }
 
 function contactSelectEdit(key) {
-  for (let i = 0; i < contactsOverlayEdit.length; i++) {
+  for (let i = 0; i < boardOverlayEditContacts.length; i++) {
     if (
-      contactsOverlayEdit[i].id == key &&
-      contactsOverlayEdit[i].state == "unchecked"
+      boardOverlayEditContacts[i].id == key &&
+      boardOverlayEditContacts[i].state == "unchecked"
     ) {
-      contactsOverlayEdit[i].state = "checked";
+      boardOverlayEditContacts[i].state = "checked";
     } else if (
-      contactsOverlayEdit[i].id == key &&
-      contactsOverlayEdit[i].state == "checked"
+      boardOverlayEditContacts[i].id == key &&
+      boardOverlayEditContacts[i].state == "checked"
     ) {
-      contactsOverlayEdit[i].state = "unchecked";
+      boardOverlayEditContacts[i].state = "unchecked";
     }
   }
-  showContactsEdit();
+  boardOverlayEditDisplayContacts();
 }
 
-async function loadContactListBoardEdit() {
-  try {
-    await pullContactListBoardEdit();
-  } catch (error) {
-    console.error("Error rendering tasks:", error);
-  }
-}
-
-async function pullContactListBoardEdit() {
-  let data = await readData(CONTACTS_URL);
-
-  for (let key in data) {
-    contactsOverlayEdit.push({
-      id: key,
-      contact: data[key]["name"],
-      state: "unchecked",
-    });
-  }
+function disableOverlayTaskEdit() {
+  boardOverlayEditTask.classList.add("d-none");
+  boardRenderTasks();
+  boardSearchInput.value = "";
 }
