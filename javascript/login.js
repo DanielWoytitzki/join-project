@@ -7,6 +7,46 @@ document.addEventListener('DOMContentLoaded', (event) => {
     fetchUserDetailsFromLocalStorage();
 });
 
+function signUp() {
+    document.getElementById('loginheadersignup').classList.add('d-none');
+    let content = document.getElementById('loginsignupsection');
+    content.innerHTML = signUpHTML(); 
+}
+
+function signUpHTML() {
+    return `
+    <div class="signup-box">
+        <div class="signup-box-head">
+            <div class="blue-arrow-icon">
+                <a href="./login.html"><img src="./img/arrow-left-blue.svg"></a>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+                <h1>Sign up</h1>
+                <hr>
+            </div>
+            <div class="blue-arrow-icon">   
+            </div>
+        </div>
+        <div style="gap: 24px"; class="login-box-input-fields">
+            <input style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name">
+            <input style="background-image: url('./img/mail-icon.svg');" type="text" placeholder="Email">
+            <input style="background-image: url('./img/lock-icon.svg');" type="text" placeholder="Password">
+            <div>
+                <input style="background-image: url('./img/lock-icon.svg');" type="text" placeholder="Confirm Password">
+                <p>Your passwords don't match. Please try again.</p>
+                <div class="checkbox-acceptpl">
+                    <input type="checkbox">
+                    <span>I accept the <a href="./privacy-policy.html">Privacy policy</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="login-box-buttons">
+            <button class="button-login">Sign up</button>
+        </div>
+    </div>
+    `;
+}
+
 /**
  * This function logs one in as user as long as one is found in the database
  */
