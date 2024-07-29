@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background-color: #f6f7f8;
+    display: flex;
+}
+
+div {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 274px;
+    height: 334.07px;
+    object-fit: cover;
+    position: relative;
+    transform: translate3d(0px, 0px, 0px);
+}
+
+img.animate {
+    transition-delay: 200ms;
+    transform: translate3d(-530px, -390px, 0);
+    transition: transform 500ms ease-in-out;
+    width: 100.03px;
+    height: 121.97px;
+}

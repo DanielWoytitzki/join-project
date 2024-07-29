@@ -52,9 +52,15 @@ header {
   border-radius: 559px;
 }
 
-.header-user-icon img {
+.header-user-icon span {
   width: 27.94px;
   height: 14.24px;
+  color: #29abe2;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hpl-section {
