@@ -1,3 +1,9 @@
+function animateLogo() {
+  const logo = document.getElementById('join-logo_big');
+  logo.classList.add('animate');
+  setTimeout(window.location.href = 'login.html', 50000);
+}
+
 /**
  * This function renders all templates (e. g. header, navigation bar on desktop/mobile)
  */
