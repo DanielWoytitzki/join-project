@@ -1,23 +1,17 @@
 function animateLogo() {
-  const logo = document.getElementById('join-logo_big');
-  logo.classList.add('animate');
-  setTimeout(window.location.href = 'login.html', 50000);
+  const logo = document.getElementById("join-logo_big");
+  logo.classList.add("animate");
+  setTimeout((window.location.href = "login.html"), 50000);
 }
 
 /**
  * This function renders all templates (e. g. header, navigation bar on desktop/mobile)
  */
 function renderTemplates() {
-<<<<<<< HEAD
   document.getElementById("header").innerHTML = generateHTMLForHeader();
   document.getElementById("desktopNav").innerHTML = generateHTMLForDesktopNav();
   document.getElementById("mobileNav").innerHTML = generateHTMLForMobileNav();
-=======
-  document.getElementById('header').innerHTML = generateHTMLForHeader();
-  document.getElementById('desktopNav').innerHTML = generateHTMLForDesktopNav();
-  document.getElementById('mobileNav').innerHTML = generateHTMLForMobileNav();
   insertUserInitials();
->>>>>>> c4958fc7c019ae90d10c5d4d4100922e6a967507
 }
 
 /**
@@ -149,27 +143,25 @@ function deleteUserDetailsFromSessionStorage() {
   window.location.href = "./index.html";
 }
 
-<<<<<<< HEAD
-const BASE_URL =
-  "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
-=======
 /**
  * This function inserts the user's initials into the header
  */
 function insertUserInitials() {
-  let userDetailsString = sessionStorage.getItem('userDetails');
+  let userDetailsString = sessionStorage.getItem("userDetails");
   if (userDetailsString) {
     let userDetails = JSON.parse(userDetailsString);
-    let initials = userDetails.name.split(' ').map(namePart => namePart.charAt(0)).join('');
-    document.getElementById('userInitials').innerHTML = initials;
+    let initials = userDetails.name
+      .split(" ")
+      .map((namePart) => namePart.charAt(0))
+      .join("");
+    document.getElementById("userInitials").innerHTML = initials;
   } else {
-    document.getElementById('userInitials').innerHTML = 'G';
+    document.getElementById("userInitials").innerHTML = "G";
   }
 }
 
-
-const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
->>>>>>> c4958fc7c019ae90d10c5d4d4100922e6a967507
+const BASE_URL =
+  "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 const TASKS_URL = "tasks";
 const CONTACTS_URL = "contacts";
 

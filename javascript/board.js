@@ -309,51 +309,36 @@ function boardOverlayEditDisplayTask(id) {
   document.getElementById("editTaskDueDate").value = task["dueDate"];
   addTaskPrioritySelect(task["priority"]);
   boardOverlayEditContacts = [];
-  boardOverlayEditPullContacts(task, id);
-  // boardOverlayEditPushCheckedContacts(task["assignedContacts"], id);
+  boardOverlayEditPullContacts(task);
   //contacts
   //subtasks
   //submit
 }
 
 function boardOverlayEditPullContacts(task) {
-  let assignedContacts = task["assignedContacts"];
-
-  for (let key in boardContacts) {
-    for (let i = 0; i < assignedContacts.length; i++) {
-      console.log(assignedContacts[i]);
-      if (key == assignedContacts[i]) {
-        boardOverlayEditContacts.push({
-          id: key,
-          contact: boardContacts[key]["name"],
-          state: "checked",
-        });
-      }
-    }
-
-    if (
-      !boardOverlayEditContacts.hasOwnProperty({
+  if (task.hasOwnProperty("assignedContacts")) {
+    let assignedContacts = task["assignedContacts"];
+    for (let key in boardContacts) {
+      boardOverlayEditContacts.push({
         id: key,
-      })
-    ) {
-      console.log("hello");
+        contact: boardContacts[key]["name"],
+        state: "unchecked",
+      });
     }
+    boardOverlayEditPushCheckedContacts(assignedContacts);
   }
-  console.log(boardOverlayEditContacts);
 }
 
-// function boardOverlayEditPushCheckedContacts(assignedContacts, id) {
-//   // let taskId = document.getElementById(`boardOverlayTaskContacts${id}`);
-//   for (let i = 0; i < assignedContacts.length; i++) {
-//     let contact = assignedContacts[i];
-//     for (let key in boardContacts) {
-//       if (key == contact) {
-//         let contactName = boardContacts[key]["name"];
-//         let initials = getInitials(contactName);
-//         taskId.innerHTML += generateTaskOverlayContacts(initials, contactName);
-//       }
-//     }
-//   }
+function boardOverlayEditPushCheckedContacts(assignedContacts) {
+  for (let i = 0; i < boardOverlayEditContacts.length; i++) {
+    let contactId = boardOverlayEditContacts[i]["id"];
+    for (let j = 0; j < assignedContacts.length; j++) {
+      if (contactId == assignedContacts[j]) {
+        boardOverlayEditContacts[i]["state"] = "checked";
+      }
+    }
+  }
+}
 
 function boardOverlayEditToggleContacts() {
   if (boardOverlayEditContactsState == false) {
@@ -379,7 +364,6 @@ function boardOverlayEditToggleContacts() {
 function boardOverlayEditDisplayContacts() {
   document.getElementById("boardOverlayEditContactsDropdownOptions").innerHTML =
     "";
-  console.log(boardOverlayEditContacts);
   for (let i = 0; i < boardOverlayEditContacts.length; i++) {
     let contactId = boardOverlayEditContacts[i]["id"];
     let name = boardOverlayEditContacts[i]["contact"];
