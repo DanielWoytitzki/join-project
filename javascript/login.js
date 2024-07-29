@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function signUp() {
     document.getElementById('loginheadersignup').classList.add('d-none');
+    document.getElementById('loginmobilesignup').classList.add('d-none');
     let content = document.getElementById('loginsignupsection');
     content.innerHTML = signUpHTML(); 
 }

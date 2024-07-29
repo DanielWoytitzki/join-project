@@ -1,0 +1,126 @@
+@media (max-width: 900px) {
+    .login-header {
+        padding: 64px 56px 0px 56px;
+    }
+
+    .signup-box {
+        margin-top: 56px;
+    }
+}
+
+@media (max-width: 700px) {
+    .login-header {
+        padding: 40px 40px 0px 40px;
+    }
+
+    .login-header img {
+        height: 78.03px;
+        width: 64px;
+    }
+
+    .login-header-signup {
+        display: none;
+    }
+
+    .login-box {
+        width: 396px;
+        height: 515px;
+    }
+
+    .signup-box {
+        width: 396px;
+        height: 595px;
+    }
+
+    .signup-box-head {
+        width: 320px;
+    }
+
+    .login-box-head h1, .signup-box-head h1{
+        font-size: 47px;
+    }
+
+    .login-box-head hr, .signup-box-head hr {
+        width: 88px;
+    }
+
+    .login-box-input-fields {
+        width: 364px;
+    }
+
+    .login-box-input-fields input {
+        width: 322px;
+        background-position: 320px 10px;
+    }
+
+    .checkbox-remember {
+        margin-left: 16px;
+    }
+
+    .checkbox-remember input, .checkbox-acceptpl input {
+        width: 16px;
+        height: 16px;
+    }
+
+    .login-box-buttons {
+        flex-direction: column;
+        gap: 21px;
+    }
+
+    .login-box-buttons button {
+        width: 180px;
+        font-size: 16px;
+    }
+
+    .login-mobile-signup {
+        display: flex;
+        justify-content: center;
+        padding: 56px 0;
+    }
+
+    .login-mobile-signup button {
+        width: 104px;
+    }
+
+    .extra-links-login {
+        padding-bottom: 32px;
+    }
+}
+
+@media (max-width: 410px) {
+    .login-box {
+        width: 300px;
+        height: 515px;
+    }
+
+    .signup-box {
+        width: 300px;
+        height: 595px;
+    }
+
+    .signup-box-head {
+        width: 270px;
+    }
+
+    .login-box-input-fields {
+        width: 282px;
+    }
+
+    .login-box-input-fields input {
+        width: 240px;
+        background-position: 240px 10px;
+    }
+
+    .checkbox-remember {
+        margin-left: 16px;
+    }
+
+    .checkbox-remember input, .checkbox-acceptpl input {
+        width: 16px;
+        height: 16px;
+    }
+
+    .login-mobile-signup {
+        gap: 16px;
+    }
+}

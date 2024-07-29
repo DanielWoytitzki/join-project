@@ -265,5 +265,34 @@ body {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
+}
+
+.login-mobile-signup {
+    display: none; 
+    align-items: center; 
+    gap: 35px;
+}
+
+.login-mobile-signup p {
+    margin: 0;
+    font-size: 20px;
+}
+
+.login-mobile-signup button {
+    height: 49px;
+    width: 91px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    background: #2A3647;
+    border-radius: 8px;
+    border: 1px solid #2A3647;
+}
+
+.login-mobile-signup button:hover {
+    background-color: #29abe2;
+    border: 1px solid #29abe2;
+    box-shadow: 0px 4px 6px 0px #00000040;
+    cursor: pointer;
 }
