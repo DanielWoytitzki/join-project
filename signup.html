@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="login-mediaq.css">
+    <script src="./javascript/signup.js"></script>
     <title>Sign up</title>
 </head>
 
@@ -19,7 +20,7 @@
         <img src="./img/join-logo.svg" alt="">
     </div>
 
-    <section style="display: flex; justify-content: center;">
+    <form onsubmit="signUp(); return false" style="display: flex; justify-content: center;">
         <div class="signup-box">
             <div class="signup-box-head">
                 <div class="blue-arrow-icon">
@@ -33,33 +34,31 @@
                 </div>
             </div>
             <div style="gap: 24px" ; class="login-box-input-fields">
-                <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name">
-                <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email"
-                    placeholder="Email">
-                <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password"
-                    placeholder="Password">
+                <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name" required>
+                <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email" required>
+                <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password" required>
+                
                 <div>
-                    <input id="confirmedPassword" style="background-image: url('./img/lock-icon.svg');" type="password"
-                        placeholder="Confirm Password">
-                    <p>Your passwords don't match. Please try again.</p>
+                    <input id="confirmedPassword" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Confirm Password" required>
+                    <p id="wrong-confirmed-password-msg" style="color: #FFFFFF;">Your passwords don't match. Please try again.</p>
                     <div class="checkbox-acceptpl">
-                        <input id="checkbox-privacy-policy" type="checkbox">
+                        <input id="checkbox-privacy-policy" type="checkbox" onclick="checkCheckbox()">
                         <span>I accept the <a href="./privacy-policy.html">Privacy policy</a></span>
                     </div>
                 </div>
             </div>
             <div class="login-box-buttons">
-                <button onclick="signUp()" id="signup-button" class="button-login">Sign up</button>
+                <button id="signup-button" class="button-login" disabled>Sign up</button>
             </div>
         </div>
-    </section>
+    </form>
 
     <div class="extra-links-login">
         <a href="./privacy-policy.html">Privacy Policy</a>
         <a href="./legal-notice.html">Legal notice</a>
     </div>
 
-    <script src="./javascript/signup.js"></script>
+    
 
 </body>
 

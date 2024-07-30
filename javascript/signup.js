@@ -23,9 +23,7 @@ async function addUserToDatabase() {
             body: JSON.stringify(user)
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error('Error adding user');
 
         let responseAsJson = await response.json();
         console.log(responseAsJson);
@@ -43,7 +41,7 @@ function checkConfirmedPassword() {
     let userPassword = document.getElementById('password').value;
     let confirmedPassword = document.getElementById('confirmedPassword').value;
 
-    if (userPassword == confirmedPassword) {
+    if (userPassword === confirmedPassword) {
         return true;
     } else {
         return false;
@@ -73,18 +71,22 @@ function checkCheckbox() {
 function signUp() {
     if (checkConfirmedPassword() == false) {
         document.getElementById('confirmedPassword').style = "border-color: red;";
-        document.getElementById('wrongConfirmedPasswordMSG').style.removeProperty("display");
+        document.getElementById('wrong-confirmed-password-msg').style.color = 'red';
         console.log('Das Passwort stimmt nicht überein. Bitte überprüfen Sie Ihre Eingabe');
     } else if (checkCheckbox() == false) {
         console.log('Bitte akzeptieren Sie unsere Privacy policy.');
     } else {
-        addUserToDatabase();
+        addUserToDatabase().then(() => {
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('confirmedPassword').value = '';
+            successfullSignUp();
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 800);
+        });        
     }
-    document.getElementById('name').value = '';
-    userEmail = document.getElementById('email').value = '';
-    userPassword = document.getElementById('password').value = '';
-    successfullSignUp();
-    /* setTimeout(window.location.href = 'login.html', 800); */
 }
 
 /**
@@ -99,7 +101,7 @@ function forwardToLogIn() {
  */
 function successfullSignUp() {
     const overlay = document.createElement('div');
-    overlay.className = 'overlay';
+    overlay.className = 'signup-overlay';
     overlay.innerHTML = HTMLForSuccessfullSignUp();
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
@@ -111,8 +113,8 @@ function successfullSignUp() {
  */
 function HTMLForSuccessfullSignUp() {
     return `
-        <div class="sign-up-frame73">
+        <div class="signup-msg">
             You Signed Up successfully
         </div>
-    `
+    `;
 }
