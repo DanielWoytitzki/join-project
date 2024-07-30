@@ -4,32 +4,48 @@ const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.
 
 init();
 
-
-
-
-// TEST / AUSSTEHEND
 /**
  * This function checks if an user or guest is logged in
  */
 function checkIfUserOrGuest() {
     let userDetailsString = sessionStorage.getItem("userDetails");
-    let userDetails = JSON.parse(userDetailsString);
+    let userDetails = userDetailsString ? JSON.parse(userDetailsString) : null;
 
-    if (userDetails.status == "logged in") {
-      
-      
-      document.getElementById("userInitials").innerHTML = initials;
+    let greetingText = checkLocalTime();
+
+    if (userDetails && userDetails.status === "logged in") {
+        let userDetailsName = userDetails.name;
+        console.log(userDetailsName);
+        
+        document.getElementById("greeting").innerHTML = generateGreetingForUser(greetingText, userDetailsName);
     } else {
-      document.getElementById("userInitials").innerHTML = "G";
+        document.getElementById("greeting").innerHTML = generateGreetingForGuest(greetingText);
     }
 }
 
+/**
+ * This function generates the greeting for an user
+ * @param {string} greetingText - Greeting text depending on the local time
+ * @param {string} userDetailsName - Name of the user who is logged in
+ * @returns HTML Code
+ */
+function generateGreetingForUser(greetingText, userDetailsName) {
+    return `
+        <h2>${greetingText},</h2>
+        <span>${userDetailsName}</span>
+    `;
+}
 
-
-
-
-
-
+/**
+ * This function generates the greeting for a guest
+ * @param {string} greetingText - Greeting text depending on the local time
+ * @returns HTML Code
+ */
+function generateGreetingForGuest(greetingText) {
+    return `
+        <h2>${greetingText}</h2>
+    `;
+}
 
 /**
  * This function checks the current local time
@@ -37,32 +53,26 @@ function checkIfUserOrGuest() {
 function checkLocalTime() {
     var localDate = new Date();
     var currentLocalTime = localDate.getHours();
-
-    generateGreeting(currentLocalTime);
+    return generateGreetingText(currentLocalTime);
 }
 
 /**
  * This function generates the greeting depending on the current local time
  * @param {number} currentLocalTime 
  */
-function generateGreeting(currentLocalTime) {
+function generateGreetingText(currentLocalTime) {
+    let greetingText = '';
+
     if (currentLocalTime >= 5 && currentLocalTime < 12) {
-        document.getElementById("greeting").innerHTML = 'Good morning,';
+        greetingText = 'Good morning';
     } else if (currentLocalTime >= 12 && currentLocalTime < 18) {
-        document.getElementById("greeting").innerHTML = 'Good afternoon,';
+        greetingText = 'Good afternoon';
     } else {
-        document.getElementById("greeting").innerHTML = 'Good evening,';
+        greetingText = 'Good evening';
     }
+
+    return greetingText;
 }
-
-
-
-
-
-
-
-
-
 
 /**
  * This function fetches the tasks from the database
@@ -189,7 +199,7 @@ async function init() {
 
         console.log(numberOfTasksToDo, numberOfTasksDone, numberOfUrgentTasks, dateOfUpcomingDeadline, numberOfTasksInBoard, numberOfTasksInProgress, numberOfTasksAwaitingFeedback);
     }
-    checkLocalTime();
+    checkIfUserOrGuest();
 }
 
 /**
