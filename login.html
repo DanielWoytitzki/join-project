@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="login-mediaq.css">
+    <script src="./javascript/login.js"></script>
     <title>Login</title>
 </head>
 
@@ -19,21 +20,21 @@
         <img src="./img/join-logo.svg" alt="">
         <div class="login-header-signup">
             <p>Not a Join user?</p>
-            <a href="./signup.html"><button>Sign up</button></a>
+            <button onclick="forwardToSignUp()">Sign up</button>
         </div>
     </div>
 
-    <section style="display: flex; justify-content: center;">
+    <form onsubmit="logInAsUser(); return false" style="display: flex; justify-content: center;">
         <div class="login-box">
             <div class="login-box-head">
                 <h1>Log in</h1>
                 <hr>
             </div>
             <div class="login-box-input-fields">
-                <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email">
+                <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email" required>
                 <div>
-                    <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password">
-                    <p>Check your email and password. Please try again.</p>
+                    <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password" required>
+                    <p id="user-not-found-msg" style="color: #FFFFFF;">Check your email and password. Please try again.</p>
                     <div class="checkbox-remember">
                         <input id="checkbox-remember-me" type="checkbox">
                         <span>Remember me</span>
@@ -41,11 +42,11 @@
                 </div>
             </div>
             <div class="login-box-buttons">
-                <button onclick="logInAsUser()" class="button-login">Log in</button>
-                <button onclick="logInAsGuest()" class="button-guest-login">Guest Log in</button>
+                <button class="button-login">Log in</button>
+                <button onclick="logInAsGuest()" class="button-guest-login" formnovalidate="formnovalidate">Guest Log in</button>
             </div>
         </div>
-    </section>
+    </form>
 
     <div class="login-mobile-signup">
         <p>Not a Join user?</p>
@@ -56,9 +57,6 @@
         <a href="./privacy-policy.html">Privacy Policy</a>
         <a href="./legal-notice.html">Legal notice</a>
     </div>
-
-    <script src="./javascript/login.js"></script>
-    <script src="./javascript/signup.js"></script>
 </body>
 
 </html>

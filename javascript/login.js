@@ -1,9 +1,9 @@
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
- * Adds an eventlistener in order to load the function "fetchUserDetailsFromLocalStorage()" after the whole site has been loaded
+ * Adds an event listener to load the function "fetchUserDetailsFromLocalStorage()" after the whole site has been loaded
  */
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     fetchUserDetailsFromLocalStorage();
 });
 
@@ -11,33 +11,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * This function logs one in as user as long as one is found in the database
  */
 async function logInAsUser() {
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
+    let email = document.getElementById('email').value.trim();
+    let password = document.getElementById('password').value.trim();
 
-    let response = await fetch(BASE_URL + "users.json");
-    let users = await response.json();
-    console.log(users);
+    try {
+        let response = await fetch(BASE_URL + "users.json");
+        if (!response.ok) throw new Error('Error fetching users');
 
-    let userFound = false;
-    let userName = '';
+        let users = await response.json();
 
-    for (let userId in users) {
-        if (users[userId].email === email && users[userId].password === password) {
-            userFound = true;
-            userName = users[userId].name;
-            console.log('User gefunden:', users[userId]);
-            break;
+        let userFound = false;
+        let userName = '';
+
+        for (let userId in users) {
+            if (users[userId].email === email && users[userId].password === password) {
+                userFound = true;
+                userName = users[userId].name;
+                break;
+            }
         }
-    }
 
-    if (userFound) {
-        console.log('User gefunden');
-        saveLogInToSessionStorage(userName, email);
-    } else {
-        console.log('User wurde nicht gefunden. Bitte registrieren Sie sich oder melden sich als Gast an');
+        if (userFound) {
+            saveLogInToSessionStorage(userName, email);
+            checkRememberMe(email, password);
+            window.location.href = 'summary.html';
+        } else {
+            document.getElementById('user-not-found-msg').style.color = "red";
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
     }
-    checkRememberMe(email, password);
-    window.location.href = 'summary.html';
 }
 
 /**
@@ -46,62 +49,40 @@ async function logInAsUser() {
  * @param {string} email - Email of the logged in user
  */
 function saveLogInToSessionStorage(name, email) {
-    let userDetails = {
+    sessionStorage.setItem('userDetails', JSON.stringify({
         status: 'logged in',
         name: name,
         email: email
-    };
-    
-    sessionStorage.setItem('userDetails', JSON.stringify(userDetails));
+    }));
 }
 
 /**
  * This function checks if the checkbox of "Remember me" is checked or not
  */
 function checkRememberMe(email, password) {
-    let checkbox = document.getElementById('checkbox-remember-me').checked;
-
-    if (checkbox == true) {
-        console.log('Log in wird beim nächsten Mal angezeigt');
+    if (document.getElementById('checkbox-remember-me').checked) {
         saveLogInToLocalStorage(email, password);
-        loadLogInFromLocalStorage(email, password);
     } else {
-        console.log('Log in muss erneut eingegeben werden');
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
         document.getElementById('email').value = '';
         document.getElementById('password').value = '';
     }
 }
 
 /**
- * This function saves ones email and password to the local storage if the checkbox of "Remember me" is/was checked
+ * This function saves one's email and password to the local storage if the checkbox of "Remember me" is/was checked
  * 
  * @param {string} email - Email of the current user
  * @param {string} password - Password of the current user
  */
 function saveLogInToLocalStorage(email, password) {
-    let emailAsText = JSON.stringify(email);
-    let passwordAsText = JSON.stringify(password);
-    localStorage.setItem('email', emailAsText);
-    localStorage.setItem('password', passwordAsText);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
 }
 
 /**
- * This function loads ones email and password from the local storage if the checkbox of "Remember me" is/was checked
- * 
- * @param {string} email - Email of the current user
- * @param {string} password - Password of the current user
- */
-function loadLogInFromLocalStorage(email, password) {
-    let emailAsText = localStorage.getItem('email');
-    let passwordAsText = localStorage.getItem('password');
-    if (emailAsText && passwordAsText) {
-        email = JSON.parse(emailAsText);
-        password = JSON.parse(passwordAsText);
-    }
-}
-
-/**
- * This function fetchs ones email and password from the local storage if the checkbox of "Remember me" is/was checked
+ * This function fetches one's email and password from the local storage if the checkbox of "Remember me" is/was checked
  */
 function fetchUserDetailsFromLocalStorage() {
     let inputEmail = document.getElementById('email');
@@ -111,16 +92,10 @@ function fetchUserDetailsFromLocalStorage() {
         let email = localStorage.getItem('email');
         let password = localStorage.getItem('password');
 
-        if (email !== null) {
-            email = email.replace(/"/g, '');
-            inputEmail.value = email;
-        }
-        if (password !== null) {
-            password = password.replace(/"/g, '');
-            inputPassword.value = password;
-        }
+        if (email) inputEmail.value = email;
+        if (password) inputPassword.value = password;
     } else {
-        console.error('Email oder Password nicht gefunden');
+        console.error('Email oder Passwort-Feld nicht gefunden');
     }
 }
 
@@ -128,7 +103,7 @@ function fetchUserDetailsFromLocalStorage() {
  * This function forwards one to the sign-up page
  */
 function forwardToSignUp() {
-    window.location.href = 'sign_up.html';
+    window.location.href = 'signup.html';
 }
 
 /**
