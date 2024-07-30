@@ -4,6 +4,33 @@ const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.
 
 init();
 
+
+
+
+// TEST / AUSSTEHEND
+/**
+ * This function checks if an user or guest is logged in
+ */
+function checkIfUserOrGuest() {
+    let userDetailsString = sessionStorage.getItem("userDetails");
+    let userDetails = JSON.parse(userDetailsString);
+
+    if (userDetails.status == "logged in") {
+      
+      
+      document.getElementById("userInitials").innerHTML = initials;
+    } else {
+      document.getElementById("userInitials").innerHTML = "G";
+    }
+}
+
+
+
+
+
+
+
+
 /**
  * This function checks the current local time
  */

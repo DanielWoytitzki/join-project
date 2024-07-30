@@ -53,6 +53,7 @@ header {
 }
 
 .header-user-icon span {
+  cursor: pointer;
   width: 27.94px;
   height: 14.24px;
   color: #29abe2;
