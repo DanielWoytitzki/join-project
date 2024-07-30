@@ -131,7 +131,7 @@ function generateNoTaskDone() {
 function generateTaskOverlayEditHTML(taskId) {
   return `<div class="board-overlay-task-edit" onclick="event.stopPropagation()" id="taskOverlayEdit${taskId}">
             <div class="board-overlay-task-edit-right">
-                <img class="closeIcon" src="./img/close.svg" alt="" onclick="disableOverlayTaskEdit()" />
+                <img class="closeIcon" src="./img/close.svg" alt="" onclick="boardOverlayEditTaskHide()" />
             </div>
             <div class="board-overlay-task-edit-container">
                 <div class="board-overlay-task-edit-content-box">
@@ -144,7 +144,7 @@ function generateTaskOverlayEditHTML(taskId) {
                             placeholder="Enter a Title"
                             class="board-overlay-task-edit-content-box-input"
                         />
-                        <div id="addTaskTitleRequired" class="add-task-small-required d-none">
+                        <div id="boardOverlayEditTitleRequired" class="add-task-small-required d-none">
                             This field is required
                         </div>
                     </div>
@@ -167,7 +167,7 @@ function generateTaskOverlayEditHTML(taskId) {
                             name="editTaskDueDate"
                             id="editTaskDueDate"
                         />
-                        <div id="addTaskDueDateRequired" class="add-task-small-required d-none">
+                        <div id="boardOverlayEditDueDateRequired" class="add-task-small-required d-none">
                             This field is required
                         </div>
                     </div>
@@ -177,24 +177,24 @@ function generateTaskOverlayEditHTML(taskId) {
                     <div class="add-task-priority-content-box">
                         <div
                             class="add-task-priority white"
-                            onclick="addTaskPrioritySelect('Urgent')"
-                            id="addtaskPriorityUrgent"
+                            onclick="boardOverlayEditPrioritySelect('Urgent')"
+                            id="boardOverlayEditPriorityUrgent"
                         >
                             <span>Urgent</span>
                             <img src="./img/prio-urgent.svg" alt="" />
                         </div>
                         <div
                             class="add-task-priority orange"
-                            onclick="addTaskPrioritySelect('Medium')"
-                            id="addtaskPriorityMedium"
+                            onclick="boardOverlayEditPrioritySelect('Medium')"
+                            id="boardOverlayEditPriorityMedium"
                         >
                             <span>Medium</span>
                             <img src="./img/prio-medium.svg" alt="" />
                         </div>
                         <div
                             class="add-task-priority white"
-                            onclick="addTaskPrioritySelect('Low')"
-                            id="addtaskPriorityLow"
+                            onclick="boardOverlayEditPrioritySelect('Low')"
+                            id="boardOverlayEditPriorityLow"
                         >
                             <span>Low</span>
                             <img src="./img/prio-low.svg" alt="" />
@@ -220,44 +220,45 @@ function generateTaskOverlayEditHTML(taskId) {
                 </div>
                 <div class="board-overlay-task-edit-content-box pointer">
                     <label>Subtasks</label>
-                    <div class="add-task-subtask-add" id="addTaskSubtaskContainer">
+                    <div class="add-task-subtask-add" id="boardOverlayEditSubtaskContainer">
                         <input
-                            id="addTaskSubtaskInput"
+                            id="boardOverlayEditSubtaskInput"
                             type="text"
                             placeholder="Add new subtask"
                             class="board-overlay-task-edit-content-box-input"
+                            onfocus="boardOverlayEditSubtaskHandleFocusInput()"
                         />
                         <div
-                            id="addTaskSubtaskPlusIcon"
+                            id="boardOverlayEditSubtaskPlusIcon"
                             class="add-task-subtask-icon"
-                            onclick="subtaskFocusInput()"
+                            onclick="boardOverlayEditSubtaskFocusInput()"
                         >
                             <img class="filter" src="./img/add-plus.svg" alt="" />
                         </div>
                         <div
-                            id="addTaskSubtasIconSection"
+                            id="boardOverlayEditSubtaskIconSection"
                             class="add-task-subtask-add-icon-section-input d-none"
                         >
                             <div
                                 class="add-task-subtask-icon"
-                                onclick="subtaskClearInput()"
+                                onclick="boardOverlayEditSubtaskClearInput()"
                             >
                                 <img src="./img/close.svg" alt="" class="filter" />
                             </div>
                             <hr class="add-task-subtask-devider" />
                             <div
                                 class="add-task-subtask-icon"
-                                onclick="subtaskSubmitInput()"
+                                onclick="boardOverlayEditSubtaskSubmitInput()"
                             >
                                 <img src="./img/check.svg" alt="" class="filter" />
                             </div>
                         </div>
                     </div>
-                    <div id="addTaskSubtaskList" class="add-task-subtask-list"></div>
+                    <div id="boardOverlayEditSubtaskList" class="add-task-subtask-list"></div>
                 </div>
             </div>
             <div class="board-overlay-task-edit-right">
-                <button class="add-task-bottom-button btn-check">
+                <button class="add-task-bottom-button btn-check" onclick="boardOverlayEditSubmit('${taskId}')">
                     <span>Ok</span>
                     <img src="./img/check.svg" alt="" />
                 </button>
@@ -275,6 +276,32 @@ function generateContactListEdit(contactId, initials, name, contactState) {
               </div>
               <img src="./img/check-button-${contactState}.svg"
                    alt=""
-                   onclick="contactSelectEdit('${contactId}')"/>
+                   onclick="boardOverlayEditSelectContact('${contactId}')"/>
             </div>`;
+}
+
+function generateBoardOverlayEditSubtaskList(subtaskId, subtaskTitle) {
+  return `<div id="subtask'${subtaskId}'" class="add-task-subtask-task">
+                <li>${subtaskTitle}</li>
+                <div class="add-task-subtask-add-icon-section">
+                    <img onclick="boardOverlayEditSubtaskEdit(${subtaskId})" id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
+                    <hr class="add-task-subtask-devider" />
+                    <img onclick="boardOverlayEditSubtaskDelete(${subtaskId})" id="addTaskSubtaskDelete" src="./img/delete.svg" alt="" />
+                </div>
+              </div>`;
+}
+
+function generateSubtaskEdit(subtaskId) {
+  return `<div class="add-task-subtask-edit">
+                <input id="boardOverlayEditSubtaskInputEditValue" class="add-task-subtask-edit-input" type="text" />
+                <div class="add-task-subtask-edit-icons">
+                    <div class="add-task-subtask-icon">
+                        <img onclick="boardOverlayEditSubtaskDelete(${subtaskId})" src="./img/delete.svg" alt="" class="filter" />
+                    </div>
+                    <hr />
+                    <div class="add-task-subtask-icon">
+                        <img onclick="boardOverlayEditSubtaskSubmitEdit(${subtaskId})" src="./img/check.svg" alt="" class="filter" />
+                    </div>
+                </div>
+              </div>`;
 }

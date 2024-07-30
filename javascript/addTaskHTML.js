@@ -22,18 +22,3 @@ function generateAddTaskSubtaskList(subtaskId, subtaskTitle) {
               </div>
             </div>`;
 }
-
-function generateAddTaskSubtaskEdit(subtaskId) {
-  return `<div class="add-task-subtask-edit">
-              <input id="subtaskInputEditValue" class="add-task-subtask-edit-input" type="text" />
-              <div class="add-task-subtask-edit-icons">
-                  <div class="add-task-subtask-icon">
-                      <img onclick="subtaskDeleteTask(${subtaskId})" src="./img/delete.svg" alt="" class="filter" />
-                  </div>
-                  <hr />
-                  <div class="add-task-subtask-icon">
-                      <img onclick="subtaskSubmitEditTask(${subtaskId})" src="./img/check.svg" alt="" class="filter" />
-                  </div>
-              </div>
-            </div>`;
-}

@@ -292,14 +292,6 @@ function checkRequired() {
   return required;
 }
 
-function convertArrayToObject(array) {
-  let obj = {};
-  array.forEach((value, index) => {
-    obj[index] = value;
-  });
-  return obj;
-}
-
 function addTaskAssignedContactList() {
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i]["state"] == "checked") {
