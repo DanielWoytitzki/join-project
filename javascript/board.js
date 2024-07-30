@@ -12,6 +12,7 @@ let boardOverlayEditTask = document.getElementById("taskOverlayEdit");
 let currentDraggedElement;
 let boardOverlayEditContactsState = false;
 let boardOverlayEditContacts = [];
+let boardOverlayEditSubtasks = [];
 
 async function boardInit() {
   await boardPullContacts();
@@ -310,8 +311,9 @@ function boardOverlayEditDisplayTask(id) {
   addTaskPrioritySelect(task["priority"]);
   boardOverlayEditContacts = [];
   boardOverlayEditPullContacts(task);
-  //contacts
-  //subtasks
+  boardOverlayEditSubtasks = [];
+  boardOverlayEditPullSubtasks(task);
+  boardOverlayEditDisplaySubtasks();
   //submit
 }
 
@@ -380,7 +382,7 @@ function boardOverlayEditDisplayContacts() {
   }
 }
 
-function contactSelectEdit(key) {
+function boardOverlayEditSelectContact(key) {
   for (let i = 0; i < boardOverlayEditContacts.length; i++) {
     if (
       boardOverlayEditContacts[i].id == key &&
@@ -397,8 +399,98 @@ function contactSelectEdit(key) {
   boardOverlayEditDisplayContacts();
 }
 
-function disableOverlayTaskEdit() {
+function boardOverlayEditTaskHide() {
   boardOverlayEditTask.classList.add("d-none");
   boardRenderTasks();
   boardSearchInput.value = "";
+}
+
+function boardOverlayEditPullSubtasks(task) {
+  if (task.hasOwnProperty("subtasks")) {
+    let subtasks = task["subtasks"];
+    for (let key in subtasks) {
+      boardOverlayEditSubtasks.push({
+        subtaskTitle: subtasks[key]["subtaskTitle"],
+        subtaskState: subtasks[key]["subtaskState"],
+      });
+    }
+  }
+}
+
+function boardOverlayEditSubtaskFocusInput() {
+  document.getElementById("boardOverlayEditSubtaskInput").focus();
+}
+
+function boardOverlayEditSubtaskHandleFocusInput() {
+  document
+    .getElementById("boardOverlayEditSubtaskContainer")
+    .classList.add("focused");
+  document
+    .getElementById("boardOverlayEditSubtaskPlusIcon")
+    .classList.add("d-none");
+  document
+    .getElementById("boardOverlayEditSubtaskIconSection")
+    .classList.remove("d-none");
+  document
+    .getElementById("boardOverlayEditSubtaskInput")
+    .addEventListener("blur", () => {
+      setTimeout(boardOverlayEditSubtaskRemoveFocus, 100);
+    });
+}
+
+function boardOverlayEditSubtaskRemoveFocus() {
+  document
+    .getElementById("boardOverlayEditSubtaskContainer")
+    .classList.remove("focused");
+  document
+    .getElementById("boardOverlayEditSubtaskPlusIcon")
+    .classList.remove("d-none");
+  document
+    .getElementById("boardOverlayEditSubtaskIconSection")
+    .classList.add("d-none");
+}
+
+function boardOverlayEditSubtaskSubmitInput() {
+  let subtask = document.getElementById("boardOverlayEditSubtaskInput").value;
+  boardOverlayEditSubtasks.push({
+    subtaskTitle: subtask,
+    subtaskState: "unchecked",
+  });
+  boardOverlayEditDisplaySubtasks();
+  boardOverlayEditSubtaskClearInput();
+}
+
+function boardOverlayEditDisplaySubtasks() {
+  document.getElementById("boardOverlayEditSubtaskList").innerHTML = "";
+  for (let i = 0; i < boardOverlayEditSubtasks.length; i++) {
+    let subtaskTitle = boardOverlayEditSubtasks[i]["subtaskTitle"];
+    document.getElementById("boardOverlayEditSubtaskList").innerHTML +=
+      generateBoardOverlayEditSubtaskList(i, subtaskTitle);
+  }
+}
+
+function boardOverlayEditSubtaskClearInput() {
+  document.getElementById("boardOverlayEditSubtaskInput").value = "";
+}
+
+function boardOverlayEditSubtaskDelete(id) {
+  boardOverlayEditSubtasks.splice(id, 1);
+  boardOverlayEditDisplaySubtasks();
+}
+
+function boardOverlayEditSubtaskEdit(id) {
+  document.getElementById("boardOverlayEditSubtaskList").innerHTML = "";
+  document.getElementById("boardOverlayEditSubtaskList").innerHTML +=
+    generateSubtaskEdit(id);
+  console.log(boardOverlayEditSubtasks[id]["subtaskTitle"]);
+  document.getElementById("boardOverlayEditSubtaskInputEditValue").value =
+    boardOverlayEditSubtasks[id]["subtaskTitle"];
+}
+
+function boardOverlayEditSubtaskSubmitEdit(id) {
+  let subtask = document.getElementById(
+    "boardOverlayEditSubtaskInputEditValue"
+  ).value;
+  boardOverlayEditSubtasks[id]["subtaskTitle"] = subtask;
+  boardOverlayEditDisplaySubtasks();
 }
