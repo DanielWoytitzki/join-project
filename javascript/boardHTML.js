@@ -144,7 +144,7 @@ function generateTaskOverlayEditHTML(taskId) {
                             placeholder="Enter a Title"
                             class="board-overlay-task-edit-content-box-input"
                         />
-                        <div id="addTaskTitleRequired" class="add-task-small-required d-none">
+                        <div id="boardOverlayEditTitleRequired" class="add-task-small-required d-none">
                             This field is required
                         </div>
                     </div>
@@ -167,7 +167,7 @@ function generateTaskOverlayEditHTML(taskId) {
                             name="editTaskDueDate"
                             id="editTaskDueDate"
                         />
-                        <div id="addTaskDueDateRequired" class="add-task-small-required d-none">
+                        <div id="boardOverlayEditDueDateRequired" class="add-task-small-required d-none">
                             This field is required
                         </div>
                     </div>
@@ -177,24 +177,24 @@ function generateTaskOverlayEditHTML(taskId) {
                     <div class="add-task-priority-content-box">
                         <div
                             class="add-task-priority white"
-                            onclick="addTaskPrioritySelect('Urgent')"
-                            id="addtaskPriorityUrgent"
+                            onclick="boardOverlayEditPrioritySelect('Urgent')"
+                            id="boardOverlayEditPriorityUrgent"
                         >
                             <span>Urgent</span>
                             <img src="./img/prio-urgent.svg" alt="" />
                         </div>
                         <div
                             class="add-task-priority orange"
-                            onclick="addTaskPrioritySelect('Medium')"
-                            id="addtaskPriorityMedium"
+                            onclick="boardOverlayEditPrioritySelect('Medium')"
+                            id="boardOverlayEditPriorityMedium"
                         >
                             <span>Medium</span>
                             <img src="./img/prio-medium.svg" alt="" />
                         </div>
                         <div
                             class="add-task-priority white"
-                            onclick="addTaskPrioritySelect('Low')"
-                            id="addtaskPriorityLow"
+                            onclick="boardOverlayEditPrioritySelect('Low')"
+                            id="boardOverlayEditPriorityLow"
                         >
                             <span>Low</span>
                             <img src="./img/prio-low.svg" alt="" />
@@ -258,7 +258,7 @@ function generateTaskOverlayEditHTML(taskId) {
                 </div>
             </div>
             <div class="board-overlay-task-edit-right">
-                <button class="add-task-bottom-button btn-check">
+                <button class="add-task-bottom-button btn-check" onclick="boardOverlayEditSubmit('${taskId}')">
                     <span>Ok</span>
                     <img src="./img/check.svg" alt="" />
                 </button>

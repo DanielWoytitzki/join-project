@@ -223,3 +223,11 @@ function getInitials(name) {
   initials.toUpperCase();
   return initials;
 }
+
+function convertArrayToObject(array) {
+  let obj = {};
+  array.forEach((value, index) => {
+    obj[index] = value;
+  });
+  return obj;
+}

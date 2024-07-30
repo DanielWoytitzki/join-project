@@ -13,6 +13,8 @@ let currentDraggedElement;
 let boardOverlayEditContactsState = false;
 let boardOverlayEditContacts = [];
 let boardOverlayEditSubtasks = [];
+let boardOverlayEditAssignedContacts = [];
+let boardOverlayEditPriority;
 
 async function boardInit() {
   await boardPullContacts();
@@ -30,6 +32,7 @@ async function boardPullContacts() {
 
 async function boardRenderTasks() {
   boardClearTasks();
+  boardTasks = "";
   try {
     boardTasks = await readData(TASKS_URL);
     boardDisplay();
@@ -277,9 +280,9 @@ async function boardOverlayTaskSubtaskToggle(state, id, key) {
   }
 }
 
-function boardOverlayTaskHide() {
+async function boardOverlayTaskHide() {
   boardOverlayTask.classList.add("d-none");
-  boardRenderTasks();
+  await boardRenderTasks();
   boardSearchInput.value = "";
 }
 
@@ -308,13 +311,12 @@ function boardOverlayEditDisplayTask(id) {
   document.getElementById("editTaskTitle").value = task["title"];
   document.getElementById("editTaskDescription").value = task["description"];
   document.getElementById("editTaskDueDate").value = task["dueDate"];
-  addTaskPrioritySelect(task["priority"]);
+  boardOverlayEditPrioritySelect(task["priority"]);
   boardOverlayEditContacts = [];
   boardOverlayEditPullContacts(task);
   boardOverlayEditSubtasks = [];
   boardOverlayEditPullSubtasks(task);
   boardOverlayEditDisplaySubtasks();
-  //submit
 }
 
 function boardOverlayEditPullContacts(task) {
@@ -482,7 +484,6 @@ function boardOverlayEditSubtaskEdit(id) {
   document.getElementById("boardOverlayEditSubtaskList").innerHTML = "";
   document.getElementById("boardOverlayEditSubtaskList").innerHTML +=
     generateSubtaskEdit(id);
-  console.log(boardOverlayEditSubtasks[id]["subtaskTitle"]);
   document.getElementById("boardOverlayEditSubtaskInputEditValue").value =
     boardOverlayEditSubtasks[id]["subtaskTitle"];
 }
@@ -493,4 +494,109 @@ function boardOverlayEditSubtaskSubmitEdit(id) {
   ).value;
   boardOverlayEditSubtasks[id]["subtaskTitle"] = subtask;
   boardOverlayEditDisplaySubtasks();
+}
+
+async function boardOverlayEditSubmit(id) {
+  let required = boardOverlayEditSubmitCheckRequired();
+  if (required) {
+    boardOverlayEditAssignedContactList();
+    let title = document.getElementById("editTaskTitle").value;
+    let description = document.getElementById("editTaskDescription").value;
+    let dueDate = document.getElementById("editTaskDueDate").value;
+    let assignedContactsObject = convertArrayToObject(
+      boardOverlayEditAssignedContacts
+    );
+    let subtasksObject = convertArrayToObject(boardOverlayEditSubtasks);
+    let taskCategory = boardTasks[id]["category"];
+    let taskPosition = boardTasks[id]["position"];
+    let task = {
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      priority: boardOverlayEditPriority,
+      category: taskCategory,
+      assignedContacts: assignedContactsObject,
+      subtasks: subtasksObject,
+      position: taskPosition,
+    };
+    let path = TASKS_URL + "/" + id;
+    putData(path, task);
+    await boardRenderTasks();
+    await boardOverlayTaskHide();
+    boardOverlayRender(id);
+    setTimeout(boardOverlayEditTaskHide, 500);
+  }
+}
+
+function boardOverlayEditSubmitCheckRequired() {
+  let title = false,
+    dueDate = false;
+  if (document.getElementById("editTaskTitle").value == "") {
+    document
+      .getElementById("boardOverlayEditTitleRequired")
+      .classList.remove("d-none");
+    document.getElementById("editTaskTitle").classList.add("red-border");
+  } else if (!document.getElementById("editTaskTitle").value == "") {
+    document
+      .getElementById("boardOverlayEditTitleRequired")
+      .classList.add("d-none");
+    document.getElementById("editTaskTitle").classList.remove("red-border");
+    title = true;
+  }
+  if (document.getElementById("editTaskDueDate").value == "") {
+    document
+      .getElementById("boardOverlayEditDueDateRequired")
+      .classList.remove("d-none");
+    document.getElementById("editTaskDueDate").classList.add("red-border");
+  } else if (!document.getElementById("editTaskDueDate").value == "") {
+    document
+      .getElementById("boardOverlayEditDueDateRequired")
+      .classList.add("d-none");
+    document.getElementById("editTaskDueDate").classList.remove("red-border");
+    dueDate = true;
+  }
+  let required;
+  if (title && dueDate) {
+    required = true;
+  }
+  return required;
+}
+
+function boardOverlayEditAssignedContactList() {
+  boardOverlayEditAssignedContacts = [];
+  for (let i = 0; i < boardOverlayEditContacts.length; i++) {
+    if (boardOverlayEditContacts[i]["state"] == "checked") {
+      boardOverlayEditAssignedContacts.push(boardOverlayEditContacts[i]["id"]);
+    }
+  }
+}
+
+function boardOverlayEditPrioritySelect(priority) {
+  let urgent = document.getElementById("boardOverlayEditPriorityUrgent");
+  let medium = document.getElementById("boardOverlayEditPriorityMedium");
+  let low = document.getElementById("boardOverlayEditPriorityLow");
+  if (priority == "Urgent") {
+    urgent.classList.add("red");
+    urgent.classList.remove("white");
+    medium.classList.remove("orange");
+    medium.classList.add("white");
+    low.classList.remove("green");
+    boardOverlayEditPriority = "Urgent";
+  } else if (priority == "Medium") {
+    medium.classList.add("orange");
+    medium.classList.remove("white");
+    urgent.classList.remove("red");
+    urgent.classList.add("white");
+    low.classList.remove("green");
+    low.classList.add("white");
+    boardOverlayEditPriority = "Medium";
+  } else if (priority == "Low") {
+    low.classList.add("green");
+    low.classList.remove("white");
+    medium.classList.remove("orange");
+    medium.classList.add("white");
+    urgent.classList.remove("red");
+    urgent.classList.add("white");
+    boardOverlayEditPriority = "Low";
+  }
 }
