@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .board-section {
   width: calc(100vw - 232px);
 }
@@ -98,7 +102,8 @@
 .board-body {
   display: grid;
   padding: 0px 64px;
-  gap: 26px;
+  row-gap: 26px;
+  column-gap: 22px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr max-content;
 }
@@ -129,12 +134,19 @@
 }
 
 .board-body-body {
+  overflow-y: scroll;
   grid-row: 2;
   display: flex;
   flex-direction: column;
   gap: 16px;
   /* flex: 1 1 auto; */
   flex-grow: 1;
+  height: calc(100vh - 332px);
+  padding: 6px;
+}
+
+.board-body-body::-webkit-scrollbar {
+  display: none;
 }
 
 .board-body-body-no-task {
@@ -149,6 +161,10 @@
   box-shadow: 0px 0px 4px 0px #00000029;
 }
 
+.board-body-body-no-task span {
+  text-align: center;
+}
+
 .board-body-body-task {
   display: flex;
   flex-direction: column;
@@ -156,7 +172,7 @@
   padding: 16px;
   border-radius: 24px;
   gap: 24px;
-  box-shadow: 0px 0px 10px 3px #00000014;
+  box-shadow: 0px 0px 6px 3px #00000014;
 }
 
 .board-body-body-task:hover {

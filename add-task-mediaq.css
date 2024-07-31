@@ -1,0 +1,156 @@
+@media (max-width: 1790px) {
+  .add-task-content-box {
+    width: 590px;
+  }
+}
+
+@media (max-width: 1690px) {
+  .add-task-content-box {
+    width: 540px;
+  }
+}
+
+@media (max-width: 1590px) {
+  .add-task-content-box {
+    width: 490px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .add-task-content-box {
+    width: 440px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .add-task-content-box {
+    width: 396px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .add-task-body {
+    flex-direction: column;
+    overflow-y: scroll;
+    height: calc(100vh - 400px);
+    gap: 24px;
+    width: 100%;
+  }
+
+  .add-task-body::-webkit-scrollbar {
+    display: none;
+  }
+
+  .add-task-content-box {
+    width: 100%;
+  }
+
+  .add-task-bottom {
+    margin: 0;
+  }
+
+  .devider {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .task-section {
+    gap: 32px;
+    padding: 48px 48px;
+    align-self: center;
+    width: calc(100vw - 328px);
+  }
+
+  .add-task-priority-content-box {
+    justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 850px) {
+  .task-section {
+    width: calc(100vw - 32px);
+    padding: 16px;
+  }
+
+  .board-add-task-header h1 {
+    padding-top: 32px;
+  }
+}
+
+@media (max-width: 550px) {
+  .add-task-priority-content-box {
+    justify-content: space-between;
+  }
+
+  .btn-cancel {
+    display: none;
+  }
+
+  .board-add-task-header h1 {
+    font-size: 47px;
+    line-height: 56.4px;
+  }
+
+  .add-task-content-box label {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .add-task-content-box-input {
+    font-size: 16px;
+    line-height: 19.2px;
+    padding: 10px 21px;
+  }
+
+  .add-task-textarea {
+    font-size: 16px;
+    line-height: 19.2px;
+    height: 88px;
+    padding: 18px 21px;
+  }
+
+  .add-task-dropdown-select span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .add-task-priority-content-box {
+    gap: 8px;
+  }
+
+  .add-task-priority {
+    width: 120px;
+    padding: 10px 10px;
+  }
+
+  .add-task-priority span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+}
+
+@media (max-width: 428px) {
+  .add-task-priority-content-box {
+    flex-direction: column;
+  }
+
+  .add-task-priority {
+    width: calc(100vw - 64px);
+  }
+
+  .add-task-bottom {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .add-task-body {
+    height: calc(100vh - 420px);
+  }
+
+  .task-section {
+    gap: 16px;
+  }
+}

@@ -11,15 +11,17 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./add-task.css" />
-    <link rel="stylesheet" href="./mediaq.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./add-task-mediaq.css" />
+    <link rel="stylesheet" href="./mediaq.css" />
+
     <title>Add Task</title>
   </head>
 
   <body onload="AddTaskInit()">
     <nav id="desktopNav" class="desktop-nav"></nav>
 
-    <div class="main-right">
+    <main class="main-right">
       <header id="header"></header>
 
       <section class="task-section">
@@ -27,7 +29,6 @@
           <h1>Add Task</h1>
         </div>
         <div class="add-task-body" id="addTaskForm">
-          <!-- onsubmit="addTaskSubmit()" -->
           <div class="add-task-body-column">
             <div class="add-task-content-box">
               <label for="addTaskTitle"
@@ -78,7 +79,7 @@
             </div>
           </div>
 
-          <div>
+          <div class="devider">
             <hr class="add-task-devider" />
           </div>
 
@@ -231,7 +232,7 @@
           </div>
         </div>
       </section>
-    </div>
+    </main>
 
     <nav id="mobileNav" class="mobile-nav"></nav>
 
