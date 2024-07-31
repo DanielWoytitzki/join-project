@@ -78,9 +78,17 @@
   .board-add-task-header h1 {
     padding-top: 32px;
   }
+
+  .add-task-body {
+    height: calc(100vh - 424px);
+  }
 }
 
 @media (max-width: 550px) {
+  .add-task-body {
+    height: calc(100vh - 407px);
+  }
+
   .add-task-priority-content-box {
     justify-content: space-between;
   }

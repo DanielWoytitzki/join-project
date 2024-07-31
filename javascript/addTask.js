@@ -119,7 +119,7 @@ async function addTaskContactListload() {
   try {
     let data = await readData(CONTACTS_URL);
     for (let key in data) {
-      contacts.push({
+      addTaskContacts.push({
         id: key,
         contact: data[key]["name"],
         state: "unchecked",
