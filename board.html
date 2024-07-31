@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="./img/join-logo.svg">
+    <link rel="icon" type="image/x-icon" href="./img/join-logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -111,12 +111,13 @@
     <section
       class="board-overlay-task-background d-none"
       id="taskOverlay"
-      onclick="disableOverlayTask()"
+      onclick="boardOverlayTaskHide()"
     ></section>
 
-    <section class="board-overlay-task-background d-none" id="taskOverlayEdit">
-      <!-- onclick="disableOverlayTaskEdit()" -->
-    </section>
+    <section
+      class="board-overlay-task-background d-none"
+      id="taskOverlayEdit"
+    ></section>
 
     <section class="board-add-task-background d-none" id="addTaskOverlay">
       <div class="board-add-task">
@@ -126,7 +127,7 @@
             class="closeIcon"
             src="./img/close.svg"
             alt=""
-            onclick="disableOverlayAddTask()"
+            onclick="addTaskHideOverlay()"
           />
         </div>
         <div class="add-task-body" id="addTaskForm">
@@ -165,7 +166,7 @@
               <label for="addTaskAssignedTo">Assigned to</label>
               <div
                 class="add-task-dropdown add-task-dropdown-shadow"
-                onclick="toggleContacts()"
+                onclick="addTaskToggleContacts()"
               >
                 <div class="add-task-dropdown-select">
                   <span id="addTaskAssignedTo">Select contacts to assign</span>
@@ -237,7 +238,7 @@
               <label>Category<span class="red-star">*</span></label>
               <div
                 class="add-task-dropdown add-task-dropdown-shadow"
-                onclick="toggleCategory()"
+                onclick="addTaskToggleCategory()"
               >
                 <div
                   class="add-task-dropdown-select"
@@ -253,13 +254,13 @@
                 <div class="d-none" id="addTaskCategoryDropdownOptions">
                   <div
                     class="add-task-dropdown-option"
-                    onclick="setCategory('Technical Task')"
+                    onclick="addTaskSetCategory('Technical Task')"
                   >
                     <span>Technical Task</span>
                   </div>
                   <div
                     class="add-task-dropdown-option"
-                    onclick="setCategory('User Story')"
+                    onclick="addTaskSetCategory('User Story')"
                   >
                     <span>User Story</span>
                   </div>
@@ -284,7 +285,7 @@
                 <div
                   id="addTaskSubtaskPlusIcon"
                   class="add-task-subtask-icon"
-                  onclick="subtaskFocusInput()"
+                  onclick="addTaskSubtaskFocusInput()"
                 >
                   <img class="filter" src="./img/add-plus.svg" alt="" />
                 </div>
@@ -294,14 +295,14 @@
                 >
                   <div
                     class="add-task-subtask-icon"
-                    onclick="subtaskClearInput()"
+                    onclick="addTaskSubtaskClearInput()"
                   >
                     <img src="./img/close.svg" alt="" class="filter" />
                   </div>
                   <hr class="add-task-subtask-devider" />
                   <div
                     class="add-task-subtask-icon"
-                    onclick="subtaskSubmitInput()"
+                    onclick="addTaskSubtaskSubmitInput()"
                   >
                     <img src="./img/check.svg" alt="" class="filter" />
                   </div>
@@ -316,7 +317,7 @@
           <div class="add-task-bottom-button-section">
             <div
               class="add-task-bottom-button btn-cancel"
-              onclick="disableOverlayAddTask()"
+              onclick="addTaskHideOverlay()"
             >
               <span>Cancel</span>
               <img class="icon-cancel" src="./img/cancel.svg" alt="" />
