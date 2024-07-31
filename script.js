@@ -32,11 +32,26 @@ function generateHTMLForHeader() {
       <div onclick="forwardToHelp()" class="header-help-icon">
         <img src="./img/help-icon.svg" alt="">
       </div>
-      <div class="header-user-icon">
+      <div onclick="toggleMenu()" class="header-user-icon">
         <span id="userInitials"></span
+      </div>
+
+      <div id="menu" class="header-overlay-menu">
+        <a href="./help.html" style="display: none">Help</a>
+        <a href="./legal-notice.html">Legal Notice</a>
+        <a href="./privacy-policy.html">Privacy Policy</a>
+        <a href="./login.html" onclick="deleteUserDetailsFromSessionStorage()">Log out</a>
       </div>
   </div>
   `;
+}
+
+/**
+ * This function toggles a burger menu
+ */
+function toggleMenu() {
+  document.querySelector('.header-user-icon').classList.toggle('header-overlay-menu-active');
+  document.getElementById('menu').classList.toggle('show-header-overlay-menu');
 }
 
 /**
@@ -142,7 +157,7 @@ function fetchUserDetailsFromSessionStorage() {
  */
 function deleteUserDetailsFromSessionStorage() {
   sessionStorage.clear();
-  window.location.href = "./index.html";
+  /* window.location.href = "./index.html"; */
 }
 
 /**

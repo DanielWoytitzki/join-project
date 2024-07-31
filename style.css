@@ -3,6 +3,7 @@ body {
   font-family: "Inter", sans-serif;
   background-color: #f6f7f8;
   display: flex;
+  overflow-x: hidden;
 }
 
 header {
@@ -39,7 +40,11 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.header-help-icon:hover {
   cursor: pointer;
+  transform: scale(1.20);
 }
 
 .header-user-icon {
@@ -63,6 +68,48 @@ header {
   justify-content: center;
   align-items: center;
 }
+
+.header-overlay-menu {
+  position: absolute;
+  top: 102px;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 150px;
+  height: 158px;
+  background-color: #2a3647;
+  border-radius: 20px 0px 20px 20px;
+  padding: 10px;
+  transform: translateX(200px);
+  transition: all 225ms ease-in-out;
+}
+
+.show-header-overlay-menu {
+  transform: translateX(-20px);
+}
+
+.header-overlay-menu-active {
+  background-color: rgba(12, 46, 98, 0.12);
+}
+
+.header-overlay-menu a {
+  color: #CDCDCD;
+  font-size: 16px;
+  text-decoration: none;
+  width: 110px;
+  height: 46px;
+  border-radius: 8px;
+  padding: 8px 16px 8px 16px;
+  gap: 8px;
+}
+
+.header-overlay-menu a:hover {
+  background-color: #2A3D59;
+}
+
 
 .hpl-section {
   width: calc(100vw - 232px);
