@@ -33,7 +33,7 @@ function generateHTMLForHeader() {
         <img src="./img/help-icon.svg" alt="">
       </div>
       <div onclick="toggleMenu()" class="header-user-icon">
-        <span id="userInitials"></span
+        <span id="userInitials"></span>
       </div>
 
       <div id="menu" class="header-overlay-menu">
@@ -50,8 +50,10 @@ function generateHTMLForHeader() {
  * This function toggles a burger menu
  */
 function toggleMenu() {
-  document.querySelector('.header-user-icon').classList.toggle('header-overlay-menu-active');
-  document.getElementById('menu').classList.toggle('show-header-overlay-menu');
+  document
+    .querySelector(".header-user-icon")
+    .classList.toggle("header-overlay-menu-active");
+  document.getElementById("menu").classList.toggle("show-header-overlay-menu");
 }
 
 /**

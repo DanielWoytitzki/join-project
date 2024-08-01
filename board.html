@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="board-body">
-          <div class="board-body-header">
+          <div class="board-body-header board-body-header-grid-1">
             <h2>To do</h2>
             <img
               class="board-body-header-icon"
@@ -66,13 +66,12 @@
             />
           </div>
           <div
-            class="board-body-body"
+            class="board-body-body board-body-body-grid-1"
             id="taskFieldToDo"
             ondrop="moveTo('ToDo')"
             ondragover="allowDrop(event)"
           ></div>
-
-          <div class="board-body-header">
+          <div class="board-body-header board-body-header-grid-2">
             <h2>In progress</h2>
             <img
               class="board-body-header-icon"
@@ -82,13 +81,13 @@
             />
           </div>
           <div
-            class="board-body-body"
+            class="board-body-body board-body-body-grid-2"
             id="taskFieldInProgress"
             ondrop="moveTo('InProgress')"
             ondragover="allowDrop(event)"
           ></div>
 
-          <div class="board-body-header">
+          <div class="board-body-header board-body-header-grid-3">
             <h2>Await feedback</h2>
             <img
               class="board-body-header-icon"
@@ -98,17 +97,17 @@
             />
           </div>
           <div
-            class="board-body-body"
+            class="board-body-body board-body-body-grid-3"
             id="taskFieldAwaitFeedback"
             ondrop="moveTo('AwaitFeedback')"
             ondragover="allowDrop(event)"
           ></div>
 
-          <div class="board-body-header">
+          <div class="board-body-header board-body-header-grid-4">
             <h2>Done</h2>
           </div>
           <div
-            class="board-body-body"
+            class="board-body-body board-body-body-grid-4"
             id="taskFieldDone"
             ondrop="moveTo('Done')"
             ondragover="allowDrop(event)"
