@@ -7,16 +7,27 @@ body {
 }
 
 .board-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 3fr;
+  gap: 32px;
   padding: 48px 64px;
 }
 
-.board-head-right {
-  display: flex;
-  align-items: center;
-  gap: 32px;
+.grid1 {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.grid2 {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: center;
+}
+
+.grid3 {
+  grid-row: 1;
+  grid-column: 3;
+  align-self: center;
 }
 
 .board-head h1 {
@@ -41,6 +52,7 @@ body {
   line-height: 24px;
   border: none;
   flex-grow: 1;
+  width: 100%;
 }
 
 .board-head-right-search input:focus {
@@ -557,4 +569,8 @@ body {
   padding: 12px 21px;
   font-size: 20px;
   line-height: 24px;
+}
+
+.board-add-Task-Icon-MediaQ {
+  display: none;
 }

@@ -26,8 +26,10 @@
 
       <section class="board-section">
         <div class="board-head">
-          <h1>Board</h1>
-          <div class="board-head-right">
+          <div class="grid1">
+            <h1>Board</h1>
+          </div>
+          <div class="grid2">
             <div class="board-head-right-search">
               <input
                 type="text"
@@ -39,9 +41,17 @@
                 <img src="./img/search.svg" alt="" />
               </div>
             </div>
+          </div>
+          <div class="grid3">
             <button class="board-head-right-add" onclick="addTask('ToDo')">
               <span>Add task</span>
-              <img src="./img/add-plus.svg" alt="" />
+              <img id="boardaddTaskIcon" src="./img/add-plus.svg" alt="" />
+              <img
+                id="boardaddTaskIconMediaQ"
+                class="board-add-Task-Icon-MediaQ"
+                src="./img/plus-button-mediaq.svg"
+                alt=""
+              />
             </button>
           </div>
         </div>
@@ -182,7 +192,7 @@
             </div>
           </div>
 
-          <div>
+          <div class="devider">
             <hr class="add-task-devider" />
           </div>
 
