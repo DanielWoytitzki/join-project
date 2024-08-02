@@ -44,7 +44,7 @@ header {
 
 .header-help-icon:hover {
   cursor: pointer;
-  transform: scale(1.20);
+  transform: scale(1.2);
 }
 
 .header-user-icon {
@@ -55,6 +55,11 @@ header {
   align-items: center;
   border: 3px solid #2a3647;
   border-radius: 559px;
+}
+
+.header-user-icon:hover {
+  background: rgba(12, 46, 98, 0.12);
+  cursor: pointer;
 }
 
 .header-user-icon span {
@@ -96,7 +101,7 @@ header {
 }
 
 .header-overlay-menu a {
-  color: #CDCDCD;
+  color: #cdcdcd;
   font-size: 16px;
   text-decoration: none;
   width: 110px;
@@ -107,9 +112,8 @@ header {
 }
 
 .header-overlay-menu a:hover {
-  background-color: #2A3D59;
+  background-color: #2a3d59;
 }
-
 
 .hpl-section {
   width: calc(100vw - 232px);
@@ -382,4 +386,17 @@ header {
 
 .turn180 {
   transform: rotate(180deg);
+}
+
+.transition-in-from-right {
+  animation: slide-in-from-right 75ms forwards ease-in;
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    right: 0;
+  }
 }

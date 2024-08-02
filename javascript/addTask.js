@@ -118,6 +118,7 @@ function addTaskContactSelect(key) {
 async function addTaskContactListload() {
   try {
     let data = await readData(CONTACTS_URL);
+    addTaskContacts = [];
     for (let key in data) {
       addTaskContacts.push({
         id: key,
@@ -335,3 +336,45 @@ function showOverlayAddTask() {
 function addTaskHideOverlay() {
   addTaskOverlay.classList.add("d-none");
 }
+
+async function addTaskClearInputs() {
+  document.getElementById("addTaskTitle").value = "";
+  document.getElementById("addTaskDescription").value = "";
+  await addTaskContactListload();
+  document.getElementById("addTaskDueDate").value = "";
+  addTaskPrioritySelect("Medium");
+  document.getElementById("addTaskCategory").innerHTML = "Select task category";
+  document.getElementById("addTaskSubtaskInput").value = "";
+  addTaskSubtasks = [];
+  addTaskDisplaySubtasks();
+}
+
+document.addEventListener("click", function (event) {
+  let modal = document.getElementById("addTaskAssignedToDropdownOptions");
+  let dropdown = document.getElementById(
+    "addTaskContactsDropdownButtonToToggle"
+  );
+  let isClickInside = modal.contains(event.target);
+  let isClickedDropdown = dropdown.contains(event.target);
+  if (
+    !isClickInside &&
+    !modal.classList.contains("d-none") &&
+    !isClickedDropdown
+  ) {
+    addTaskToggleContacts();
+  }
+});
+
+document.addEventListener("click", function (event) {
+  let modal = document.getElementById("addTaskCategoryDropdownOptions");
+  let dropdown = document.getElementById("addTaskCategoryContainer");
+  let isClickInside = modal.contains(event.target);
+  let isClickedDropdown = dropdown.contains(event.target);
+  if (
+    !isClickInside &&
+    !modal.classList.contains("d-none") &&
+    !isClickedDropdown
+  ) {
+    addTaskToggleCategory();
+  }
+});

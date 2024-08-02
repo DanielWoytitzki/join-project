@@ -130,7 +130,7 @@
     ></section>
 
     <section class="board-add-task-background d-none" id="addTaskOverlay">
-      <div class="board-add-task">
+      <div class="board-add-task transition-in-from-right">
         <div class="board-add-task-header">
           <h1>Add Task</h1>
           <img
@@ -141,7 +141,6 @@
           />
         </div>
         <div class="add-task-body" id="addTaskForm">
-          <!-- onsubmit="addTaskSubmit()" -->
           <div class="add-task-body-column">
             <div class="add-task-content-box">
               <label for="addTaskTitle"
@@ -178,7 +177,10 @@
                 class="add-task-dropdown add-task-dropdown-shadow"
                 onclick="addTaskToggleContacts()"
               >
-                <div class="add-task-dropdown-select">
+                <div
+                  class="add-task-dropdown-select"
+                  id="addTaskContactsDropdownButtonToToggle"
+                >
                   <span id="addTaskAssignedTo">Select contacts to assign</span>
                   <img
                     src="./img/arrow-drop-down.svg"
@@ -336,8 +338,6 @@
               class="add-task-bottom-button btn-check"
               onclick="addTaskSubmit()"
             >
-              <!-- type="submit"
-            form="addTaskForm" -->
               <span>Create Task</span>
               <img src="./img/check.svg" alt="" />
             </button>
@@ -352,6 +352,7 @@
     </div>
   </body>
   <script src="./javascript/board.js"></script>
+  <script src="./javascript/boardOverlayEdit.js"></script>
   <script src="./javascript/boardHTML.js"></script>
   <script src="./javascript/addTaskHTML.js"></script>
   <script src="./javascript/addTask.js"></script>

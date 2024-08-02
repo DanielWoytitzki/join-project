@@ -40,7 +40,7 @@ function generateTaskSubtasks(progress, subtaskDone, subtaskTotal) {
 }
 
 function generateTaskOverlayHTML(taskId, task, priority) {
-  return `<div class="board-overlay-task" onclick="event.stopPropagation()" id="taskOverlay${taskId}">
+  return `<div class="board-overlay-task transition-in-from-right" onclick="event.stopPropagation()" id="taskOverlay${taskId}">
             <div class="board-overlay-task-header">
                 <span id="categoryOverlay${taskId}">${task["category"]}</span>
                 <img class="closeIcon" src="./img/close.svg" alt="" onclick="boardOverlayTaskHide()" />
@@ -129,7 +129,7 @@ function generateNoTaskDone() {
 }
 
 function generateTaskOverlayEditHTML(taskId) {
-  return `<div class="board-overlay-task-edit" onclick="event.stopPropagation()" id="taskOverlayEdit${taskId}">
+  return `<div class="board-overlay-task-edit" id="taskOverlayEdit${taskId}">
             <div class="board-overlay-task-edit-right">
                 <img class="closeIcon" src="./img/close.svg" alt="" onclick="boardOverlayEditTaskHide()" />
             </div>
@@ -207,7 +207,7 @@ function generateTaskOverlayEditHTML(taskId) {
                         class="add-task-dropdown add-task-dropdown-shadow"
                         onclick="boardOverlayEditToggleContacts()"
                     >
-                        <div class="add-task-dropdown-select">
+                        <div class="add-task-dropdown-select" id="boardOverlayEditContactsDropdownButtonToToggle">
                             <span id="addTaskAssignedTo">Select contacts to assign</span>
                             <img
                                 src="./img/arrow-drop-down.svg"
