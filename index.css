@@ -23,7 +23,7 @@ img {
 
 img.animate {
     transition-delay: 200ms;
-    transform: translate3d(-640px, -390px, 0);
+    transform: translate3d(-615px, -385px, 0);
     transition: transform 500ms ease-in-out, width 500ms ease-in-out, height 500ms ease-in-out;
     width: 100.03px;
     height: 121.97px;

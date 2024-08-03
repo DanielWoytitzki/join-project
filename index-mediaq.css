@@ -1,0 +1,53 @@
+@media (max-width: 2560px) and (min-width: 1921px) {
+    img.animate {
+        transform: translate3d(-1175px, -475px, 0);
+    }
+}
+
+@media (max-width: 1920px) and (min-width: 1441px) {
+    img.animate {
+        transform: translate3d(-855px, -475px, 0);
+    }
+}
+
+@media (max-width: 1440px) and (min-width: 1281px) {
+    img.animate {
+        transform: translate3d(-615px, -385px, 0);
+    }
+}
+
+@media (max-width: 1280px) and (min-width: 1025px) {
+    img.animate {
+        transform: translate3d(-535px, -355px, 0);
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 801px) {
+    img.animate {
+        transform: translate3d(-410px, -260px, 0);
+    }
+}
+
+@media (max-width: 800px) and (min-width: 411px) {
+    img.animate {
+        transform: translate3d(-280px, -385px, 0);
+    }
+}
+
+@media (max-width: 410px) and (min-width: 320px) {
+    /*
+    body {
+        background-color: #2A3647;
+        }
+    */
+
+    img {
+        src: "./img/join-logo-reverse.svg";
+    }
+
+    img.animate {
+        transform: translate3d(-80px, -385px, 0);
+        width: 100.03px;
+        height: 121.97px;
+    }
+}
