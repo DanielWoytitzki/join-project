@@ -81,6 +81,24 @@ function HTMLForContactCard(contact) {
     `
 }
 
+
+
+function updateSelectedContact(contactId) {
+    let contactBoxes = document.querySelectorAll('.single-contact-box');
+    
+    contactBoxes.forEach(contactBox => {
+        if (contactBox.getAttribute('onclick').includes(contactId)) {
+            contactBox.classList.add('selected');
+        } else {
+            contactBox.classList.remove('selected');
+        }
+    });
+}
+
+
+
+
+
 /**
  * This function fetches and displays the detailed contact information
  * 
@@ -91,6 +109,8 @@ async function showDetailedContact(contactId) {
     let detailedContact = await response.json();
     detailedContact.id = contactId;
     document.getElementById('contact-detailed').innerHTML = HTMLForDetailedContact(detailedContact);
+
+    updateSelectedContact(contactId);
 }
 
 /**
@@ -163,19 +183,19 @@ function HTMLForAddNewContact() {
                 <div>
                     <img class="profile-icon-img" src="./img/profile-pic-blank.svg" alt="Profile Picture Placeholder">
                 </div>
-                <div>
+                <form onsubmit="addContactToDatabase(); return false">
                     <div>
-                        <form class="input-fields-add-contact">
-                            <input required type="text" placeholder="Name" id="name">
-                            <input required type="email" placeholder="E-Mail" id="email">
-                            <input required type="number" placeholder="Phone" id="phone">
-                        </form>
+                        <div class="input-fields-add-contact">
+                            <input id="name" type="text" placeholder="Name" required>
+                            <input id="email" type="email" placeholder="E-Mail" required>
+                            <input id="phone" type="number" placeholder="Phone" requiered>
+                        </div>
                     </div>
-                    <div>
-                        <button type="button" onclick="closeOverlay()">Cancel <img src="./img/close.svg"></button>
-                        <button type="button" onclick="addContactToDatabase()">Create contact <img src="./img/check.svg"></button>
+                    <div class="buttons-add-contact">
+                        <button class="cancel-button-add-contact" onclick="closeOverlay()" formnovalidate="formnovalidate">Cancel <img src="./img/close.svg"></button>
+                        <button class="create-contact-button-add-contact">Create contact <img src="./img/check.svg"></button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     `;
