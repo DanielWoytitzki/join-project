@@ -84,6 +84,13 @@
   padding: 15px 24px;
   display: flex;
   gap: 35px;
+  margin-top: 8px;
+  border-radius: 8px;
+}
+
+.single-contact-box:hover {
+  cursor: pointer;
+  background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
 }
 
 .single-contact-box-profile-img {
@@ -116,7 +123,7 @@
 }
 
 .contact-big-onclick {
-  width: 461px;
+  width: 550px;
   margin: 0 48px;
   display: flex;
   flex-direction: column;

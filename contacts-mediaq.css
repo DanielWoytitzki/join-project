@@ -1,0 +1,71 @@
+@media (max-width: 1350px) {
+    .contact-section-head {
+        width: 430px;
+        padding: 56px 40px 32px 40px;
+    }
+
+    .contact-section-head h1 {
+        font-size: 47px;
+    }
+
+    .contact-section-head hr {
+        height: 53px;
+    }
+
+    .contact-section-head p {
+        font-size: 20px;
+    }
+
+    .contact-big-profile-img {
+        height: 80px;
+        width: 80px;
+    }
+
+    .contact-big-profile-img span {
+        font-size: 30px;
+    }
+
+    .contact-big-onclick {
+        width: 400px;
+    }
+
+    .contact-big-onclick h2 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .contact-section-content {
+        display: none;
+    }
+
+    .all-contacts-box {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .contact-section {
+        width: 100vw;
+    }
+}
+
+@media (max-width: 380px) {
+    .all-contacts-box button {
+        width: 300px;
+    }
+
+    .contact-list {
+        width: 300px;
+    }
+
+    .single-contact-box-content {
+        justify-content: center;
+        gap: 0;
+    }
+
+    .single-contact-box-content a {
+        display: none;
+    }
+}
