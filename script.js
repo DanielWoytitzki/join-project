@@ -159,7 +159,7 @@ function fetchUserDetailsFromSessionStorage() {
  */
 function deleteUserDetailsFromSessionStorage() {
   sessionStorage.clear();
-  /* window.location.href = "./index.html"; */
+  window.location.href = "./index.html";
 }
 
 /**

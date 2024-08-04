@@ -1,6 +1,6 @@
 @media (max-width: 2560px) and (min-width: 1921px) {
     img.animate {
-        transform: translate3d(-1175px, -475px, 0);
+        transform: translate3d(-1175px, -600px, 0);
     }
 }
 
@@ -28,26 +28,49 @@
     }
 }
 
-@media (max-width: 800px) and (min-width: 411px) {
+@media (max-width: 800px) and (min-width: 701px) {
     img.animate {
-        transform: translate3d(-280px, -385px, 0);
+        transform: translate3d(-240px, -390px, 0);
+    }
+}
+
+@media (max-width: 700px) and (min-width: 411px) {
+    img.animate {
+        transform: translate3d(-280px, -430px, 0);
+        width: 64px;
+        height: 78.03px;
     }
 }
 
 @media (max-width: 410px) and (min-width: 320px) {
-    /*
     body {
-        background-color: #2A3647;
-        }
-    */
+        animation: changeBackgroundColor 800ms ease-in-out;
+    }
 
-    img {
-        src: "./img/join-logo-reverse.svg";
+    @keyframes changeBackgroundColor {
+        0% {
+            background-color: #2A3647;
+        }
+
+        100% {
+            background-color: #f6f7f8;
+        }
     }
 
     img.animate {
-        transform: translate3d(-80px, -385px, 0);
-        width: 100.03px;
-        height: 121.97px;
+        transform: translate3d(-90px, -440px, 0);
+        width: 64px;
+        height: 78.03px;
+        animation: changeImageSRC 800ms ease-in-out;
+    }
+
+    @keyframes changeImageSRC {
+        0% {
+            content: url("./img/join-logo-reverse.svg")
+        }
+
+        100% {
+            content: url("./img/join-logo.svg");
+        }
     }
 }
