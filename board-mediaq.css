@@ -96,16 +96,6 @@
     padding-bottom: 16px;
   }
 
-  .board-body-body::-webkit-scrollbar {
-    display: block;
-    height: 10px;
-    border-radius: 10px;
-  }
-
-  .board-body-body::-webkit-scrollbar-track {
-    background: #f6f6f6;
-  }
-
   .board-body-body-task {
     width: 220px;
   }
@@ -157,6 +147,10 @@
 
   .board-body-body-no-task {
     width: 252px;
+  }
+
+  .board-body-body-task-header button {
+    display: flex;
   }
 }
 

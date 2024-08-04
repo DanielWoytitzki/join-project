@@ -148,7 +148,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  /* flex: 1 1 auto; */
   flex-grow: 1;
   height: calc(100vh - 332px);
   padding: 6px;
@@ -186,6 +185,28 @@
 }
 
 .board-body-body-task:hover {
+  cursor: pointer;
+}
+
+.board-body-body-task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-body-body-task-header button {
+  display: none;
+  background-color: #ffffff;
+  border: unset;
+  border-radius: 50%;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-body-body-task-header img:hover {
+  background-color: #d4e3ff;
+  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -285,6 +306,8 @@
   width: 100vw;
   top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -572,4 +595,44 @@
 
 .board-add-Task-Icon-MediaQ {
   display: none;
+}
+
+.board-body-body-task-reposition {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: #2a3647;
+  color: #ffffff;
+  gap: 8px;
+  justify-content: center;
+  border-radius: 20px 0 20px 20px;
+  z-index: 9999;
+  position: relative;
+  top: -200px;
+  left: -12px;
+}
+
+.board-body-body-task-reposition span {
+  padding: 8px 10px;
+}
+
+.board-body-body-task-reposition span:hover {
+  background-color: #2a3d59;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.board-body-body-task-reposition-background {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

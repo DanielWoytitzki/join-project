@@ -1,7 +1,10 @@
 function generateTaskHTML(taskId, task) {
-  return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="boardOverlayRender('${taskId}')">
-            <div>
+  return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="boardOverlayRender('${taskId}'), boardTaskRepositionClose('${taskId}')">
+            <div class="board-body-body-task-header">
                 <span class="board-body-body-task-label" id="boardTasksCategory${taskId}">${task["category"]}</span>
+                <button onclick="event.stopPropagation(), boardTaskReposition('${taskId}')" id="boardTaskRepositionButton${taskId}">
+                    <img id="boardTaskReposition${taskId}" src="./img/arrow-drop-down.svg" alt="" draggable="false">
+                </button>                
             </div>
             <div class="board-body-body-task-text">
                 <h3>${task["title"]}</h3>
@@ -13,10 +16,19 @@ function generateTaskHTML(taskId, task) {
                 <div class="board-body-body-task-bottom-contactlist" id="boardTasksContacts${taskId}">
                 </div>
                 <div class="board-body-body-task-bottom-icon">
-                    <img src="./img/prio-${task["priority"]}.svg" alt="" />
+                    <img src="./img/prio-${task["priority"]}.svg" alt="" draggable="false"/>
                 </div>
             </div>
         </div>`;
+}
+
+function generateTaskRepositionHTML(taskId) {
+  return `<div id="boardTaskRepositionOverlay${taskId}" class="board-body-body-task-reposition" onclick="event.stopPropagation()">
+              <span onclick="boardTaskRepositionRender('${taskId}', 'ToDo')">To Do</span>
+              <span onclick="boardTaskRepositionRender('${taskId}', 'InProgress')">In progress</span>
+              <span onclick="boardTaskRepositionRender('${taskId}', 'AwaitFeedback')">Await Feedback</span>
+              <span onclick="boardTaskRepositionRender('${taskId}', 'Done')">Done</span>
+          </div>`;
 }
 
 function generateTaskContacts(initials) {

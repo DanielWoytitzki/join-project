@@ -36,6 +36,7 @@ async function boardRenderTasks() {
   try {
     boardTasks = await readData(TASKS_URL);
     boardDisplay();
+    updateDraggableStatus();
   } catch (error) {
     console.error("Error rendering tasks:", error);
   }
@@ -292,3 +293,168 @@ async function taskOverlayDeleteTask(id) {
   await boardRenderTasks();
   boardOverlayTaskHide();
 }
+
+function boardTaskReposition(id) {
+  if (document.getElementById(`boardTaskRepositionOverlay${id}`)) {
+    boardTaskRepositionClose(id);
+  } else {
+    document.getElementById(`task${id}`).innerHTML +=
+      generateTaskRepositionHTML(id);
+  }
+}
+
+function boardTaskRepositionRender(id, position) {
+  currentDraggedElement = id;
+  moveTo(position);
+}
+
+function boardTaskRepositionClose(id) {
+  document.getElementById(`boardTaskRepositionOverlay${id}`).remove();
+}
+
+function updateDraggableStatus() {
+  const draggableDivs = document.querySelectorAll(
+    ".board-body-body-task, .board-body-body-task-header, .board-body-body-task-text, .board-body-body-task-progress"
+  );
+  const isNarrow = window.innerWidth < 1250;
+
+  draggableDivs.forEach((div) => {
+    if (isNarrow) {
+      div.setAttribute("draggable", "false");
+    } else {
+      div.setAttribute("draggable", "true");
+    }
+  });
+}
+
+window.addEventListener("resize", updateDraggableStatus);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const boardBodyToDo = document.getElementById("taskFieldToDo");
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  boardBodyToDo.addEventListener("mousedown", (e) => {
+    isDown = true;
+    boardBodyToDo.classList.add("active");
+    startX = e.pageX - boardBodyToDo.offsetLeft;
+    scrollLeft = boardBodyToDo.scrollLeft;
+  });
+
+  boardBodyToDo.addEventListener("mouseleave", () => {
+    isDown = false;
+    boardBodyToDo.classList.remove("active");
+  });
+
+  boardBodyToDo.addEventListener("mouseup", () => {
+    isDown = false;
+    boardBodyToDo.classList.remove("active");
+  });
+
+  boardBodyInProgress.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - boardBodyInProgress.offsetLeft;
+    const walk = (x - startX) * 2;
+    boardBodyInProgress.scrollLeft = scrollLeft - walk;
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const boardBodyInProgress = document.getElementById("taskFieldInProgress");
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  boardBodyInProgress.addEventListener("mousedown", (e) => {
+    isDown = true;
+    boardBodyInProgress.classList.add("active");
+    startX = e.pageX - boardBodyInProgress.offsetLeft;
+    scrollLeft = boardBodyInProgress.scrollLeft;
+  });
+
+  boardBodyInProgress.addEventListener("mouseleave", () => {
+    isDown = false;
+    boardBodyInProgress.classList.remove("active");
+  });
+
+  boardBodyInProgress.addEventListener("mouseup", () => {
+    isDown = false;
+    boardBodyInProgress.classList.remove("active");
+  });
+
+  boardBodyInProgress.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - boardBodyInProgress.offsetLeft;
+    const walk = (x - startX) * 2;
+    boardBodyInProgress.scrollLeft = scrollLeft - walk;
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const boardBodyAwaitFeedback = document.getElementById(
+    "taskFieldAwaitFeedback"
+  );
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  boardBodyAwaitFeedback.addEventListener("mousedown", (e) => {
+    isDown = true;
+    boardBodyAwaitFeedback.classList.add("active");
+    startX = e.pageX - boardBodyAwaitFeedback.offsetLeft;
+    scrollLeft = boardBodyAwaitFeedback.scrollLeft;
+  });
+
+  boardBodyAwaitFeedback.addEventListener("mouseleave", () => {
+    isDown = false;
+    boardBodyAwaitFeedback.classList.remove("active");
+  });
+
+  boardBodyAwaitFeedback.addEventListener("mouseup", () => {
+    isDown = false;
+    boardBodyAwaitFeedback.classList.remove("active");
+  });
+
+  boardBodyAwaitFeedback.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - boardBodyAwaitFeedback.offsetLeft;
+    const walk = (x - startX) * 2;
+    boardBodyAwaitFeedback.scrollLeft = scrollLeft - walk;
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const boardBodyDone = document.getElementById("taskFieldDone");
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  boardBodyDone.addEventListener("mousedown", (e) => {
+    isDown = true;
+    boardBodyDone.classList.add("active");
+    startX = e.pageX - boardBodyDone.offsetLeft;
+    scrollLeft = boardBodyDone.scrollLeft;
+  });
+
+  boardBodyDone.addEventListener("mouseleave", () => {
+    isDown = false;
+    boardBodyDone.classList.remove("active");
+  });
+
+  boardBodyDone.addEventListener("mouseup", () => {
+    isDown = false;
+    boardBodyDone.classList.remove("active");
+  });
+
+  boardBodyDone.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - boardBodyDone.offsetLeft;
+    const walk = (x - startX) * 2;
+    boardBodyDone.scrollLeft = scrollLeft - walk;
+  });
+});
