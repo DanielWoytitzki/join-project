@@ -325,7 +325,7 @@
   border-radius: 30px;
   width: 445px;
   cursor: default;
-  margin: 48px 0;
+  margin: 48px 48px;
 }
 
 .board-overlay-task-header {

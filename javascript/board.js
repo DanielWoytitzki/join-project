@@ -309,7 +309,9 @@ function boardTaskRepositionRender(id, position) {
 }
 
 function boardTaskRepositionClose(id) {
-  document.getElementById(`boardTaskRepositionOverlay${id}`).remove();
+  if (document.getElementById(`boardTaskRepositionOverlay${id}`)) {
+    document.getElementById(`boardTaskRepositionOverlay${id}`).remove();
+  }
 }
 
 function updateDraggableStatus() {
@@ -352,12 +354,12 @@ document.addEventListener("DOMContentLoaded", function () {
     boardBodyToDo.classList.remove("active");
   });
 
-  boardBodyInProgress.addEventListener("mousemove", (e) => {
+  boardBodyToDo.addEventListener("mousemove", (e) => {
     if (!isDown) return;
     e.preventDefault();
-    const x = e.pageX - boardBodyInProgress.offsetLeft;
+    const x = e.pageX - boardBodyToDo.offsetLeft;
     const walk = (x - startX) * 2;
-    boardBodyInProgress.scrollLeft = scrollLeft - walk;
+    boardBodyToDo.scrollLeft = scrollLeft - walk;
   });
 });
 
