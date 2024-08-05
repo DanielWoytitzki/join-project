@@ -2,6 +2,14 @@
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 */
 
+var colorArray = [
+    '#FF7A00', '#FF5EB3', '#6E52FF',
+    '#9327FF', '#00BEE8', '#1FD7C1',
+    '#FF745E', '#FFA35E', '#FC71FF',
+    '#FFC701', '#0038FF', '#C3FF2B', 
+    '#FFE62B', '#FF4646', '#FFBB2B'
+];
+
 loadContactsFromDatabase();
 
 /**
@@ -60,7 +68,7 @@ function renderContacts(contacts) {
 /**
  * This function generates the HTML for a single contact card
  * 
- * @param {object} contact - The contact object containing name, email and phone 
+ * @param {object} contact - The contact object containing name, email, phone, and color 
  * @returns {string} - The HTML string for the contact card
  */
 function HTMLForContactCard(contact) {
@@ -68,9 +76,11 @@ function HTMLForContactCard(contact) {
     const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
     const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
 
+    const backgroundColor = contact.color || '#000'; // Default to black if no color is provided
+
     return `
-        <div onclick="showDetailedContact('${contact.id}')" class="single-contact-box">
-            <div class="single-contact-box-profile-img">
+        <div onclick="showDetailedContact('${contact.id}', '${backgroundColor}')" class="single-contact-box">
+            <div class="single-contact-box-profile-img" style="background-color: ${backgroundColor};">
                 <span>${firstLetter}${secondLetter}</span>
             </div>
             <div class="single-contact-box-content">
@@ -78,9 +88,8 @@ function HTMLForContactCard(contact) {
                 <a href="mailto:${contact.email}">${contact.email}</a>
             </div>
         </div>
-    `
+    `;
 }
-
 
 
 function updateSelectedContact(contactId) {
@@ -116,23 +125,24 @@ async function showDetailedContact(contactId) {
 /**
  * This function generates the HTML for the detailed contact view
  * 
- * @param {object} detailedContact - The detailed contact object containing name, email and phone
+ * @param {object} detailedContact - The detailed contact object containing name, email, phone, and color
  * @returns {string} - The HTML string for the detailed contact view
  */
 function HTMLForDetailedContact(detailedContact) {
     const nameParts = detailedContact.name.split(' ');
     const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
     const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
+    const backgroundColor = detailedContact.color || '#000'; // Default to black if no color is provided
 
     return `
         <div style="display: flex; align-items: center; gap: 54px;">
-            <div class="contact-big-profile-img">
+            <div class="contact-big-profile-img" style="background-color: ${backgroundColor};">
                 <span>${firstLetter}${secondLetter}</span>
             </div>
             <div>
                 <h2>${detailedContact.name}</h2>
                 <div style="display: flex; justify-content: space-between; width: 159px;">
-                    <div onclick="editContact('${detailedContact.id}', '${detailedContact.name}', '${detailedContact.email}', '${detailedContact.phone}')" class="contact-big-icon">
+                    <div onclick="editContact('${detailedContact.id}', '${detailedContact.name}', '${detailedContact.email}', '${detailedContact.phone}', '${backgroundColor}')" class="contact-big-icon">
                         <img src="./img/edit-icon-contact.svg" alt="">
                         <span>Edit</span>
                     </div>
@@ -226,11 +236,13 @@ async function addContactToDatabase() {
     let contactName = document.getElementById('name').value;
     let contactEmail = document.getElementById('email').value;
     let contactPhone = document.getElementById('phone').value;
+    const contactColor = colorArray[Math.floor(Math.random() * colorArray.length)];
 
     let data = {
         name: contactName,
         email: contactEmail,
         phone: contactPhone,
+        color: contactColor // Save the randomly chosen color
     };
 
     let response = await fetch(BASE_URL + "/contacts.json", {
@@ -294,11 +306,12 @@ async function editContactFromDatabase(contactId, updatedData) {
  * @param {string} name - The name of the updated contact
  * @param {string} email - The email of the updated contact
  * @param {number} phone - The phone number of the updated contact
+ * @param {string} color - The background color for the contact's initials
  */
-function editContact(contactId, name, email, phone) {
+function editContact(contactId, name, email, phone, color) {
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
-    overlay.innerHTML = HTMLForEditContact(contactId, name, email, phone);
+    overlay.innerHTML = HTMLForEditContact(contactId, name, email, phone, color);
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 }
@@ -309,9 +322,10 @@ function editContact(contactId, name, email, phone) {
  * @param {string} name - The name of the updated contact
  * @param {string} email - The email of the updated contact
  * @param {number} phone - The phone number of the updated contact
+ * @param {string} color - The background color for the contact's initials
  * @returns HTML code
  */
-function HTMLForEditContact(contactId, name, email, phone) {
+function HTMLForEditContact(contactId, name, email, phone, color) {
     const nameParts = name.split(' ');
     const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
     const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
@@ -330,7 +344,7 @@ function HTMLForEditContact(contactId, name, email, phone) {
                 </div>
 
                 <div class="overlay-add-contact-right">
-                    <div class="contact-big-profile-img">
+                    <div class="contact-big-profile-img" style="background-color: ${color};">
                         <span>${firstLetter}${secondLetter}</span>
                     </div>
                     <div>
