@@ -125,6 +125,21 @@
     line-height: 19.2px;
   }
 
+  .add-task-dropdown-option span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .add-task-contact-content span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .add-task-contact-icon span {
+    font-size: 12px;
+    line-height: 14.4px;
+  }
+
   .add-task-priority-content-box {
     gap: 8px;
   }
@@ -135,6 +150,11 @@
   }
 
   .add-task-priority span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .add-task-subtask-task {
     font-size: 16px;
     line-height: 19.2px;
   }

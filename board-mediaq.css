@@ -296,8 +296,6 @@
     margin: 16px;
   }
 
-  /* height: calc(100vh - 407px); */
-
   .board-overlay-task-edit {
     margin: 16px;
     width: calc(100vw - 80px);
@@ -315,6 +313,65 @@
 
   .board-overlay-task-edit-right {
     padding-right: 8px;
+  }
+
+  .board-overlay-task-edit-content-box label {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .board-overlay-task-edit-content-box-input {
+    font-size: 16px;
+    line-height: 19.2px;
+    padding: 10px 21px;
+  }
+
+  .board-overlay-task {
+    margin: 16px;
+    width: calc(100vw - 80px);
+    padding: 32px 24px;
+    gap: 16px;
+  }
+
+  .board-overlay-task-header span {
+    font-size: 16px;
+    line-height: 19.2px;
+    padding: 4px 16px;
+  }
+
+  .board-overlay-task-title {
+    font-size: 36px;
+    line-height: 43.2px;
+  }
+
+  .board-overlay-task-description {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .board-overlay-task-date span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .board-overlay-task-priority span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .board-overlay-task-contacts span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  .board-overlay-task-contactlist-contact-icon span {
+    font-size: 12px;
+    line-height: 14.4px;
+  }
+
+  .board-overlay-task-subtasks span {
+    font-size: 16px;
+    line-height: 19.2px;
   }
 }
 

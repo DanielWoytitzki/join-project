@@ -23,9 +23,13 @@ async function AddTaskInit() {
 }
 
 async function addTask(position) {
-  await addTaskContactListload();
-  addTaskPosition = position;
-  addTaskOverlay.classList.remove("d-none");
+  if (window.innerWidth < 850) {
+    window.location.href = "add-task.html";
+  } else {
+    await addTaskContactListload();
+    addTaskPosition = position;
+    addTaskOverlay.classList.remove("d-none");
+  }
 }
 
 function addTaskPrioritySelect(priority) {
