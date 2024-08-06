@@ -17,6 +17,7 @@ function renderTemplates() {
   document.getElementById("desktopNav").innerHTML = generateHTMLForDesktopNav();
   document.getElementById("mobileNav").innerHTML = generateHTMLForMobileNav();
   insertUserInitials();
+  changeNavLinkBackgroundColor();
 }
 
 /**
@@ -68,25 +69,25 @@ function generateHTMLForDesktopNav() {
     </div>
 
     <div class="desktop-nav-icon-box">
-      <a href="./summary.html">
+      <a href="./summary.html" id="navLink-summary">
         <div class="desktop-nav-icon">
           <img src="./img/nav-icon-summary.svg" alt="">
           <span>Summary</span>
         </div>
       </a>
-      <a href="./add-task.html">
+      <a href="./add-task.html" id="navLink-add-task">
         <div class="desktop-nav-icon">
           <img src="./img/nav-icon-task.svg" alt="">
           <span>Add Task</span>
         </div>
       </a>
-      <a href="./board.html">
+      <a href="./board.html" id="navLink-board">
         <div class="desktop-nav-icon">
           <img src="./img/nav-icon-board.svg" alt="">
           <span>Board</span>
         </div>
       </a>
-      <a href="./contacts.html">
+      <a href="./contacts.html" id="navLink-contacts">
         <div class="desktop-nav-icon">
           <img src="./img/nav-icon-contact.svg" alt="">
           <span>Contacts</span>
@@ -95,8 +96,8 @@ function generateHTMLForDesktopNav() {
     </div>
 
     <div class="extra-links-desktop-nav">
-      <a href="./privacy-policy.html">Privacy Policy</a>
-      <a href="./legal-notice.html">Legal notice</a>
+      <a href="./privacy-policy.html" id="navLink-privacy-policy">Privacy Policy</a>
+      <a href="./legal-notice.html" id="navLink-legal-notice">Legal notice</a>
     </div>
   `;
 }
@@ -250,4 +251,13 @@ function convertArrayToObject(array) {
     obj[index] = value;
   });
   return obj;
+}
+
+function changeNavLinkBackgroundColor() {
+  const path = window.location.pathname;
+  let fileName = path.substring(path.lastIndexOf("/") + 1);
+  let currentHTML = fileName.replace(".html", "");
+  document
+    .getElementById(`navLink-${currentHTML}`)
+    .classList.add("desktop-nav-icon-box-hover");
 }

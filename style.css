@@ -245,7 +245,21 @@ header {
 }
 
 .desktop-nav-icon-box a:hover {
-  background-color: #091931;
+  background: #2a3d59;
+}
+
+.desktop-nav-icon-box-hover {
+  background: #091931;
+  pointer-events: none;
+}
+
+.desktop-nav-icon-box-hover img {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(2%)
+    hue-rotate(87deg) brightness(108%) contrast(101%);
+}
+
+.desktop-nav-icon-box-hover span {
+  color: #ffffff;
 }
 
 .desktop-nav-icon {
@@ -274,10 +288,16 @@ header {
   color: #cdcdcd;
   text-decoration: none;
   padding: 8px;
+  text-align: left;
+  padding-left: 50px;
+  font-size: 16px;
+  line-height: 19.2px;
 }
 
 .extra-links-desktop-nav a:hover {
-  background-color: #091931;
+  -ms-transform-origin-y: scale(1.1);
+  color: #29abe2;
+  font-weight: bold;
 }
 
 /* ==================Add Task================== */
