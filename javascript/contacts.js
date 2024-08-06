@@ -3,83 +3,95 @@ const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.
 */
 
 var colorArray = [
-    '#FF7A00', '#FF5EB3', '#6E52FF',
-    '#9327FF', '#00BEE8', '#1FD7C1',
-    '#FF745E', '#FFA35E', '#FC71FF',
-    '#FFC701', '#0038FF', '#C3FF2B', 
-    '#FFE62B', '#FF4646', '#FFBB2B'
+  "#FF7A00",
+  "#FF5EB3",
+  "#6E52FF",
+  "#9327FF",
+  "#00BEE8",
+  "#1FD7C1",
+  "#FF745E",
+  "#FFA35E",
+  "#FC71FF",
+  "#FFC701",
+  "#0038FF",
+  "#C3FF2B",
+  "#FFE62B",
+  "#FF4646",
+  "#FFBB2B",
 ];
 
 loadContactsFromDatabase();
 
 /**
  * This function loads ones contacts from the database
- * 
- * @param {string} path - This is the path leading to your contacts at your database 
+ *
+ * @param {string} path - This is the path leading to your contacts at your database
  */
 async function loadContactsFromDatabase(path = "/contacts") {
-    let response = await fetch(BASE_URL + path + ".json");
-    let data = await response.json();
-    renderContacts(data);
+  let response = await fetch(BASE_URL + path + ".json");
+  let data = await response.json();
+  renderContacts(data);
 }
 
 /**
  * This function renders ones contacts out of the database
- * 
+ *
  * @param {object} contacts - All your contacts (name, email and phone) in your database
  */
 function renderContacts(contacts) {
-    let contactList = document.getElementById('contact-list');
-    contactList.innerHTML = '';
-    document.getElementById('contact-detailed').innerHTML = '';
-    document.getElementById('contact-detailed-mobile').innerHTML = '';
+  let contactList = document.getElementById("contact-list");
+  contactList.innerHTML = "";
+  document.getElementById("contact-detailed").innerHTML = "";
+  document.getElementById("contact-detailed-mobile").innerHTML = "";
 
-    if (contacts) {
-        // Convert contacts object to an array and sort it alphabetically by name
-        let sortedContacts = Object.keys(contacts).map(id => ({
-            id,
-            ...contacts[id]
-        })).sort((a, b) => a.name.localeCompare(b.name));
+  if (contacts) {
+    // Convert contacts object to an array and sort it alphabetically by name
+    let sortedContacts = Object.keys(contacts)
+      .map((id) => ({
+        id,
+        ...contacts[id],
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
 
-        // Create a map to group contacts by the first letter of their name
-        let groupedContacts = sortedContacts.reduce((groups, contact) => {
-            let firstLetter = contact.name.charAt(0).toUpperCase();
-            if (!groups[firstLetter]) {
-                groups[firstLetter] = [];
-            }
-            groups[firstLetter].push(contact);
-            return groups;
-        }, {});
+    // Create a map to group contacts by the first letter of their name
+    let groupedContacts = sortedContacts.reduce((groups, contact) => {
+      let firstLetter = contact.name.charAt(0).toUpperCase();
+      if (!groups[firstLetter]) {
+        groups[firstLetter] = [];
+      }
+      groups[firstLetter].push(contact);
+      return groups;
+    }, {});
 
-        // Render each group
-        for (let letter in groupedContacts) {
-            contactList.innerHTML += `
+    // Render each group
+    for (let letter in groupedContacts) {
+      contactList.innerHTML += `
                 <div class="alphabetical-numbering">
                     <span>${letter}</span>
                 </div>
                 <hr>
                 `;
-            groupedContacts[letter].forEach(contact => {
-                contactList.innerHTML += HTMLForContactCard(contact);
-            });
-        }
+      groupedContacts[letter].forEach((contact) => {
+        contactList.innerHTML += HTMLForContactCard(contact);
+      });
     }
+  }
 }
 
 /**
  * This function generates the HTML for a single contact card
- * 
- * @param {object} contact - The contact object containing name, email, phone, and color 
+ *
+ * @param {object} contact - The contact object containing name, email, phone, and color
  * @returns {string} - The HTML string for the contact card
  */
 function HTMLForContactCard(contact) {
-    const nameParts = contact.name.split(' ');
-    const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
-    const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
+  const nameParts = contact.name.split(" ");
+  const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : "";
+  const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : "";
 
-    const backgroundColor = contact.color || '#000'; // Default to black if no color is provided
+  const backgroundColor = contact.color || "#000"; // Default to black if no color is provided
 
-    return `
+  return `
         <div onclick="showDetailedContact('${contact.id}', '${backgroundColor}')" class="single-contact-box">
             <div class="single-contact-box-profile-img" style="background-color: ${backgroundColor};">
                 <span>${firstLetter}${secondLetter}</span>
@@ -92,55 +104,54 @@ function HTMLForContactCard(contact) {
     `;
 }
 
-
 function updateSelectedContact(contactId) {
-    let contactBoxes = document.querySelectorAll('.single-contact-box');
-    
-    contactBoxes.forEach(contactBox => {
-        if (contactBox.getAttribute('onclick').includes(contactId)) {
-            contactBox.classList.add('selected');
-        } else {
-            contactBox.classList.remove('selected');
-        }
-    });
+  let contactBoxes = document.querySelectorAll(".single-contact-box");
+
+  contactBoxes.forEach((contactBox) => {
+    if (contactBox.getAttribute("onclick").includes(contactId)) {
+      contactBox.classList.add("selected");
+    } else {
+      contactBox.classList.remove("selected");
+    }
+  });
 }
-
-
-
-
 
 /**
  * This function fetches and displays the detailed contact information
- * 
+ *
  * @param {string} contactId - The contactId is automatically generated by your database
  */
 async function showDetailedContact(contactId) {
-    document.getElementById('detailedcontactmobile').classList.remove('d-none');
-    document.getElementById('detailedcontactmobile').classList.add('contact-section-content-mobile');
-    document.getElementById('contactlist').classList.remove('contact-section');
-    document.getElementById('contactlist').classList.add('d-none');
-    let response = await fetch(BASE_URL + "/contacts/" + contactId + ".json");
-    let detailedContact = await response.json();
-    detailedContact.id = contactId;
-    document.getElementById('contact-detailed').innerHTML = HTMLForDetailedContact(detailedContact);
-    document.getElementById('contact-detailed-mobile').innerHTML = HTMLForDetailedContactMobile(detailedContact);
+  document.getElementById("detailedcontactmobile").classList.remove("d-none");
+  document
+    .getElementById("detailedcontactmobile")
+    .classList.add("contact-section-content-mobile");
+  document.getElementById("contactlist").classList.remove("contact-section");
+  document.getElementById("contactlist").classList.add("d-none");
+  let response = await fetch(BASE_URL + "/contacts/" + contactId + ".json");
+  let detailedContact = await response.json();
+  detailedContact.id = contactId;
+  document.getElementById("contact-detailed").innerHTML =
+    HTMLForDetailedContact(detailedContact);
+  document.getElementById("contact-detailed-mobile").innerHTML =
+    HTMLForDetailedContactMobile(detailedContact);
 
-    updateSelectedContact(contactId);
+  updateSelectedContact(contactId);
 }
 
 /**
  * This function generates the HTML for the detailed contact view
- * 
+ *
  * @param {object} detailedContact - The detailed contact object containing name, email, phone, and color
  * @returns {string} - The HTML string for the detailed contact view
  */
 function HTMLForDetailedContact(detailedContact) {
-    const nameParts = detailedContact.name.split(' ');
-    const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
-    const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
-    const backgroundColor = detailedContact.color || '#000'; // Default to black if no color is provided
+  const nameParts = detailedContact.name.split(" ");
+  const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : "";
+  const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : "";
+  const backgroundColor = detailedContact.color || "#000"; // Default to black if no color is provided
 
-    return `
+  return `
         <div style="display: flex; align-items: center; gap: 54px;">
             <div class="contact-big-profile-img" style="background-color: ${backgroundColor};">
                 <span>${firstLetter}${secondLetter}</span>
@@ -172,12 +183,12 @@ function HTMLForDetailedContact(detailedContact) {
 }
 
 function HTMLForDetailedContactMobile(detailedContact) {
-    const nameParts = detailedContact.name.split(' ');
-    const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
-    const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
-    const backgroundColor = detailedContact.color || '#000'; // Default to black if no color is provided
+  const nameParts = detailedContact.name.split(" ");
+  const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : "";
+  const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : "";
+  const backgroundColor = detailedContact.color || "#000"; // Default to black if no color is provided
 
-    return `
+  return `
         <div style="display: flex; align-items: center; gap: 20px;">
             <div class="contact-big-profile-img-mobile" style="background-color: ${backgroundColor};">
                 <span>${firstLetter}${secondLetter}</span>
@@ -199,28 +210,33 @@ function HTMLForDetailedContactMobile(detailedContact) {
 }
 
 function closeDetailedContactMobile() {
-    document.getElementById('detailedcontactmobile').classList.add('d-none');
-    document.getElementById('detailedcontactmobile').classList.remove('contact-section-content-mobile');
-    document.getElementById('contactlist').classList.add('contact-section');
-    document.getElementById('contactlist').classList.remove('d-none');
+  document.getElementById("detailedcontactmobile").classList.add("d-none");
+  document
+    .getElementById("detailedcontactmobile")
+    .classList.remove("contact-section-content-mobile");
+  document.getElementById("contactlist").classList.add("contact-section");
+  document.getElementById("contactlist").classList.remove("d-none");
 }
-
 
 function toggleContactMenu() {
-    document.querySelector(".contact-big-mobile-option-button").classList.toggle("contact-big-mobile-overlay-menu-active");
-    document.getElementById("mobileContactMenu").classList.toggle("show-contact-big-mobile-overlay-menu");
+  document
+    .querySelector(".contact-big-mobile-option-button")
+    .classList.toggle("contact-big-mobile-overlay-menu-active");
+  document
+    .getElementById("mobileContactMenu")
+    .classList.toggle("show-contact-big-mobile-overlay-menu");
+  document.getElementById("mobileContactMenu").classList.toggle("d-none");
 }
-
 
 /**
  * This function creates an overlay and adds a new contact to the database
  */
 function addNewContact() {
-    const overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    overlay.innerHTML = HTMLForAddNewContact();
-    document.body.appendChild(overlay);
-    document.body.style.overflow = 'hidden';
+  const overlay = document.createElement("div");
+  overlay.className = "overlay";
+  overlay.innerHTML = HTMLForAddNewContact();
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
 }
 
 /**
@@ -228,7 +244,7 @@ function addNewContact() {
  * @returns HTML code
  */
 function HTMLForAddNewContact() {
-    return `
+  return `
         <div class="overlay-add-contact">
             <div class="overlay-add-contact-left">
                 <img src="./img/logo-big-desktop.svg">
@@ -269,82 +285,83 @@ function HTMLForAddNewContact() {
  * This function closes the overlay pop up
  */
 function closeOverlay() {
-    const overlay = document.querySelector(".overlay");
-    if (overlay) {
-        overlay.remove();
-    }
-    document.body.style.overflow = 'auto';
+  const overlay = document.querySelector(".overlay");
+  if (overlay) {
+    overlay.remove();
+  }
+  document.body.style.overflow = "auto";
 }
 
 /**
  * This function adds ones new contact to the database
  */
 async function addContactToDatabase() {
-    let contactName = document.getElementById('name').value;
-    let contactEmail = document.getElementById('email').value;
-    let contactPhone = document.getElementById('phone').value;
-    const contactColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+  let contactName = document.getElementById("name").value;
+  let contactEmail = document.getElementById("email").value;
+  let contactPhone = document.getElementById("phone").value;
+  const contactColor =
+    colorArray[Math.floor(Math.random() * colorArray.length)];
 
-    let data = {
-        name: contactName,
-        email: contactEmail,
-        phone: contactPhone,
-        color: contactColor // Save the randomly chosen color
-    };
+  let data = {
+    name: contactName,
+    email: contactEmail,
+    phone: contactPhone,
+    color: contactColor, // Save the randomly chosen color
+  };
 
-    let response = await fetch(BASE_URL + "/contacts.json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    let responseAsJson = await response.json();
-    console.log(responseAsJson);
+  let response = await fetch(BASE_URL + "/contacts.json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  let responseAsJson = await response.json();
+  console.log(responseAsJson);
 
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('phone').value = '';
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("phone").value = "";
 
-    loadContactsFromDatabase();
-    closeOverlay();
+  loadContactsFromDatabase();
+  closeOverlay();
 }
 
 /**
  * This function deletes ones contacts from the database
- * 
+ *
  * @param {string} contactId - The contactId is automatically generated by your database
  */
 async function deleteContactFromDatabase(contactId) {
-    let response = await fetch(BASE_URL + "/contacts/" + contactId + ".json", {
-        method: "DELETE",
-    });
-    let responseAsJson = await response.json();
-    console.log(responseAsJson);
+  let response = await fetch(BASE_URL + "/contacts/" + contactId + ".json", {
+    method: "DELETE",
+  });
+  let responseAsJson = await response.json();
+  console.log(responseAsJson);
 
-    loadContactsFromDatabase();
-    closeOverlay();
+  loadContactsFromDatabase();
+  closeOverlay();
 }
 
 /**
  * This function edits ones contact in your database
- * 
+ *
  * @param {string} contactId - The contactId is automatically generated by your database
  * @param {object} updatedData - The updatedData is the updated information/data of an existing contact (name, email, phone, and color)
  */
 async function editContactFromDatabase(contactId, updatedData) {
-    let response = await fetch(BASE_URL + "/contacts/" + contactId + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData)
-    });
-    let responseAsJson = await response.json();
-    console.log(responseAsJson);
+  let response = await fetch(BASE_URL + "/contacts/" + contactId + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedData),
+  });
+  let responseAsJson = await response.json();
+  console.log(responseAsJson);
 
-    updateContactInList(contactId, updatedData);
-    showDetailedContact(contactId);
+  updateContactInList(contactId, updatedData);
+  showDetailedContact(contactId);
 }
 
 /**
@@ -356,11 +373,11 @@ async function editContactFromDatabase(contactId, updatedData) {
  * @param {string} color - The background color for the contact's initials
  */
 function editContact(contactId, name, email, phone, color) {
-    const overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    overlay.innerHTML = HTMLForEditContact(contactId, name, email, phone, color);
-    document.body.appendChild(overlay);
-    document.body.style.overflow = 'hidden';
+  const overlay = document.createElement("div");
+  overlay.className = "overlay";
+  overlay.innerHTML = HTMLForEditContact(contactId, name, email, phone, color);
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
 }
 
 /**
@@ -373,11 +390,11 @@ function editContact(contactId, name, email, phone, color) {
  * @returns HTML code
  */
 function HTMLForEditContact(contactId, name, email, phone, color) {
-    const nameParts = name.split(' ');
-    const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
-    const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
-    
-    return `
+  const nameParts = name.split(" ");
+  const firstLetter = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : "";
+  const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : "";
+
+  return `
         <div class="overlay-add-contact">
             <div class="overlay-add-contact-left">
                 <img src="./img/logo-big-desktop.svg">
@@ -418,34 +435,40 @@ function HTMLForEditContact(contactId, name, email, phone, color) {
  * @param {string} contactId - The contactId is automatically generated by your database
  */
 function saveEditedContact(contactId) {
-    let newName = document.getElementById('editName').value;
-    let newEmail = document.getElementById('editEmail').value;
-    let newPhone = document.getElementById('editPhone').value;
-    let color = document.querySelector('.contact-big-profile-img').style.backgroundColor; // Fetch the current color
+  let newName = document.getElementById("editName").value;
+  let newEmail = document.getElementById("editEmail").value;
+  let newPhone = document.getElementById("editPhone").value;
+  let color = document.querySelector(".contact-big-profile-img").style
+    .backgroundColor; // Fetch the current color
 
-    if (newName && newEmail && newPhone) {
-        let updatedData = {
-            name: newName,
-            email: newEmail,
-            phone: newPhone,
-            color: color // Include color in updated data
-        };
-        editContactFromDatabase(contactId, updatedData);
-        closeOverlay();
-    }
+  if (newName && newEmail && newPhone) {
+    let updatedData = {
+      name: newName,
+      email: newEmail,
+      phone: newPhone,
+      color: color, // Include color in updated data
+    };
+    editContactFromDatabase(contactId, updatedData);
+    closeOverlay();
+  }
 }
 
 /**
  * This function updates a single contact in the contact list without clearing the detailed view
- * 
+ *
  * @param {string} contactId - The contactId is automatically generated by your database
  * @param {object} updatedData - The updated information/data of an existing contact (name, email and phone)
  */
 async function updateContactInList(contactId, updatedData) {
-    let contactBox = document.querySelector(`.single-contact-box[onclick="showDetailedContact('${contactId}')"]`);
+  let contactBox = document.querySelector(
+    `.single-contact-box[onclick="showDetailedContact('${contactId}')"]`
+  );
 
-    if (contactBox) {
-        const newContactHTML = HTMLForContactCard({ id: contactId, ...updatedData });
-        contactBox.outerHTML = newContactHTML;
-    }
+  if (contactBox) {
+    const newContactHTML = HTMLForContactCard({
+      id: contactId,
+      ...updatedData,
+    });
+    contactBox.outerHTML = newContactHTML;
+  }
 }
