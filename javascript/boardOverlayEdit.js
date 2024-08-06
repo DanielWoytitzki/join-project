@@ -315,9 +315,6 @@ function handleClick(event) {
   );
   const isClickInside = modal.contains(event.target);
   const isClickedDropdown = dropdown.contains(event.target);
-  console.log(isClickInside);
-  console.log(modal.classList.contains("d-none"));
-  console.log(isClickedDropdown);
   if (
     !isClickInside &&
     !modal.classList.contains("d-none") &&

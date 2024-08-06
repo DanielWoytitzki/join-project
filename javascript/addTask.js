@@ -20,6 +20,7 @@ async function AddTaskInit() {
   await addTaskContactListload();
   addTaskPosition = "ToDo";
   renderTemplates();
+  document.onclick = handleClickAddTaskOverlay;
 }
 
 async function addTask(position) {
@@ -29,6 +30,7 @@ async function addTask(position) {
     await addTaskContactListload();
     addTaskPosition = position;
     addTaskOverlay.classList.remove("d-none");
+    document.onclick = handleClickAddTaskOverlay;
   }
 }
 
@@ -304,7 +306,6 @@ function addTaskAssignedContactList() {
 
 function addTaskSubmitSite() {
   let required = addTaskCheckRequired();
-  console.log(required);
   if (required) {
     addTaskAssignedContactList();
     let title = document.getElementById("addTaskTitle").value;
@@ -353,13 +354,13 @@ async function addTaskClearInputs() {
   addTaskDisplaySubtasks();
 }
 
-document.addEventListener("click", function (event) {
-  let modal = document.getElementById("addTaskAssignedToDropdownOptions");
-  let dropdown = document.getElementById(
+function handleClickAddTaskOverlay(event) {
+  const modal = document.getElementById("addTaskAssignedToDropdownOptions");
+  const dropdown = document.getElementById(
     "addTaskContactsDropdownButtonToToggle"
   );
-  let isClickInside = modal.contains(event.target);
-  let isClickedDropdown = dropdown.contains(event.target);
+  const isClickInside = modal.contains(event.target);
+  const isClickedDropdown = dropdown.contains(event.target);
   if (
     !isClickInside &&
     !modal.classList.contains("d-none") &&
@@ -367,7 +368,7 @@ document.addEventListener("click", function (event) {
   ) {
     addTaskToggleContacts();
   }
-});
+}
 
 document.addEventListener("click", function (event) {
   let modal = document.getElementById("addTaskCategoryDropdownOptions");

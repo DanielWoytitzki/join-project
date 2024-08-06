@@ -408,10 +408,6 @@
   .add-task-subtask-add input {
     width: 100%;
   }
-
-  /* .board-overlay-task-edit-content-box-input {
-    width: 100%;
-  } */
 }
 
 @media (max-width: 420px) {
