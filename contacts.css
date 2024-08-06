@@ -288,6 +288,50 @@
   cursor: pointer;
 }
 
+
+
+.contact-big-mobile-overlay-menu {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 116px;
+  /* height: 158px; */
+  background-color: #ffffff;
+  border-radius: 20px 0px 20px 20px;
+  padding: 10px;
+  transform: translateX(200px);
+  transition: all 300ms ease-in-out;
+}
+
+.show-contact-big-mobile-overlay-menu {
+  transform: translateX(-10px);
+}
+
+.contact-big-mobile-overlay-menu-active {
+  background-color: rgba(12, 46, 98, 0.12);
+}
+
+.contact-big-mobile-overlay-menu div {
+  font-size: 16px;
+  width: 96px;
+  /* height: 40px; */
+  border-radius: 8px;
+  padding: 8px 16px 8px 16px;
+  gap: 8px;
+  align-self: center;
+}
+
+.header-overlay-menu a:hover {
+  background-color: #2a3d59;
+}
+
+
+
 .overlay {
   position: fixed;
   width: 100%;
