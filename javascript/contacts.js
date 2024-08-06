@@ -226,6 +226,7 @@ function toggleContactMenu() {
     .getElementById("mobileContactMenu")
     .classList.toggle("show-contact-big-mobile-overlay-menu");
   document.getElementById("mobileContactMenu").classList.toggle("d-none");
+  document.getElementById("mobileContactMenu").classList.toggle("d-flex");
 }
 
 /**

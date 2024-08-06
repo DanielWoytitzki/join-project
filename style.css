@@ -401,6 +401,10 @@ header {
   display: none;
 }
 
+.d-flex {
+  display: flex;
+}
+
 .pointer {
   cursor: pointer;
 }
