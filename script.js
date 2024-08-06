@@ -53,9 +53,7 @@ function generateHTMLForHeader() {
  * This function toggles a burger menu
  */
 function toggleMenu() {
-  document
-    .querySelector(".header-user-icon")
-    .classList.toggle("header-overlay-menu-active");
+  document.querySelector(".header-user-icon").classList.toggle("header-overlay-menu-active");
   document.getElementById("menu").classList.toggle("show-header-overlay-menu");
 }
 

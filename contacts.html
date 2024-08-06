@@ -39,9 +39,20 @@
                 <div id="contact-detailed-mobile" class="contact-big-onclick-mobile"></div>
             </div>
             <div style="display: flex; justify-content: flex-end;">
-                <div class="contact-big-mobile-option-button">
+                <div onclick="toggleContactMenu()" class="contact-big-mobile-option-button">
                     <img src="./img/mobile-icon-editcontact.svg" alt="">
                 </div>
+            </div>
+
+            <div id="mobileContactMenu" class="contact-big-mobile-overlay-menu">
+                <div onclick="editContact('${detailedContact.id}', '${detailedContact.name}', '${detailedContact.email}', '${detailedContact.phone}', '${backgroundColor}')" class="contact-big-icon">
+                    <img src="./img/edit-icon-contact.svg" alt="">
+                    <span>Edit</span>
+                </div>
+                <div onclick="deleteContactFromDatabase('${detailedContact.id}')" class="contact-big-icon">
+                    <img src="./img/delete-icon-contact.svg" alt="">
+                    <span>Delete</span>
+                </div>                
             </div>
         </div>
 
