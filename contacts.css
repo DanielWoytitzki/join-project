@@ -140,7 +140,7 @@
 
 .single-contact-box:hover {
   cursor: pointer;
-  background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+  background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
 }
 
 .single-contact-box-profile-img {
@@ -213,7 +213,7 @@
   height: 120px;
   width: 120px;
   border-radius: 70px;
-  box-shadow: 0px 0px 4px 0px #0000001A;
+  box-shadow: 0px 0px 4px 0px #0000001a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -229,7 +229,7 @@
   height: 80px;
   width: 80px;
   border-radius: 70px;
-  box-shadow: 0px 0px 4px 0px #0000001A;
+  box-shadow: 0px 0px 4px 0px #0000001a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,7 +251,8 @@
   color: #29abe2;
   font-weight: 700;
   cursor: pointer;
-  filter: brightness(0) saturate(100%) invert(60%) sepia(37%) saturate(2663%) hue-rotate(165deg) brightness(96%) contrast(84%);
+  filter: brightness(0) saturate(100%) invert(60%) sepia(37%) saturate(2663%)
+    hue-rotate(165deg) brightness(96%) contrast(84%);
 }
 
 .contact-big-info {
@@ -266,7 +267,7 @@
 
 .contact-big-info a {
   text-decoration: none;
-  color: #007CEE;
+  color: #007cee;
 }
 
 .contact-big-mobile-option-button {
@@ -275,7 +276,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #2A3647;
+  background: #2a3647;
   border-radius: 56px;
   box-shadow: 0px 4px 4px 0px #00000040;
   margin-right: 48px;
@@ -313,7 +314,7 @@
 .overlay-add-contact-left {
   width: 371px;
   height: 592px;
-  background: #2A3647;
+  background: #2a3647;
   border-top-left-radius: 26px;
   border-bottom-left-radius: 26px;
   color: #ffffff;
@@ -341,7 +342,7 @@
 
 .overlay-add-contact-left hr {
   width: 90px;
-  border: 3px solid #29ABE2;
+  border: 3px solid #29abe2;
   margin: 0;
 }
 
@@ -374,7 +375,7 @@
 .input-fields-add-contact input {
   width: 422px;
   height: 50px;
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 0 21px;
   background-position: 420px 10px;
