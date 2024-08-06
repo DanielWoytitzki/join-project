@@ -24,7 +24,28 @@
     <div>
         <header id="header"></header>
 
-        <section class="contact-section">
+        <div id="detailedcontactmobile" class="d-none">
+            <div>
+                <div style="display: flex; justify-content: space-between; padding: 40px 16px;">
+                    <div class="contact-section-head-mobile">
+                        <h1>Contacts</h1>
+                        <p>Better with a team</p>
+                        <hr>
+                    </div>
+                    <div onclick="closeDetailedContactMobile()" class="contact-big-mobile-arrow-back">
+                        <img style="height: 24px;" src="./img/arrow-left-blue.svg" alt="">
+                    </div>
+                </div>
+                <div id="contact-detailed-mobile" class="contact-big-onclick-mobile"></div>
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+                <div class="contact-big-mobile-option-button">
+                    <img src="./img/mobile-icon-editcontact.svg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <section id="contactlist" class="contact-section">
 
             <div class="all-contacts-box">
                 <button onclick="addNewContact()">Add new contact<img src="./img/person_add-icon.svg"></button>
@@ -39,7 +60,7 @@
                     <p>Better with a team</p>
                 </div>
                 <div id="contact-detailed" class="contact-big-onclick">
-                    
+
                 </div>
             </div>
 

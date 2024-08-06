@@ -49,6 +49,15 @@
     .contact-section {
         width: 100vw;
     }
+
+    .contact-section-content-mobile {
+        height: calc(100vh - 165px);
+        width: 100vw;
+    }
+
+    .contact-big-mobile-option-button {
+        margin-right: 16px;
+    }
 }
 
 @media (max-width: 380px) {
@@ -67,5 +76,18 @@
 
     .single-contact-box-content a {
         display: none;
+    }
+
+    .contact-big-profile-img-mobile {
+        height: 65px;
+        width: 65px;
+    }
+
+    .contact-big-profile-img-mobile span {
+        font-size: 20px;
+    }
+
+    .contact-big-onclick-mobile h2 {
+        font-size: 27px;
     }
 }
