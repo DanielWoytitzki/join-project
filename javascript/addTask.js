@@ -131,6 +131,7 @@ async function addTaskContactListload() {
         id: key,
         contact: data[key]["name"],
         state: "unchecked",
+        color: data[key]["color"],
       });
     }
   } catch (error) {
@@ -145,11 +146,13 @@ function addTaskShowContacts() {
     let name = addTaskContacts[i]["contact"];
     let contactState = addTaskContacts[i]["state"];
     let initials = getInitials(name);
+    let contactBackgroundColor = addTaskContacts[i]["color"];
     addTaskContactDropdown.innerHTML += generateAddTaskContactList(
       contactId,
       initials,
       name,
-      contactState
+      contactState,
+      contactBackgroundColor
     );
   }
 }
@@ -395,8 +398,11 @@ function addTaskShowAssignedContactList() {
     if (addTaskContacts[i]["state"] == "checked") {
       let name = addTaskContacts[i]["contact"];
       let initials = getInitials(name);
-      assignedContactList.innerHTML +=
-        generateAddTaskAssignedContacts(initials);
+      let contactBackgroundColor = addTaskContacts[i]["color"];
+      assignedContactList.innerHTML += generateAddTaskAssignedContacts(
+        initials,
+        contactBackgroundColor
+      );
     }
   }
 }

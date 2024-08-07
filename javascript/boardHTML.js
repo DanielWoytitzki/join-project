@@ -31,14 +31,14 @@ function generateTaskRepositionHTML(taskId) {
           </div>`;
 }
 
-function generateTaskContacts(initials) {
-  return `<div class="board-body-body-task-bottom-contact">
+function generateTaskContacts(initials, backgroundColor) {
+  return `<div class="board-body-body-task-bottom-contact" style="background-color: ${backgroundColor};">
             <span>${initials}</span>
           </div>`;
 }
 
-function generateTaskContactsTwo(initials, left) {
-  return `<div class="board-body-body-task-bottom-contact" style="left: -${left}px;">
+function generateTaskContactsTwo(initials, left, backgroundColor) {
+  return `<div class="board-body-body-task-bottom-contact" style="left: -${left}px; background-color: ${backgroundColor};">
               <span>${initials}</span>
             </div>`;
 }
@@ -100,9 +100,9 @@ function generateTaskOverlayHTML(taskId, task, priority) {
         </div>`;
 }
 
-function generateTaskOverlayContacts(initials, name) {
+function generateTaskOverlayContacts(initials, name, backgroundColor) {
   return `<li class="board-overlay-task-contactlist-contact">
-            <div class="board-overlay-task-contactlist-contact-icon" style="background: #1fd7c1">
+            <div class="board-overlay-task-contactlist-contact-icon" style="background-color: ${backgroundColor};">
                 <span>${initials}</span>
             </div>
             <span>${name}</span>
@@ -282,10 +282,16 @@ function generateTaskOverlayEditHTML(taskId) {
         </div>`;
 }
 
-function generateContactListEdit(contactId, initials, name, contactState) {
+function generateContactListEdit(
+  contactId,
+  initials,
+  name,
+  contactState,
+  backgroundColor
+) {
   return `<div id="contact'${contactId}'" class="add-task-dropdown-option add-task-contact-box" onclick="event.stopPropagation()">
               <div class="add-task-contact-content">
-                  <div class="add-task-contact-icon" style="background: #462f8a">
+                  <div class="add-task-contact-icon" style="background: ${backgroundColor}">
                       <span>${initials}</span>
                   </div>
                   <span>${name}</span>
@@ -322,8 +328,11 @@ function generateSubtaskEdit(subtaskId) {
               </div>`;
 }
 
-function generateBoardOverlayEditAssignedContactList(initials) {
-  return `<div class="add-task-assigned-contactlist-contact">
+function generateBoardOverlayEditAssignedContactList(
+  initials,
+  backgroundColor
+) {
+  return `<div class="add-task-assigned-contactlist-contact" style="background-color: ${backgroundColor};">
               <span>${initials}</span>
             </div>`;
 }

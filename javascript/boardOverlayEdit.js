@@ -37,6 +37,7 @@ function boardOverlayEditPullContacts(task) {
       id: key,
       contact: boardContacts[key]["name"],
       state: "unchecked",
+      color: boardContacts[key]["color"],
     });
   }
   if (task.hasOwnProperty("assignedContacts")) {
@@ -86,13 +87,15 @@ function boardOverlayEditDisplayContacts() {
     let name = boardOverlayEditContacts[i]["contact"];
     let contactState = boardOverlayEditContacts[i]["state"];
     let initials = getInitials(name);
+    let contactBackgroundColor = boardOverlayEditContacts[i]["color"];
     document.getElementById(
       "boardOverlayEditContactsDropdownOptions"
     ).innerHTML += generateContactListEdit(
       contactId,
       initials,
       name,
-      contactState
+      contactState,
+      contactBackgroundColor
     );
   }
 }
@@ -343,8 +346,12 @@ function boardOverlayEditAssignedContactsListUnderDropdown() {
     if (boardOverlayEditContacts[i]["state"] == "checked") {
       let name = boardOverlayEditContacts[i]["contact"];
       let initials = getInitials(name);
+      let contactBackgroundColor = boardOverlayEditContacts[i]["color"];
       assignedContactList.innerHTML +=
-        generateBoardOverlayEditAssignedContactList(initials);
+        generateBoardOverlayEditAssignedContactList(
+          initials,
+          contactBackgroundColor
+        );
     }
   }
 }

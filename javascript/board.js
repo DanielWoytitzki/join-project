@@ -71,13 +71,22 @@ function boardDisplayTasksAssignedContacts(task, id) {
         if (key == contact && counter == 0) {
           let contactName = boardContacts[key]["name"];
           let initials = getInitials(contactName);
-          taskId.innerHTML += generateTaskContacts(initials);
+          let contactBackgroundColor = boardContacts[key]["color"];
+          taskId.innerHTML += generateTaskContacts(
+            initials,
+            contactBackgroundColor
+          );
           counter++;
         } else if (key == contact && counter > 0) {
           let contactName = boardContacts[key]["name"];
           let initials = getInitials(contactName);
           let left = counter * 8;
-          taskId.innerHTML += generateTaskContactsTwo(initials, left);
+          let contactBackgroundColor = boardContacts[key]["color"];
+          taskId.innerHTML += generateTaskContactsTwo(
+            initials,
+            left,
+            contactBackgroundColor
+          );
           counter++;
         }
       }
@@ -210,9 +219,11 @@ function boardOverlayDisplayTaskAssignedContacts(task, id) {
         if (key == contact) {
           let contactName = boardContacts[key]["name"];
           let initials = getInitials(contactName);
+          let contactBackgroundColor = boardContacts[key]["color"];
           taskId.innerHTML += generateTaskOverlayContacts(
             initials,
-            contactName
+            contactName,
+            contactBackgroundColor
           );
         }
       }
