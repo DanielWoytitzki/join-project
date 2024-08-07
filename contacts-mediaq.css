@@ -60,6 +60,29 @@
     }
 }
 
+@media (max-width: 410px) {
+    .overlay-add-contact-mobile {
+        width: 350px;
+    }
+
+    .overlay-add-contact-mobile-top {
+        width: 350px;
+    }
+
+    .overlay-add-contact-mobile-mid {
+        width: 350px;
+    }
+
+    .overlay-add-contact-mobile-bottom {
+        width: 350px;
+    }
+
+    .input-fields-add-contact-mobile input {
+        width: 290px;
+        background-position: 290px 8px;
+    }
+}
+
 @media (max-width: 380px) {
     .all-contacts-box button {
         width: 300px;
@@ -89,5 +112,32 @@
 
     .contact-big-onclick-mobile h2 {
         font-size: 27px;
+    }
+}
+
+@media (max-width: 360px) {
+    .overlay-add-contact-mobile {
+        width: 310px;
+    }
+
+    .overlay-add-contact-mobile-top {
+        width: 310px;
+    }
+
+    .overlay-add-contact-mobile-top h1 {
+        font-size: 40px;
+    }
+
+    .overlay-add-contact-mobile-mid {
+        width: 310px;
+    }
+
+    .overlay-add-contact-mobile-bottom {
+        width: 310px;
+    }
+
+    .input-fields-add-contact-mobile input {
+        width: 250px;
+        background-position: 250px 8px;
     }
 }
