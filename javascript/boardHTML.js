@@ -229,6 +229,10 @@ function generateTaskOverlayEditHTML(taskId) {
                         </div>
                         <div class="d-none" id="boardOverlayEditContactsDropdownOptions"></div>
                     </div>
+                    <div
+                        class="add-task-assigned-contactlist"
+                        id="boardOverlayEditAssignedContactListe"
+                    ></div>
                 </div>
                 <div class="board-overlay-task-edit-content-box pointer">
                     <label>Subtasks</label>
@@ -316,4 +320,10 @@ function generateSubtaskEdit(subtaskId) {
                     </div>
                 </div>
               </div>`;
+}
+
+function generateBoardOverlayEditAssignedContactList(initials) {
+  return `<div class="add-task-assigned-contactlist-contact">
+              <span>${initials}</span>
+            </div>`;
 }

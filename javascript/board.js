@@ -8,13 +8,7 @@ let boardPositionAwaitFeedback = document.getElementById(
 let boardPositionDone = document.getElementById("taskFieldDone");
 let boardSearchInput = document.getElementById("boardSearchInput");
 let boardOverlayTask = document.getElementById("taskOverlay");
-let boardOverlayEditTask = document.getElementById("taskOverlayEdit");
 let currentDraggedElement;
-let boardOverlayEditContactsState = false;
-let boardOverlayEditContacts = [];
-let boardOverlayEditSubtasks = [];
-let boardOverlayEditAssignedContacts = [];
-let boardOverlayEditPriority;
 
 async function boardInit() {
   await boardPullContacts();

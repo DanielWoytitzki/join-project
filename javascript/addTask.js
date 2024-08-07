@@ -119,6 +119,7 @@ function addTaskContactSelect(key) {
     }
   }
   addTaskShowContacts();
+  addTaskShowAssignedContactList();
 }
 
 async function addTaskContactListload() {
@@ -383,3 +384,19 @@ document.addEventListener("click", function (event) {
     addTaskToggleCategory();
   }
 });
+
+function addTaskShowAssignedContactList() {
+  let assignedContactList = document.getElementById(
+    "addTaskAssignedToContactList"
+  );
+  assignedContactList.innerHTML = "";
+
+  for (let i = 0; i < addTaskContacts.length; i++) {
+    if (addTaskContacts[i]["state"] == "checked") {
+      let name = addTaskContacts[i]["contact"];
+      let initials = getInitials(name);
+      assignedContactList.innerHTML +=
+        generateAddTaskAssignedContacts(initials);
+    }
+  }
+}

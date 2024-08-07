@@ -22,3 +22,9 @@ function generateAddTaskSubtaskList(subtaskId, subtaskTitle) {
               </div>
             </div>`;
 }
+
+function generateAddTaskAssignedContacts(initials) {
+  return `<div class="add-task-assigned-contactlist-contact">
+            <span>${initials}</span>
+          </div>`;
+}

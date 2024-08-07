@@ -1,3 +1,10 @@
+let boardOverlayEditTask = document.getElementById("taskOverlayEdit");
+let boardOverlayEditContactsState = false;
+let boardOverlayEditContacts = [];
+let boardOverlayEditSubtasks = [];
+let boardOverlayEditAssignedContacts = [];
+let boardOverlayEditPriority;
+
 function boardOverlayEditRender(id) {
   boardOverlayEditDisplay();
   boardOverlayEditDisplayTask(id);
@@ -21,6 +28,7 @@ function boardOverlayEditDisplayTask(id) {
   boardOverlayEditSubtasks = [];
   boardOverlayEditPullSubtasks(task);
   boardOverlayEditDisplaySubtasks();
+  boardOverlayEditAssignedContactsListUnderDropdown();
 }
 
 function boardOverlayEditPullContacts(task) {
@@ -104,6 +112,7 @@ function boardOverlayEditSelectContact(key) {
     }
   }
   boardOverlayEditDisplayContacts();
+  boardOverlayEditAssignedContactsListUnderDropdown();
 }
 
 function boardOverlayEditTaskHide() {
@@ -321,5 +330,21 @@ function handleClick(event) {
     !isClickedDropdown
   ) {
     boardOverlayEditToggleContacts();
+  }
+}
+
+function boardOverlayEditAssignedContactsListUnderDropdown() {
+  let assignedContactList = document.getElementById(
+    "boardOverlayEditAssignedContactListe"
+  );
+  assignedContactList.innerHTML = "";
+
+  for (let i = 0; i < boardOverlayEditContacts.length; i++) {
+    if (boardOverlayEditContacts[i]["state"] == "checked") {
+      let name = boardOverlayEditContacts[i]["contact"];
+      let initials = getInitials(name);
+      assignedContactList.innerHTML +=
+        generateBoardOverlayEditAssignedContactList(initials);
+    }
   }
 }

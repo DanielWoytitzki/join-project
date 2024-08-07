@@ -355,7 +355,29 @@ body {
   height: 20px;
 }
 
-/* ==================================== */
+.add-task-assigned-contactlist {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-task-assigned-contactlist-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  width: 42px;
+  height: 42px;
+  background: #9327ff;
+  border-radius: 50%;
+}
+
+.add-task-assigned-contactlist-contact span {
+  font-size: 12px;
+  line-height: 14.4px;
+  text-align: center;
+  color: #ffffff;
+}
 
 .add-task-bottom {
   width: 100%;
