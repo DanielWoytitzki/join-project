@@ -53,6 +53,7 @@ function boardDisplay() {
     boardDisplayCategoryBackground(task, key);
   }
   boardDisplayNoTasks();
+  boardTaskFieldDragEmpty();
 }
 
 function boardDisplayTasks(position, key, item) {
@@ -157,6 +158,22 @@ function moveTo(position) {
   let data = position;
   putData(path, data);
   setTimeout(boardRenderTasks, 200);
+}
+
+function boardTaskFieldDragEmpty() {
+  boardPositionToDo.innerHTML += generateTaskFieldDragEmpty("ToDo");
+  boardPositionInProgress.innerHTML += generateTaskFieldDragEmpty("InProgress");
+  boardPositionAwaitFeedback.innerHTML +=
+    generateTaskFieldDragEmpty("AwaitFeedback");
+  boardPositionDone.innerHTML += generateTaskFieldDragEmpty("Done");
+}
+
+function highlight(id) {
+  document.getElementById(`taskFieldEmpty${id}`).classList.remove("d-none");
+}
+
+function removeHighlight(id) {
+  document.getElementById(`taskFieldEmpty${id}`).classList.add("d-none");
 }
 
 /* ======== Search ====== */

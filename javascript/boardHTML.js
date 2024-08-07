@@ -336,3 +336,7 @@ function generateBoardOverlayEditAssignedContactList(
               <span>${initials}</span>
             </div>`;
 }
+
+function generateTaskFieldDragEmpty(id) {
+  return `<div id="taskFieldEmpty${id}" class="board-drag-area-highlight d-none"></div>`;
+}

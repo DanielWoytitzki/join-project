@@ -70,7 +70,8 @@
             class="board-body-body board-body-body-grid-1"
             id="taskFieldToDo"
             ondrop="moveTo('ToDo')"
-            ondragover="allowDrop(event)"
+            ondragover="allowDrop(event); highlight('ToDo')"
+            ondragleave="removeHighlight('ToDo')"
           ></div>
           <div class="board-body-header board-body-header-grid-2">
             <h2>In progress</h2>
@@ -85,7 +86,9 @@
             class="board-body-body board-body-body-grid-2"
             id="taskFieldInProgress"
             ondrop="moveTo('InProgress')"
-            ondragover="allowDrop(event)"
+            ondragover="allowDrop(event); highlight('InProgress')"
+            +
+            ondragleave="removeHighlight('InProgress')"
           ></div>
 
           <div class="board-body-header board-body-header-grid-3">
@@ -101,7 +104,8 @@
             class="board-body-body board-body-body-grid-3"
             id="taskFieldAwaitFeedback"
             ondrop="moveTo('AwaitFeedback')"
-            ondragover="allowDrop(event)"
+            ondragover="allowDrop(event); highlight('AwaitFeedback')"
+            ondragleave="removeHighlight('AwaitFeedback')"
           ></div>
 
           <div class="board-body-header board-body-header-grid-4">
@@ -111,12 +115,12 @@
             class="board-body-body board-body-body-grid-4"
             id="taskFieldDone"
             ondrop="moveTo('Done')"
-            ondragover="allowDrop(event)"
+            ondragover="allowDrop(event); highlight('Done')"
+            ondragleave="removeHighlight('Done')"
           ></div>
         </div>
       </section>
     </main>
-
     <nav id="mobileNav" class="mobile-nav"></nav>
 
     <section

@@ -636,3 +636,13 @@
   align-items: center;
   justify-content: center;
 }
+
+.board-drag-area-highlight {
+  border: 1px dashed #a8a8a8;
+  box-shadow: 0px 0px 4px 0px #00000029;
+  height: 244px;
+  width: 100%;
+  border-radius: 30px;
+  display: flex;
+  flex-shrink: 0;
+}
