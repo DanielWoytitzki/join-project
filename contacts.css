@@ -116,6 +116,25 @@
   width: 32px;
 }
 
+.add-contact-button-mobile {
+  width: 56px;
+  height: 56px;
+  background: #2a3647;
+  border-radius: 56px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.add-contact-button-mobile:hover {
+  cursor: pointer;
+  background: #29abe2;
+}
+
 .contact-list {
   width: 352px;
 }

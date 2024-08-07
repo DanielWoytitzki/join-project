@@ -282,6 +282,59 @@ function HTMLForAddNewContact() {
     `;
 }
 
+function addNewContactMobile() {
+  const overlay = document.createElement("div");
+  overlay.className = "overlay";
+  overlay.innerHTML = HTMLForAddNewContactMobile();
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
+}
+
+/**
+ * This function generates the HTML code for the "add new contact" pop up
+ * @returns HTML code
+ */
+function HTMLForAddNewContactMobile() {
+  return `
+        <div class="overlay-add-contact-mobile">
+            <div class="overlay-add-contact-mobile-top">
+                <div class="close-icon-mobile-box">
+                    <img class="close-icon-mobile" src="./img/close.svg" alt="" onclick="closeOverlay()">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <h1>Add contact</h1>
+                    <p>Tasks are better with a team!</p>
+                    <hr>
+                </div>
+                <div class="close-icon-mobile-box">
+                    <img src="./img/close.svg" alt="" onclick="closeOverlay()">
+                </div>
+            </div>
+
+            <div class="overlay-add-contact-mobile-mid">
+                <div class="overlay-add-contact-profile-img-mobile">
+                    <img src="./img/profile-pic-blank.svg" alt="Profile Picture Placeholder">
+                </div>
+            </div>
+
+            <form class="overlay-add-contact-mobile-bottom" onsubmit="addContactToDatabase(); return false">
+              <div>
+                <div>
+                    <div class="input-fields-add-contact-mobile">
+                        <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name" required>
+                        <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="E-Mail" required>
+                        <input id="phone" style="background-image: url('./img/call-icon.svg');" type="number" placeholder="Phone" requiered>
+                    </div>
+                </div>
+                <div class="buttons-add-contact">
+                    <button class="create-contact-button-add-contact">Create contact <img src="./img/check.svg"></button>
+                </div>
+              </div>
+            </form>
+        </div>
+    `;
+}
+
 /**
  * This function closes the overlay pop up
  */
