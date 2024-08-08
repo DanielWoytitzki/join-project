@@ -1,5 +1,5 @@
 function generateTaskHTML(taskId, task) {
-  return `<div draggable="true" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="boardOverlayRender('${taskId}'), boardTaskRepositionClose('${taskId}')">
+  return `<div draggable="true" ondrag="whileDragging('${taskId}')" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="boardOverlayRender('${taskId}'), boardTaskRepositionClose('${taskId}')">
             <div class="board-body-body-task-header">
                 <span class="board-body-body-task-label" id="boardTasksCategory${taskId}">${task["category"]}</span>
                 <button onclick="event.stopPropagation(), boardTaskReposition('${taskId}')" id="boardTaskRepositionButton${taskId}">

@@ -646,3 +646,7 @@
   display: flex;
   flex-shrink: 0;
 }
+
+.task-on-drag-rotate {
+  transform: rotate(5deg);
+}

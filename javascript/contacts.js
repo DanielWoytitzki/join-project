@@ -3,11 +3,21 @@ const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.
 */
 
 var colorArray = [
-  "#FF7A00", "#FF5EB3", "#6E52FF",
-  "#9327FF", "#00BEE8", "#1FD7C1",
-  "#FF745E", "#FFA35E", "#FC71FF",
-  "#FFC701", "#0038FF", "#C3FF2B",
-  "#FFE62B", "#FF4646", "#FFBB2B",
+  "#FF7A00",
+  "#FF5EB3",
+  "#6E52FF",
+  "#9327FF",
+  "#00BEE8",
+  "#1FD7C1",
+  "#FF745E",
+  "#FFA35E",
+  "#FC71FF",
+  "#FFC701",
+  "#0038FF",
+  "#C3FF2B",
+  "#FFE62B",
+  "#FF4646",
+  "#FFBB2B",
 ];
 
 loadContactsFromDatabase();
@@ -236,7 +246,7 @@ function addNewContact() {
  */
 function HTMLForAddNewContact() {
   return `
-        <div class="overlay-add-contact">
+        <div class="overlay-add-contact transition-in-from-right">
             <div class="overlay-add-contact-left">
                 <img src="./img/logo-big-desktop.svg">
                 <h1>Add contact</h1>
@@ -477,7 +487,13 @@ function HTMLForEditContact(contactId, name, email, phone, color) {
 function editContactMobile(contactId, name, email, phone, color) {
   const overlay = document.createElement("div");
   overlay.className = "overlay";
-  overlay.innerHTML = HTMLForEditContactMobile(contactId, name, email, phone, color);
+  overlay.innerHTML = HTMLForEditContactMobile(
+    contactId,
+    name,
+    email,
+    phone,
+    color
+  );
   document.body.appendChild(overlay);
   document.body.style.overflow = "hidden";
 }

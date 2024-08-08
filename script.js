@@ -40,7 +40,7 @@ function generateHTMLForHeader() {
         <span id="userInitials"></span>
       </div>
 
-      <div id="menu" class="header-overlay-menu d-none">
+      <div id="menu" class="header-overlay-menu d-none transition-in-from-right">
         <a href="./help.html" style="display: none">Help</a>
         <a href="./legal-notice.html">Legal Notice</a>
         <a href="./privacy-policy.html">Privacy Policy</a>

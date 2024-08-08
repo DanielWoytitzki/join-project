@@ -176,6 +176,10 @@ function removeHighlight(id) {
   document.getElementById(`taskFieldEmpty${id}`).classList.add("d-none");
 }
 
+function whileDragging(id) {
+  document.getElementById(`task${id}`).classList.add("task-on-drag-rotate");
+}
+
 /* ======== Search ====== */
 
 boardSearchInput.addEventListener("input", boardSearch);
