@@ -234,7 +234,10 @@ function toggleContactMenu() {
   let contactEmail = container.getAttribute("data-contact-email");
   let contactPhone = container.getAttribute("data-contact-phone");
   
-  editContactMobile(contactId, contactName, contactEmail, contactPhone);
+  let menuContainer = document.getElementById("mobileContactMenu");
+  menuContainer.addEventListener("click", function() {
+    editContactMobile(contactId, contactName, contactEmail, contactPhone);
+  });  
 
   document.querySelector(".contact-big-mobile-option-button").classList.toggle("contact-big-mobile-overlay-menu-active");
   document.getElementById("mobileContactMenu").classList.toggle("show-contact-big-mobile-overlay-menu");
