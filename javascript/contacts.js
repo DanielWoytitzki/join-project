@@ -133,6 +133,13 @@ async function showDetailedContact(contactId, backgroundColor) {
     document.getElementById("contactlist").classList.remove("contact-section");
     document.getElementById("contactlist").classList.add("d-none");
     document.getElementById("contact-detailed-mobile").innerHTML = HTMLForDetailedContactMobile(detailedContact, backgroundColor);
+    
+    let container = document.getElementById("detailedcontactmobile");
+    container.setAttribute("data-contact-id", detailedContact.id);
+    container.setAttribute("data-contact-name", detailedContact.name);
+    container.setAttribute("data-contact-email", detailedContact.email);
+    container.setAttribute("data-contact-phone", detailedContact.phone);
+    container.setAttribute("data-contact-backgroundcolor", detailedContact.backgroundColor);
   } else {
     document.getElementById("contact-detailed").innerHTML = HTMLForDetailedContact(detailedContact, backgroundColor);
   }
@@ -220,12 +227,17 @@ function closeDetailedContactMobile() {
 }
 
 function toggleContactMenu() {
-  document
-    .querySelector(".contact-big-mobile-option-button")
-    .classList.toggle("contact-big-mobile-overlay-menu-active");
-  document
-    .getElementById("mobileContactMenu")
-    .classList.toggle("show-contact-big-mobile-overlay-menu");
+  let container = document.getElementById("detailedcontactmobile");
+
+  let contactId = container.getAttribute("data-contact-id");
+  let contactName = container.getAttribute("data-contact-name");
+  let contactEmail = container.getAttribute("data-contact-email");
+  let contactPhone = container.getAttribute("data-contact-phone");
+  
+  editContactMobile(contactId, contactName, contactEmail, contactPhone);
+
+  document.querySelector(".contact-big-mobile-option-button").classList.toggle("contact-big-mobile-overlay-menu-active");
+  document.getElementById("mobileContactMenu").classList.toggle("show-contact-big-mobile-overlay-menu");
   document.getElementById("mobileContactMenu").classList.toggle("d-none");
   document.getElementById("mobileContactMenu").classList.toggle("d-flex");
 }
