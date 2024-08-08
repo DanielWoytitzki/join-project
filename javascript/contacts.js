@@ -123,18 +123,14 @@ function updateSelectedContact(contactId) {
  */
 async function showDetailedContact(contactId) {
   document.getElementById("detailedcontactmobile").classList.remove("d-none");
-  document
-    .getElementById("detailedcontactmobile")
-    .classList.add("contact-section-content-mobile");
+  document.getElementById("detailedcontactmobile").classList.add("contact-section-content-mobile");
   document.getElementById("contactlist").classList.remove("contact-section");
   document.getElementById("contactlist").classList.add("d-none");
   let response = await fetch(BASE_URL + "/contacts/" + contactId + ".json");
   let detailedContact = await response.json();
   detailedContact.id = contactId;
-  document.getElementById("contact-detailed").innerHTML =
-    HTMLForDetailedContact(detailedContact);
-  document.getElementById("contact-detailed-mobile").innerHTML =
-    HTMLForDetailedContactMobile(detailedContact);
+  document.getElementById("contact-detailed").innerHTML = HTMLForDetailedContact(detailedContact);
+  document.getElementById("contact-detailed-mobile").innerHTML = HTMLForDetailedContactMobile(detailedContact);
 
   updateSelectedContact(contactId);
 }
@@ -520,7 +516,7 @@ function HTMLForEditContactMobile(contactId, name, email, phone, color) {
 
             <div class="overlay-add-contact-mobile-mid">
                 <div class="overlay-add-contact-profile-img-mobile" style="background-color: ${color};">
-                    <span>AM</span>
+                    <span>${firstLetter}${secondLetter}</span>
                 </div>
             </div>
 
