@@ -4,6 +4,12 @@
     }
 }
 
+@media (max-width: 850px) and (min-width: 320px) {
+    .header-overlay-menu {
+        top: 66px;
+    }
+}
+
 @media (max-width: 1050px) {
     header {
         padding: 20px 40px 20px 80px;
