@@ -1,5 +1,6 @@
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 
+
 /**
  * This function adds a new user to the database
  */
@@ -32,6 +33,7 @@ async function addUserToDatabase() {
     }
 }
 
+
 /**
  * This function checks the entered password with the confirmed password
  * 
@@ -47,6 +49,7 @@ function checkConfirmedPassword() {
         return false;
     }
 }
+
 
 /**
  * This function checks if the checkbox of "I accept the Privacy policy" is checked or not
@@ -64,6 +67,7 @@ function checkCheckbox() {
         return false;
     }
 }
+
 
 /**
  * This function signs one up as an user
@@ -89,12 +93,14 @@ function signUp() {
     }
 }
 
+
 /**
  * This function forwards one to the login page after a successfully sign up
  */
 function forwardToLogIn() {
     window.location.href = 'login.html';
 }
+
 
 /**
  * This function shows one that the sign up was successful
@@ -106,6 +112,7 @@ function successfullSignUp() {
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 }
+
 
 /**
  * This function generates the HTML code for the successfully sign up pop up
