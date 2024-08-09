@@ -41,7 +41,7 @@ function generateHTMLForHeader() {
       </div>
 
       <div id="menu" class="header-overlay-menu d-none transition-in-from-right">
-        <a href="./help.html" style="display: none">Help</a>
+        <a href="./help.html" class="d-none-2560-to-851">Help</a>
         <a href="./legal-notice.html">Legal Notice</a>
         <a href="./privacy-policy.html">Privacy Policy</a>
         <a href="./login.html" onclick="deleteUserDetailsFromSessionStorage()">Log out</a>

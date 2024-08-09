@@ -1,3 +1,9 @@
+@media (max-width: 2560px) and (min-width: 851px) {
+    .d-none-2560-to-851 {
+        display: none;
+    }
+}
+
 @media (max-width: 1050px) {
     header {
         padding: 20px 40px 20px 80px;
