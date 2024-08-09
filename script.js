@@ -111,25 +111,25 @@ function generateHTMLForDesktopNav() {
  */
 function generateHTMLForMobileNav() {
   return `
-    <a href="./summary.html">
+    <a href="./summary.html" id="navLink-mobile-summary">
       <div class="mobile-nav-icon">
         <img src="./img/nav-icon-summary.svg" alt="">
         <span>Summary</span>
       </div>
     </a>
-    <a href="./board.html">
+    <a href="./board.html" id="navLink-mobile-board">
       <div class="mobile-nav-icon">
         <img src="./img/nav-icon-board.svg" alt="">
         <span>Board</span>
       </div>
     </a>
-    <a href="./add-task.html">
+    <a href="./add-task.html" id="navLink-mobile-add-task">
       <div class="mobile-nav-icon">
         <img src="./img/nav-icon-task.svg" alt="">
         <span>Add Task</span>
       </div>
     </a>
-    <a href="./contacts.html">
+    <a href="./contacts.html" id="navLink-mobile-contacts">
       <div class="mobile-nav-icon">
         <img src="./img/nav-icon-contact.svg" alt="">
         <span>Contacts</span>
@@ -260,7 +260,14 @@ function changeNavLinkBackgroundColor() {
   const path = window.location.pathname;
   let fileName = path.substring(path.lastIndexOf("/") + 1);
   let currentHTML = fileName.replace(".html", "");
-  document
-    .getElementById(`navLink-${currentHTML}`)
-    .classList.add("desktop-nav-icon-box-hover");
+  
+  let selectedDesktopNavLink = document.getElementById(`navLink-${currentHTML}`);
+  if (selectedDesktopNavLink) {
+    selectedDesktopNavLink.classList.add("desktop-nav-icon-box-hover");
+  }
+  
+  let selectedMobileNavLink = document.getElementById(`navLink-mobile-${currentHTML}`);
+  if (selectedMobileNavLink) {
+    selectedMobileNavLink.classList.add("mobile-nav-icon-box-hover");
+  }
 }
