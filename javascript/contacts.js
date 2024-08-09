@@ -245,6 +245,27 @@ function toggleContactMenu() {
   document.getElementById("mobileContactMenu").classList.toggle("d-flex");
 }
 
+document.addEventListener("click", function (event) {
+  let menuContainer = document.getElementById("mobileContactMenu");
+  let background = document.getElementById("detailedcontactmobile");
+  
+  let isClickInsideMenu = menuContainer.contains(event.target);
+  let isClickInsideBackground = background.contains(event.target);
+
+  console.log("isClickInsideMenu:", isClickInsideMenu);
+  console.log("isClickInsideBackground:", isClickInsideBackground);
+  console.log("menuContainer is visible:", !menuContainer.classList.contains("d-none"));
+
+  if (
+    !isClickInsideMenu &&  // Klick erfolgt außerhalb des Menüs
+    !menuContainer.classList.contains("d-none") && // Menü ist geöffnet
+    !isClickInsideBackground // Klick erfolgt nicht auf den Hintergrund
+  ) {
+    console.log("toggleContactMenu triggered");
+    toggleContactMenu(); // Menü wird erneut umgeschaltet
+  }
+});
+
 /**
  * This function creates an overlay and adds a new contact to the database
  */
