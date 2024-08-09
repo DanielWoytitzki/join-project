@@ -333,7 +333,7 @@ function addNewContactMobile() {
  */
 function HTMLForAddNewContactMobile() {
   return `
-        <div class="overlay-add-contact-mobile">
+        <div class="overlay-add-contact-mobile transition-in-from-bottom">
             <div class="overlay-add-contact-mobile-top">
                 <div class="close-icon-mobile-box">
                     <img class="close-icon-mobile" src="./img/close.svg" alt="" onclick="closeOverlay()">
@@ -486,7 +486,7 @@ function HTMLForEditContact(contactId, name, email, phone, color) {
   const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : "";
 
   return `
-        <div class="overlay-add-contact">
+        <div class="overlay-add-contact transition-in-from-right">
             <div class="overlay-add-contact-left">
                 <img src="./img/logo-big-desktop.svg">
                 <h1>Edit contact</h1>
@@ -541,7 +541,7 @@ function HTMLForEditContactMobile(contactId, name, email, phone, color) {
   const secondLetter = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : "";
 
   return `
-        <div class="overlay-add-contact-mobile">
+        <div class="overlay-add-contact-mobile transition-in-from-bottom">
             <div class="overlay-add-contact-mobile-top">
                 <div class="close-icon-mobile-box">
                     <img class="close-icon-mobile" src="./img/close.svg" alt="" onclick="closeOverlay()">
