@@ -305,7 +305,7 @@ function HTMLForAddNewContact() {
                             <div class="input-fields-add-contact">
                                 <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name" required>
                                 <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="E-Mail" required>
-                                <input id="phone" style="background-image: url('./img/call-icon.svg');" type="number" placeholder="Phone" requiered>
+                                <input id="phone" style="background-image: url('./img/call-icon.svg');" type="number" placeholder="Phone" required>
                             </div>
                         </div>
                         <div class="buttons-add-contact">
@@ -360,7 +360,7 @@ function HTMLForAddNewContactMobile() {
                     <div class="input-fields-add-contact-mobile">
                         <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name" required>
                         <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="E-Mail" required>
-                        <input id="phone" style="background-image: url('./img/call-icon.svg');" type="number" placeholder="Phone" requiered>
+                        <input id="phone" style="background-image: url('./img/call-icon.svg');" type="number" placeholder="Phone" required>
                     </div>
                 </div>
                 <div class="buttons-add-contact">
@@ -505,13 +505,13 @@ function HTMLForEditContact(contactId, name, email, phone, color) {
                     <div>
                         <div>
                             <form class="input-fields-add-contact">
-                                <input id="editName" style="background-image: url('./img/person-icon.svg');" type="text" value="${name}" placeholder="Name">
-                                <input id="editEmail" style="background-image: url('./img/mail-icon.svg');" type="email" value="${email}" placeholder="E-Mail">
-                                <input id="editPhone" style="background-image: url('./img/call-icon.svg');" type="number" value="${phone}" placeholder="Phone">
+                                <input id="editName" style="background-image: url('./img/person-icon.svg');" type="text" value="${name}" placeholder="Name" required>
+                                <input id="editEmail" style="background-image: url('./img/mail-icon.svg');" type="email" value="${email}" placeholder="E-Mail" required>
+                                <input id="editPhone" style="background-image: url('./img/call-icon.svg');" type="number" value="${phone}" placeholder="Phone" required>
                             </form>
                         </div>
                         <div class="buttons-add-contact">
-                            <button class="delete-button-add-contact" type="button" onclick="deleteContactFromDatabase('${contactId}')">Delete</button>
+                            <button class="delete-button-add-contact" type="button" onclick="deleteContactFromDatabase('${contactId}')" formnovalidate="formnovalidate">Delete</button>
                             <button class="save-button-add-contact" type="button" onclick="saveEditedContact('${contactId}')">Save <img src="./img/check.svg"></button>
                         </div>
                     </div>
