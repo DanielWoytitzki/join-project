@@ -9,6 +9,7 @@ function animateLogo() {
   }, 500);
 }
 
+
 /**
  * This function renders all templates (e. g. header, navigation bar on desktop/mobile)
  */
@@ -19,6 +20,7 @@ function renderTemplates() {
   insertUserInitials();
   changeNavLinkBackgroundColor();
 }
+
 
 /**
  * This function generates the template for the header
@@ -41,7 +43,7 @@ function generateHTMLForHeader() {
       </div>
 
       <div id="menu" class="header-overlay-menu d-none transition-in-from-right">
-        <a href="./help.html" style="display: none">Help</a>
+        <a href="./help.html" class="d-none-2560-to-851">Help</a>
         <a href="./legal-notice.html">Legal Notice</a>
         <a href="./privacy-policy.html">Privacy Policy</a>
         <a href="./login.html" onclick="deleteUserDetailsFromSessionStorage()">Log out</a>
@@ -49,6 +51,7 @@ function generateHTMLForHeader() {
   </div>
   `;
 }
+
 
 /**
  * This function toggles a burger menu
@@ -60,6 +63,7 @@ function toggleMenu() {
   document.getElementById("menu").classList.toggle("show-header-overlay-menu");
   document.getElementById("menu").classList.toggle("d-none");
 }
+
 
 /**
  * This function generates the template for the navigation bar on desktop
@@ -105,31 +109,32 @@ function generateHTMLForDesktopNav() {
   `;
 }
 
+
 /**
  * This function generates the template for the navigation bar on mobile
  * @returns HTML-Code
  */
 function generateHTMLForMobileNav() {
   return `
-    <a href="./summary.html">
+    <a href="./summary.html" id="navLink-mobile-summary">
       <div class="mobile-nav-icon">
         <img src="./img/nav-icon-summary.svg" alt="">
         <span>Summary</span>
       </div>
     </a>
-    <a href="./board.html">
+    <a href="./board.html" id="navLink-mobile-board">
       <div class="mobile-nav-icon">
         <img src="./img/nav-icon-board.svg" alt="">
         <span>Board</span>
       </div>
     </a>
-    <a href="./add-task.html">
+    <a href="./add-task.html" id="navLink-mobile-add-task">
       <div class="mobile-nav-icon">
         <img src="./img/nav-icon-task.svg" alt="">
         <span>Add Task</span>
       </div>
     </a>
-    <a href="./contacts.html">
+    <a href="./contacts.html" id="navLink-mobile-contacts">
       <div class="mobile-nav-icon">
         <img src="./img/nav-icon-contact.svg" alt="">
         <span>Contacts</span>
@@ -138,12 +143,14 @@ function generateHTMLForMobileNav() {
   `;
 }
 
+
 /**
  * This function forwards one to the help page
  */
 function forwardToHelp() {
-  window.location.href = "help.html";
+  window.location.href = "./help.html";
 }
+
 
 /**
  * This function fetchs ones user details (status (e. g. "logged in"), name and email) from the session storage
@@ -158,6 +165,7 @@ function fetchUserDetailsFromSessionStorage() {
   }
 }
 
+
 /**
  * This function deletes ones user details (status (e. g. "logged in"), name and email) from the session storage
  * = log out
@@ -166,6 +174,7 @@ function deleteUserDetailsFromSessionStorage() {
   sessionStorage.clear();
   window.location.href = "./index.html";
 }
+
 
 /**
  * This function inserts the user's initials into the header
@@ -183,6 +192,7 @@ function insertUserInitials() {
     document.getElementById("userInitials").innerHTML = "G";
   }
 }
+
 
 const BASE_URL =
   "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -300,14 +310,27 @@ function convertArrayToObject(array) {
   return obj;
 }
 
+<<<<<<< HEAD
 /**
  * change the background color of the navigation links in the navigation side bar
+=======
+
+/**
+ * This function changes the background color of the selected nav-link
+>>>>>>> f4f600986542b2c36f45da30f0f3a2ed64995a7f
  */
 function changeNavLinkBackgroundColor() {
   const path = window.location.pathname;
   let fileName = path.substring(path.lastIndexOf("/") + 1);
   let currentHTML = fileName.replace(".html", "");
-  document
-    .getElementById(`navLink-${currentHTML}`)
-    .classList.add("desktop-nav-icon-box-hover");
+  
+  let selectedDesktopNavLink = document.getElementById(`navLink-${currentHTML}`);
+  if (selectedDesktopNavLink) {
+    selectedDesktopNavLink.classList.add("desktop-nav-icon-box-hover");
+  }
+  
+  let selectedMobileNavLink = document.getElementById(`navLink-mobile-${currentHTML}`);
+  if (selectedMobileNavLink) {
+    selectedMobileNavLink.classList.add("mobile-nav-icon-box-hover");
+  }
 }

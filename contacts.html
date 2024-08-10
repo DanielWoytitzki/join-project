@@ -11,15 +11,17 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./contacts.css" />
-    <link rel="stylesheet" href="./contacts-mediaq.css" />
+    <link rel="stylesheet" href="./css/contacts.css" />
+    <link rel="stylesheet" href="./css/contacts-mediaq.css" />
     <link rel="stylesheet" href="./mediaq.css" />
     <script src="./script.js"></script>
-    <script src="./javascript/contacts.js"></script>
+    <script src="./javascript/contacts_1-2.js"></script>
+    <script src="./javascript/contacts_2-2.js"></script>
     <title>Contacts</title>
   </head>
 
   <body onload="renderTemplates()">
+
     <nav id="desktopNav" class="desktop-nav"></nav>
 
     <div>
@@ -69,7 +71,6 @@
           class="contact-big-mobile-overlay-menu d-none"
         >
           <div 
-            onclick="editContactMobile('${detailedContact.id}', '${detailedContact.name}', '${detailedContact.email}', '${detailedContact.phone}', '${backgroundColor}')"
             class="contact-big-icon"
           >
             <img src="./img/edit-icon-contact.svg" alt="" />
@@ -108,5 +109,7 @@
     </div>
 
     <nav id="mobileNav" class="mobile-nav"></nav>
+
   </body>
+  
 </html>

@@ -198,6 +198,7 @@ header {
 
 .mobile-nav a:hover {
   background-color: #091931;
+  border-radius: 16px;
 }
 
 .mobile-nav-icon {
@@ -214,6 +215,21 @@ header {
 .mobile-nav-icon img {
   height: 24px;
   width: 24px;
+}
+
+.mobile-nav-icon-box-hover {
+  background: #091931;
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+.mobile-nav-icon-box-hover img {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(2%)
+    hue-rotate(87deg) brightness(108%) contrast(101%);
+}
+
+.mobile-nav-icon-box-hover span {
+  color: #ffffff;
 }
 
 .desktop-nav {
@@ -414,7 +430,7 @@ header {
 }
 
 .transition-in-from-right {
-  animation: slide-in-from-right 75ms forwards ease-in;
+  animation: slide-in-from-right 300ms forwards ease-in;
 }
 
 @keyframes slide-in-from-right {
@@ -423,5 +439,18 @@ header {
   }
   to {
     right: 0;
+  }
+}
+
+.transition-in-from-bottom {
+  animation: slide-in-from-bottom 300ms forwards ease-in-out;
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    bottom: 0;
   }
 }

@@ -216,8 +216,9 @@
 }
 
 .contact-big-onclick-mobile {
-  width: 100%;
-  margin: 0 16px;
+  /* width: 100%; */
+  /* margin: 0 16px; */
+  margin-left: 16px;
   display: flex;
   flex-direction: column;
   gap: 21px;
@@ -236,6 +237,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid #FFFFFF;
 }
 
 .contact-big-profile-img span {
@@ -252,6 +254,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid #FFFFFF;
 }
 
 .contact-big-profile-img-mobile span {
@@ -321,7 +324,7 @@
 
 .contact-big-mobile-overlay-menu {
   position: absolute;
-  bottom: 40px;
+  bottom: 170px;
   right: 0;
   z-index: 9999;
   flex-direction: column;
@@ -468,7 +471,7 @@
 .overlay-add-contact-mobile-mid {
   width: 396px;
   position: fixed;
-  top: 425px;
+  top: 290px;
   display: flex;
   justify-content: center;
 }

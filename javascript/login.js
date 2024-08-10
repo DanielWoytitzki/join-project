@@ -1,11 +1,13 @@
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 
+
 /**
  * Adds an event listener to load the function "fetchUserDetailsFromLocalStorage()" after the whole site has been loaded
  */
 document.addEventListener('DOMContentLoaded', () => {
     fetchUserDetailsFromLocalStorage();
 });
+
 
 /**
  * This function logs one in as user as long as one is found in the database
@@ -43,6 +45,7 @@ async function logInAsUser() {
     }
 }
 
+
 /**
  * This function saves the login process to the session storage
  * @param {string} name - Name of the logged in user
@@ -55,6 +58,7 @@ function saveLogInToSessionStorage(name, email) {
         email: email
     }));
 }
+
 
 /**
  * This function checks if the checkbox of "Remember me" is checked or not
@@ -70,6 +74,7 @@ function checkRememberMe(email, password) {
     }
 }
 
+
 /**
  * This function saves one's email and password to the local storage if the checkbox of "Remember me" is/was checked
  * 
@@ -80,6 +85,7 @@ function saveLogInToLocalStorage(email, password) {
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
 }
+
 
 /**
  * This function fetches one's email and password from the local storage if the checkbox of "Remember me" is/was checked
@@ -99,16 +105,18 @@ function fetchUserDetailsFromLocalStorage() {
     }
 }
 
+
 /**
  * This function forwards one to the sign-up page
  */
 function forwardToSignUp() {
-    window.location.href = 'signup.html';
+    window.location.href = './signup.html';
 }
+
 
 /**
  * This function forwards one to the summary page as guest
  */
 function logInAsGuest() {
-    window.location.href = 'summary.html';
+    window.location.href = './summary.html';
 }
