@@ -1,3 +1,13 @@
+/**
+ * Generates the HTML of the contact list of all contacts from the database which is displayed when open the assigned contact dropdown
+ *
+ * @param {string} contactId - the id of the contact in the database
+ * @param {string} initials - the initials of the contact name
+ * @param {string} name - the contact name
+ * @param {string} contactState - the state of the contact if it is checked or unchecked
+ * @param {string} backgroundColor - the background color of the contact
+ * @returns
+ */
 function generateAddTaskContactList(
   contactId,
   initials,
@@ -18,6 +28,13 @@ function generateAddTaskContactList(
             </div>`;
 }
 
+/**
+ * Generates the HTML of the subtasks which are added
+ *
+ * @param {string} subtaskId - the incremental number of the subtasks as a id
+ * @param {string} subtaskTitle - the title of the added subtask
+ * @returns
+ */
 function generateAddTaskSubtaskList(subtaskId, subtaskTitle) {
   return `<div id="subtask'${subtaskId}'" class="add-task-subtask-task">
               <li>${subtaskTitle}</li>
@@ -29,6 +46,13 @@ function generateAddTaskSubtaskList(subtaskId, subtaskTitle) {
             </div>`;
 }
 
+/**
+ * Generates the HTML for the assigned contacts which were checked in the dropdown
+ *
+ * @param {string} initials - the initials of the checked contact name
+ * @param {string} backgroundColor - the background color of the contact
+ * @returns
+ */
 function generateAddTaskAssignedContacts(initials, backgroundColor) {
   return `<div class="add-task-assigned-contactlist-contact" style="background: ${backgroundColor}">
             <span>${initials}</span>

@@ -1,3 +1,10 @@
+/**
+ * Generate the HTML for the tasks loaded in the board
+ *
+ * @param {string} taskId - the id of the task in the database
+ * @param {object} task - the content of the task
+ * @returns
+ */
 function generateTaskHTML(taskId, task) {
   return `<div draggable="true" ondrag="whileDragging('${taskId}')" ondragstart="startDragging('${taskId}')" class="board-body-body-task" id="task${taskId}" onclick="boardOverlayRender('${taskId}'), boardTaskRepositionClose('${taskId}')">
             <div class="board-body-body-task-header">
@@ -22,6 +29,12 @@ function generateTaskHTML(taskId, task) {
         </div>`;
 }
 
+/**
+ * Generates the HTML for the relocation menu for repositioning the task to a different task field
+ *
+ * @param {string} taskId - the id of the task in the database
+ * @returns
+ */
 function generateTaskRepositionHTML(taskId) {
   return `<div id="boardTaskRepositionOverlay${taskId}" class="board-body-body-task-reposition" onclick="event.stopPropagation()">
               <span onclick="boardTaskRepositionRender('${taskId}', 'ToDo')">To Do</span>
@@ -31,18 +44,42 @@ function generateTaskRepositionHTML(taskId) {
           </div>`;
 }
 
+/**
+ * Generates the HTML for the first contact initial circles in every task
+ *
+ * @param {string} initials - the initials of the contact name
+ * @param {string} backgroundColor - the background color of the contact
+ * @returns
+ */
 function generateTaskContacts(initials, backgroundColor) {
   return `<div class="board-body-body-task-bottom-contact" style="background-color: ${backgroundColor};">
             <span>${initials}</span>
           </div>`;
 }
 
+/**
+ * Generates the HTML for the contact initial circles in every task starting from the second contact
+ * shiftes the circle to the left to overlap
+ *
+ * @param {string} initials - the initials of the contact name
+ * @param {number} left - the value which shiftes the contact cicrle to the left
+ * @param {string} backgroundColor - the background color of the contact
+ * @returns
+ */
 function generateTaskContactsTwo(initials, left, backgroundColor) {
   return `<div class="board-body-body-task-bottom-contact" style="left: -${left}px; background-color: ${backgroundColor};">
               <span>${initials}</span>
             </div>`;
 }
 
+/**
+ * Generates the HTML for the subtask progress bar, the number of finished subtaks and the number of total subtasks
+ *
+ * @param {number} progress - the calculated width in percent of the completed tasks devided by the total tasks
+ * @param {number} subtaskDone - the number of subtasks done
+ * @param {number} subtaskTotal - the number of total subtasks
+ * @returns
+ */
 function generateTaskSubtasks(progress, subtaskDone, subtaskTotal) {
   return `<div class="board-body-body-task-progress-bar">
                 <div class="board-body-body-task-progress-bar-progress" style="width: ${progress}%;"></div>
@@ -51,6 +88,14 @@ function generateTaskSubtasks(progress, subtaskDone, subtaskTotal) {
             <span>Subtasks</span>`;
 }
 
+/**
+ * Generates the HTML for the overlay for the selected task
+ *
+ * @param {string} taskId - the id of the selected task in the database
+ * @param {object} task - the content of the selected task
+ * @param {string} priority - the pirority of the selected task
+ * @returns
+ */
 function generateTaskOverlayHTML(taskId, task, priority) {
   return `<div class="board-overlay-task transition-in-from-right" onclick="event.stopPropagation()" id="taskOverlay${taskId}">
             <div class="board-overlay-task-header">
@@ -100,6 +145,14 @@ function generateTaskOverlayHTML(taskId, task, priority) {
         </div>`;
 }
 
+/**
+ * Generates the HTML for the initials and the name of the assigned contacts of the selected task
+ *
+ * @param {string} initials - the initials of the assigned contact
+ * @param {string} name - the name of the assigned contact
+ * @param {string} backgroundColor - the background color of the assigned contact
+ * @returns
+ */
 function generateTaskOverlayContacts(initials, name, backgroundColor) {
   return `<li class="board-overlay-task-contactlist-contact">
             <div class="board-overlay-task-contactlist-contact-icon" style="background-color: ${backgroundColor};">
@@ -109,6 +162,15 @@ function generateTaskOverlayContacts(initials, name, backgroundColor) {
           </li>`;
 }
 
+/**
+ * Generates the HTML for the subtasks of the selected task
+ *
+ * @param {string} subtaskTitle - the title of the subtask
+ * @param {string} state - the state of the subtask either checked or unchecked
+ * @param {string} id - the id of the task in the database
+ * @param {number} key - the id of the subtask in the subtask array of the selected task
+ * @returns
+ */
 function generateTaskOverlaySubtasks(subtaskTitle, state, id, key) {
   return `<li class="board-overlay-task-subtasklist-subtask">
             <img src="./img/check-button-${state}.svg" class="check-hover" onclick="boardOverlayTaskSubtaskToggle('${state}', '${id}', '${key}')" alt=""/>
@@ -116,172 +178,60 @@ function generateTaskOverlaySubtasks(subtaskTitle, state, id, key) {
           </li>`;
 }
 
+/**
+ * Generates the HTML for the to do task field, when no task is in there
+ *
+ * @returns
+ */
 function generateNoTaskToDo() {
   return `<div class="board-body-body-no-task">
             <span>No tasks To do</span>
           </div>`;
 }
 
+/**
+ * Generates the HTML for the in progress task field, when no task is in there
+ *
+ * @returns
+ */
 function generateNoTaskInProgress() {
   return `<div class="board-body-body-no-task">
             <span>No tasks in progress</span>
           </div>`;
 }
 
+/**
+ * Generates the HTML for the await feedback task field, when no task is in there
+ *
+ * @returns
+ */
 function generateNoTaskAwaitFeedback() {
   return `<div class="board-body-body-no-task">
             <span>No tasks await feedback</span>
           </div>`;
 }
 
+/**
+ * Generates the HTML for the done task field, when no task is in there
+ *
+ * @returns
+ */
 function generateNoTaskDone() {
   return `<div class="board-body-body-no-task">
             <span>No tasks done</span>
           </div>`;
 }
 
-function generateTaskOverlayEditHTML(taskId) {
-  return `<div class="board-overlay-task-edit" id="taskOverlayEdit${taskId}">
-            <div class="board-overlay-task-edit-right">
-                <img class="closeIcon" src="./img/close.svg" alt="" onclick="boardOverlayEditTaskHide()" />
-            </div>
-            <div class="board-overlay-task-edit-container">
-                <div class="board-overlay-task-edit-content-box">
-                    <label for="editTaskTitle">Title<span class="red-star">*</span></label>
-                    <div class="add-task-required-input">
-                        <input
-                            type="text"
-                            name="editTaskTitle"
-                            id="editTaskTitle"
-                            placeholder="Enter a Title"
-                            class="board-overlay-task-edit-content-box-input"
-                        />
-                        <div id="boardOverlayEditTitleRequired" class="add-task-small-required d-none">
-                            This field is required
-                        </div>
-                    </div>
-                </div>
-                <div class="board-overlay-task-edit-content-box">
-                    <label for="editTaskDescription">Description</label>
-                    <textarea
-                        class="add-task-textarea"
-                        name="editTaskDescription"
-                        id="editTaskDescription"
-                        placeholder="Enter a Description"
-                    ></textarea>
-                </div>
-                <div class="board-overlay-task-edit-content-box">
-                    <label for="editTaskDueDate">Due date<span class="red-star">*</span></label>
-                    <div class="add-task-required-input">
-                        <input
-                            class="board-overlay-task-edit-content-box-input"
-                            type="date"
-                            name="editTaskDueDate"
-                            id="editTaskDueDate"
-                        />
-                        <div id="boardOverlayEditDueDateRequired" class="add-task-small-required d-none">
-                            This field is required
-                        </div>
-                    </div>
-                </div>
-                <div class="board-overlay-task-edit-content-box">
-                    <label>Prio</label>
-                    <div class="add-task-priority-content-box">
-                        <div
-                            class="add-task-priority white"
-                            onclick="boardOverlayEditPrioritySelect('Urgent')"
-                            id="boardOverlayEditPriorityUrgent"
-                        >
-                            <span>Urgent</span>
-                            <img src="./img/prio-urgent.svg" alt="" />
-                        </div>
-                        <div
-                            class="add-task-priority orange"
-                            onclick="boardOverlayEditPrioritySelect('Medium')"
-                            id="boardOverlayEditPriorityMedium"
-                        >
-                            <span>Medium</span>
-                            <img src="./img/prio-medium.svg" alt="" />
-                        </div>
-                        <div
-                            class="add-task-priority white"
-                            onclick="boardOverlayEditPrioritySelect('Low')"
-                            id="boardOverlayEditPriorityLow"
-                        >
-                            <span>Low</span>
-                            <img src="./img/prio-low.svg" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div class="board-overlay-task-edit-content-box">
-                    <label for="addTaskAssignedTo">Assigned to</label>
-                    <div
-                        class="add-task-dropdown add-task-dropdown-shadow"
-                        onclick="boardOverlayEditToggleContacts()"
-                    >
-                        <div class="add-task-dropdown-select" id="boardOverlayEditContactsDropdownButtonToToggle">
-                            <span id="addTaskAssignedTo">Select contacts to assign</span>
-                            <img
-                                src="./img/arrow-drop-down.svg"
-                                alt=""
-                                id="boardOverlayEditContactsDropdownArrow"
-                            />
-                        </div>
-                        <div class="d-none" id="boardOverlayEditContactsDropdownOptions"></div>
-                    </div>
-                    <div
-                        class="add-task-assigned-contactlist"
-                        id="boardOverlayEditAssignedContactListe"
-                    ></div>
-                </div>
-                <div class="board-overlay-task-edit-content-box pointer">
-                    <label>Subtasks</label>
-                    <div class="add-task-subtask-add" id="boardOverlayEditSubtaskContainer">
-                        <input
-                            id="boardOverlayEditSubtaskInput"
-                            type="text"
-                            placeholder="Add new subtask"
-                            class="board-overlay-task-edit-content-box-input"
-                            onfocus="boardOverlayEditSubtaskHandleFocusInput()"
-                        />
-                        <div
-                            id="boardOverlayEditSubtaskPlusIcon"
-                            class="add-task-subtask-icon"
-                            onclick="boardOverlayEditSubtaskFocusInput()"
-                        >
-                            <img class="filter" src="./img/add-plus.svg" alt="" />
-                        </div>
-                        <div
-                            id="boardOverlayEditSubtaskIconSection"
-                            class="add-task-subtask-add-icon-section-input d-none"
-                        >
-                            <div
-                                class="add-task-subtask-icon"
-                                onclick="boardOverlayEditSubtaskClearInput()"
-                            >
-                                <img src="./img/close.svg" alt="" class="filter" />
-                            </div>
-                            <hr class="add-task-subtask-devider" />
-                            <div
-                                class="add-task-subtask-icon"
-                                onclick="boardOverlayEditSubtaskSubmitInput()"
-                            >
-                                <img src="./img/check.svg" alt="" class="filter" />
-                            </div>
-                        </div>
-                    </div>
-                    <div id="boardOverlayEditSubtaskList" class="add-task-subtask-list"></div>
-                </div>
-            </div>
-            <div class="board-overlay-task-edit-right">
-                <button class="add-task-bottom-button btn-check" onclick="boardOverlayEditSubmit('${taskId}')">
-                    <span>Ok</span>
-                    <img src="./img/check.svg" alt="" />
-                </button>
-            </div>
-        </div>`;
-}
-
+/**
+ * Generates the contact list of all contacts and shows which are assigned to the selected task and which not
+ *
+ * @param {string} contactId - the id of the contact
+ * @param {string} initials - the initials of the contact name
+ * @param {string} name - the name of the contact
+ * @param {string} contactState - the state of the contact, either checked or unchecked
+ * @param {string} backgroundColor - the background color of the contact
+ * @returns
+ */
 function generateContactListEdit(
   contactId,
   initials,
@@ -302,17 +252,12 @@ function generateContactListEdit(
             </div>`;
 }
 
-function generateBoardOverlayEditSubtaskList(subtaskId, subtaskTitle) {
-  return `<div id="subtask'${subtaskId}'" class="add-task-subtask-task">
-                <li>${subtaskTitle}</li>
-                <div class="add-task-subtask-add-icon-section">
-                    <img onclick="boardOverlayEditSubtaskEdit(${subtaskId})" id="addTaskSubtaskEdit" src="./img/edit.svg" alt="" />
-                    <hr class="add-task-subtask-devider" />
-                    <img onclick="boardOverlayEditSubtaskDelete(${subtaskId})" id="addTaskSubtaskDelete" src="./img/delete.svg" alt="" />
-                </div>
-              </div>`;
-}
-
+/**
+ * Generate the HTML for the ability to edit a subtask
+ *
+ * @param {number} subtaskId - the id of the subtask in the subtask array of the selected task
+ * @returns
+ */
 function generateSubtaskEdit(subtaskId) {
   return `<div class="add-task-subtask-edit">
                 <input id="boardOverlayEditSubtaskInputEditValue" class="add-task-subtask-edit-input" type="text" />
@@ -326,15 +271,6 @@ function generateSubtaskEdit(subtaskId) {
                     </div>
                 </div>
               </div>`;
-}
-
-function generateBoardOverlayEditAssignedContactList(
-  initials,
-  backgroundColor
-) {
-  return `<div class="add-task-assigned-contactlist-contact" style="background-color: ${backgroundColor};">
-              <span>${initials}</span>
-            </div>`;
 }
 
 function generateTaskFieldDragEmpty(id) {

@@ -16,6 +16,10 @@ let addTaskAssignedContacts = [];
 let addTaskPosition = "ToDo";
 let addTaskOverlay = document.getElementById("addTaskOverlay");
 
+/**
+ * renders the addTask HTML page
+ * set task field position of the added task to ToDo
+ */
 async function AddTaskInit() {
   await addTaskContactListload();
   addTaskPosition = "ToDo";
@@ -23,6 +27,13 @@ async function AddTaskInit() {
   document.onclick = handleClickAddTaskOverlay;
 }
 
+/**
+ * renders the overlay of the addTask in the board HTML page
+ * if the window screen width is under 850 pixels, it redirects to the addtask HTML page
+ * reveals the overlay
+ *
+ * @param {string} position - the task field position of the added task
+ */
 async function addTask(position) {
   if (window.innerWidth < 850) {
     window.location.href = "add-task.html";
@@ -34,6 +45,12 @@ async function addTask(position) {
   }
 }
 
+/**
+ * by clicking on the different priority buttons, they change their color
+ * current selected priority is saved in variable
+ *
+ * @param {string} priority - the priority of the new task
+ */
 function addTaskPrioritySelect(priority) {
   let urgent = document.getElementById("addtaskPriorityUrgent");
   let medium = document.getElementById("addtaskPriorityMedium");
@@ -64,27 +81,31 @@ function addTaskPrioritySelect(priority) {
   }
 }
 
+/**
+ * Reveals the category list if hidden or
+ * Hides the category list if reveald
+ */
 function addTaskToggleCategory() {
-  if (addTaskCategoryState == false) {
-    document
-      .getElementById("addTaskCategoryDropdownOptions")
-      .classList.remove("d-none");
-    addTaskCategoryState = true;
-    document.getElementById("addTaskCategoryArrow").classList.add("turn180");
-  } else if (addTaskCategoryState == true) {
-    document
-      .getElementById("addTaskCategoryDropdownOptions")
-      .classList.add("d-none");
-    addTaskCategoryState = false;
-    document.getElementById("addTaskCategoryArrow").classList.remove("turn180");
-  }
+  document
+    .getElementById("addTaskCategoryDropdownOptions")
+    .classList.toggle("d-none");
+  document.getElementById("addTaskCategoryArrow").classList.toggle("turn180");
 }
 
+/**
+ * change the displayed category to the selected
+ *
+ * @param {string} category
+ */
 function addTaskSetCategory(category) {
   document.getElementById("addTaskCategory").innerHTML = `${category}`;
   addTaskCategory = category;
 }
 
+/**
+ * Reveals the contact list if hidden or
+ * Hides the contact list if reveald
+ */
 function addTaskToggleContacts() {
   if (addTaskContactsState == false) {
     document
@@ -104,6 +125,11 @@ function addTaskToggleContacts() {
   }
 }
 
+/**
+ * by selecting the icon the checked state of the contact changes
+ *
+ * @param {string} key - the id of the contact in the database
+ */
 function addTaskContactSelect(key) {
   for (let i = 0; i < addTaskContacts.length; i++) {
     if (
@@ -122,6 +148,9 @@ function addTaskContactSelect(key) {
   addTaskShowAssignedContactList();
 }
 
+/**
+ * pushes the information of each contact from the database into a new array and set it to unchecked
+ */
 async function addTaskContactListload() {
   try {
     let data = await readData(CONTACTS_URL);
@@ -139,6 +168,9 @@ async function addTaskContactListload() {
   }
 }
 
+/**
+ * displays the contacts in the contact list dropdown with also the state if checked or unchecked
+ */
 function addTaskShowContacts() {
   addTaskContactDropdown.innerHTML = "";
   for (let i = 0; i < addTaskContacts.length; i++) {
@@ -157,14 +189,23 @@ function addTaskShowContacts() {
   }
 }
 
+/**
+ * set the focus to the add subtask input
+ */
 function addTaskSubtaskFocusInput() {
   addTaskSubtaskInput.focus();
 }
 
+/**
+ * clears the input field of subtask input
+ */
 function addTaskSubtaskClearInput() {
   addTaskSubtaskInput.value = "";
 }
 
+/**
+ * when focused in the subtask input the plus icon hides and the cross and check icon reveal
+ */
 addTaskSubtaskInput.addEventListener("focus", () => {
   addTaskSubtaskContainer.classList.add("focused");
   document.getElementById("addTaskSubtaskPlusIcon").classList.add("d-none");
@@ -173,26 +214,40 @@ addTaskSubtaskInput.addEventListener("focus", () => {
     .classList.remove("d-none");
 });
 
+/**
+ * when subtask input loses focus a function is called
+ */
 addTaskSubtaskInput.addEventListener("blur", () => {
   setTimeout(addTaskSubtaskInputRemoveFocus, 100);
 });
 
+/**
+ * the cross and check icon hide and the plus icon reveal
+ */
 function addTaskSubtaskInputRemoveFocus() {
   addTaskSubtaskContainer.classList.remove("focused");
   document.getElementById("addTaskSubtaskPlusIcon").classList.remove("d-none");
   document.getElementById("addTaskSubtasIconSection").classList.add("d-none");
 }
 
+/**
+ * submits the input of a subtask to the subtasks array
+ */
 function addTaskSubtaskSubmitInput() {
-  let subtask = addTaskSubtaskInput.value;
-  addTaskSubtasks.push({
-    subtaskTitle: subtask,
-    subaddTaskPosition: "unchecked",
-  });
-  addTaskDisplaySubtasks();
-  addTaskSubtaskClearInput();
+  if (!addTaskSubtaskInput.value == "") {
+    let subtask = addTaskSubtaskInput.value;
+    addTaskSubtasks.push({
+      subtaskTitle: subtask,
+      subaddTaskPosition: "unchecked",
+    });
+    addTaskDisplaySubtasks();
+    addTaskSubtaskClearInput();
+  }
 }
 
+/**
+ * displays the subtasks of the new task
+ */
 function addTaskDisplaySubtasks() {
   addTaskSubtaskList.innerHTML = "";
   for (let i = 0; i < addTaskSubtasks.length; i++) {
@@ -201,11 +256,21 @@ function addTaskDisplaySubtasks() {
   }
 }
 
+/**
+ * deletes the selected subtask and rerender the subtasks
+ *
+ * @param {number} id - the id of the selected subtask
+ */
 function addTaskSubtaskDeleteTask(id) {
   addTaskSubtasks.splice(id, 1);
   addTaskDisplaySubtasks();
 }
 
+/**
+ * displays the edit input for the selected subtask
+ *
+ * @param {number} id - the id of the selected subtask
+ */
 function addTaskSubtaskEditTask(id) {
   addTaskSubtaskList.innerHTML = "";
   addTaskSubtaskList.innerHTML += generateAddTaskSubtaskEdit(id);
@@ -213,12 +278,24 @@ function addTaskSubtaskEditTask(id) {
     addTaskSubtasks[id]["subtaskTitle"];
 }
 
+/**
+ * submits the new input to the selected subtask
+ *
+ * @param {number} id - the id of the selcted subtask
+ */
 function subtaskSubmitEditTask(id) {
-  let subtask = document.getElementById("subtaskInputEditValue").value;
-  addTaskSubtasks[id]["subtaskTitle"] = subtask;
-  addTaskDisplaySubtasks();
+  if (!document.getElementById("subtaskInputEditValue").value == "") {
+    let subtask = document.getElementById("subtaskInputEditValue").value;
+    addTaskSubtasks[id]["subtaskTitle"] = subtask;
+    addTaskDisplaySubtasks();
+  }
 }
 
+/**
+ * checks if all the required fields are filled out
+ * submit inputs of the new task to the database
+ * message appears saying new task is added
+ */
 function addTaskSubmit() {
   let required = addTaskCheckRequired();
   if (required) {
@@ -244,6 +321,10 @@ function addTaskSubmit() {
   }
 }
 
+/**
+ * hides the add Task overlay
+ * rerenders the tasks
+ */
 function boardAddTaskHideOverlay() {
   addTaskPosition = "ToDo";
   boardRenderTasks();
@@ -251,6 +332,12 @@ function boardAddTaskHideOverlay() {
   addTaskHideOverlay();
 }
 
+/**
+ * checks if the required inputs have a value
+ * displays a message if no value is detected
+ *
+ * @returns
+ */
 function addTaskCheckRequired() {
   let title = false,
     dueDate = false,
@@ -300,109 +387,13 @@ function addTaskCheckRequired() {
   return required;
 }
 
+/**
+ * pushes the assigned contacts from in a new array
+ */
 function addTaskAssignedContactList() {
   for (let i = 0; i < addTaskContacts.length; i++) {
     if (addTaskContacts[i]["state"] == "checked") {
       addTaskAssignedContacts.push(addTaskContacts[i]["id"]);
-    }
-  }
-}
-
-function addTaskSubmitSite() {
-  let required = addTaskCheckRequired();
-  if (required) {
-    addTaskAssignedContactList();
-    let title = document.getElementById("addTaskTitle").value;
-    let description = document.getElementById("addTaskDescription").value;
-    let dueDate = document.getElementById("addTaskDueDate").value;
-    let assignedContactsObject = convertArrayToObject(addTaskAssignedContacts);
-    let subtasksObject = convertArrayToObject(addTaskSubtasks);
-    let task = {
-      title: title,
-      description: description,
-      dueDate: dueDate,
-      priority: addTaskPriority,
-      category: addTaskCategory,
-      assignedContacts: assignedContactsObject,
-      subtasks: subtasksObject,
-      position: addTaskPosition,
-    };
-    postData(TASKS_URL, task);
-    document.getElementById("taskAddedSlide").classList.remove("d-none");
-    document.getElementById("taskAddedSlide").classList.add("transition-up");
-    setTimeout(boardRedirect, 2000);
-  }
-}
-
-function boardRedirect() {
-  window.location.href = "board.html";
-}
-
-function showOverlayAddTask() {
-  addTaskOverlay.classList.remove("d-none");
-}
-
-function addTaskHideOverlay() {
-  addTaskOverlay.classList.add("d-none");
-}
-
-async function addTaskClearInputs() {
-  document.getElementById("addTaskTitle").value = "";
-  document.getElementById("addTaskDescription").value = "";
-  await addTaskContactListload();
-  document.getElementById("addTaskDueDate").value = "";
-  addTaskPrioritySelect("Medium");
-  document.getElementById("addTaskCategory").innerHTML = "Select task category";
-  document.getElementById("addTaskSubtaskInput").value = "";
-  addTaskSubtasks = [];
-  addTaskDisplaySubtasks();
-}
-
-function handleClickAddTaskOverlay(event) {
-  const modal = document.getElementById("addTaskAssignedToDropdownOptions");
-  const dropdown = document.getElementById(
-    "addTaskContactsDropdownButtonToToggle"
-  );
-  const isClickInside = modal.contains(event.target);
-  const isClickedDropdown = dropdown.contains(event.target);
-  if (
-    !isClickInside &&
-    !modal.classList.contains("d-none") &&
-    !isClickedDropdown
-  ) {
-    addTaskToggleContacts();
-  }
-}
-
-document.addEventListener("click", function (event) {
-  let modal = document.getElementById("addTaskCategoryDropdownOptions");
-  let dropdown = document.getElementById("addTaskCategoryContainer");
-  let isClickInside = modal.contains(event.target);
-  let isClickedDropdown = dropdown.contains(event.target);
-  if (
-    !isClickInside &&
-    !modal.classList.contains("d-none") &&
-    !isClickedDropdown
-  ) {
-    addTaskToggleCategory();
-  }
-});
-
-function addTaskShowAssignedContactList() {
-  let assignedContactList = document.getElementById(
-    "addTaskAssignedToContactList"
-  );
-  assignedContactList.innerHTML = "";
-
-  for (let i = 0; i < addTaskContacts.length; i++) {
-    if (addTaskContacts[i]["state"] == "checked") {
-      let name = addTaskContacts[i]["contact"];
-      let initials = getInitials(name);
-      let contactBackgroundColor = addTaskContacts[i]["color"];
-      assignedContactList.innerHTML += generateAddTaskAssignedContacts(
-        initials,
-        contactBackgroundColor
-      );
     }
   }
 }

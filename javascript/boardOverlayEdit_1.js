@@ -5,16 +5,29 @@ let boardOverlayEditSubtasks = [];
 let boardOverlayEditAssignedContacts = [];
 let boardOverlayEditPriority;
 
+/**
+ * Renders the Edit Overlay and fill the with content of the selected task
+ *
+ * @param {string} id - the id of the selected task in the database
+ */
 function boardOverlayEditRender(id) {
   boardOverlayEditDisplay();
   boardOverlayEditDisplayTask(id);
   document.onclick = handleClick;
 }
 
+/**
+ * Reveals the edit overlay
+ */
 function boardOverlayEditDisplay() {
   boardOverlayEditTask.classList.remove("d-none");
 }
 
+/**
+ * fills the fields with content of selected task
+ *
+ * @param {string} id - the id of the selected task in the database
+ */
 function boardOverlayEditDisplayTask(id) {
   let task = boardTasks[id];
   boardOverlayEditTask.innerHTML = "";
@@ -31,6 +44,12 @@ function boardOverlayEditDisplayTask(id) {
   boardOverlayEditAssignedContactsListUnderDropdown();
 }
 
+/**
+ * pushes the information of each contact from the database into a new array and set it to unchecked
+ * if the task has assigned contacts it will go into function to change unchecked to checked
+ *
+ * @param {object} task - the content of the selected task
+ */
 function boardOverlayEditPullContacts(task) {
   for (let key in boardContacts) {
     boardOverlayEditContacts.push({
@@ -42,11 +61,15 @@ function boardOverlayEditPullContacts(task) {
   }
   if (task.hasOwnProperty("assignedContacts")) {
     let assignedContacts = task["assignedContacts"];
-
     boardOverlayEditPushCheckedContacts(assignedContacts);
   }
 }
 
+/**
+ * checks what contact is assigned to the selected task and set the value state to checked if it is assigned
+ *
+ * @param {Array} assignedContacts - the assigned contacts with all needed information in an array
+ */
 function boardOverlayEditPushCheckedContacts(assignedContacts) {
   for (let i = 0; i < boardOverlayEditContacts.length; i++) {
     let contactId = boardOverlayEditContacts[i]["id"];
@@ -58,6 +81,10 @@ function boardOverlayEditPushCheckedContacts(assignedContacts) {
   }
 }
 
+/**
+ * Reveals the contact list if hidden or
+ * Hides the contact list if reveald
+ */
 function boardOverlayEditToggleContacts() {
   if (boardOverlayEditContactsState == false) {
     document
@@ -79,6 +106,9 @@ function boardOverlayEditToggleContacts() {
   }
 }
 
+/**
+ * displays the contacts in the contact list dropdown with also the state if checked or unchecked
+ */
 function boardOverlayEditDisplayContacts() {
   document.getElementById("boardOverlayEditContactsDropdownOptions").innerHTML =
     "";
@@ -100,6 +130,11 @@ function boardOverlayEditDisplayContacts() {
   }
 }
 
+/**
+ * by selecting the icon the checked state of the contact changes
+ *
+ * @param {string} key - the id of the contact in the database
+ */
 function boardOverlayEditSelectContact(key) {
   for (let i = 0; i < boardOverlayEditContacts.length; i++) {
     if (
@@ -118,12 +153,20 @@ function boardOverlayEditSelectContact(key) {
   boardOverlayEditAssignedContactsListUnderDropdown();
 }
 
+/**
+ * hides the edit overlay and rerenders the tasks
+ */
 function boardOverlayEditTaskHide() {
   boardOverlayEditTask.classList.add("d-none");
   boardRenderTasks();
   boardSearchInput.value = "";
 }
 
+/**
+ * pushes the subtasks of the selected task in an array
+ *
+ * @param {object} task - the content of the selected task
+ */
 function boardOverlayEditPullSubtasks(task) {
   if (task.hasOwnProperty("subtasks")) {
     let subtasks = task["subtasks"];
@@ -136,10 +179,18 @@ function boardOverlayEditPullSubtasks(task) {
   }
 }
 
+/**
+ * set the focus to the add subtask input
+ */
 function boardOverlayEditSubtaskFocusInput() {
   document.getElementById("boardOverlayEditSubtaskInput").focus();
 }
 
+/**
+ * hide the plus icon
+ * reveal the cross and the check icon
+ * when clicked outside the input, focus is removed
+ */
 function boardOverlayEditSubtaskHandleFocusInput() {
   document
     .getElementById("boardOverlayEditSubtaskContainer")
@@ -157,6 +208,10 @@ function boardOverlayEditSubtaskHandleFocusInput() {
     });
 }
 
+/**
+ * hide the plus icon
+ * reveal the cross and the check icon
+ */
 function boardOverlayEditSubtaskRemoveFocus() {
   document
     .getElementById("boardOverlayEditSubtaskContainer")
@@ -169,16 +224,24 @@ function boardOverlayEditSubtaskRemoveFocus() {
     .classList.add("d-none");
 }
 
+/**
+ * submits the input of a subtask to the subtasks array
+ */
 function boardOverlayEditSubtaskSubmitInput() {
-  let subtask = document.getElementById("boardOverlayEditSubtaskInput").value;
-  boardOverlayEditSubtasks.push({
-    subtaskTitle: subtask,
-    subtaskState: "unchecked",
-  });
-  boardOverlayEditDisplaySubtasks();
-  boardOverlayEditSubtaskClearInput();
+  if (!document.getElementById("boardOverlayEditSubtaskInput").value == "") {
+    let subtask = document.getElementById("boardOverlayEditSubtaskInput").value;
+    boardOverlayEditSubtasks.push({
+      subtaskTitle: subtask,
+      subtaskState: "unchecked",
+    });
+    boardOverlayEditDisplaySubtasks();
+    boardOverlayEditSubtaskClearInput();
+  }
 }
 
+/**
+ * displays the subtasks of the selected task
+ */
 function boardOverlayEditDisplaySubtasks() {
   document.getElementById("boardOverlayEditSubtaskList").innerHTML = "";
   for (let i = 0; i < boardOverlayEditSubtasks.length; i++) {
@@ -188,15 +251,28 @@ function boardOverlayEditDisplaySubtasks() {
   }
 }
 
+/**
+ * clears the input field of subtask input
+ */
 function boardOverlayEditSubtaskClearInput() {
   document.getElementById("boardOverlayEditSubtaskInput").value = "";
 }
 
+/**
+ * deletes the selected subtask and rerender the subtasks
+ *
+ * @param {number} id - the id of the selected subtask
+ */
 function boardOverlayEditSubtaskDelete(id) {
   boardOverlayEditSubtasks.splice(id, 1);
   boardOverlayEditDisplaySubtasks();
 }
 
+/**
+ * displays the edit input for the selected subtask
+ *
+ * @param {number} id - the id of the selected subtask
+ */
 function boardOverlayEditSubtaskEdit(id) {
   document.getElementById("boardOverlayEditSubtaskList").innerHTML = "";
   document.getElementById("boardOverlayEditSubtaskList").innerHTML +=
@@ -205,14 +281,32 @@ function boardOverlayEditSubtaskEdit(id) {
     boardOverlayEditSubtasks[id]["subtaskTitle"];
 }
 
+/**
+ * submits the new input to the selected subtask
+ *
+ * @param {number} id - the id of the selcted subtask
+ */
 function boardOverlayEditSubtaskSubmitEdit(id) {
-  let subtask = document.getElementById(
-    "boardOverlayEditSubtaskInputEditValue"
-  ).value;
-  boardOverlayEditSubtasks[id]["subtaskTitle"] = subtask;
-  boardOverlayEditDisplaySubtasks();
+  if (
+    !document.getElementById("boardOverlayEditSubtaskInputEditValue").value ==
+    ""
+  ) {
+    let subtask = document.getElementById(
+      "boardOverlayEditSubtaskInputEditValue"
+    ).value;
+    boardOverlayEditSubtasks[id]["subtaskTitle"] = subtask;
+    boardOverlayEditDisplaySubtasks();
+  }
 }
 
+/**
+ * checks if all the required fields are filled out
+ * submit changes of the edited task to the database
+ * rerenders the tasks
+ * closes the edit overlay
+ *
+ * @param {string} id - the id of the selected task
+ */
 async function boardOverlayEditSubmit(id) {
   let required = boardOverlayEditSubmitCheckRequired();
   if (required) {
@@ -245,6 +339,12 @@ async function boardOverlayEditSubmit(id) {
   }
 }
 
+/**
+ * checks if the required inputs have a value
+ * displays a message if no value is detected
+ *
+ * @returns
+ */
 function boardOverlayEditSubmitCheckRequired() {
   let title = false,
     dueDate = false;
@@ -277,81 +377,4 @@ function boardOverlayEditSubmitCheckRequired() {
     required = true;
   }
   return required;
-}
-
-function boardOverlayEditAssignedContactList() {
-  boardOverlayEditAssignedContacts = [];
-  for (let i = 0; i < boardOverlayEditContacts.length; i++) {
-    if (boardOverlayEditContacts[i]["state"] == "checked") {
-      boardOverlayEditAssignedContacts.push(boardOverlayEditContacts[i]["id"]);
-    }
-  }
-}
-
-function boardOverlayEditPrioritySelect(priority) {
-  let urgent = document.getElementById("boardOverlayEditPriorityUrgent");
-  let medium = document.getElementById("boardOverlayEditPriorityMedium");
-  let low = document.getElementById("boardOverlayEditPriorityLow");
-  if (priority == "Urgent") {
-    urgent.classList.add("red");
-    urgent.classList.remove("white");
-    medium.classList.remove("orange");
-    medium.classList.add("white");
-    low.classList.remove("green");
-    boardOverlayEditPriority = "Urgent";
-  } else if (priority == "Medium") {
-    medium.classList.add("orange");
-    medium.classList.remove("white");
-    urgent.classList.remove("red");
-    urgent.classList.add("white");
-    low.classList.remove("green");
-    low.classList.add("white");
-    boardOverlayEditPriority = "Medium";
-  } else if (priority == "Low") {
-    low.classList.add("green");
-    low.classList.remove("white");
-    medium.classList.remove("orange");
-    medium.classList.add("white");
-    urgent.classList.remove("red");
-    urgent.classList.add("white");
-    boardOverlayEditPriority = "Low";
-  }
-}
-
-function handleClick(event) {
-  const modal = document.getElementById(
-    "boardOverlayEditContactsDropdownOptions"
-  );
-  const dropdown = document.getElementById(
-    "boardOverlayEditContactsDropdownButtonToToggle"
-  );
-  const isClickInside = modal.contains(event.target);
-  const isClickedDropdown = dropdown.contains(event.target);
-  if (
-    !isClickInside &&
-    !modal.classList.contains("d-none") &&
-    !isClickedDropdown
-  ) {
-    boardOverlayEditToggleContacts();
-  }
-}
-
-function boardOverlayEditAssignedContactsListUnderDropdown() {
-  let assignedContactList = document.getElementById(
-    "boardOverlayEditAssignedContactListe"
-  );
-  assignedContactList.innerHTML = "";
-
-  for (let i = 0; i < boardOverlayEditContacts.length; i++) {
-    if (boardOverlayEditContacts[i]["state"] == "checked") {
-      let name = boardOverlayEditContacts[i]["contact"];
-      let initials = getInitials(name);
-      let contactBackgroundColor = boardOverlayEditContacts[i]["color"];
-      assignedContactList.innerHTML +=
-        generateBoardOverlayEditAssignedContactList(
-          initials,
-          contactBackgroundColor
-        );
-    }
-  }
 }
