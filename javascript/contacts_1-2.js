@@ -238,7 +238,7 @@ function closeDetailedContactMobile() {
 
 
 /**
- * This function toggles the contact menu (edit/delete) on mobile devices
+ * This function toggles the contact menu on mobile devices
  */
 function toggleContactMenu() {
   let container = document.getElementById("detailedcontactmobile");
@@ -258,31 +258,6 @@ function toggleContactMenu() {
   document.getElementById("mobileContactMenu").classList.toggle("d-none");
   document.getElementById("mobileContactMenu").classList.toggle("d-flex");
 }
-
-
-/**
- * This eventlistener closes/toggles the contact menu (edit/delete) on mobile devices
- */
-document.addEventListener("click", function (event) {
-  let menuContainer = document.getElementById("mobileContactMenu");
-  let background = document.getElementById("detailedcontactmobile");
-  
-  let isClickInsideMenu = menuContainer.contains(event.target);
-  let isClickInsideBackground = background.contains(event.target);
-
-  console.log("isClickInsideMenu:", isClickInsideMenu);
-  console.log("isClickInsideBackground:", isClickInsideBackground);
-  console.log("menuContainer is visible:", !menuContainer.classList.contains("d-none"));
-
-  if (
-    !isClickInsideMenu &&  // Klick erfolgt außerhalb des Menüs
-    !menuContainer.classList.contains("d-none") && // Menü ist geöffnet
-    !isClickInsideBackground // Klick erfolgt nicht auf den Hintergrund
-  ) {
-    console.log("toggleContactMenu triggered");
-    toggleContactMenu(); // Menü wird erneut umgeschaltet
-  }
-});
 
 
 /**
