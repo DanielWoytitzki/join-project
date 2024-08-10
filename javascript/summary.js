@@ -2,7 +2,9 @@
 const BASE_URL = "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
 */
 
+
 init();
+
 
 /**
  * This function checks if an user or guest is logged in
@@ -23,6 +25,7 @@ function checkIfUserOrGuest() {
     }
 }
 
+
 /**
  * This function generates the greeting for an user
  * @param {string} greetingText - Greeting text depending on the local time
@@ -36,6 +39,7 @@ function generateGreetingForUser(greetingText, userDetailsName) {
     `;
 }
 
+
 /**
  * This function generates the greeting for a guest
  * @param {string} greetingText - Greeting text depending on the local time
@@ -47,6 +51,7 @@ function generateGreetingForGuest(greetingText) {
     `;
 }
 
+
 /**
  * This function checks the current local time
  */
@@ -55,6 +60,7 @@ function checkLocalTime() {
     var currentLocalTime = localDate.getHours();
     return generateGreetingText(currentLocalTime);
 }
+
 
 /**
  * This function generates the greeting depending on the current local time
@@ -74,6 +80,7 @@ function generateGreetingText(currentLocalTime) {
     return greetingText;
 }
 
+
 /**
  * This function fetches the tasks from the database
  * @returns An object, empty or filled with all tasks
@@ -88,6 +95,7 @@ async function fetchTasksFromDatabase() {
     }
 }
 
+
 /**
  * This function gets the number of tasks "To-do"
  * @param {object} tasks -  All tasks within the database
@@ -97,6 +105,7 @@ function getNumberOfTasksToDo(tasks) {
     let tasksArray = Object.values(tasks);
     return tasksArray.filter(task => task.position === 'ToDo').length;
 }
+
 
 /**
  * This function gets the number of tasks "Done"
@@ -108,6 +117,7 @@ function getNumberOfTasksDone(tasks) {
     return tasksArray.filter(task => task.position === 'Done').length;
 }
 
+
 /**
  * This function gets the number of "Urgent" tasks
  * @param {object} tasks -  All tasks within the database
@@ -117,6 +127,7 @@ function getNumberOfUrgentTasks(tasks) {
     let tasksArray = Object.values(tasks);
     return tasksArray.filter(task => task.priority === 'Urgent').length;
 }
+
 
 /**
  * This function gets the date of the upcoming deadline
@@ -140,6 +151,7 @@ function getDateOfUpcomingDeadline(tasks) {
     return upcomingDate.toLocaleDateString('en-US', options);
 }
 
+
 /**
  * This function gets the number of "tasks in board"
  * @param {object} tasks -  All tasks within the database
@@ -149,6 +161,7 @@ function getNumberOfTasksInBoard(tasks) {
     let tasksArray = Object.values(tasks);
     return tasksArray.length;
 }
+
 
 /**
  * This function gets the number of "tasks in progress"
@@ -160,6 +173,7 @@ function getNumberOfTasksInProgress(tasks) {
     return tasksArray.filter(task => task.position === 'InProgress').length;
 }
 
+
 /**
  * This function gets the number of "awaiting feedback" tasks
  * @param {object} tasks -  All tasks within the database
@@ -169,6 +183,7 @@ function getNumberOfTasksAwaitingFeedback(tasks) {
     let tasksArray = Object.values(tasks);
     return tasksArray.filter(task => task.position === 'AwaitFeedback').length;
 }
+
 
 /**
  * This function initials the numbers
@@ -201,6 +216,7 @@ async function init() {
     }
     checkIfUserOrGuest();
 }
+
 
 /**
  * This function forwards one to the board page

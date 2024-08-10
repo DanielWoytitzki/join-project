@@ -110,7 +110,7 @@ function fetchUserDetailsFromLocalStorage() {
  * This function forwards one to the sign-up page
  */
 function forwardToSignUp() {
-    window.location.href = 'signup.html';
+    window.location.href = './signup.html';
 }
 
 
@@ -118,5 +118,5 @@ function forwardToSignUp() {
  * This function forwards one to the summary page as guest
  */
 function logInAsGuest() {
-    window.location.href = 'summary.html';
+    window.location.href = './summary.html';
 }

@@ -9,6 +9,7 @@ function animateLogo() {
   }, 500);
 }
 
+
 /**
  * This function renders all templates (e. g. header, navigation bar on desktop/mobile)
  */
@@ -19,6 +20,7 @@ function renderTemplates() {
   insertUserInitials();
   changeNavLinkBackgroundColor();
 }
+
 
 /**
  * This function generates the template for the header
@@ -50,6 +52,7 @@ function generateHTMLForHeader() {
   `;
 }
 
+
 /**
  * This function toggles a burger menu
  */
@@ -60,6 +63,7 @@ function toggleMenu() {
   document.getElementById("menu").classList.toggle("show-header-overlay-menu");
   document.getElementById("menu").classList.toggle("d-none");
 }
+
 
 /**
  * This function generates the template for the navigation bar on desktop
@@ -105,6 +109,7 @@ function generateHTMLForDesktopNav() {
   `;
 }
 
+
 /**
  * This function generates the template for the navigation bar on mobile
  * @returns HTML-Code
@@ -138,12 +143,14 @@ function generateHTMLForMobileNav() {
   `;
 }
 
+
 /**
  * This function forwards one to the help page
  */
 function forwardToHelp() {
-  window.location.href = "help.html";
+  window.location.href = "./help.html";
 }
+
 
 /**
  * This function fetchs ones user details (status (e. g. "logged in"), name and email) from the session storage
@@ -158,6 +165,7 @@ function fetchUserDetailsFromSessionStorage() {
   }
 }
 
+
 /**
  * This function deletes ones user details (status (e. g. "logged in"), name and email) from the session storage
  * = log out
@@ -166,6 +174,7 @@ function deleteUserDetailsFromSessionStorage() {
   sessionStorage.clear();
   window.location.href = "./index.html";
 }
+
 
 /**
  * This function inserts the user's initials into the header
@@ -183,6 +192,7 @@ function insertUserInitials() {
     document.getElementById("userInitials").innerHTML = "G";
   }
 }
+
 
 const BASE_URL =
   "https://join-7b4c8-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -256,6 +266,10 @@ function convertArrayToObject(array) {
   return obj;
 }
 
+
+/**
+ * This function changes the background color of the selected nav-link
+ */
 function changeNavLinkBackgroundColor() {
   const path = window.location.pathname;
   let fileName = path.substring(path.lastIndexOf("/") + 1);

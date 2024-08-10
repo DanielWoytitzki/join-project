@@ -87,7 +87,7 @@ function signUp() {
             document.getElementById('confirmedPassword').value = '';
             successfullSignUp();
             setTimeout(() => {
-                window.location.href = 'login.html';
+                window.location.href = './login.html';
             }, 800);
         });        
     }
@@ -98,7 +98,7 @@ function signUp() {
  * This function forwards one to the login page after a successfully sign up
  */
 function forwardToLogIn() {
-    window.location.href = 'login.html';
+    window.location.href = './login.html';
 }
 
 
