@@ -198,15 +198,20 @@ function boardDisplayNoTasks() {
  * @param {string} id - the id of the task in the database
  */
 function boardOverlayRender(id) {
-  boardOverlayDisplay();
+  boardOverlayDisplay(id);
   boardOverlayDisplayTask(id);
 }
 
 /**
  * reveals the overlay HTML
  */
-function boardOverlayDisplay() {
+function boardOverlayDisplay(id) {
   boardOverlayTask.classList.remove("d-none");
+  setTimeout(() => {
+    document
+      .getElementById(`taskOverlay${id}`)
+      .classList.remove("transition-in-from-right");
+  }, 200);
 }
 
 /**
