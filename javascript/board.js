@@ -10,12 +10,19 @@ let boardSearchInput = document.getElementById("boardSearchInput");
 let boardOverlayTask = document.getElementById("taskOverlay");
 let currentDraggedElement;
 
+/**
+ * Initializing the Board by running various functions
+ */
 async function boardInit() {
   await boardPullContacts();
   await boardRenderTasks();
   renderTemplates();
 }
 
+/**
+ * Pulling the contacts from the database and stores them in a variable
+ * if an error occurs, an error message appears in the console
+ */
 async function boardPullContacts() {
   try {
     boardContacts = await readData(CONTACTS_URL);
@@ -24,6 +31,11 @@ async function boardPullContacts() {
   }
 }
 
+/**
+ * Clear the borad
+ * Pulling the tasks from the database and stores them in a variable
+ * If an error occurs, an error message appears in the console
+ */
 async function boardRenderTasks() {
   boardClearTasks();
   boardTasks = "";
@@ -36,6 +48,9 @@ async function boardRenderTasks() {
   }
 }
 
+/**
+ * Clearing the task fields
+ */
 function boardClearTasks() {
   boardPositionToDo.innerHTML = "";
   boardPositionInProgress.innerHTML = "";
@@ -43,6 +58,9 @@ function boardClearTasks() {
   boardPositionDone.innerHTML = "";
 }
 
+/**
+ * Iterating through each task to generate
+ */
 function boardDisplay() {
   for (let key in boardTasks) {
     let task = boardTasks[key];
@@ -56,11 +74,25 @@ function boardDisplay() {
   boardTaskFieldDragEmpty();
 }
 
-function boardDisplayTasks(position, key, item) {
+/**
+ * Generate tasks in the right position field
+ *
+ * @param {string} position - the task field
+ * @param {string} key - the id of the task in the database
+ * @param {object} task - the content of the task
+ */
+function boardDisplayTasks(position, key, task) {
   let column = "taskField" + position;
-  document.getElementById(column).innerHTML += generateTaskHTML(key, item);
+  document.getElementById(column).innerHTML += generateTaskHTML(key, task);
 }
 
+/**
+ * checks if a task has assigned contacts
+ * displays the contact initials on the cards
+ *
+ * @param {object} task - the content of the task
+ * @param {string} id - the id of the task in the database
+ */
 function boardDisplayTasksAssignedContacts(task, id) {
   if (task.hasOwnProperty("assignedContacts")) {
     let assignedContacts = task["assignedContacts"];
@@ -95,6 +127,15 @@ function boardDisplayTasksAssignedContacts(task, id) {
   }
 }
 
+/**
+ * checks if a task has subtasks
+ * displays the subtask-progress on the cards
+ * displays the count of unfinished subtasks on the cards
+ * displays the subtask-total-count on the cards
+ *
+ * @param {object} task - the content of the task
+ * @param {string} id - the id of the task in the database
+ */
 function boardDisplayTasksSubtasks(task, id) {
   if (task.hasOwnProperty("subtasks")) {
     let taskId = document.getElementById(`boardTasksSubtasks${id}`);
@@ -118,16 +159,25 @@ function boardDisplayTasksSubtasks(task, id) {
   }
 }
 
-function boardDisplayCategoryBackground(task, key) {
+/**
+ * gives a background color to a div with a certain category value in the database
+ *
+ * @param {object} task - the content of the task
+ * @param {string} id - the id of the task in the database
+ */
+function boardDisplayCategoryBackground(task, id) {
   if (task["category"] == "User Story") {
-    document.getElementById(`boardTasksCategory${key}`).style.background =
+    document.getElementById(`boardTasksCategory${id}`).style.background =
       "#0038FF";
   } else if (task["category"] == "Technical Task") {
-    document.getElementById(`boardTasksCategory${key}`).style.background =
+    document.getElementById(`boardTasksCategory${id}`).style.background =
       "#20D7C1";
   }
 }
 
+/**
+ * displays a special-card when no task is in a task field
+ */
 function boardDisplayNoTasks() {
   if (!boardPositionToDo.hasChildNodes()) {
     boardPositionToDo.innerHTML += generateNoTaskAwaitFeedback();
@@ -143,16 +193,29 @@ function boardDisplayNoTasks() {
   }
 }
 
-/* ======== Drag & Drop ====== */
-
+/**
+ * assign the id of the dragged element to a variabele
+ *
+ * @param {string} id - the id of the task in the database
+ */
 function startDragging(id) {
   currentDraggedElement = id;
 }
 
+/**
+ * prevents default behaviour
+ *
+ * @param {event} ev - drag event listener
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
+/**
+ * saves the position of the droped element to the database
+ *
+ * @param {string} position - position of dragged element
+ */
 function moveTo(position) {
   let path = TASKS_URL + "/" + currentDraggedElement + "/position";
   let data = position;
@@ -160,6 +223,9 @@ function moveTo(position) {
   setTimeout(boardRenderTasks, 200);
 }
 
+/**
+ * generates a hidden empty task border to every task field
+ */
 function boardTaskFieldDragEmpty() {
   boardPositionToDo.innerHTML += generateTaskFieldDragEmpty("ToDo");
   boardPositionInProgress.innerHTML += generateTaskFieldDragEmpty("InProgress");
@@ -168,22 +234,42 @@ function boardTaskFieldDragEmpty() {
   boardPositionDone.innerHTML += generateTaskFieldDragEmpty("Done");
 }
 
+/**
+ * reveal the hidden empty task
+ *
+ * @param {string} id - the id of the task in the database
+ */
 function highlight(id) {
   document.getElementById(`taskFieldEmpty${id}`).classList.remove("d-none");
 }
 
+/**
+ * hide the empty revealed task
+ *
+ * @param {string} id - the id of the task in the database
+ */
 function removeHighlight(id) {
   document.getElementById(`taskFieldEmpty${id}`).classList.add("d-none");
 }
 
+/**
+ * add a rotation class to the current dragged element
+ *
+ * @param {string} id - the id of the task in the database
+ */
 function whileDragging(id) {
   document.getElementById(`task${id}`).classList.add("task-on-drag-rotate");
 }
 
-/* ======== Search ====== */
-
+/**
+ * listens for a input in search bar
+ */
 boardSearchInput.addEventListener("input", boardSearch);
 
+/**
+ * put searched words in lower case
+ * checks if the word is in the title or description of any task
+ */
 function boardSearch() {
   boardClearTasks();
   let filterWord = boardSearchInput.value.toLowerCase();
@@ -200,26 +286,43 @@ function boardSearch() {
   boardDisplayNoTasks();
 }
 
-function boardDisplaySearch(key) {
-  let task = boardTasks[key];
+/**
+ * displays only the matching tasks from the search
+ *
+ * @param {string} id - the id of the task in the database
+ */
+function boardDisplaySearch(id) {
+  let task = boardTasks[id];
   let position = task["position"];
-  boardDisplayTasks(position, key, task);
-  boardDisplayTasksAssignedContacts(task, key);
-  boardDisplayTasksSubtasks(task, key);
-  boardDisplayCategoryBackground(task, key);
+  boardDisplayTasks(position, id, task);
+  boardDisplayTasksAssignedContacts(task, id);
+  boardDisplayTasksSubtasks(task, id);
+  boardDisplayCategoryBackground(task, id);
 }
 
-/* ======== Overlay ====== */
-
+/**
+ * renders the overlay of specific task when task is clicked
+ *
+ * @param {string} id - the id of the task in the database
+ */
 function boardOverlayRender(id) {
   boardOverlayDisplay();
   boardOverlayDisplayTask(id);
 }
 
+/**
+ * reveals the overlay HTML
+ */
 function boardOverlayDisplay() {
   boardOverlayTask.classList.remove("d-none");
 }
 
+/**
+ * clears the overlay content
+ * generate content to overlay
+ *
+ * @param {string} id - the id of the task in the database
+ */
 function boardOverlayDisplayTask(id) {
   boardOverlayTask.innerHTML = "";
   let task = boardTasks[id];
@@ -230,6 +333,13 @@ function boardOverlayDisplayTask(id) {
   boardOverlayDisplayTaskCategoryBackgroundColor(task, id);
 }
 
+/**
+ * checks if the selected task has assigned contacts
+ * display the assigned contact initials with corresponding background color
+ *
+ * @param {object} task - the content of the selected task in the database
+ * @param {string} id - the id of the cselected task in the database
+ */
 function boardOverlayDisplayTaskAssignedContacts(task, id) {
   if (task.hasOwnProperty("assignedContacts")) {
     let assignedContacts = task["assignedContacts"];
@@ -252,6 +362,14 @@ function boardOverlayDisplayTaskAssignedContacts(task, id) {
   }
 }
 
+/**
+ * checks if the selected task has subtasks
+ * display the checked subtasks
+ * display the unchecked subtasks
+ *
+ * @param {object} task - the content of the selected task in the database
+ * @param {string} id - the id of the cselected task in the database
+ */
 function boardOverlayDisplayTaskSubtasks(task, id) {
   if (task.hasOwnProperty("subtasks")) {
     let taskId = document.getElementById(`boardOverlayTaskSubtasks${id}`);
@@ -281,16 +399,30 @@ function boardOverlayDisplayTaskSubtasks(task, id) {
   }
 }
 
-function boardOverlayDisplayTaskCategoryBackgroundColor(task, key) {
+/**
+ * gives a background color to a div with a certain category value of the task
+ *
+ * @param {object} task - the content of the selected task
+ * @param {string} id - the id of the selected task in the database
+ */
+function boardOverlayDisplayTaskCategoryBackgroundColor(task, id) {
   if (task["category"] == "User Story") {
-    document.getElementById(`categoryOverlay${key}`).style.background =
+    document.getElementById(`categoryOverlay${id}`).style.background =
       "#0038FF";
   } else if (task["category"] == "Technical Task") {
-    document.getElementById(`categoryOverlay${key}`).style.background =
+    document.getElementById(`categoryOverlay${id}`).style.background =
       "#20D7C1";
   }
 }
 
+/**
+ * checks if the subtask is checked or unchecked
+ * post data of current state to the database
+ *
+ * @param {string} state - state of selected subtask
+ * @param {string} id - the id of the selected task in the database
+ * @param {string} key - the id of the selected subtask of the selected task
+ */
 async function boardOverlayTaskSubtaskToggle(state, id, key) {
   if (state == "checked") {
     let path = TASKS_URL + "/" + id + "/subtasks/" + key + "/subtaskState";
@@ -307,12 +439,20 @@ async function boardOverlayTaskSubtaskToggle(state, id, key) {
   }
 }
 
+/**
+ * hides the overlay of the selected task
+ */
 async function boardOverlayTaskHide() {
   boardOverlayTask.classList.add("d-none");
   await boardRenderTasks();
   boardSearchInput.value = "";
 }
 
+/**
+ * deletes selected task in the database
+ *
+ * @param {string} id - the id of the selected task in the database
+ */
 async function taskOverlayDeleteTask(id) {
   let path = TASKS_URL + "/" + id;
   await deleteData(path);
@@ -320,6 +460,11 @@ async function taskOverlayDeleteTask(id) {
   boardOverlayTaskHide();
 }
 
+/**
+ * opens menu to relocate a task to a different task field
+ *
+ * @param {string} id - the id of the selected task in the database
+ */
 function boardTaskReposition(id) {
   if (document.getElementById(`boardTaskRepositionOverlay${id}`)) {
     boardTaskRepositionClose(id);
@@ -329,17 +474,37 @@ function boardTaskReposition(id) {
   }
 }
 
+/**
+ * set new position of the selected task
+ *
+ * @param {string} id - the id of the selected task in the database
+ * @param {string} position - the new position of the selected task
+ */
 function boardTaskRepositionRender(id, position) {
   currentDraggedElement = id;
   moveTo(position);
 }
 
+/**
+ * close the relocation menu
+ *
+ * @param {string} id - the id of the selected task in the database
+ */
 function boardTaskRepositionClose(id) {
   if (document.getElementById(`boardTaskRepositionOverlay${id}`)) {
     document.getElementById(`boardTaskRepositionOverlay${id}`).remove();
   }
 }
 
+/**
+ * listens to resizing of the browser window
+ * calls draggabbility function to activate or diactivate drag and drop
+ */
+window.addEventListener("resize", updateDraggableStatus);
+
+/**
+ * deactivate the draggability of the task when width of the browser window is under 1250px
+ */
 function updateDraggableStatus() {
   const draggableDivs = document.querySelectorAll(
     ".board-body-body-task, .board-body-body-task-header, .board-body-body-task-text, .board-body-body-task-progress"
@@ -355,8 +520,9 @@ function updateDraggableStatus() {
   });
 }
 
-window.addEventListener("resize", updateDraggableStatus);
-
+/**
+ * when mouse is clicked in specific task field, tasks can be scrolled in x axis with mouse movement to left and right
+ */
 document.addEventListener("DOMContentLoaded", function () {
   const boardBodyToDo = document.getElementById("taskFieldToDo");
   let isDown = false;
@@ -389,6 +555,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+/**
+ * when mouse is clicked in specific task field, tasks can be scrolled in x axis with mouse movement to left and right
+ */
 document.addEventListener("DOMContentLoaded", function () {
   const boardBodyInProgress = document.getElementById("taskFieldInProgress");
   let isDown = false;
@@ -421,6 +590,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+/**
+ * when mouse is clicked in specific task field, tasks can be scrolled in x axis with mouse movement to left and right
+ */
 document.addEventListener("DOMContentLoaded", function () {
   const boardBodyAwaitFeedback = document.getElementById(
     "taskFieldAwaitFeedback"
@@ -455,6 +627,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+/**
+ * when mouse is clicked in specific task field, tasks can be scrolled in x axis with mouse movement to left and right
+ */
 document.addEventListener("DOMContentLoaded", function () {
   const boardBodyDone = document.getElementById("taskFieldDone");
   let isDown = false;

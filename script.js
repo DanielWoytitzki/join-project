@@ -189,6 +189,12 @@ const BASE_URL =
 const TASKS_URL = "tasks";
 const CONTACTS_URL = "contacts";
 
+/**
+ * read data from the database
+ *
+ * @param {string} path - the path in the database to the specific item
+ * @returns
+ */
 async function readData(path) {
   try {
     const response = await fetch(BASE_URL + path + ".json");
@@ -198,6 +204,13 @@ async function readData(path) {
   }
 }
 
+/**
+ * post data in the database
+ *
+ * @param {string} path - the path in the database to the specific location
+ * @param {object} data - the data which is posted in the database
+ * @returns
+ */
 async function postData(path = "", data = {}) {
   try {
     let response = await fetch(BASE_URL + path + ".json", {
@@ -211,6 +224,12 @@ async function postData(path = "", data = {}) {
   }
 }
 
+/**
+ * delete data from the database
+ *
+ * @param {string} path - the path in the database to the specific item
+ * @returns
+ */
 async function deleteData(path = "") {
   try {
     let response = await fetch(BASE_URL + path + ".json", {
@@ -222,6 +241,13 @@ async function deleteData(path = "") {
   }
 }
 
+/**
+ * put data in the database
+ *
+ * @param {string} path - the path in the database to the specific location
+ * @param {object} data - the data which is put in the database
+ * @returns
+ */
 async function putData(path = "", data = {}) {
   try {
     let response = await fetch(BASE_URL + path + ".json", {
@@ -235,11 +261,23 @@ async function putData(path = "", data = {}) {
   }
 }
 
+/**
+ * put the first letter of given name to upper case
+ *
+ * @param {string} name - given name of the person
+ * @returns
+ */
 function nameWithUpperCase(name) {
   let nameUpperCase = name.charAt(0).toUpperCase() + name.slice(1);
   return nameUpperCase;
 }
 
+/**
+ * takes the first and last name and gets the initials
+ *
+ * @param {string} name - the first and last name
+ * @returns
+ */
 function getInitials(name) {
   let fullName = name;
   let nameParts = fullName.split(" ");
@@ -248,6 +286,12 @@ function getInitials(name) {
   return initials;
 }
 
+/**
+ * converts an array to an object
+ *
+ * @param {array} array - the given array
+ * @returns
+ */
 function convertArrayToObject(array) {
   let obj = {};
   array.forEach((value, index) => {
@@ -256,6 +300,9 @@ function convertArrayToObject(array) {
   return obj;
 }
 
+/**
+ * change the background color of the navigation links in the navigation side bar
+ */
 function changeNavLinkBackgroundColor() {
   const path = window.location.pathname;
   let fileName = path.substring(path.lastIndexOf("/") + 1);
