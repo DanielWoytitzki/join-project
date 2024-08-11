@@ -325,7 +325,12 @@
   border-radius: 30px;
   width: 445px;
   cursor: default;
-  margin: 48px 48px;
+  height: calc(100vh - 192px);
+  overflow-y: scroll;
+}
+
+.board-overlay-task::-webkit-scrollbar {
+  display: none;
 }
 
 .board-overlay-task-header {
@@ -409,6 +414,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 176px;
+  overflow-y: scroll;
 }
 
 .board-overlay-task-contactlist-contact {
@@ -447,6 +454,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 156px;
+  overflow-y: scroll;
 }
 
 .board-overlay-task-subtasklist-subtask {
@@ -466,6 +475,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
+  margin-top: auto;
 }
 
 .board-overlay-task-footer-inner {
