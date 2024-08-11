@@ -366,6 +366,7 @@ body {
   display: flex;
   gap: 8px;
   align-items: center;
+  overflow: hidden;
 }
 
 .add-task-assigned-contactlist-contact {
@@ -377,6 +378,7 @@ body {
   height: 42px;
   background: #9327ff;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .add-task-assigned-contactlist-contact span {
