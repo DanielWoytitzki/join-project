@@ -107,6 +107,26 @@ body {
     color: #D1D1D1;
 }
 
+.d-none {
+    display: none;
+}
+
+.red-border {
+    border-color: #ff8190;
+}
+
+.required-input {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.required-input-msg {
+    font-size: 12px;
+    line-height: 14.4px;
+    color: #ff8190;
+}
+
 .checkbox-remember {
     display: flex;
     align-items: center;

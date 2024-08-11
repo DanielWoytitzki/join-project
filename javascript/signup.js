@@ -70,26 +70,77 @@ function checkCheckbox() {
 
 
 /**
+ * This function checks if all required fields are filled out
+ * @returns false or true
+ */
+function signupCheckRequired() {
+    let requiredName = false;
+    let requiredEmail = false;
+    let requiredPassword = false;
+
+    if (document.getElementById("name").value == "") {
+        document.getElementById("name").classList.add("red-border");
+        document.getElementById("signupNameRequired").classList.remove("d-none");
+    } else if (!document.getElementById("name").value == "") {
+        document.getElementById("name").classList.remove("red-border");
+        document.getElementById("signupNameRequired").classList.add("d-none");
+        requiredName = true;
+    }
+
+    const emailValue = document.getElementById("email").value;
+
+    if (emailValue == "" || !emailValue.includes("@")) {
+        document.getElementById("email").classList.add("red-border");
+        document.getElementById("signupEmailRequired").classList.remove("d-none");
+    } else if (!document.getElementById("email").value == "") {
+        document.getElementById("email").classList.remove("red-border");
+        document.getElementById("signupEmailRequired").classList.add("d-none");
+        requiredEmail = true;
+    }
+
+    if (document.getElementById("password").value == "") {
+        document.getElementById("password").classList.add("red-border");
+        document.getElementById("signupPasswordRequired").classList.remove("d-none");
+    } else if (!document.getElementById("password").value == "") {
+        document.getElementById("password").classList.remove("red-border");
+        document.getElementById("signupPasswordRequired").classList.add("d-none");
+        requiredPassword = true;
+    }
+
+    let required = false;
+
+    if (requiredName && requiredEmail && requiredPassword) {
+        required = true;
+    }
+    return required;
+}
+
+
+/**
  * This function signs one up as an user
  */
 function signUp() {
-    if (checkConfirmedPassword() == false) {
-        document.getElementById('confirmedPassword').style = "border-color: red;";
-        document.getElementById('wrong-confirmed-password-msg').style.color = 'red';
-        console.log('Das Passwort stimmt nicht überein. Bitte überprüfen Sie Ihre Eingabe');
-    } else if (checkCheckbox() == false) {
-        console.log('Bitte akzeptieren Sie unsere Privacy policy.');
-    } else {
-        addUserToDatabase().then(() => {
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('confirmedPassword').value = '';
-            successfullSignUp();
-            setTimeout(() => {
-                window.location.href = './login.html';
-            }, 800);
-        });        
+    let required = signupCheckRequired();
+
+    if (required) {
+        if (checkConfirmedPassword() == false) {
+            document.getElementById('confirmedPassword').style = "border-color: red;";
+            document.getElementById('wrong-confirmed-password-msg').style.color = 'red';
+            console.log('Das Passwort stimmt nicht überein. Bitte überprüfen Sie Ihre Eingabe');
+        } else if (checkCheckbox() == false) {
+            console.log('Bitte akzeptieren Sie unsere Privacy policy.');
+        } else {
+            addUserToDatabase().then(() => {
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+                document.getElementById('confirmedPassword').value = '';
+                successfullSignUp();
+                setTimeout(() => {
+                    window.location.href = './login.html';
+                }, 800);
+            });        
+        }
     }
 }
 

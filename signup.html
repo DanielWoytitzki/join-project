@@ -20,7 +20,7 @@
         <img src="./img/join-logo.svg" alt="">
     </div>
 
-    <form onsubmit="signUp(); return false" style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center;">
         <div class="signup-box">
             <div class="signup-box-head">
                 <div class="blue-arrow-icon">
@@ -33,11 +33,22 @@
                 <div class="blue-arrow-icon">
                 </div>
             </div>
-            <div style="gap: 24px" ; class="login-box-input-fields">
-                <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name" required>
-                <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email" required>
-                <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password" required>
+            <div style="gap: 20px" ; class="login-box-input-fields">
+                <div class="required-input">
+                    <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name" required>
+                    <div id="signupNameRequired" class="required-input-msg d-none">This field is required.</div>
+                </div>
                 
+                <div class="required-input">
+                    <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email" required>
+                    <div id="signupEmailRequired" class="required-input-msg d-none">This field is required. Don't forget to add "@".</div>
+                </div>
+                
+                <div class="required-input">
+                    <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password" required>
+                    <div id="signupPasswordRequired" class="required-input-msg d-none">This field is required.</div>
+                </div>
+                             
                 <div>
                     <input id="confirmedPassword" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Confirm Password" required>
                     <p id="wrong-confirmed-password-msg" style="color: #FFFFFF;">Your passwords don't match. Please try again.</p>
@@ -48,10 +59,10 @@
                 </div>
             </div>
             <div class="login-box-buttons">
-                <button id="signup-button" class="button-login" disabled>Sign up</button>
+                <button onclick="signUp()" id="signup-button" class="button-login">Sign up</button>
             </div>
         </div>
-    </form>
+    </div>
 
     <div class="extra-links-login">
         <a href="./privacy-policy.html">Privacy Policy</a>
