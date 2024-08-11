@@ -295,7 +295,7 @@ function contactsCheckRequired() {
   } else if (!document.getElementById("phone").value == "") {
     document.getElementById("phone").classList.remove("red-border");
     document.getElementById("contactsPhoneRequired").classList.add("d-none");
-    requiredPassword = true;
+    requiredPhone = true;
   }
 
   let required = false;
