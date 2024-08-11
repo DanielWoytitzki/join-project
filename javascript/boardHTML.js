@@ -73,6 +73,19 @@ function generateTaskContactsTwo(initials, left, backgroundColor) {
 }
 
 /**
+ * Generates the HTML for count of contacts which are assinged, but not displayed
+ *
+ * @param {number} count - the count how many contacts would be loaded after 3 are displayed
+ * @param {number} left - the value which shiftes the contact cicrle to the left
+ * @returns
+ */
+function generateTaskContactsPlusCount(count, left) {
+  return `<div class="board-body-body-task-bottom-contact" style="left: -${left}px; background-color: #000000; color: #ffffff">
+              <span>+${count}</span>
+            </div>`;
+}
+
+/**
  * Generates the HTML for the subtask progress bar, the number of finished subtaks and the number of total subtasks
  *
  * @param {number} progress - the calculated width in percent of the completed tasks devided by the total tasks

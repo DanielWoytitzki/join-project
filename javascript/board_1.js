@@ -109,7 +109,7 @@ function boardDisplayTasksAssignedContacts(task, id) {
             contactBackgroundColor
           );
           counter++;
-        } else if (key == contact && counter > 0) {
+        } else if (key == contact && counter > 0 && counter < 3) {
           let contactName = boardContacts[key]["name"];
           let initials = getInitials(contactName);
           let left = counter * 8;
@@ -119,6 +119,11 @@ function boardDisplayTasksAssignedContacts(task, id) {
             left,
             contactBackgroundColor
           );
+          counter++;
+        } else if (counter == 3 && assignedContacts.length > 3) {
+          let count = assignedContacts.length - 3;
+          let left = counter * 8;
+          taskId.innerHTML += generateTaskContactsPlusCount(count, left);
           counter++;
         }
       }
