@@ -8,6 +8,14 @@
     .header-overlay-menu {
         top: 66px;
     }
+
+    .hpl-section {
+        width: 100vw;
+    }
+
+    .all-contacts-box {
+        height: calc(100vh - 165px);
+    }
 }
 
 @media (max-width: 1050px) {
