@@ -58,3 +58,24 @@ function generateAddTaskAssignedContacts(initials, backgroundColor) {
             <span>${initials}</span>
           </div>`;
 }
+
+/**
+ * Generate the HTML for the ability to edit a subtask
+ *
+ * @param {number} subtaskId - the id of the subtask in the subtask array of the selected task
+ * @returns
+ */
+function generateAddTaskSubtaskEdit(subtaskId) {
+  return `<div class="add-task-subtask-edit">
+                <input id="subtaskInputEditValue" class="add-task-subtask-edit-input" type="text" />
+                <div class="add-task-subtask-edit-icons">
+                    <div class="add-task-subtask-icon">
+                        <img onclick="addTaskSubtaskDeleteTask(${subtaskId})" src="./img/delete.svg" alt="" class="filter" />
+                    </div>
+                    <hr />
+                    <div class="add-task-subtask-icon">
+                        <img onclick="subtaskSubmitEditTask(${subtaskId})" src="./img/check.svg" alt="" class="filter" />
+                    </div>
+                </div>
+              </div>`;
+}
