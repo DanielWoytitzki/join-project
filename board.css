@@ -182,6 +182,11 @@
   gap: 24px;
   box-shadow: 0px 0px 6px 3px #00000014;
   flex-shrink: 0;
+  overflow-y: scroll;
+}
+
+.board-body-body-task::-webkit-scrollbar {
+  display: none;
 }
 
 .board-body-body-task:hover {
@@ -276,11 +281,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .board-body-body-task-bottom-contactlist {
   display: flex;
   align-items: center;
+  overflow: hidden;
+  /* max-width: 100%; */
 }
 
 .board-body-body-task-bottom-contact {
@@ -291,8 +299,8 @@
   width: 32px;
   height: 32px;
   border-radius: 45px;
-  background-color: #ff7a00;
   border: 1px solid #ffffff;
+  flex-shrink: 0;
 }
 
 .board-body-body-task-bottom-contact span {
