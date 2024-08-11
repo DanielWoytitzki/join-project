@@ -53,7 +53,7 @@ function generateTaskOverlayEditHTML(taskId) {
                       <div class="add-task-priority-content-box">
                           <div
                               class="add-task-priority white"
-                              onclick="boardOverlayEditPrioritySelect('Urgent')"
+                              onclick="boardOverlayEditPrioritySelect('urgent')"
                               id="boardOverlayEditPriorityUrgent"
                           >
                               <span>Urgent</span>
@@ -61,7 +61,7 @@ function generateTaskOverlayEditHTML(taskId) {
                           </div>
                           <div
                               class="add-task-priority orange"
-                              onclick="boardOverlayEditPrioritySelect('Medium')"
+                              onclick="boardOverlayEditPrioritySelect('medium')"
                               id="boardOverlayEditPriorityMedium"
                           >
                               <span>Medium</span>
@@ -69,7 +69,7 @@ function generateTaskOverlayEditHTML(taskId) {
                           </div>
                           <div
                               class="add-task-priority white"
-                              onclick="boardOverlayEditPrioritySelect('Low')"
+                              onclick="boardOverlayEditPrioritySelect('low')"
                               id="boardOverlayEditPriorityLow"
                           >
                               <span>Low</span>

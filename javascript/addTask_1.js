@@ -1,4 +1,4 @@
-let addTaskPriority = "Medium";
+let addTaskPriority = "medium";
 let addTaskCategory;
 let addTaskCategoryState = false;
 let addTaskContactsState = false;
@@ -55,29 +55,29 @@ function addTaskPrioritySelect(priority) {
   let urgent = document.getElementById("addtaskPriorityUrgent");
   let medium = document.getElementById("addtaskPriorityMedium");
   let low = document.getElementById("addtaskPriorityLow");
-  if (priority == "Urgent") {
+  if (priority == "urgent") {
     urgent.classList.add("red");
     urgent.classList.remove("white");
     medium.classList.remove("orange");
     medium.classList.add("white");
     low.classList.remove("green");
-    addTaskPriority = "Urgent";
-  } else if (priority == "Medium") {
+    addTaskPriority = "urgent";
+  } else if (priority == "medium") {
     medium.classList.add("orange");
     medium.classList.remove("white");
     urgent.classList.remove("red");
     urgent.classList.add("white");
     low.classList.remove("green");
     low.classList.add("white");
-    addTaskPriority = "Medium";
-  } else if (priority == "Low") {
+    addTaskPriority = "medium";
+  } else if (priority == "low") {
     low.classList.add("green");
     low.classList.remove("white");
     medium.classList.remove("orange");
     medium.classList.add("white");
     urgent.classList.remove("red");
     urgent.classList.add("white");
-    addTaskPriority = "Low";
+    addTaskPriority = "low";
   }
 }
 

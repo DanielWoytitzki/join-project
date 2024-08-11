@@ -20,29 +20,29 @@ function boardOverlayEditPrioritySelect(priority) {
   let urgent = document.getElementById("boardOverlayEditPriorityUrgent");
   let medium = document.getElementById("boardOverlayEditPriorityMedium");
   let low = document.getElementById("boardOverlayEditPriorityLow");
-  if (priority == "Urgent") {
+  if (priority == "urgent") {
     urgent.classList.add("red");
     urgent.classList.remove("white");
     medium.classList.remove("orange");
     medium.classList.add("white");
     low.classList.remove("green");
-    boardOverlayEditPriority = "Urgent";
-  } else if (priority == "Medium") {
+    boardOverlayEditPriority = "urgent";
+  } else if (priority == "medium") {
     medium.classList.add("orange");
     medium.classList.remove("white");
     urgent.classList.remove("red");
     urgent.classList.add("white");
     low.classList.remove("green");
     low.classList.add("white");
-    boardOverlayEditPriority = "Medium";
-  } else if (priority == "Low") {
+    boardOverlayEditPriority = "medium";
+  } else if (priority == "low") {
     low.classList.add("green");
     low.classList.remove("white");
     medium.classList.remove("orange");
     medium.classList.add("white");
     urgent.classList.remove("red");
     urgent.classList.add("white");
-    boardOverlayEditPriority = "Low";
+    boardOverlayEditPriority = "low";
   }
 }
 
