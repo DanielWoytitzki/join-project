@@ -24,16 +24,24 @@
         </div>
     </div>
 
-    <form onsubmit="logInAsUser(); return false" style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center;">
         <div class="login-box">
             <div class="login-box-head">
                 <h1>Log in</h1>
                 <hr>
             </div>
             <div class="login-box-input-fields">
-                <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email" required>
+                <div class="required-input">
+                    <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="Email" required>
+                    <div id="loginEmailRequired" class="required-input-msg d-none">This field is required.</div>
+                </div>
+                
                 <div>
-                    <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password" required>
+                    <div>
+                        <input id="password" style="background-image: url('./img/lock-icon.svg');" type="password" placeholder="Password" required>
+                        <div id="loginPasswordRequired" class="required-input-msg d-none">This field is required.</div>
+                    </div>
+                    
                     <p id="user-not-found-msg" style="color: #FFFFFF;">Check your email and password. Please try again.</p>
                     <div class="checkbox-remember">
                         <input id="checkbox-remember-me" type="checkbox">
@@ -42,11 +50,11 @@
                 </div>
             </div>
             <div class="login-box-buttons">
-                <button class="button-login">Log in</button>
-                <button onclick="logInAsGuest()" class="button-guest-login" formnovalidate="formnovalidate">Guest Log in</button>
+                <button onclick="logInAsUser()" class="button-login">Log in</button>
+                <button onclick="logInAsGuest()" class="button-guest-login">Guest Log in</button>
             </div>
         </div>
-    </form>
+    </div>
 
     <div class="login-mobile-signup">
         <p>Not a Join user?</p>

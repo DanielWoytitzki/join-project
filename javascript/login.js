@@ -10,39 +10,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /**
+ * This function checks if all required fields are filled out
+ * @returns false or true
+ */
+function loginCheckRequired() {
+    let requiredEmail = false;
+    let requiredPassword = false;
+
+    if (document.getElementById("email").value == "") {
+        document.getElementById("email").classList.add("red-border");
+        document.getElementById("loginEmailRequired").classList.remove("d-none");
+    } else if (!document.getElementById("email").value == "") {
+        document.getElementById("email").classList.remove("red-border");
+        document.getElementById("loginEmailRequired").classList.add("d-none");
+        requiredEmail = true;
+    }
+
+    if (document.getElementById("password").value == "") {
+        document.getElementById("password").classList.add("red-border");
+        document.getElementById("loginPasswordRequired").classList.remove("d-none");
+    } else if (!document.getElementById("password").value == "") {
+        document.getElementById("password").classList.remove("red-border");
+        document.getElementById("loginPasswordRequired").classList.add("d-none");
+        requiredPassword = true;
+    }
+
+    let required = false;
+
+    if (requiredEmail && requiredPassword) {
+        required = true;
+    }
+    return required;
+}
+
+
+/**
  * This function logs one in as user as long as one is found in the database
  */
 async function logInAsUser() {
-    let email = document.getElementById('email').value.trim();
-    let password = document.getElementById('password').value.trim();
+    let required = loginCheckRequired();
 
-    try {
-        let response = await fetch(BASE_URL + "users.json");
-        if (!response.ok) throw new Error('Error fetching users');
+    if (required) {
+        let email = document.getElementById('email').value.trim();
+        let password = document.getElementById('password').value.trim();
 
-        let users = await response.json();
+        try {
+            let response = await fetch(BASE_URL + "users.json");
+            if (!response.ok) throw new Error('Error fetching users');
 
-        let userFound = false;
-        let userName = '';
+            let users = await response.json();
 
-        for (let userId in users) {
-            if (users[userId].email === email && users[userId].password === password) {
-                userFound = true;
-                userName = users[userId].name;
-                break;
+            let userFound = false;
+            let userName = '';
+
+            for (let userId in users) {
+                if (users[userId].email === email && users[userId].password === password) {
+                    userFound = true;
+                    userName = users[userId].name;
+                    break;
+                }
             }
-        }
 
-        if (userFound) {
-            saveLogInToSessionStorage(userName, email);
-            checkRememberMe(email, password);
-            window.location.href = 'summary.html';
-        } else {
-            document.getElementById('user-not-found-msg').style.color = "red";
+            if (userFound) {
+                saveLogInToSessionStorage(userName, email);
+                checkRememberMe(email, password);
+                window.location.href = 'summary.html';
+            } else {
+                document.getElementById('user-not-found-msg').style.color = "red";
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
-    } catch (error) {
-        console.error('Error fetching data:', error);
     }
+
+
 }
 
 

@@ -84,7 +84,7 @@ body {
 .login-box-input-fields {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 28px;
 }
 
 .login-box-input-fields input {
