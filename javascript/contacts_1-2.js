@@ -131,7 +131,7 @@ async function showDetailedContact(contactId, backgroundColor) {
     document.getElementById("contactlist").classList.remove("contact-section");
     document.getElementById("contactlist").classList.add("d-none");
     document.getElementById("contact-detailed-mobile").innerHTML = HTMLForDetailedContactMobile(detailedContact, backgroundColor);
-    
+
     let container = document.getElementById("detailedcontactmobile");
     container.setAttribute("data-contact-id", detailedContact.id);
     container.setAttribute("data-contact-name", detailedContact.name);
@@ -247,16 +247,63 @@ function toggleContactMenu() {
   let contactName = container.getAttribute("data-contact-name");
   let contactEmail = container.getAttribute("data-contact-email");
   let contactPhone = container.getAttribute("data-contact-phone");
-  
+
   let menuContainer = document.getElementById("mobileContactMenu");
-  menuContainer.addEventListener("click", function() {
+  menuContainer.addEventListener("click", function () {
     editContactMobile(contactId, contactName, contactEmail, contactPhone);
-  });  
+  });
 
   document.querySelector(".contact-big-mobile-option-button").classList.toggle("contact-big-mobile-overlay-menu-active");
   document.getElementById("mobileContactMenu").classList.toggle("show-contact-big-mobile-overlay-menu");
   document.getElementById("mobileContactMenu").classList.toggle("d-none");
   document.getElementById("mobileContactMenu").classList.toggle("d-flex");
+}
+
+
+/**
+ * This function checks if all required fields are filled out
+ * @returns false or true
+ */
+function contactsCheckRequired() {
+  let requiredName = false;
+  let requiredEmail = false;
+  let requiredPhone = false;
+
+  if (document.getElementById("name").value == "") {
+    document.getElementById("name").classList.add("red-border");
+    document.getElementById("contactsNameRequired").classList.remove("d-none");
+  } else if (!document.getElementById("name").value == "") {
+    document.getElementById("name").classList.remove("red-border");
+    document.getElementById("contactsNameRequired").classList.add("d-none");
+    requiredName = true;
+  }
+
+  const emailValue = document.getElementById("email").value;
+
+  if (emailValue == "" || !emailValue.includes("@")) {
+    document.getElementById("email").classList.add("red-border");
+    document.getElementById("contactsEmailRequired").classList.remove("d-none");
+  } else if (!document.getElementById("email").value == "") {
+    document.getElementById("email").classList.remove("red-border");
+    document.getElementById("contactsEmailRequired").classList.add("d-none");
+    requiredEmail = true;
+  }
+
+  if (document.getElementById("phone").value == "") {
+    document.getElementById("phone").classList.add("red-border");
+    document.getElementById("contactsPhoneRequired").classList.remove("d-none");
+  } else if (!document.getElementById("phone").value == "") {
+    document.getElementById("phone").classList.remove("red-border");
+    document.getElementById("contactsPhoneRequired").classList.add("d-none");
+    requiredPassword = true;
+  }
+
+  let required = false;
+
+  if (requiredName && requiredEmail && requiredPhone) {
+    required = true;
+  }
+  return required;
 }
 
 
@@ -295,91 +342,30 @@ function HTMLForAddNewContact() {
                     <div>
                         <img class="profile-icon-img" src="./img/profile-pic-blank.svg" alt="Profile Picture Placeholder">
                     </div>
-                    <form onsubmit="addContactToDatabase(); return false">
+                    <div>
                         <div>
                             <div class="input-fields-add-contact">
+                              <div class="required-input">
                                 <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name" required>
+                                <div id="contactsNameRequired" class="required-input-msg d-none">This field is required.</div>
+                              </div>
+                              <div class="required-input">
                                 <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="E-Mail" required>
+                                <div id="contactsEmailRequired" class="required-input-msg d-none">This field is required. Don't forget to add "@".</div>
+                              </div>
+                              <div class="required-input">
                                 <input id="phone" style="background-image: url('./img/call-icon.svg');" type="number" placeholder="Phone" required>
+                                <div id="contactsPhoneRequired" class="required-input-msg d-none">This field is required.</div>
+                              </div>
                             </div>
                         </div>
                         <div class="buttons-add-contact">
                             <button class="cancel-button-add-contact" onclick="closeOverlay()" formnovalidate="formnovalidate">Cancel <img src="./img/close.svg"></button>
-                            <button class="create-contact-button-add-contact">Create contact <img src="./img/check.svg"></button>
+                            <button class="create-contact-button-add-contact" onclick="addContactToDatabase()">Create contact <img src="./img/check.svg"></button>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-
-/**
- * This function creates an overlay and adds a new contact to the database on mobile devices
- */
-function addNewContactMobile() {
-  const overlay = document.createElement("div");
-  overlay.className = "overlay";
-  overlay.innerHTML = HTMLForAddNewContactMobile();
-  document.body.appendChild(overlay);
-  document.body.style.overflow = "hidden";
-}
-
-
-/**
- * This function generates the HTML code for the "add new contact" pop up
- * @returns HTML code
- */
-function HTMLForAddNewContactMobile() {
-  return `
-        <div class="overlay-add-contact-mobile transition-in-from-bottom">
-            <div class="overlay-add-contact-mobile-top">
-                <div class="close-icon-mobile-box">
-                    <img class="close-icon-mobile" src="./img/close.svg" alt="" onclick="closeOverlay()">
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <h1>Add contact</h1>
-                    <p>Tasks are better with a team!</p>
-                    <hr>
-                </div>
-                <div class="close-icon-mobile-box">
-                    <img src="./img/close.svg" alt="" onclick="closeOverlay()">
-                </div>
-            </div>
-
-            <div class="overlay-add-contact-mobile-mid">
-                <div class="overlay-add-contact-profile-img-mobile">
-                    <img src="./img/profile-pic-blank.svg" alt="Profile Picture Placeholder">
-                </div>
-            </div>
-
-            <form class="overlay-add-contact-mobile-bottom" onsubmit="addContactToDatabase(); return false">
-              <div>
-                <div>
-                    <div class="input-fields-add-contact-mobile">
-                        <input id="name" style="background-image: url('./img/person-icon.svg');" type="text" placeholder="Name" required>
-                        <input id="email" style="background-image: url('./img/mail-icon.svg');" type="email" placeholder="E-Mail" required>
-                        <input id="phone" style="background-image: url('./img/call-icon.svg');" type="number" placeholder="Phone" required>
                     </div>
                 </div>
-                <div class="buttons-add-contact">
-                    <button class="create-contact-button-add-contact">Create contact <img src="./img/check.svg"></button>
-                </div>
-              </div>
-            </form>
+            </div>
         </div>
     `;
-}
-
-
-/**
- * This function closes the overlay pop up
- */
-function closeOverlay() {
-  const overlay = document.querySelector(".overlay");
-  if (overlay) {
-    overlay.remove();
-  }
-  document.body.style.overflow = "auto";
 }
