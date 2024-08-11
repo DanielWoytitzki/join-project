@@ -112,7 +112,7 @@ body {
 }
 
 .red-border {
-    border-color: #ff8190;
+    border-color: #ff8190 !important;
 }
 
 .required-input {
