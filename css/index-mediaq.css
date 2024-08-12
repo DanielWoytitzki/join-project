@@ -1,3 +1,36 @@
+@media (max-width: 700px) {
+    body {
+        animation: changeBackgroundColor 700ms ease-in-out;
+    }
+
+    @keyframes changeBackgroundColor {
+        0% {
+            background-color: #2A3647;
+        }
+
+        100% {
+            background-color: #f6f7f8;
+        }
+    }
+   
+    @keyframes logoAnimation {  
+        0% {
+            content: url("./img/join-logo-reverse.svg")
+        }
+        
+        100% {
+            top: 40px;
+            left: 40px;
+            width: 64px;
+            height: 78.03px;
+            transform: translate(0%, 0%);
+            content: url("./img/join-logo.svg");
+        }
+    }
+}
+
+/* Alternative */
+/*
 @media (max-width: 2560px) and (min-width: 1921px) {
     img.animate {
         transform: translate3d(-1175px, -600px, 0);
@@ -42,7 +75,40 @@
     }
 }
 
-@media (max-width: 410px) and (min-width: 320px) {
+@media (max-width: 410px) and (min-width: 375px) {
+    body {
+        animation: changeBackgroundColor 800ms ease-in-out;
+    }
+
+    @keyframes changeBackgroundColor {
+        0% {
+            background-color: #2A3647;
+        }
+
+        100% {
+            background-color: #f6f7f8;
+        }
+    }
+
+    img.animate {
+        transform: translate3d(-110px, -250px, 0);
+        width: 64px;
+        height: 78.03px;
+        animation: changeImageSRC 800ms ease-in-out;
+    }
+
+    @keyframes changeImageSRC {
+        0% {
+            content: url("./img/join-logo-reverse.svg")
+        }
+
+        100% {
+            content: url("./img/join-logo.svg");
+        }
+    }
+}
+
+@media (max-width: 374px) and (min-width: 320px) {
     body {
         animation: changeBackgroundColor 800ms ease-in-out;
     }
@@ -74,3 +140,4 @@
         }
     }
 }
+*/

@@ -2,8 +2,9 @@
  * This function animates the logo before forwarding one to the login
  */
 function animateLogo() {
-  const logo = document.getElementById("join-logo_big");
+  /*const logo = document.getElementById("join-logo_big");
   logo.classList.add("animate");
+  */
   setTimeout(() => {
     window.location.href = "login.html";
   }, 500);
