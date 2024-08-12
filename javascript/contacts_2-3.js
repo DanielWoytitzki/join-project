@@ -102,7 +102,6 @@ async function addContactToDatabase() {
       body: JSON.stringify(data),
     });
     let responseAsJson = await response.json();
-    console.log(responseAsJson);
 
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
@@ -123,7 +122,6 @@ async function deleteContactFromDatabase(contactId) {
     method: "DELETE",
   });
   let responseAsJson = await response.json();
-  console.log(responseAsJson);
 
   loadContactsFromDatabase();
   closeOverlay();
@@ -144,7 +142,6 @@ async function editContactFromDatabase(contactId, updatedData) {
     body: JSON.stringify(updatedData),
   });
   let responseAsJson = await response.json();
-  console.log(responseAsJson);
 
   updateContactInList(contactId, updatedData);
   showDetailedContact(contactId);

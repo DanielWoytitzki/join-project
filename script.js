@@ -152,9 +152,6 @@ function fetchUserDetailsFromSessionStorage() {
   let userDetailsString = sessionStorage.getItem("userDetails");
   if (userDetailsString) {
     let userDetails = JSON.parse(userDetailsString);
-    console.log(userDetails.status);
-    console.log(userDetails.name);
-    console.log(userDetails.email);
   }
 }
 

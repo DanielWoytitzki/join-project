@@ -27,7 +27,6 @@ async function addUserToDatabase() {
         if (!response.ok) throw new Error('Error adding user');
 
         let responseAsJson = await response.json();
-        console.log(responseAsJson);
     } catch (error) {
         console.error('Error adding user to database:', error);
     }

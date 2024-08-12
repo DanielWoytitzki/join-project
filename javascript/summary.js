@@ -17,7 +17,6 @@ function checkIfUserOrGuest() {
 
     if (userDetails && userDetails.status === "logged in") {
         let userDetailsName = userDetails.name;
-        console.log(userDetailsName);
         
         document.getElementById("greeting").innerHTML = generateGreetingForUser(greetingText, userDetailsName);
     } else {
@@ -211,8 +210,6 @@ async function init() {
 
         let numberOfTasksAwaitingFeedback = getNumberOfTasksAwaitingFeedback(tasks);
         document.getElementById('tasksAwaitingFeedback').innerHTML = numberOfTasksAwaitingFeedback;
-
-        console.log(numberOfTasksToDo, numberOfTasksDone, numberOfUrgentTasks, dateOfUpcomingDeadline, numberOfTasksInBoard, numberOfTasksInProgress, numberOfTasksAwaitingFeedback);
     }
     checkIfUserOrGuest();
 }
