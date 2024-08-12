@@ -160,3 +160,13 @@
         background-position: 250px 8px;
     }
 }
+
+@media (max-height: 770px) {
+    .overlay-add-contact-mobile {
+        height: 650px;
+    }
+
+    .overlay-add-contact-mobile-mid {
+        top: 235px;
+    }
+}

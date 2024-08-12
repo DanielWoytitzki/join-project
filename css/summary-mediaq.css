@@ -140,3 +140,9 @@
         height: 116px;
     }
 }
+
+@media (max-height: 790px) {
+    .summary-section {
+        height: 100vh;
+    }
+}
