@@ -24,6 +24,7 @@
   grid-row: 1;
   grid-column: 3;
   align-self: center;
+  z-index: -1;
 }
 
 .board-head h1 {
